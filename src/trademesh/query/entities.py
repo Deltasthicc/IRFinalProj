@@ -190,6 +190,9 @@ class EntityMatcher:
         if len(key) < 2 or (n_tokens == 1 and text.lower() in STOPWORDS):
             return None
         single = n_tokens == 1
+        words = [w.lower() for w in re.findall(r"[A-Za-z0-9&]+", text)]
+        if not single and (words[0] in STOPWORDS or words[-1] in STOPWORDS or "&" in (words[0], words[-1])):
+            return None  # "Apple and" is not a name: spans must not start or end with a function word
         is_caps = text.isupper()
         # tickers are only trusted when typed in capitals and long enough to be distinctive
         short_ticker_ok = is_caps and len(key) >= 2
