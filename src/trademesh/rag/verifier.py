@@ -102,7 +102,13 @@ def verify(answer: str, passages: list[Passage]) -> VerifierResult:
     if not res.cited:
         res.flags.append("answer contains no citation")
 
-    sentences = [s for s in re.split(r"(?<=[.!?])\s+", answer.strip()) if s]
+    sentences: list[str] = []
+    for s in re.split(r"(?<=[.!?])\s+", answer.strip()):
+        # "Sales rose. [P1]": a fragment that is only a citation belongs to the previous sentence
+        if sentences and s and not CITE_RE.sub("", s).strip(" .,;"):
+            sentences[-1] += " " + s
+        elif s:
+            sentences.append(s)
     res.uncited_sentences = [s for s in sentences if not CITE_RE.search(s)]
     if res.cited and res.uncited_sentences:
         res.flags.append(f"{len(res.uncited_sentences)} sentence(s) without a citation")

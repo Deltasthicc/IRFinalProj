@@ -54,6 +54,13 @@ def test_verifier_flags_invented_citation_and_number():
     assert not r.passed and len(r.flags) >= 2
 
 
+def test_citation_after_final_period_belongs_to_that_sentence():
+    r = verify("Net sales rose. [P1]", [P(1, "Net sales rose.")])
+    assert r.passed and r.uncited_sentences == []
+    r = verify("Net sales rose [P1]. Margins fell.", [P(1, "Net sales rose.")])
+    assert r.uncited_sentences == ["Margins fell."]
+
+
 def test_verifier_no_citation():
     r = verify("Net sales rose.", [P(1, "Net sales rose.")])
     assert "answer contains no citation" in r.flags
