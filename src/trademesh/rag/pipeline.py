@@ -91,6 +91,25 @@ class RagPipeline:
     def answer(self, question: str, closed_book: bool = False, compare: bool | None = None) -> RagResult:
         if closed_book:
             return self._closed_book(question)
+        res = self.prepare(question, compare)
+        low = res.confidence < self.cfg.tau
+        if not res.passages or (low and not self.cfg.call_llm_when_low_score):
+            d = decide(None, res.confidence, self.cfg.tau) if res.passages else None
+            res.abstained = True
+            res.abstain_reason = d.reason if d else "no passage was retrieved"
+            res.answer = "INSUFFICIENT EVIDENCE"
+            return res
+
+        r = self.llm.complete(RAG_SYSTEM, build_user_prompt(question, res.passages))
+        res.answer, res.cached, res.model, res.provider = r.text, r.cached, r.model, r.provider
+        res.model_said_insufficient = is_insufficient(r.text)
+        res.verifier = verify(r.text, res.passages)
+        d = decide(r.text, res.confidence, self.cfg.tau)
+        res.abstained, res.abstain_reason = d.abstain, d.reason
+        return res
+
+    def prepare(self, question: str, compare: bool | None = None) -> RagResult:
+        """Everything before the LLM call: entities, retrieval, context, confidence. No LLM."""
         mentions = self.matcher.find_mentions(question)
         tickers = list(dict.fromkeys(m.ticker for m in mentions)) if self.cfg.entity_filter else []
         topic = self.matcher.strip_mentions(question, mentions) if tickers else question
@@ -118,21 +137,6 @@ class RagPipeline:
 
         res.hits = hits
         res.passages = [self.by_id[h.passage_id] for h in hits]
-
-        low = res.confidence < self.cfg.tau
-        if not res.passages or (low and not self.cfg.call_llm_when_low_score):
-            d = decide(None, res.confidence, self.cfg.tau) if res.passages else None
-            res.abstained = True
-            res.abstain_reason = d.reason if d else "no passage was retrieved"
-            res.answer = "INSUFFICIENT EVIDENCE"
-            return res
-
-        r = self.llm.complete(RAG_SYSTEM, build_user_prompt(question, res.passages))
-        res.answer, res.cached, res.model, res.provider = r.text, r.cached, r.model, r.provider
-        res.model_said_insufficient = is_insufficient(r.text)
-        res.verifier = verify(r.text, res.passages)
-        d = decide(r.text, res.confidence, self.cfg.tau)
-        res.abstained, res.abstain_reason = d.abstain, d.reason
         return res
 
     def _closed_book(self, question: str) -> RagResult:

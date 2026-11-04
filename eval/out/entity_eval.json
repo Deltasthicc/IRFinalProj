@@ -1,0 +1,367 @@
+{
+  "n": 40,
+  "correct": 39,
+  "accuracy": 0.975,
+  "wrong_ticker": 0,
+  "no_match": 1,
+  "agreement_with_brute_force": 1.0,
+  "by_kind": {
+    "deletion": {
+      "correct": 15,
+      "n": 15
+    },
+    "insertion": {
+      "correct": 2,
+      "n": 2
+    },
+    "spacing": {
+      "correct": 3,
+      "n": 3
+    },
+    "substitution": {
+      "correct": 10,
+      "n": 10
+    },
+    "ticker": {
+      "correct": 5,
+      "n": 6
+    },
+    "transposition": {
+      "correct": 4,
+      "n": 4
+    }
+  },
+  "failures": [
+    {
+      "typo": "MSTF",
+      "expected": "MSFT",
+      "got": null,
+      "ok": false,
+      "distance": null,
+      "kind": "ticker transposition"
+    }
+  ],
+  "results": [
+    {
+      "typo": "Aple",
+      "expected": "AAPL",
+      "got": "AAPL",
+      "ok": true,
+      "distance": 1,
+      "kind": "deletion"
+    },
+    {
+      "typo": "Appple",
+      "expected": "AAPL",
+      "got": "AAPL",
+      "ok": true,
+      "distance": 1,
+      "kind": "insertion"
+    },
+    {
+      "typo": "Micorsoft",
+      "expected": "MSFT",
+      "got": "MSFT",
+      "ok": true,
+      "distance": 2,
+      "kind": "transposition"
+    },
+    {
+      "typo": "MSFTT",
+      "expected": "MSFT",
+      "got": "MSFT",
+      "ok": true,
+      "distance": 1,
+      "kind": "ticker insertion"
+    },
+    {
+      "typo": "Nvidea",
+      "expected": "NVDA",
+      "got": "NVDA",
+      "ok": true,
+      "distance": 1,
+      "kind": "substitution"
+    },
+    {
+      "typo": "Telsa",
+      "expected": "TSLA",
+      "got": "TSLA",
+      "ok": true,
+      "distance": 2,
+      "kind": "transposition"
+    },
+    {
+      "typo": "Tesle",
+      "expected": "TSLA",
+      "got": "TSLA",
+      "ok": true,
+      "distance": 1,
+      "kind": "substitution"
+    },
+    {
+      "typo": "Amazom",
+      "expected": "AMZN",
+      "got": "AMZN",
+      "ok": true,
+      "distance": 1,
+      "kind": "substitution"
+    },
+    {
+      "typo": "Amazn",
+      "expected": "AMZN",
+      "got": "AMZN",
+      "ok": true,
+      "distance": 1,
+      "kind": "deletion"
+    },
+    {
+      "typo": "Netflx",
+      "expected": "NFLX",
+      "got": "NFLX",
+      "ok": true,
+      "distance": 1,
+      "kind": "deletion"
+    },
+    {
+      "typo": "Netfliks",
+      "expected": "NFLX",
+      "got": "NFLX",
+      "ok": true,
+      "distance": 2,
+      "kind": "substitution"
+    },
+    {
+      "typo": "JPMorgen",
+      "expected": "JPM",
+      "got": "JPM",
+      "ok": true,
+      "distance": 1,
+      "kind": "substitution"
+    },
+    {
+      "typo": "JP Morgn Chase",
+      "expected": "JPM",
+      "got": "JPM",
+      "ok": true,
+      "distance": 1,
+      "kind": "deletion"
+    },
+    {
+      "typo": "Goldmann Sachs",
+      "expected": "GS",
+      "got": "GS",
+      "ok": true,
+      "distance": 1,
+      "kind": "insertion"
+    },
+    {
+      "typo": "Goldman Sacks",
+      "expected": "GS",
+      "got": "GS",
+      "ok": true,
+      "distance": 1,
+      "kind": "substitution"
+    },
+    {
+      "typo": "Bank of Amerca",
+      "expected": "BAC",
+      "got": "BAC",
+      "ok": true,
+      "distance": 1,
+      "kind": "deletion"
+    },
+    {
+      "typo": "XOMM",
+      "expected": "XOM",
+      "got": "XOM",
+      "ok": true,
+      "distance": 1,
+      "kind": "ticker insertion"
+    },
+    {
+      "typo": "Exxon Mobl",
+      "expected": "XOM",
+      "got": "XOM",
+      "ok": true,
+      "distance": 1,
+      "kind": "deletion"
+    },
+    {
+      "typo": "Exon Mobil",
+      "expected": "XOM",
+      "got": "XOM",
+      "ok": true,
+      "distance": 1,
+      "kind": "deletion"
+    },
+    {
+      "typo": "Chevran",
+      "expected": "CVX",
+      "got": "CVX",
+      "ok": true,
+      "distance": 1,
+      "kind": "substitution"
+    },
+    {
+      "typo": "TSLQ",
+      "expected": "TSLA",
+      "got": "TSLA",
+      "ok": true,
+      "distance": 1,
+      "kind": "ticker substitution"
+    },
+    {
+      "typo": "Walmrt",
+      "expected": "WMT",
+      "got": "WMT",
+      "ok": true,
+      "distance": 1,
+      "kind": "deletion"
+    },
+    {
+      "typo": "Wal Mart",
+      "expected": "WMT",
+      "got": "WMT",
+      "ok": true,
+      "distance": 0,
+      "kind": "spacing"
+    },
+    {
+      "typo": "Coca Cla",
+      "expected": "KO",
+      "got": "KO",
+      "ok": true,
+      "distance": 1,
+      "kind": "deletion"
+    },
+    {
+      "typo": "Cocacola",
+      "expected": "KO",
+      "got": "KO",
+      "ok": true,
+      "distance": 0,
+      "kind": "spacing"
+    },
+    {
+      "typo": "Pepsi Co",
+      "expected": "PEP",
+      "got": "PEP",
+      "ok": true,
+      "distance": 0,
+      "kind": "spacing"
+    },
+    {
+      "typo": "Pfzer",
+      "expected": "PFE",
+      "got": "PFE",
+      "ok": true,
+      "distance": 1,
+      "kind": "deletion"
+    },
+    {
+      "typo": "Pfiser",
+      "expected": "PFE",
+      "got": "PFE",
+      "ok": true,
+      "distance": 1,
+      "kind": "substitution"
+    },
+    {
+      "typo": "Johnsen & Johnson",
+      "expected": "JNJ",
+      "got": "JNJ",
+      "ok": true,
+      "distance": 1,
+      "kind": "substitution"
+    },
+    {
+      "typo": "UnitedHeath",
+      "expected": "UNH",
+      "got": "UNH",
+      "ok": true,
+      "distance": 1,
+      "kind": "deletion"
+    },
+    {
+      "typo": "United Healt Group",
+      "expected": "UNH",
+      "got": "UNH",
+      "ok": true,
+      "distance": 1,
+      "kind": "deletion"
+    },
+    {
+      "typo": "Boieng",
+      "expected": "BA",
+      "got": "BA",
+      "ok": true,
+      "distance": 2,
+      "kind": "transposition"
+    },
+    {
+      "typo": "Boing",
+      "expected": "BA",
+      "got": "BA",
+      "ok": true,
+      "distance": 1,
+      "kind": "deletion"
+    },
+    {
+      "typo": "Disny",
+      "expected": "DIS",
+      "got": "DIS",
+      "ok": true,
+      "distance": 1,
+      "kind": "deletion"
+    },
+    {
+      "typo": "Walt Disnay",
+      "expected": "DIS",
+      "got": "DIS",
+      "ok": true,
+      "distance": 1,
+      "kind": "substitution"
+    },
+    {
+      "typo": "Inetl",
+      "expected": "INTC",
+      "got": "INTC",
+      "ok": true,
+      "distance": 2,
+      "kind": "transposition"
+    },
+    {
+      "typo": "Intl",
+      "expected": "INTC",
+      "got": "INTC",
+      "ok": true,
+      "distance": 1,
+      "kind": "deletion"
+    },
+    {
+      "typo": "AAPLL",
+      "expected": "AAPL",
+      "got": "AAPL",
+      "ok": true,
+      "distance": 1,
+      "kind": "ticker insertion"
+    },
+    {
+      "typo": "MSTF",
+      "expected": "MSFT",
+      "got": null,
+      "ok": false,
+      "distance": null,
+      "kind": "ticker transposition"
+    },
+    {
+      "typo": "NVDX",
+      "expected": "NVDA",
+      "got": "NVDA",
+      "ok": true,
+      "distance": 1,
+      "kind": "ticker substitution"
+    }
+  ],
+  "dictionary": "data\\needs\\companies_proposal_list.json (proposal list; A's data/companies.json not found)"
+}

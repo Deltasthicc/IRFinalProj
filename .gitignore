@@ -6,3 +6,5 @@ __pycache__/
 *.log
 eval/out/private/
 .DS_Store
+
+eval/out/dryrun/
