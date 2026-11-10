@@ -52,9 +52,11 @@ python -m pytest -q        # offline, no network, no key
 * **Role A** may provide `trademesh.index.build_retrievers(passages) -> {name: Retriever}`. **Role B** may provide `trademesh.ranking.build_retrievers(passages)` and `trademesh.ranking.build_reranker(passages)`. They are discovered automatically (`src/trademesh/retrievers.py`); the app and eval scripts then stop using the stub.
 * Optional app data: `data/graph/company_graph.json` (nodes with `ticker, pagerank, hub, authority, in_degree`; edges `source -> target`) and `data/vision/results.json`. Formats are documented in `src/trademesh/app/backend.py`.
 
-## LLM settings
+## LLM settings (Gemini, Anthropic, OpenAI-compatible, Ollama)
 
-See `.env.example`. Every call is cached under `LLM_CACHE_DIR` by the hash of (model, prompt, parameters) and logged to `calls.jsonl`, so the demo can run offline from the cache (`LLM_OFFLINE=1`). The eval scripts print the number of live (uncached) calls. Keys live only in `.env`, which is git-ignored.
+Using Gemini: get a key at https://aistudio.google.com/apikey, then in `.env` set
+`LLM_PROVIDER=gemini` and `GEMINI_API_KEY=...` (optionally `LLM_MODEL=`, default `gemini-2.5-flash`).
+The key stays in `.env`, which is git-ignored. See `.env.example` for all options. Every call is cached under `LLM_CACHE_DIR` by the hash of (model, prompt, parameters) and logged to `calls.jsonl`, so the demo can run offline from the cache (`LLM_OFFLINE=1`). The eval scripts print the number of live (uncached) calls. Keys live only in `.env`, which is git-ignored.
 
 ## Evaluation (Role C)
 

@@ -1,6 +1,7 @@
 """Provider-agnostic LLM client with an on-disk cache and a call log.
 
-* Providers (env LLM_PROVIDER): "anthropic" (ANTHROPIC_API_KEY), "openai" (any
+* Providers (env LLM_PROVIDER): "gemini" (GEMINI_API_KEY, Google AI Studio), "anthropic"
+  (ANTHROPIC_API_KEY), "openai" (any
   OpenAI-compatible endpoint: OPENAI_BASE_URL + OPENAI_API_KEY, which also covers a local
   Ollama at http://localhost:11434/v1) and "stub" (development only, see below).
 * Temperature is always 0.
@@ -22,7 +23,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
 
-DEFAULT_MODELS = {"anthropic": "claude-haiku-5-5", "openai": "gpt-4o-mini", "stub": "stub-extractive"}
+DEFAULT_MODELS = {"gemini": "gemini-2.5-flash", "anthropic": "claude-haiku-5-5", "openai": "gpt-4o-mini",
+                  "stub": "stub-extractive"}
 
 
 def load_env(path: Path | None = None) -> None:
@@ -120,6 +122,9 @@ class LLMClient:
             return _stub_answer(user)
         import requests  # imported here so tests and the offline path never need the network stack
 
+        if self.provider == "gemini":
+            return self._call_gemini(requests, system, user, max_tokens)
+
         if self.provider == "anthropic":
             url = os.getenv("ANTHROPIC_BASE_URL", "https://api.anthropic.com") + "/v1/messages"
             headers = {"x-api-key": os.environ["ANTHROPIC_API_KEY"], "anthropic-version": "2023-06-01",
@@ -135,6 +140,27 @@ class LLMClient:
                 "messages": [{"role": "system", "content": system}, {"role": "user", "content": user}]}
         data = _post(requests, base + "/chat/completions", headers, body)
         return data["choices"][0]["message"]["content"].strip()
+
+
+    def _call_gemini(self, requests, system: str, user: str, max_tokens: int) -> str:
+        """Google Gemini REST API (generateContent). Key from GEMINI_API_KEY (or GOOGLE_API_KEY)."""
+        key = os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY")
+        if not key:
+            raise RuntimeError("set GEMINI_API_KEY in .env (see .env.example)")
+        base = os.getenv("GEMINI_BASE_URL", "https://generativelanguage.googleapis.com/v1beta").rstrip("/")
+        gen = {"temperature": 0, "maxOutputTokens": max_tokens}
+        if self.model.startswith("gemini-2.5-flash"):
+            gen["thinkingConfig"] = {"thinkingBudget": 0}   # thinking tokens would eat the answer budget
+        body = {"systemInstruction": {"parts": [{"text": system}]},
+                "contents": [{"role": "user", "parts": [{"text": user}]}], "generationConfig": gen}
+        headers = {"x-goog-api-key": key, "content-type": "application/json"}
+        data = _post(requests, f"{base}/models/{self.model}:generateContent", headers, body)
+        try:
+            parts = data["candidates"][0]["content"]["parts"]
+        except (KeyError, IndexError):
+            reason = data.get("promptFeedback") or data.get("candidates", [{}])[0].get("finishReason")
+            raise RuntimeError(f"Gemini returned no answer ({reason})") from None
+        return "".join(p.get("text", "") for p in parts).strip()
 
 
 def _post(requests, url: str, headers: dict, body: dict, retries: int = 2) -> dict:

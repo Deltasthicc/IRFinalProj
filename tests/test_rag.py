@@ -214,3 +214,32 @@ def test_second_run_is_served_from_cache(pipe):
     assert pipe.llm.live_calls == 1
     r = pipe.answer("Tesla battery supplier risk")
     assert r.cached and pipe.llm.live_calls == 1
+
+
+def test_gemini_request_and_response(tmp_path, monkeypatch):
+    """The Gemini adapter builds the right request and parses the reply (no network: fake requests)."""
+    monkeypatch.setenv("GEMINI_API_KEY", "test-key")
+    seen = {}
+
+    class FakeResp:
+        status_code = 200
+        def raise_for_status(self): pass
+        def json(self):
+            return {"candidates": [{"content": {"parts": [{"text": "Sales rose 4 percent [P1]."}]}}]}
+
+    class FakeRequests:
+        @staticmethod
+        def post(url, headers, json, timeout):
+            seen.update(url=url, headers=headers, body=json)
+            return FakeResp()
+
+    import sys
+    monkeypatch.setitem(sys.modules, "requests", FakeRequests)
+    c = LLMClient(provider="gemini", cache_dir=tmp_path)
+    r = c.complete("be brief", "question?")
+    assert r.text == "Sales rose 4 percent [P1]." and not r.cached
+    assert seen["url"].endswith("/models/gemini-2.5-flash:generateContent")
+    assert seen["headers"]["x-goog-api-key"] == "test-key"
+    assert seen["body"]["generationConfig"]["temperature"] == 0
+    assert seen["body"]["systemInstruction"]["parts"][0]["text"] == "be brief"
+    assert c.complete("be brief", "question?").cached        # second call served from disk
