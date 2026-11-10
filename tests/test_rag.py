@@ -238,7 +238,7 @@ def test_gemini_request_and_response(tmp_path, monkeypatch):
     c = LLMClient(provider="gemini", cache_dir=tmp_path)
     r = c.complete("be brief", "question?")
     assert r.text == "Sales rose 4 percent [P1]." and not r.cached
-    assert seen["url"].endswith("/models/gemini-2.5-flash:generateContent")
+    assert seen["url"].endswith("/models/gemini-3.5-flash:generateContent")
     assert seen["headers"]["x-goog-api-key"] == "test-key"
     assert seen["body"]["generationConfig"]["temperature"] == 0
     assert seen["body"]["systemInstruction"]["parts"][0]["text"] == "be brief"

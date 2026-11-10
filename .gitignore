@@ -8,3 +8,6 @@ eval/out/private/
 .DS_Store
 
 eval/out/dryrun/
+
+# LLM answer cache: ignored while the corpus is the test fixture; commit the real cache before the demo
+cache/

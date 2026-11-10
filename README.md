@@ -55,7 +55,7 @@ python -m pytest -q        # offline, no network, no key
 ## LLM settings (Gemini, Anthropic, OpenAI-compatible, Ollama)
 
 Using Gemini: get a key at https://aistudio.google.com/apikey, then in `.env` set
-`LLM_PROVIDER=gemini` and `GEMINI_API_KEY=...` (optionally `LLM_MODEL=`, default `gemini-2.5-flash`).
+`LLM_PROVIDER=gemini` and `GEMINI_API_KEY=...` (optionally `LLM_MODEL=`, default `gemini-3.5-flash`).
 The key stays in `.env`, which is git-ignored. See `.env.example` for all options. Every call is cached under `LLM_CACHE_DIR` by the hash of (model, prompt, parameters) and logged to `calls.jsonl`, so the demo can run offline from the cache (`LLM_OFFLINE=1`). The eval scripts print the number of live (uncached) calls. Keys live only in `.env`, which is git-ignored.
 
 ## Evaluation (Role C)

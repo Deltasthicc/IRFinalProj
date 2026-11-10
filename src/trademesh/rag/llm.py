@@ -23,7 +23,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
 
-DEFAULT_MODELS = {"gemini": "gemini-2.5-flash", "anthropic": "claude-haiku-5-5", "openai": "gpt-4o-mini",
+DEFAULT_MODELS = {"gemini": "gemini-3.5-flash", "anthropic": "claude-haiku-5-5", "openai": "gpt-4o-mini",
                   "stub": "stub-extractive"}
 
 
@@ -148,9 +148,9 @@ class LLMClient:
         if not key:
             raise RuntimeError("set GEMINI_API_KEY in .env (see .env.example)")
         base = os.getenv("GEMINI_BASE_URL", "https://generativelanguage.googleapis.com/v1beta").rstrip("/")
-        gen = {"temperature": 0, "maxOutputTokens": max_tokens}
-        if self.model.startswith("gemini-2.5-flash"):
-            gen["thinkingConfig"] = {"thinkingBudget": 0}   # thinking tokens would eat the answer budget
+        # Gemini 3.x "thinks" before answering and thinking tokens count against maxOutputTokens,
+        # so we leave extra room; otherwise a short answer can come back empty.
+        gen = {"temperature": 0, "maxOutputTokens": max_tokens + 2048}
         body = {"systemInstruction": {"parts": [{"text": system}]},
                 "contents": [{"role": "user", "parts": [{"text": user}]}], "generationConfig": gen}
         headers = {"x-goog-api-key": key, "content-type": "application/json"}
