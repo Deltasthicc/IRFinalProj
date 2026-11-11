@@ -163,24 +163,43 @@ class LLMClient:
         return "".join(p.get("text", "") for p in parts).strip()
 
 
-def _post(requests, url: str, headers: dict, body: dict, retries: int = 3) -> dict:
-    """POST with retries on transient failures (HTTP 429/5xx, read timeouts, dropped connections).
+_LAST_CALL = [0.0]
 
-    Gemini 3.x can spend a long time thinking on a long prompt, so the read timeout is generous
-    (LLM_TIMEOUT seconds, default 180). A retry is safe: the request is deterministic and the
-    disk cache only stores a finished answer.
+
+def _post(requests, url: str, headers: dict, body: dict, retries: int = 6) -> dict:
+    """POST with spacing and retries on transient failures.
+
+    - LLM_MIN_INTERVAL seconds (default 4.5) between live calls keeps us under a 15 requests/minute cap.
+    - Read timeouts and dropped connections are retried (LLM_TIMEOUT seconds per attempt, default 180).
+    - HTTP 429: a per-day quota stops at once with a clear message; a per-minute limit waits
+      (as long as the server says, at least 20 s) and retries.
+    A retry is safe: requests are deterministic and the disk cache only stores finished answers.
     """
     timeout = float(os.getenv("LLM_TIMEOUT", "180"))
+    gap = float(os.getenv("LLM_MIN_INTERVAL", "4.5"))
     transient = (requests.exceptions.Timeout, requests.exceptions.ConnectionError)
     for attempt in range(retries + 1):
+        wait = _LAST_CALL[0] + gap - time.time()
+        if wait > 0:
+            time.sleep(wait)
         try:
             r = requests.post(url, headers=headers, json=body, timeout=timeout)
         except transient:
+            _LAST_CALL[0] = time.time()
             if attempt < retries:
                 time.sleep(3 * (attempt + 1))
                 continue
             raise
-        if r.status_code in (429, 500, 502, 503, 529) and attempt < retries:
+        _LAST_CALL[0] = time.time()
+        if r.status_code == 429:
+            if "PerDay" in r.text:
+                raise RuntimeError("LLM daily quota exhausted (HTTP 429, per-day). Finished answers are cached; "
+                                   "rerun after the quota resets or use another model/billing.")
+            if attempt < retries:
+                m = re.search(r"retry in ([0-9.]+)s", r.text)
+                time.sleep(min(max(float(m.group(1)) if m else 0.0, 20.0), 90.0))
+                continue
+        elif r.status_code in (500, 502, 503, 529) and attempt < retries:
             time.sleep(3 * (attempt + 1))
             continue
         r.raise_for_status()
