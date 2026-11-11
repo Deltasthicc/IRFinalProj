@@ -1,0 +1,57 @@
+{
+  "split": "test",
+  "n_questions": 20,
+  "resamples": 10000,
+  "pairs": {
+    "bm25_rag - closed_book": {
+      "mean_diff": 0.15,
+      "ci95": [
+        -0.25,
+        0.55
+      ],
+      "better": 9,
+      "worse": 8,
+      "tied": 3
+    },
+    "best_rag - closed_book": {
+      "mean_diff": 0.525,
+      "ci95": [
+        0.225,
+        0.85
+      ],
+      "better": 10,
+      "worse": 2,
+      "tied": 8
+    },
+    "best_rag - bm25_rag": {
+      "mean_diff": 0.375,
+      "ci95": [
+        0.15,
+        0.65
+      ],
+      "better": 7,
+      "worse": 0,
+      "tied": 13
+    }
+  },
+  "by_type": {
+    "entity": {
+      "n": 7,
+      "closed_book": 1.2142857142857142,
+      "bm25_rag": 1.7857142857142858,
+      "best_rag": 1.8571428571428572
+    },
+    "terminology": {
+      "n": 6,
+      "closed_book": 0.75,
+      "bm25_rag": 1.1666666666666667,
+      "best_rag": 1.6666666666666667
+    },
+    "topical": {
+      "n": 7,
+      "closed_book": 1.5,
+      "bm25_rag": 1.0,
+      "best_rag": 1.5714285714285714
+    }
+  }
+}

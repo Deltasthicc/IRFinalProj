@@ -1,0 +1,37 @@
+{
+  "split": "test",
+  "configs": {
+    "closed_book": {
+      "n_rated": 20,
+      "mean_rating": 1.175,
+      "share_rated_2": 0.25,
+      "citation_precision": null,
+      "n_citations_judged": 0,
+      "number_grounding": null,
+      "n_answers_with_numbers": 0,
+      "verifier_pass_rate": null
+    },
+    "bm25_rag": {
+      "n_rated": 20,
+      "mean_rating": 1.325,
+      "share_rated_2": 0.5,
+      "citation_precision": 1.0,
+      "n_citations_judged": 35,
+      "number_grounding": 1.0,
+      "n_answers_with_numbers": 4,
+      "verifier_pass_rate": 0.95
+    },
+    "best_rag": {
+      "n_rated": 20,
+      "mean_rating": 1.7,
+      "share_rated_2": 0.7,
+      "citation_precision": 0.9666666666666667,
+      "n_citations_judged": 60,
+      "number_grounding": 1.0,
+      "n_answers_with_numbers": 5,
+      "verifier_pass_rate": 0.95
+    }
+  },
+  "kappa": 0.8864711447492905,
+  "n_double_rated": 60
+}

@@ -1,0 +1,102 @@
+{
+  "E02": {
+    "A": "bm25_rag",
+    "B": "best_rag",
+    "C": "closed_book"
+  },
+  "E04": {
+    "A": "closed_book",
+    "B": "best_rag",
+    "C": "bm25_rag"
+  },
+  "E05": {
+    "A": "bm25_rag",
+    "B": "best_rag",
+    "C": "closed_book"
+  },
+  "E06": {
+    "A": "bm25_rag",
+    "B": "best_rag",
+    "C": "closed_book"
+  },
+  "E08": {
+    "A": "bm25_rag",
+    "B": "best_rag",
+    "C": "closed_book"
+  },
+  "E09": {
+    "A": "best_rag",
+    "B": "bm25_rag",
+    "C": "closed_book"
+  },
+  "E10": {
+    "A": "closed_book",
+    "B": "best_rag",
+    "C": "bm25_rag"
+  },
+  "T02": {
+    "A": "best_rag",
+    "B": "bm25_rag",
+    "C": "closed_book"
+  },
+  "T04": {
+    "A": "bm25_rag",
+    "B": "closed_book",
+    "C": "best_rag"
+  },
+  "T05": {
+    "A": "bm25_rag",
+    "B": "best_rag",
+    "C": "closed_book"
+  },
+  "T06": {
+    "A": "closed_book",
+    "B": "best_rag",
+    "C": "bm25_rag"
+  },
+  "T08": {
+    "A": "bm25_rag",
+    "B": "closed_book",
+    "C": "best_rag"
+  },
+  "T09": {
+    "A": "best_rag",
+    "B": "bm25_rag",
+    "C": "closed_book"
+  },
+  "T10": {
+    "A": "bm25_rag",
+    "B": "best_rag",
+    "C": "closed_book"
+  },
+  "R03": {
+    "A": "closed_book",
+    "B": "bm25_rag",
+    "C": "best_rag"
+  },
+  "R04": {
+    "A": "closed_book",
+    "B": "best_rag",
+    "C": "bm25_rag"
+  },
+  "R05": {
+    "A": "best_rag",
+    "B": "closed_book",
+    "C": "bm25_rag"
+  },
+  "R07": {
+    "A": "closed_book",
+    "B": "best_rag",
+    "C": "bm25_rag"
+  },
+  "R09": {
+    "A": "bm25_rag",
+    "B": "best_rag",
+    "C": "closed_book"
+  },
+  "R10": {
+    "A": "bm25_rag",
+    "B": "closed_book",
+    "C": "best_rag"
+  }
+}
