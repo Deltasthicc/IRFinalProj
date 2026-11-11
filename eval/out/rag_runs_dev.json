@@ -1,0 +1,724 @@
+{
+  "split": "dev",
+  "retrievers": {
+    "bm25_rag": "bm25",
+    "best_rag": "hybrid"
+  },
+  "model": "gemini-3.5-flash-lite",
+  "tau": 0.0,
+  "lam": 0.0,
+  "reportable": true,
+  "runs": [
+    {
+      "id": "E01",
+      "question": "How does Apple describe its dependence on outsourcing partners to manufacture its products?",
+      "type": "entity",
+      "needs_table": "no",
+      "closed_book": {
+        "mode": "closed_book",
+        "answer": "Apple describes its manufacturing process as heavily dependent on outsourcing partners, the majority of which are located outside the United States. The company relies on these third-party suppliers to manufacture its hardware products, such as the iPhone, iPad, and Mac, and warns that disruptions with these key partners could adversely affect its business.",
+        "abstained": false,
+        "abstain_reason": "",
+        "confidence": 0.0,
+        "passage_ids": [],
+        "cited": null,
+        "verifier_passed": null,
+        "verifier_flags": null,
+        "numbers_grounded": null,
+        "n_numbers": null,
+        "model": "gemini-3.5-flash-lite",
+        "cached": true
+      },
+      "bm25_rag": {
+        "mode": "rag",
+        "answer": "Apple utilizes several outsourcing partners to manufacture subassemblies and perform final assembly and testing of finished products [P1]. A significant majority of the company's manufacturing is performed by outsourcing partners located primarily in China mainland, India, Japan, South Korea, Taiwan, and Vietnam, along with facilities in the U.S. [P2]. Furthermore, Apple relies on single-source partners for many components and on partners primarily in Asia for final assembly of substantially all of its hardware products [P2].",
+        "abstained": false,
+        "abstain_reason": "",
+        "confidence": 4.081473864599098,
+        "passage_ids": [
+          "AAPL-2026-7-0039",
+          "AAPL-2026-1A-0020",
+          "AAPL-2026-1A-0092",
+          "AAPL-2026-1A-0019",
+          "AAPL-2026-8-0065"
+        ],
+        "cited": [
+          1,
+          2
+        ],
+        "verifier_passed": true,
+        "verifier_flags": [],
+        "numbers_grounded": true,
+        "n_numbers": 0,
+        "model": "gemini-3.5-flash-lite",
+        "cached": false
+      },
+      "best_rag": {
+        "mode": "rag",
+        "answer": "Apple relies on outsourcing partners located primarily in China mainland, India, Japan, South Korea, Taiwan, and Vietnam, along with partners and facilities in the U.S., to perform a significant majority of its manufacturing and final assembly of substantially all hardware products [P1][P3]. The company also depends on outsourcing partners outside of the U.S. for component and product manufacturing and logistical services [P5], utilizing them to manufacture subassemblies and perform final assembly and testing [P2].",
+        "abstained": false,
+        "abstain_reason": "",
+        "confidence": 0.006504494976203068,
+        "passage_ids": [
+          "AAPL-2026-1A-0020",
+          "AAPL-2026-7-0039",
+          "AAPL-2026-8-0065",
+          "AAPL-2026-1A-0005",
+          "AAPL-2026-1A-0019"
+        ],
+        "cited": [
+          1,
+          2,
+          3,
+          5
+        ],
+        "verifier_passed": false,
+        "verifier_flags": [
+          "1 sentence(s) without a citation"
+        ],
+        "numbers_grounded": true,
+        "n_numbers": 0,
+        "model": "gemini-3.5-flash-lite",
+        "cached": true
+      }
+    },
+    {
+      "id": "E03",
+      "question": "What export control restrictions does NVIDIA say affect sales of its data center products to China?",
+      "type": "entity",
+      "needs_table": "no",
+      "closed_book": {
+        "mode": "closed_book",
+        "answer": "NVIDIA states that U.S. export control regulations, specifically those updated by the Biden administration in late 2023, require a license for exporting advanced AI chips like the A100, H100, A800, and H800 to China and other specified destinations. These restrictions have significantly impacted their data center product sales and competitive position in the Chinese market.",
+        "abstained": false,
+        "abstain_reason": "",
+        "confidence": 0.0,
+        "passage_ids": [],
+        "cited": null,
+        "verifier_passed": null,
+        "verifier_flags": null,
+        "numbers_grounded": null,
+        "n_numbers": null,
+        "model": "gemini-3.5-flash-lite",
+        "cached": true
+      },
+      "bm25_rag": {
+        "mode": "rag",
+        "answer": "INSUFFICIENT EVIDENCE",
+        "abstained": true,
+        "abstain_reason": "the model answered INSUFFICIENT EVIDENCE",
+        "confidence": 3.2706840053751978,
+        "passage_ids": [
+          "NVDA-2026-1-0052",
+          "NVDA-2026-1A-0109",
+          "NVDA-2026-1A-0089",
+          "NVDA-2026-1A-0104",
+          "NVDA-2026-1A-0110"
+        ],
+        "cited": [],
+        "verifier_passed": true,
+        "verifier_flags": [],
+        "numbers_grounded": true,
+        "n_numbers": 0,
+        "model": "gemini-3.5-flash-lite",
+        "cached": false
+      },
+      "best_rag": {
+        "mode": "rag",
+        "answer": "The passages state that the company is already effectively foreclosed from the China market by U.S. export controls [P3]. Additionally, the Chinese government has discouraged customers from purchasing, importing, or using data center products, including any China-specific product designed to comply with U.S. export controls [P2][P4].",
+        "abstained": false,
+        "abstain_reason": "",
+        "confidence": 0.0036429872495446266,
+        "passage_ids": [
+          "NVDA-2026-1A-0104",
+          "NVDA-2026-1-0052",
+          "NVDA-2026-1A-0110",
+          "NVDA-2026-1A-0109",
+          "NVDA-2026-1A-0089"
+        ],
+        "cited": [
+          2,
+          3,
+          4
+        ],
+        "verifier_passed": false,
+        "verifier_flags": [
+          "2 sentence(s) without a citation"
+        ],
+        "numbers_grounded": true,
+        "n_numbers": 0,
+        "model": "gemini-3.5-flash-lite",
+        "cached": true
+      }
+    },
+    {
+      "id": "E07",
+      "question": "How does Exxon Mobil describe the risks of climate change regulation to its business?",
+      "type": "entity",
+      "needs_table": "no",
+      "closed_book": {
+        "mode": "closed_book",
+        "answer": "ExxonMobil describes climate change regulations as a risk that could increase compliance costs, operational expenses, and capital expenditures. The company warns that policies aimed at reducing greenhouse gas emissions may also reduce demand for its oil and gas products. Additionally, it highlights that future regulations could lead to asset impairments or make certain projects economically unviable.",
+        "abstained": false,
+        "abstain_reason": "",
+        "confidence": 0.0,
+        "passage_ids": [],
+        "cited": null,
+        "verifier_passed": null,
+        "verifier_flags": null,
+        "numbers_grounded": null,
+        "n_numbers": null,
+        "model": "gemini-3.5-flash-lite",
+        "cached": true
+      },
+      "bm25_rag": {
+        "mode": "rag",
+        "answer": "Countries have adopted or are considering broad-reaching regulatory frameworks to report on or reduce greenhouse gas emissions from the production and use of oil, gas, and their products, while also increasing support for emission-reduction technologies [P1]. Additionally, these actions are driven by concerns over climate change risks and aim to achieve net-zero atmospheric concentrations of carbon dioxide [P1].",
+        "abstained": false,
+        "abstain_reason": "",
+        "confidence": 2.2122479454657897,
+        "passage_ids": [
+          "XOM-2025-1A-0020",
+          "XOM-2025-X-0091",
+          "XOM-2025-1A-0003",
+          "XOM-2025-X-0249",
+          "XOM-2025-X-0078"
+        ],
+        "cited": [
+          1
+        ],
+        "verifier_passed": true,
+        "verifier_flags": [],
+        "numbers_grounded": true,
+        "n_numbers": 0,
+        "model": "gemini-3.5-flash-lite",
+        "cached": false
+      },
+      "best_rag": {
+        "mode": "rag",
+        "answer": "Countries have adopted broad-reaching regulatory frameworks to report on or reduce greenhouse gas emissions and increase emission-reduction technologies, while nations also update Nationally Determined Contributions under the Paris Agreement [P1][P2]. These regulatory actions, along with changes in law, interpretation, enforcement, taxes, price controls, and government policies or priorities, could adversely affect the company's results [P3][P5].",
+        "abstained": false,
+        "abstain_reason": "",
+        "confidence": 0.002325581395348837,
+        "passage_ids": [
+          "XOM-2025-1A-0020",
+          "XOM-2025-X-0091",
+          "XOM-2025-1A-0014",
+          "XOM-2025-X-0298",
+          "XOM-2025-X-0064"
+        ],
+        "cited": [
+          1,
+          2,
+          3,
+          5
+        ],
+        "verifier_passed": true,
+        "verifier_flags": [],
+        "numbers_grounded": true,
+        "n_numbers": 0,
+        "model": "gemini-3.5-flash-lite",
+        "cached": false
+      }
+    },
+    {
+      "id": "T01",
+      "question": "Which companies describe supplier concentration as a risk, and how?",
+      "type": "topical",
+      "needs_table": "no",
+      "closed_book": {
+        "mode": "closed_book",
+        "answer": "Many large US companies, particularly in technology, retail, and manufacturing like Apple, Tesla, and Nike, disclose supplier concentration as a risk in their 10-K filings. They typically explain that relying on a single or a limited number of third-party suppliers for critical components or finished goods exposes them to severe disruptions if those partners face financial distress, operational failures, capacity constraints, or geopolitical tensions. These companies warn that such disruptions could lead to production delays, increased costs, and a significant loss of revenue.",
+        "abstained": false,
+        "abstain_reason": "",
+        "confidence": 0.0,
+        "passage_ids": [],
+        "cited": null,
+        "verifier_passed": null,
+        "verifier_flags": null,
+        "numbers_grounded": null,
+        "n_numbers": null,
+        "model": "gemini-3.5-flash-lite",
+        "cached": true
+      },
+      "bm25_rag": {
+        "mode": "rag",
+        "answer": "INTC uses sourcing plans designed to mitigate the risk of a potential supplier concentration for key commodities [P1]. NVDA lists the limited number and geographic concentration of global suppliers, foundries, contract manufacturers, assembly and test providers, and memory manufacturers as a risk [P3].",
+        "abstained": false,
+        "abstain_reason": "",
+        "confidence": 4.850279660551656,
+        "passage_ids": [
+          "INTC-2025-X-0217",
+          "MSFT-2026-1-0002",
+          "NVDA-2026-1A-0032",
+          "INTC-2025-X-0621",
+          "MSFT-2026-1A-0033"
+        ],
+        "cited": [
+          1,
+          3
+        ],
+        "verifier_passed": true,
+        "verifier_flags": [],
+        "numbers_grounded": true,
+        "n_numbers": 0,
+        "model": "gemini-3.5-flash-lite",
+        "cached": false
+      },
+      "best_rag": {
+        "mode": "rag",
+        "answer": "AAPL states that risks are heightened in regions where the company has a concentration of suppliers [P1]. INTC notes that it has sourcing plans designed to mitigate the risk of a potential supplier concentration for its key commodities [P2].",
+        "abstained": false,
+        "abstain_reason": "",
+        "confidence": 0.009243431465653687,
+        "passage_ids": [
+          "AAPL-2026-1A-0069",
+          "INTC-2025-X-0217",
+          "GS-2025-1A-0005",
+          "NVDA-2026-1C-0002",
+          "GS-2025-1A-0053"
+        ],
+        "cited": [
+          1,
+          2
+        ],
+        "verifier_passed": true,
+        "verifier_flags": [],
+        "numbers_grounded": true,
+        "n_numbers": 0,
+        "model": "gemini-3.5-flash-lite",
+        "cached": false
+      }
+    },
+    {
+      "id": "T03",
+      "question": "How do companies describe their exposure to foreign currency exchange rate risk?",
+      "type": "topical",
+      "needs_table": "no",
+      "closed_book": {
+        "mode": "closed_book",
+        "answer": "Companies typically describe foreign currency exchange rate risk as the potential for financial loss and volatility in earnings and cash flows resulting from fluctuations in exchange rates between the U.S. dollar and international currencies. They often state that this exposure arises from international revenues, expenses, assets, and liabilities denominated in foreign currencies. To manage and mitigate this risk, companies frequently report using derivative financial instruments such as forward contracts and options.",
+        "abstained": false,
+        "abstain_reason": "",
+        "confidence": 0.0,
+        "passage_ids": [],
+        "cited": null,
+        "verifier_passed": null,
+        "verifier_flags": null,
+        "numbers_grounded": null,
+        "n_numbers": null,
+        "model": "gemini-3.5-flash-lite",
+        "cached": true
+      },
+      "bm25_rag": {
+        "mode": "rag",
+        "answer": "Bank of America states that its market risk exposure to foreign exchange risk in foreign operations is not significant [P1]. Apple's exposure relates primarily to being a net receiver of currencies other than the U.S. dollar [P3]. NVIDIA considers its direct exposure to foreign exchange rate fluctuations to be minimal because substantially all sales are in United States dollars [P4].",
+        "abstained": false,
+        "abstain_reason": "",
+        "confidence": 3.5596276114729144,
+        "passage_ids": [
+          "BAC-2025-7-0356",
+          "JNJ-2025-8-0056",
+          "AAPL-2026-7A-0004",
+          "NVDA-2026-7A-0003",
+          "BAC-2025-7-0355"
+        ],
+        "cited": [
+          1,
+          3,
+          4
+        ],
+        "verifier_passed": false,
+        "verifier_flags": [
+          "1 sentence(s) without a citation"
+        ],
+        "numbers_grounded": true,
+        "n_numbers": 0,
+        "model": "gemini-3.5-flash-lite",
+        "cached": false
+      },
+      "best_rag": {
+        "mode": "rag",
+        "answer": "Companies describe their foreign exchange rate risk exposure as relating primarily to being a net receiver of currencies other than the U.S. dollar, non-U.S. dollar-denominated sales, cost of sales, and operating expenses worldwide [P1][P5]. Other companies consider their direct exposure to be minimal because substantially all sales are in U.S. dollars, while others are exposed through international stores, product and service offerings, intercompany balances, and holdings of foreign currency cash equivalents and marketable securities [P2][P3]. Additionally, exposure involves changes in the values of current holdings and future cash flows denominated in currencies other than the U.S. dollar [P4].",
+        "abstained": false,
+        "abstain_reason": "",
+        "confidence": 0.005377743082661116,
+        "passage_ids": [
+          "AAPL-2026-7A-0004",
+          "NVDA-2026-7A-0003",
+          "AMZN-2025-1A-0022",
+          "BAC-2025-7-0317",
+          "AAPL-2026-1A-0089"
+        ],
+        "cited": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "verifier_passed": false,
+        "verifier_flags": [
+          "4 sentence(s) without a citation"
+        ],
+        "numbers_grounded": true,
+        "n_numbers": 0,
+        "model": "gemini-3.5-flash-lite",
+        "cached": false
+      }
+    },
+    {
+      "id": "T07",
+      "question": "What do companies say about share repurchase programs and dividends?",
+      "type": "topical",
+      "needs_table": "no",
+      "closed_book": {
+        "mode": "closed_book",
+        "answer": "Companies typically disclose share repurchase programs and dividends in their 10-K filings under sections discussing liquidity, capital resources, and market for common equity. They generally state that these programs are designed to return value to shareholders and outline the historical amounts paid, authorized board limits, and any future intentions or constraints related to these payouts.",
+        "abstained": false,
+        "abstain_reason": "",
+        "confidence": 0.0,
+        "passage_ids": [],
+        "cited": null,
+        "verifier_passed": null,
+        "verifier_flags": null,
+        "numbers_grounded": null,
+        "n_numbers": null,
+        "model": "gemini-3.5-flash-lite",
+        "cached": true
+      },
+      "bm25_rag": {
+        "mode": "rag",
+        "answer": "Apple believes its stock price reflects expectations that cash dividends will continue at current levels or grow and that its share repurchase programs will be fully consummated, though future dividends require Board declaration and repurchase programs do not obligate acquiring a minimum amount of shares [P1]. During 2026, Apple repurchased $85.8 billion of common stock and paid $15.7 billion in dividends and dividend equivalents, and announced a new share repurchase program of up to $100 billion in April 2026 [P2]. NVIDIA repurchased 282 million shares of common stock for $40.4 billion and paid $974 million in cash dividends in fiscal year 2026, noting that future dividend payments are subject to its Board's continuing determination [P3][P5]. Walmart repurchases shares under Board-authorized programs, such as a November 2022 $20.0 billion program and a new $30.0 billion authorization approved in February 2026 [P4].",
+        "abstained": false,
+        "abstain_reason": "",
+        "confidence": 4.389378474502351,
+        "passage_ids": [
+          "AAPL-2026-1A-0096",
+          "AAPL-2026-7-0041",
+          "NVDA-2026-5-0003",
+          "WMT-2026-5-0005",
+          "NVDA-2026-7-0047"
+        ],
+        "cited": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "verifier_passed": true,
+        "verifier_flags": [],
+        "numbers_grounded": true,
+        "n_numbers": 13,
+        "model": "gemini-3.5-flash-lite",
+        "cached": false
+      },
+      "best_rag": {
+        "mode": "rag",
+        "answer": "AAPL announced a new share repurchase program of up to $100 billion in April 2026, repurchased $85.8 billion of common stock, and paid $15.7 billion in dividends and dividend equivalents [P1]. WMT repurchased shares under a $20.0 billion program approved in November 2022 and subsequently approved a new $30.0 billion share repurchase authorization in February 2026 [P2][P5]. GS uses its share repurchase program to help maintain the appropriate level of common equity based on planned quarterly repurchases submitted in an annual capital plan [P3].",
+        "abstained": false,
+        "abstain_reason": "",
+        "confidence": 0.008130618720253835,
+        "passage_ids": [
+          "AAPL-2026-7-0041",
+          "WMT-2026-7-0072",
+          "GS-2025-7-0199",
+          "AAPL-2026-8-0058",
+          "WMT-2026-8-0073"
+        ],
+        "cited": [
+          1,
+          2,
+          3,
+          5
+        ],
+        "verifier_passed": true,
+        "verifier_flags": [],
+        "numbers_grounded": true,
+        "n_numbers": 8,
+        "model": "gemini-3.5-flash-lite",
+        "cached": false
+      }
+    },
+    {
+      "id": "R01",
+      "question": "What is a remaining performance obligation and how do companies disclose it?",
+      "type": "terminology",
+      "needs_table": "no",
+      "closed_book": {
+        "mode": "closed_book",
+        "answer": "A remaining performance obligation represents the total transaction price allocated to product and service promises that are unsatisfied or partially unsatisfied at the end of a reporting period. Companies disclose this metric in their 10-K filings along with a qualitative breakdown of when they expect to recognize these amounts as revenue, typically categorized into current and non-current timeframes.",
+        "abstained": false,
+        "abstain_reason": "",
+        "confidence": 0.0,
+        "passage_ids": [],
+        "cited": null,
+        "verifier_passed": null,
+        "verifier_flags": null,
+        "numbers_grounded": null,
+        "n_numbers": null,
+        "model": "gemini-3.5-flash-lite",
+        "cached": true
+      },
+      "bm25_rag": {
+        "mode": "rag",
+        "answer": "Remaining performance obligations represent the revenue expected to be recognized for products and services for which control has not yet been transferred to customers [P1]. Companies estimate total consideration at the outset and throughout the term of the agreement, which involves significant judgments such as identifying variable consideration and potential renegotiation of commitments [P1].",
+        "abstained": false,
+        "abstain_reason": "",
+        "confidence": 3.160723183885634,
+        "passage_ids": [
+          "MSFT-2026-7-0066",
+          "MSFT-2026-8-0082",
+          "TSLA-2025-8-0052",
+          "MSFT-2026-7-0012",
+          "PEP-2025-7-0189"
+        ],
+        "cited": [
+          1
+        ],
+        "verifier_passed": true,
+        "verifier_flags": [],
+        "numbers_grounded": true,
+        "n_numbers": 0,
+        "model": "gemini-3.5-flash-lite",
+        "cached": false
+      },
+      "best_rag": {
+        "mode": "rag",
+        "answer": "Remaining performance obligations represent the revenue expected to be recognized for products and services for which control has not yet been transferred to customers [P1], or services a firm has committed to perform in the future in connection with its contracts with clients [P2]. Companies disclose that estimating total consideration and revenue allocated to remaining performance obligations can involve significant judgments, such as identifying and assessing variable consideration and potential renegotiation of commitments, while considering factors like contract terms and duration [P1]. Additionally, companies disclose specific monetary amounts for total transaction prices allocated to unsatisfied or partially unsatisfied performance obligations and the expected timeframes for recognizing that revenue [P4][P5].",
+        "abstained": false,
+        "abstain_reason": "",
+        "confidence": 0.00819672131147541,
+        "passage_ids": [
+          "MSFT-2026-7-0066",
+          "GS-2025-8-0045",
+          "AAPL-2026-8-0024",
+          "TSLA-2025-8-0052",
+          "UNH-2025-8-0039"
+        ],
+        "cited": [
+          1,
+          2,
+          4,
+          5
+        ],
+        "verifier_passed": true,
+        "verifier_flags": [],
+        "numbers_grounded": true,
+        "n_numbers": 0,
+        "model": "gemini-3.5-flash-lite",
+        "cached": false
+      }
+    },
+    {
+      "id": "R02",
+      "question": "Which companies use the term free cash flow and how do they define it?",
+      "type": "terminology",
+      "needs_table": "no",
+      "closed_book": {
+        "mode": "closed_book",
+        "answer": "Numerous large U.S. companies in SEC 10-K filings use the term \"free cash flow\" as a non-GAAP measure of financial performance. While definitions vary by company, it is most commonly defined as net cash provided by operating activities minus capital expenditures (purchases of property, plant, and equipment). Companies use this metric to indicate the amount of cash available for strategic investments, debt repayment, dividends, and share repurchases after funding operations and maintenance.",
+        "abstained": false,
+        "abstain_reason": "",
+        "confidence": 0.0,
+        "passage_ids": [],
+        "cited": null,
+        "verifier_passed": null,
+        "verifier_flags": null,
+        "numbers_grounded": null,
+        "n_numbers": null,
+        "model": "gemini-3.5-flash-lite",
+        "cached": true
+      },
+      "bm25_rag": {
+        "mode": "rag",
+        "answer": "Walmart defines free cash flow as net cash provided by operating activities minus payments for property and equipment made in that period [P1]. PepsiCo defines it as net cash from operating activities less capital spending, plus sales of property, plant and equipment [P3]. Amazon defines free cash flow as cash flow from operations reduced by \"Purchases of property and equipment, net of proceeds from sales and incentives\" [P4].",
+        "abstained": false,
+        "abstain_reason": "",
+        "confidence": 3.48587654761552,
+        "passage_ids": [
+          "WMT-2026-7-0029",
+          "AMZN-2025-7-0058",
+          "PEP-2025-7-0070",
+          "AMZN-2025-7-0059",
+          "AMZN-2025-7-0005"
+        ],
+        "cited": [
+          1,
+          3,
+          4
+        ],
+        "verifier_passed": true,
+        "verifier_flags": [],
+        "numbers_grounded": true,
+        "n_numbers": 0,
+        "model": "gemini-3.5-flash-lite",
+        "cached": false
+      },
+      "best_rag": {
+        "mode": "rag",
+        "answer": "WMT defines free cash flow as net cash provided by operating activities minus payments for property and equipment [P1]. PEP defines it as net cash from operating activities less capital spending, plus sales of property, plant and equipment [P2]. CVX defines it as cash provided by operating activities less capital expenditures [P3]. AMZN defines it as cash flow from operations reduced by purchases of property and equipment, net of proceeds from sales and incentives [P5].",
+        "abstained": false,
+        "abstain_reason": "",
+        "confidence": 0.004609494070852385,
+        "passage_ids": [
+          "WMT-2026-7-0029",
+          "PEP-2025-7-0070",
+          "CVX-2025-X-0141",
+          "WMT-2026-7-0028",
+          "AMZN-2025-7-0059"
+        ],
+        "cited": [
+          1,
+          2,
+          3,
+          5
+        ],
+        "verifier_passed": true,
+        "verifier_flags": [],
+        "numbers_grounded": true,
+        "n_numbers": 0,
+        "model": "gemini-3.5-flash-lite",
+        "cached": true
+      }
+    },
+    {
+      "id": "R06",
+      "question": "What was Apple's total net sales in the latest fiscal year?",
+      "type": "terminology",
+      "needs_table": "yes",
+      "closed_book": {
+        "mode": "closed_book",
+        "answer": "In Apple's fiscal year 2023 (ended September 30, 2023), the company reported total net sales of $383.28 billion.",
+        "abstained": false,
+        "abstain_reason": "",
+        "confidence": 0.0,
+        "passage_ids": [],
+        "cited": null,
+        "verifier_passed": null,
+        "verifier_flags": null,
+        "numbers_grounded": null,
+        "n_numbers": null,
+        "model": "gemini-3.5-flash-lite",
+        "cached": true
+      },
+      "bm25_rag": {
+        "mode": "rag",
+        "answer": "Apple's total net sales in the latest fiscal year (2026) were $478,834 million [P3][P4].",
+        "abstained": false,
+        "abstain_reason": "",
+        "confidence": 2.022535273068204,
+        "passage_ids": [
+          "WMT-2026-7-0035",
+          "WMT-2026-1-0003",
+          "AAPL-2026-8-0070",
+          "AAPL-2026-8-0026",
+          "WMT-2026-8-0122"
+        ],
+        "cited": [
+          3,
+          4
+        ],
+        "verifier_passed": true,
+        "verifier_flags": [],
+        "numbers_grounded": true,
+        "n_numbers": 2,
+        "model": "gemini-3.5-flash-lite",
+        "cached": false
+      },
+      "best_rag": {
+        "mode": "rag",
+        "answer": "Apple's total net sales in 2026 were $478,834 million [P1][P2][P4].",
+        "abstained": false,
+        "abstain_reason": "",
+        "confidence": 0.004574063231850118,
+        "passage_ids": [
+          "AAPL-2026-8-0026",
+          "AAPL-2026-8-0070",
+          "AAPL-2026-8-0050",
+          "AAPL-2026-7-0019",
+          "WMT-2026-7-0035"
+        ],
+        "cited": [
+          1,
+          2,
+          4
+        ],
+        "verifier_passed": true,
+        "verifier_flags": [],
+        "numbers_grounded": true,
+        "n_numbers": 2,
+        "model": "gemini-3.5-flash-lite",
+        "cached": false
+      }
+    },
+    {
+      "id": "R08",
+      "question": "What were Tesla's total revenues by source in the latest fiscal year?",
+      "type": "terminology",
+      "needs_table": "yes",
+      "closed_book": {
+        "mode": "closed_book",
+        "answer": "In its 2023 fiscal year, Tesla reported total revenues of $96.77 billion. The vast majority of this came from its Automotive segment ($82.42 billion), followed by Energy Generation and Storage ($6.04 billion) and Services and Other ($8.31 billion).",
+        "abstained": false,
+        "abstain_reason": "",
+        "confidence": 0.0,
+        "passage_ids": [],
+        "cited": null,
+        "verifier_passed": null,
+        "verifier_flags": null,
+        "numbers_grounded": null,
+        "n_numbers": null,
+        "model": "gemini-3.5-flash-lite",
+        "cached": true
+      },
+      "bm25_rag": {
+        "mode": "rag",
+        "answer": "In the year ended December 31, 2025, Tesla's revenues by major source were $65,821 million for automotive sales, $1,993 million for automotive regulatory credits, $12,270 million for energy generation and storage sales, and $12,530 million for services and other [P1]. Additionally, automotive leasing revenue was $1,712 million and energy generation and storage leasing revenue was $501 million [P1].",
+        "abstained": false,
+        "abstain_reason": "",
+        "confidence": 2.0830400471612416,
+        "passage_ids": [
+          "TSLA-2025-8-0044",
+          "TSLA-2025-7-0039",
+          "TSLA-2025-7-0044",
+          "TSLA-2025-8-0026",
+          "TSLA-2025-7-0004"
+        ],
+        "cited": [
+          1
+        ],
+        "verifier_passed": true,
+        "verifier_flags": [],
+        "numbers_grounded": true,
+        "n_numbers": 8,
+        "model": "gemini-3.5-flash-lite",
+        "cached": false
+      },
+      "best_rag": {
+        "mode": "rag",
+        "answer": "In the year ended December 31, 2025, total revenues by source were $65,821 million for automotive sales, $1,993 million for automotive regulatory credits, $12,270 million for energy generation and storage sales, and $12,530 million for services and other [P1]. Additionally, automotive leasing was $1,712 million and energy generation and storage leasing was $501 million [P1].",
+        "abstained": false,
+        "abstain_reason": "",
+        "confidence": 0.00273224043715847,
+        "passage_ids": [
+          "TSLA-2025-8-0044",
+          "TSLA-2025-7-0004",
+          "TSLA-2025-7-0042",
+          "TSLA-2025-7-0039",
+          "TSLA-2025-8-0026"
+        ],
+        "cited": [
+          1
+        ],
+        "verifier_passed": true,
+        "verifier_flags": [],
+        "numbers_grounded": true,
+        "n_numbers": 8,
+        "model": "gemini-3.5-flash-lite",
+        "cached": false
+      }
+    }
+  ]
+}
