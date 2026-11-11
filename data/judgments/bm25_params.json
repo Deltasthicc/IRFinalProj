@@ -1,0 +1,6 @@
+{
+ "k1": 0.6,
+ "b": 0.9,
+ "tuned_on": "dev",
+ "objective": "nDCG@10"
+}
