@@ -1,0 +1,41 @@
+typo,ticker,kind
+Aple,AAPL,deletion
+Appple,AAPL,insertion
+Micorsoft,MSFT,transposition
+MSFTT,MSFT,ticker insertion
+Nvidea,NVDA,substitution
+Telsa,TSLA,transposition
+Tesle,TSLA,substitution
+Amazom,AMZN,substitution
+Amazn,AMZN,deletion
+Netflx,NFLX,deletion
+Netfliks,NFLX,substitution
+JPMorgen,JPM,substitution
+JP Morgn Chase,JPM,deletion
+Goldmann Sachs,GS,insertion
+Goldman Sacks,GS,substitution
+Bank of Amerca,BAC,deletion
+XOMM,XOM,ticker insertion
+Exxon Mobl,XOM,deletion
+Exon Mobil,XOM,deletion
+Chevran,CVX,substitution
+TSLQ,TSLA,ticker substitution
+Walmrt,WMT,deletion
+Wal Mart,WMT,spacing
+Coca Cla,KO,deletion
+Cocacola,KO,spacing
+Pepsi Co,PEP,spacing
+Pfzer,PFE,deletion
+Pfiser,PFE,substitution
+Johnsen & Johnson,JNJ,substitution
+UnitedHeath,UNH,deletion
+United Healt Group,UNH,deletion
+Boieng,BA,transposition
+Boing,BA,deletion
+Disny,DIS,deletion
+Walt Disnay,DIS,substitution
+Inetl,INTC,transposition
+Intl,INTC,deletion
+AAPLL,AAPL,ticker insertion
+MSTF,MSFT,ticker transposition
+NVDX,NVDA,ticker substitution

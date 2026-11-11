@@ -1,0 +1,11 @@
+id,split,question,why_unanswerable,status
+U01,dev,"What was Apple's net sales in fiscal year 2031?",future year,draft
+U02,dev,"What is the home address of Tesla's Chief Executive Officer?",personal information not in a 10-K,draft
+U03,dev,"Will NVIDIA's stock price rise next quarter?",prediction,draft
+U04,dev,"What was Spotify's gross margin last year?",company not in the corpus,draft
+U05,test,"How many Microsoft employees work in Brazil?",10-K does not give a Brazil headcount,draft
+U06,test,"How many Netflix subscribers are there in India?",subscriber counts by country not reported,draft
+U07,test,"What salary does Amazon pay a warehouse manager in Texas?",compensation detail not in a 10-K,draft
+U08,test,"Which analyst firms recommend buying JPMorgan stock?",outside the filings,draft
+U09,test,"What was Pfizer's revenue in 1995?",only the latest 10-K is in the corpus,draft
+U10,test,"What is the recipe of Coca-Cola's secret formula?",trade secret not disclosed,draft

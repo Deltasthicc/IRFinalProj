@@ -1,0 +1,31 @@
+id,type,split,need,query,tickers,needs_table,status
+E01,entity,dev,"How does Apple describe its dependence on outsourcing partners to manufacture its products?","Apple outsourcing partners manufacturing dependence",AAPL,no,draft
+E02,entity,test,"How does Tesla describe the risk of depending on its Chief Executive Officer and other key personnel?","Tesla Chief Executive Officer key personnel dependence",TSLA,no,draft
+E03,entity,dev,"What export control restrictions does NVIDIA say affect sales of its data center products to China?","NVIDIA export controls China data center",NVDA,no,draft
+E04,entity,test,"How does Amazon describe the capacity and cost risks of its fulfillment network?","Amazon fulfillment network capacity cost",AMZN,no,draft
+E05,entity,test,"How does Netflix describe competition for its members' viewing time?","Netflix competition members viewing time",NFLX,no,draft
+E06,entity,test,"How does JPMorgan Chase describe the way it manages credit risk?","JPMorgan Chase credit risk management",JPM,no,draft
+E07,entity,dev,"How does Exxon Mobil describe the risks of climate change regulation to its business?","Exxon Mobil climate change regulation risk",XOM,no,draft
+E08,entity,test,"What does Pfizer say about patent expiration and loss of exclusivity for its products?","Pfizer patent expiration loss of exclusivity",PFE,no,draft
+E09,entity,test,"What does Boeing say about supply chain and quality issues in its commercial airplane programs?","Boeing supply chain quality commercial airplanes",BA,no,draft
+E10,entity,test,"How does Disney describe the risks of its direct-to-consumer streaming business?","Disney direct-to-consumer streaming risks",DIS,no,draft
+T01,topical,dev,"Which companies describe supplier concentration as a risk, and how?","supplier concentration risk single source suppliers",,no,draft
+T02,topical,test,"How do companies describe the risks and opportunities of artificial intelligence?","artificial intelligence risks opportunities",,no,draft
+T03,topical,dev,"How do companies describe their exposure to foreign currency exchange rate risk?","foreign currency exchange rate risk exposure",,no,draft
+T04,topical,test,"What cybersecurity incidents and risks do companies disclose?","cybersecurity incidents risks disclosure",,no,draft
+T05,topical,test,"How do companies describe the effect of tariffs and trade restrictions on their costs?","tariffs trade restrictions costs",,no,draft
+T06,topical,test,"How do companies describe climate change and sustainability regulation?","climate change sustainability regulation",,no,draft
+T07,topical,dev,"What do companies say about share repurchase programs and dividends?","share repurchase program dividends",,no,draft
+T08,topical,test,"How do companies describe the effect of inflation and rising interest rates on their results?","inflation rising interest rates results",,no,draft
+T09,topical,test,"How do companies describe workforce and talent retention risks?","workforce talent retention risk",,no,draft
+T10,topical,test,"Compare how Microsoft and Amazon describe competition in cloud services.","Compare Microsoft and Amazon competition cloud services",MSFT;AMZN,no,draft
+R01,terminology,dev,"What is a remaining performance obligation and how do companies disclose it?","remaining performance obligation",,no,draft
+R02,terminology,dev,"Which companies use the term free cash flow and how do they define it?","free cash flow definition",,no,draft
+R03,terminology,test,"How do companies discuss goodwill impairment?","goodwill impairment",,no,draft
+R04,terminology,test,"What critical audit matters do auditors report?","critical audit matter",,no,draft
+R05,terminology,test,"What are variable interest entities and which company consolidates them?","variable interest entities consolidation",,no,draft
+R06,terminology,dev,"What was Apple's total net sales in the latest fiscal year?","Apple total net sales",AAPL,yes,draft
+R07,terminology,test,"What was Microsoft's revenue by segment in the latest fiscal year?","Microsoft revenue by segment",MSFT,yes,draft
+R08,terminology,dev,"What were Tesla's total revenues by source in the latest fiscal year?","Tesla total revenues automotive energy services",TSLA,yes,draft
+R09,terminology,test,"What were Walmart's net sales by segment in the latest fiscal year?","Walmart net sales by segment",WMT,yes,draft
+R10,terminology,test,"What were Coca-Cola's net operating revenues by segment in the latest fiscal year?","Coca-Cola net operating revenues by segment",KO,yes,draft

@@ -11,3 +11,8 @@ eval/out/dryrun/
 
 # LLM answer cache: ignored while the corpus is the test fixture; commit the real cache before the demo
 cache/
+
+data/judgments/dryrun/
+
+data/raw/
+data/raw_html/

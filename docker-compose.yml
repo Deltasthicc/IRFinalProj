@@ -1,0 +1,32 @@
+# docker compose up                        -> the Streamlit app on http://localhost:8501
+# docker compose --profile local-llm up    -> also starts a local Ollama server (optional)
+#
+# Packaging only. The plain path always works too:
+#   pip install -r requirements.txt && streamlit run src/trademesh/app/streamlit_app.py
+services:
+  app:
+    build: .
+    ports:
+      - "8501:8501"
+    env_file:
+      - path: .env
+        required: false          # the app still starts (stub LLM, cached answers) without a .env
+    environment:
+      LLM_CACHE_DIR: /app/cache/llm
+    volumes:
+      - ./data:/app/data         # processed passages and indexes from Role A, plus data/needs
+      - ./cache:/app/cache       # LLM answer cache: lets the demo run offline
+    restart: unless-stopped
+
+  ollama:
+    image: ollama/ollama:latest
+    profiles: ["local-llm"]
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama:/root/.ollama
+    # then:  docker compose exec ollama ollama pull llama3.2
+    # and in .env:  LLM_PROVIDER=openai  OPENAI_BASE_URL=http://ollama:11434/v1  LLM_MODEL=llama3.2
+
+volumes:
+  ollama:

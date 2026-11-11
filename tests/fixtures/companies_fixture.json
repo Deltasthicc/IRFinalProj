@@ -1,0 +1,25 @@
+[
+  {
+    "ticker": "AAPL",
+    "name": "Apple Inc.",
+    "aliases": [
+      "Apple",
+      "iPhone maker"
+    ]
+  },
+  {
+    "ticker": "MSFT",
+    "name": "Microsoft Corporation",
+    "aliases": [
+      "Microsoft",
+      "MSFT Corp"
+    ]
+  },
+  {
+    "ticker": "TSLA",
+    "name": "Tesla, Inc.",
+    "aliases": [
+      "Tesla"
+    ]
+  }
+]
