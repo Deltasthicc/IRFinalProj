@@ -1,0 +1,331 @@
+{
+ "params": {
+  "min_passages_per_edge": 2,
+  "damping": 0.85,
+  "n_edges": 14
+ },
+ "nodes": [
+  {
+   "ticker": "AAPL",
+   "name": "Apple Inc.",
+   "pagerank": 0.09841619506353927,
+   "hub": 0.0,
+   "authority": 0.7557893406837772,
+   "in_degree": 3,
+   "out_degree": 0
+  },
+  {
+   "ticker": "MSFT",
+   "name": "Microsoft Corporation",
+   "pagerank": 0.05047211407278149,
+   "hub": 0.0,
+   "authority": 1.3508715758527775e-13,
+   "in_degree": 1,
+   "out_degree": 0
+  },
+  {
+   "ticker": "NVDA",
+   "name": "NVIDIA Corporation",
+   "pagerank": 0.045454418521685136,
+   "hub": 1.3160740258363866e-13,
+   "authority": 0.39711254978700705,
+   "in_degree": 1,
+   "out_degree": 2
+  },
+  {
+   "ticker": "TSLA",
+   "name": "Tesla, Inc.",
+   "pagerank": 0.03115398620105843,
+   "hub": 0.0,
+   "authority": 0.0,
+   "in_degree": 0,
+   "out_degree": 0
+  },
+  {
+   "ticker": "AMZN",
+   "name": "Amazon.com, Inc.",
+   "pagerank": 0.0719353067926122,
+   "hub": 0.0,
+   "authority": 0.5206573684395939,
+   "in_degree": 2,
+   "out_degree": 0
+  },
+  {
+   "ticker": "NFLX",
+   "name": "Netflix, Inc.",
+   "pagerank": 0.03115398620105843,
+   "hub": 0.2536227910973356,
+   "authority": 0.0,
+   "in_degree": 0,
+   "out_degree": 1
+  },
+  {
+   "ticker": "JPM",
+   "name": "JPMorgan Chase & Co.",
+   "pagerank": 0.03115398620105843,
+   "hub": 0.36816035589837964,
+   "authority": 0.0,
+   "in_degree": 0,
+   "out_degree": 1
+  },
+  {
+   "ticker": "GS",
+   "name": "The Goldman Sachs Group, Inc.",
+   "pagerank": 0.03115398620105843,
+   "hub": 0.36816035589837964,
+   "authority": 0.0,
+   "in_degree": 0,
+   "out_degree": 1
+  },
+  {
+   "ticker": "BAC",
+   "name": "Bank of America Corporation",
+   "pagerank": 0.03115398620105843,
+   "hub": 0.0,
+   "authority": 0.0,
+   "in_degree": 0,
+   "out_degree": 0
+  },
+  {
+   "ticker": "XOM",
+   "name": "Exxon Mobil Corporation",
+   "pagerank": 0.09784113814484043,
+   "hub": 0.0,
+   "authority": 4.91444216405499e-25,
+   "in_degree": 1,
+   "out_degree": 0
+  },
+  {
+   "ticker": "CVX",
+   "name": "Chevron Corporation",
+   "pagerank": 0.07845547287497781,
+   "hub": 2.393924707278323e-25,
+   "authority": 4.91444216405499e-25,
+   "in_degree": 1,
+   "out_degree": 1
+  },
+  {
+   "ticker": "WMT",
+   "name": "Walmart Inc.",
+   "pagerank": 0.055648807851642695,
+   "hub": 0.0,
+   "authority": 1.3508715758527775e-13,
+   "in_degree": 1,
+   "out_degree": 0
+  },
+  {
+   "ticker": "KO",
+   "name": "The Coca-Cola Company",
+   "pagerank": 0.055648807851642695,
+   "hub": 2.393924707278323e-25,
+   "authority": 1.3508715758527775e-13,
+   "in_degree": 1,
+   "out_degree": 1
+  },
+  {
+   "ticker": "PEP",
+   "name": "PepsiCo, Inc.",
+   "pagerank": 0.057634874471985495,
+   "hub": 1.3160740258363866e-13,
+   "authority": 4.91444216405499e-25,
+   "in_degree": 1,
+   "out_degree": 2
+  },
+  {
+   "ticker": "PFE",
+   "name": "Pfizer Inc.",
+   "pagerank": 0.03115398620105843,
+   "hub": 2.393924707278323e-25,
+   "authority": 0.0,
+   "in_degree": 0,
+   "out_degree": 1
+  },
+  {
+   "ticker": "JNJ",
+   "name": "Johnson & Johnson",
+   "pagerank": 0.057634874471985495,
+   "hub": 0.0,
+   "authority": 4.91444216405499e-25,
+   "in_degree": 1,
+   "out_degree": 0
+  },
+  {
+   "ticker": "UNH",
+   "name": "UnitedHealth Group Incorporated",
+   "pagerank": 0.03115398620105843,
+   "hub": 0.0,
+   "authority": 0.0,
+   "in_degree": 0,
+   "out_degree": 0
+  },
+  {
+   "ticker": "BA",
+   "name": "The Boeing Company",
+   "pagerank": 0.03115398620105843,
+   "hub": 0.0,
+   "authority": 0.0,
+   "in_degree": 0,
+   "out_degree": 0
+  },
+  {
+   "ticker": "DIS",
+   "name": "The Walt Disney Company",
+   "pagerank": 0.03115398620105843,
+   "hub": 2.393924707278323e-25,
+   "authority": 0.0,
+   "in_degree": 0,
+   "out_degree": 1
+  },
+  {
+   "ticker": "INTC",
+   "name": "Intel Corporation",
+   "pagerank": 0.05047211407278149,
+   "hub": 0.815224744794682,
+   "authority": 1.3508715758527775e-13,
+   "in_degree": 1,
+   "out_degree": 3
+  }
+ ],
+ "edges": [
+  {
+   "source": "CVX",
+   "target": "XOM",
+   "weight": 5,
+   "evidence": [
+    "CVX-2025-X-0302",
+    "CVX-2025-X-0303",
+    "CVX-2025-X-0304"
+   ]
+  },
+  {
+   "source": "DIS",
+   "target": "PEP",
+   "weight": 2,
+   "evidence": [
+    "DIS-2025-X-0024",
+    "DIS-2025-X-0025"
+   ]
+  },
+  {
+   "source": "GS",
+   "target": "AAPL",
+   "weight": 26,
+   "evidence": [
+    "GS-2025-1-0003",
+    "GS-2025-1-0023",
+    "GS-2025-1-0172"
+   ]
+  },
+  {
+   "source": "INTC",
+   "target": "AAPL",
+   "weight": 3,
+   "evidence": [
+    "INTC-2025-X-0042",
+    "INTC-2025-X-0240",
+    "INTC-2025-X-0595"
+   ]
+  },
+  {
+   "source": "INTC",
+   "target": "AMZN",
+   "weight": 2,
+   "evidence": [
+    "INTC-2025-X-0045",
+    "INTC-2025-X-0588"
+   ]
+  },
+  {
+   "source": "INTC",
+   "target": "NVDA",
+   "weight": 7,
+   "evidence": [
+    "INTC-2025-X-0027",
+    "INTC-2025-X-0045",
+    "INTC-2025-X-0126"
+   ]
+  },
+  {
+   "source": "JPM",
+   "target": "AAPL",
+   "weight": 27,
+   "evidence": [
+    "JPM-2025-15-0021",
+    "JPM-2025-15-0022",
+    "JPM-2025-15-0034"
+   ]
+  },
+  {
+   "source": "KO",
+   "target": "CVX",
+   "weight": 3,
+   "evidence": [
+    "KO-2025-3-0018",
+    "KO-2025-3-0019",
+    "KO-2025-8-0129"
+   ]
+  },
+  {
+   "source": "NFLX",
+   "target": "AMZN",
+   "weight": 2,
+   "evidence": [
+    "NFLX-2025-1A-0050",
+    "NFLX-2025-1A-0051"
+   ]
+  },
+  {
+   "source": "NVDA",
+   "target": "INTC",
+   "weight": 3,
+   "evidence": [
+    "NVDA-2026-1-0038",
+    "NVDA-2026-1-0039",
+    "NVDA-2026-7-0038"
+   ]
+  },
+  {
+   "source": "NVDA",
+   "target": "MSFT",
+   "weight": 4,
+   "evidence": [
+    "NVDA-2026-1-0038",
+    "NVDA-2026-1-0058",
+    "NVDA-2026-1A-0008"
+   ]
+  },
+  {
+   "source": "PEP",
+   "target": "KO",
+   "weight": 2,
+   "evidence": [
+    "PEP-2025-1-0030",
+    "PEP-2025-1A-0013"
+   ]
+  },
+  {
+   "source": "PEP",
+   "target": "WMT",
+   "weight": 2,
+   "evidence": [
+    "PEP-2025-1-0028",
+    "PEP-2025-7-0173"
+   ]
+  },
+  {
+   "source": "PFE",
+   "target": "JNJ",
+   "weight": 2,
+   "evidence": [
+    "PFE-2025-5-0004",
+    "PFE-2025-8-0244"
+   ]
+  }
+ ],
+ "correlations": {
+  "pagerank_vs_indegree_spearman": 0.9328609070016727,
+  "authority_vs_indegree_spearman": 0.9570613285232152,
+  "pagerank_vs_authority_spearman": 0.8010213972178476,
+  "pagerank_vs_indegree_kendall": 0.6
+ }
+}

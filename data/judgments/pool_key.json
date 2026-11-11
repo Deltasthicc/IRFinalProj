@@ -1,0 +1,3392 @@
+{
+ "E01": {
+  "contributors": {
+   "AAPL-2026-7-0039": [
+    "bm25",
+    "bm25+prf",
+    "dense",
+    "hybrid",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "AAPL-2026-1A-0020": [
+    "bm25",
+    "bm25+prf",
+    "dense",
+    "hybrid",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "AAPL-2026-1A-0005": [
+    "bm25",
+    "bm25+prf",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "AAPL-2026-1A-0019": [
+    "bm25",
+    "bm25+prf",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "AAPL-2026-1A-0092": [
+    "bm25",
+    "bm25+prf",
+    "dense",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "AAPL-2026-8-0065": [
+    "bm25",
+    "bm25+prf",
+    "hybrid+rerank"
+   ],
+   "AAPL-2026-1-0004": [
+    "bm25",
+    "bm25+prf"
+   ],
+   "AAPL-2026-1-0008": [
+    "bm25",
+    "bm25+prf"
+   ],
+   "AAPL-2026-1A-0015": [
+    "dense"
+   ],
+   "AAPL-2026-1-0013": [
+    "dense"
+   ],
+   "AAPL-2026-1A-0022": [
+    "dense",
+    "hybrid+rerank"
+   ],
+   "AAPL-2026-1A-0042": [
+    "dense"
+   ],
+   "AAPL-2026-1A-0009": [
+    "dense",
+    "hybrid+rerank"
+   ],
+   "AAPL-2026-8-0006": [
+    "hybrid",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "AAPL-2026-8-0017": [
+    "hybrid",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "AAPL-2026-8-0014": [
+    "hybrid",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "AAPL-2026-8-0003": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "AAPL-2026-8-0011": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "AAPL-2026-8-0008": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ]
+  },
+  "judges": [
+   "AI"
+  ]
+ },
+ "E02": {
+  "contributors": {
+   "TSLA-2025-1A-0045": [
+    "bm25",
+    "bm25+prf",
+    "dense",
+    "hybrid",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "TSLA-2025-1A-0048": [
+    "bm25",
+    "bm25+prf",
+    "dense",
+    "hybrid",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "TSLA-2025-9A-0002": [
+    "bm25",
+    "bm25+prf",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "TSLA-2025-1A-0101": [
+    "bm25",
+    "bm25+prf",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "TSLA-2025-9A-0004": [
+    "bm25",
+    "bm25+prf"
+   ],
+   "TSLA-2025-9A-0001": [
+    "bm25",
+    "bm25+prf"
+   ],
+   "TSLA-2025-9A-0003": [
+    "bm25",
+    "bm25+prf"
+   ],
+   "TSLA-2025-1-0059": [
+    "bm25",
+    "bm25+prf",
+    "dense",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "TSLA-2025-1-0057": [
+    "dense",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "TSLA-2025-1-0060": [
+    "dense",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "TSLA-2025-1A-0046": [
+    "dense",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "TSLA-2025-8-0173": [
+    "dense",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "TSLA-2025-1A-0056": [
+    "dense"
+   ],
+   "TSLA-2025-8-0028": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "TSLA-2025-8-0030": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "TSLA-2025-8-0035": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "TSLA-2025-8-0038": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "TSLA-2025-8-0024": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ]
+  },
+  "judges": [
+   "AI"
+  ]
+ },
+ "E03": {
+  "contributors": {
+   "NVDA-2026-1-0052": [
+    "bm25",
+    "bm25+prf",
+    "dense",
+    "hybrid",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "NVDA-2026-1A-0089": [
+    "bm25",
+    "bm25+prf",
+    "hybrid",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "NVDA-2026-1A-0109": [
+    "bm25",
+    "bm25+prf",
+    "dense",
+    "hybrid",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "NVDA-2026-1A-0104": [
+    "bm25",
+    "bm25+prf",
+    "dense",
+    "hybrid",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "NVDA-2026-1A-0105": [
+    "bm25",
+    "bm25+prf",
+    "dense",
+    "hybrid",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "NVDA-2026-1-0047": [
+    "bm25",
+    "bm25+prf",
+    "dense",
+    "hybrid",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "NVDA-2026-1A-0097": [
+    "bm25",
+    "bm25+prf",
+    "dense",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "NVDA-2026-1A-0088": [
+    "bm25",
+    "bm25+prf",
+    "dense",
+    "hybrid",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "NVDA-2026-1A-0126": [
+    "dense"
+   ],
+   "NVDA-2026-1A-0110": [
+    "hybrid+rerank"
+   ],
+   "NVDA-2026-1A-0106": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ]
+  },
+  "judges": [
+   "AI"
+  ]
+ },
+ "E04": {
+  "contributors": {
+   "AMZN-2025-1A-0031": [
+    "bm25",
+    "bm25+prf",
+    "dense",
+    "hybrid",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "AMZN-2025-7-0039": [
+    "bm25",
+    "bm25+prf",
+    "dense",
+    "hybrid",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "AMZN-2025-1A-0030": [
+    "bm25",
+    "bm25+prf",
+    "hybrid",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "AMZN-2025-1A-0032": [
+    "bm25",
+    "bm25+prf",
+    "hybrid",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "AMZN-2025-7-0040": [
+    "bm25",
+    "bm25+prf",
+    "dense",
+    "hybrid",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "AMZN-2025-1A-0056": [
+    "bm25"
+   ],
+   "AMZN-2025-1A-0014": [
+    "bm25",
+    "bm25+prf"
+   ],
+   "AMZN-2025-8-0056": [
+    "bm25",
+    "bm25+prf"
+   ],
+   "AMZN-2025-8-0052": [
+    "bm25+prf",
+    "hybrid+rerank"
+   ],
+   "AMZN-2025-7-0038": [
+    "dense",
+    "hybrid"
+   ],
+   "AMZN-2025-8-0038": [
+    "dense",
+    "hybrid+rerank"
+   ],
+   "AMZN-2025-7-0041": [
+    "dense",
+    "hybrid+rerank"
+   ],
+   "AMZN-2025-7-0002": [
+    "dense",
+    "hybrid"
+   ],
+   "AMZN-2025-8-0039": [
+    "dense",
+    "hybrid+rerank"
+   ],
+   "AMZN-2025-7-0006": [
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "AMZN-2025-8-0002": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "AMZN-2025-9A-0005": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "AMZN-2025-7-0032": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ]
+  },
+  "judges": [
+   "AI"
+  ]
+ },
+ "E05": {
+  "contributors": {
+   "NFLX-2025-1-0001": [
+    "bm25",
+    "bm25+prf",
+    "dense",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "NFLX-2025-1A-0007": [
+    "bm25",
+    "bm25+prf",
+    "hybrid",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "NFLX-2025-1A-0039": [
+    "bm25",
+    "bm25+prf",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "NFLX-2025-1-0003": [
+    "bm25",
+    "bm25+prf",
+    "dense",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "NFLX-2025-X-0037": [
+    "bm25",
+    "bm25+prf",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "NFLX-2025-1A-0020": [
+    "bm25",
+    "bm25+prf",
+    "dense",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "NFLX-2025-1A-0050": [
+    "bm25",
+    "bm25+prf"
+   ],
+   "NFLX-2025-1-0013": [
+    "bm25"
+   ],
+   "NFLX-2025-1A-0011": [
+    "bm25+prf"
+   ],
+   "NFLX-2025-1A-0008": [
+    "dense"
+   ],
+   "NFLX-2025-1A-0022": [
+    "dense",
+    "hybrid"
+   ],
+   "NFLX-2025-X-0068": [
+    "dense",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "NFLX-2025-1A-0003": [
+    "dense",
+    "hybrid"
+   ],
+   "NFLX-2025-1A-0055": [
+    "dense"
+   ],
+   "NFLX-2025-X-0056": [
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "NFLX-2025-X-0021": [
+    "hybrid+rerank"
+   ],
+   "NFLX-2025-9A-0005": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "NFLX-2025-X-0031": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "NFLX-2025-X-0038": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "NFLX-2025-X-0003": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "NFLX-2025-7-0056": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ]
+  },
+  "judges": [
+   "AI"
+  ]
+ },
+ "E06": {
+  "contributors": {
+   "JPM-2025-1-0025": [
+    "bm25",
+    "bm25+prf",
+    "boolean",
+    "hybrid+rerank"
+   ],
+   "JPM-2025-15-0347": [
+    "bm25",
+    "bm25+prf",
+    "boolean",
+    "dense",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "JPM-2025-15-0924": [
+    "bm25",
+    "bm25+prf",
+    "boolean",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "JPM-2025-1A-0059": [
+    "bm25",
+    "bm25+prf",
+    "boolean",
+    "hybrid"
+   ],
+   "JPM-2025-1A-0058": [
+    "bm25",
+    "bm25+prf"
+   ],
+   "JPM-2025-15-1081": [
+    "bm25",
+    "bm25+prf",
+    "hybrid"
+   ],
+   "JPM-2025-15-0336": [
+    "bm25",
+    "bm25+prf",
+    "boolean",
+    "hybrid"
+   ],
+   "JPM-2025-15-0204": [
+    "bm25"
+   ],
+   "JPM-2025-15-1072": [
+    "bm25+prf"
+   ],
+   "JPM-2025-15-0440": [
+    "boolean"
+   ],
+   "JPM-2025-15-0659": [
+    "boolean"
+   ],
+   "JPM-2025-15-0795": [
+    "boolean"
+   ],
+   "JPM-2025-1-0018": [
+    "dense",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "JPM-2025-15-0748": [
+    "dense",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "JPM-2025-15-0027": [
+    "dense"
+   ],
+   "JPM-2025-15-0601": [
+    "dense"
+   ],
+   "JPM-2025-1A-0081": [
+    "dense"
+   ],
+   "JPM-2025-1-0001": [
+    "dense"
+   ],
+   "JPM-2025-15-0172": [
+    "dense"
+   ],
+   "JPM-2025-15-0215": [
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "JPM-2025-1A-0003": [
+    "hybrid+rerank"
+   ],
+   "JPM-2025-15-0304": [
+    "hybrid+rerank"
+   ],
+   "JPM-2025-15-0623": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "JPM-2025-15-0629": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "JPM-2025-15-1176": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "JPM-2025-15-0625": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "JPM-2025-15-1111": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "JPM-2025-15-1074": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "JPM-2025-15-1208": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "JPM-2025-15-0619": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ]
+  },
+  "judges": [
+   "AI"
+  ]
+ },
+ "E07": {
+  "contributors": {
+   "XOM-2025-X-0003": [
+    "bm25",
+    "bm25+prf",
+    "hybrid",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "XOM-2025-1-0002": [
+    "bm25",
+    "bm25+prf",
+    "hybrid",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "XOM-2025-2-0056": [
+    "bm25",
+    "bm25+prf",
+    "hybrid",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "XOM-2025-X-0313": [
+    "bm25",
+    "bm25+prf"
+   ],
+   "XOM-2025-2-0057": [
+    "bm25",
+    "bm25+prf"
+   ],
+   "XOM-2025-X-0205": [
+    "bm25",
+    "bm25+prf",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "XOM-2025-1-0001": [
+    "bm25",
+    "bm25+prf",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "XOM-2025-2-0032": [
+    "bm25",
+    "bm25+prf"
+   ],
+   "XOM-2025-1A-0001": [
+    "dense",
+    "hybrid"
+   ],
+   "XOM-2025-1A-0042": [
+    "dense",
+    "hybrid"
+   ],
+   "XOM-2025-X-0067": [
+    "dense",
+    "hybrid"
+   ],
+   "XOM-2025-1-0006": [
+    "dense"
+   ],
+   "XOM-2025-X-0168": [
+    "dense"
+   ],
+   "XOM-2025-1A-0024": [
+    "dense"
+   ],
+   "XOM-2025-1A-0014": [
+    "dense"
+   ],
+   "XOM-2025-X-0190": [
+    "dense"
+   ],
+   "XOM-2025-X-0298": [
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "XOM-2025-X-0069": [
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "XOM-2025-9A-0002": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "XOM-2025-X-0235": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "XOM-2025-X-0204": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ]
+  },
+  "judges": [
+   "AI"
+  ]
+ },
+ "E08": {
+  "contributors": {
+   "PFE-2025-7-0017": [
+    "bm25",
+    "bm25+prf",
+    "hybrid",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "PFE-2025-1-0044": [
+    "bm25",
+    "bm25+prf",
+    "dense",
+    "hybrid",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "PFE-2025-1-0037": [
+    "bm25",
+    "bm25+prf",
+    "dense",
+    "hybrid",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "PFE-2025-1-0046": [
+    "bm25",
+    "bm25+prf",
+    "dense",
+    "hybrid",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "PFE-2025-1-0053": [
+    "bm25",
+    "bm25+prf",
+    "boolean",
+    "hybrid+rerank"
+   ],
+   "PFE-2025-1A-0066": [
+    "bm25",
+    "bm25+prf",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "PFE-2025-7-0070": [
+    "bm25",
+    "dense",
+    "hybrid",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "PFE-2025-1-0009": [
+    "bm25"
+   ],
+   "PFE-2025-1A-0009": [
+    "bm25+prf",
+    "dense",
+    "hybrid",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "PFE-2025-1A-0010": [
+    "bm25+prf",
+    "dense",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "PFE-2025-8-0239": [
+    "dense"
+   ],
+   "PFE-2025-1-0034": [
+    "dense",
+    "hybrid",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "PFE-2025-1-0041": [
+    "hybrid+rerank"
+   ],
+   "PFE-2025-1-0042": [
+    "hybrid+rerank"
+   ],
+   "PFE-2025-8-0241": [
+    "hybrid+rerank"
+   ]
+  },
+  "judges": [
+   "AI"
+  ]
+ },
+ "E09": {
+  "contributors": {
+   "BA-2025-1-0001": [
+    "bm25",
+    "bm25+prf",
+    "dense",
+    "hybrid",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "BA-2025-7-0090": [
+    "bm25",
+    "bm25+prf",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "BA-2025-7-0008": [
+    "bm25",
+    "bm25+prf",
+    "dense",
+    "hybrid",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "BA-2025-7-0092": [
+    "bm25",
+    "bm25+prf",
+    "hybrid",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "BA-2025-8-0017": [
+    "bm25",
+    "bm25+prf",
+    "hybrid",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "BA-2025-7-0002": [
+    "bm25",
+    "bm25+prf",
+    "hybrid",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "BA-2025-8-0020": [
+    "bm25",
+    "bm25+prf",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "BA-2025-8-0066": [
+    "bm25",
+    "bm25+prf",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "BA-2025-1A-0006": [
+    "dense"
+   ],
+   "BA-2025-1A-0011": [
+    "dense",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "BA-2025-1A-0013": [
+    "dense"
+   ],
+   "BA-2025-1-0002": [
+    "dense",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "BA-2025-7-0001": [
+    "dense"
+   ],
+   "BA-2025-7-0080": [
+    "dense"
+   ],
+   "BA-2025-7-0043": [
+    "hybrid"
+   ],
+   "BA-2025-1-0013": [
+    "hybrid+rerank"
+   ]
+  },
+  "judges": [
+   "AI"
+  ]
+ },
+ "E10": {
+  "contributors": {
+   "DIS-2025-7-0062": [
+    "bm25",
+    "bm25+prf",
+    "hybrid",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "DIS-2025-1-0024": [
+    "bm25",
+    "bm25+prf",
+    "dense",
+    "hybrid",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "DIS-2025-1-0002": [
+    "bm25",
+    "bm25+prf",
+    "dense",
+    "hybrid",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "DIS-2025-X-0094": [
+    "bm25",
+    "bm25+prf",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "DIS-2025-1-0038": [
+    "bm25",
+    "bm25+prf"
+   ],
+   "DIS-2025-1-0085": [
+    "bm25",
+    "bm25+prf",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "DIS-2025-1-0034": [
+    "bm25"
+   ],
+   "DIS-2025-7-0165": [
+    "bm25",
+    "bm25+prf",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "DIS-2025-X-0097": [
+    "bm25+prf"
+   ],
+   "DIS-2025-1-0025": [
+    "dense",
+    "hybrid"
+   ],
+   "DIS-2025-1A-0037": [
+    "dense",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "DIS-2025-1A-0008": [
+    "dense"
+   ],
+   "DIS-2025-7-0059": [
+    "dense"
+   ],
+   "DIS-2025-1A-0011": [
+    "dense"
+   ],
+   "DIS-2025-7-0054": [
+    "dense"
+   ],
+   "DIS-2025-1-0055": [
+    "hybrid"
+   ],
+   "DIS-2025-1A-0040": [
+    "hybrid",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "DIS-2025-1-0040": [
+    "hybrid+rerank"
+   ],
+   "DIS-2025-7-0164": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "DIS-2025-1-0041": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ]
+  },
+  "judges": [
+   "AI"
+  ]
+ },
+ "T01": {
+  "contributors": {
+   "BA-2025-1A-0019": [
+    "bm25",
+    "bm25+prf",
+    "hybrid",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "NVDA-2026-1A-0032": [
+    "bm25",
+    "bm25+prf",
+    "hybrid",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "AMZN-2025-1A-0040": [
+    "bm25",
+    "bm25+prf",
+    "dense",
+    "hybrid",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "TSLA-2025-8-0087": [
+    "bm25",
+    "bm25+prf",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "KO-2025-1-0040": [
+    "bm25",
+    "bm25+prf"
+   ],
+   "INTC-2025-X-0091": [
+    "bm25",
+    "bm25+prf",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "INTC-2025-X-0217": [
+    "bm25",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "INTC-2025-X-0299": [
+    "bm25",
+    "bm25+prf"
+   ],
+   "TSLA-2025-1A-0006": [
+    "bm25+prf",
+    "hybrid+rerank"
+   ],
+   "TSLA-2025-1-0030": [
+    "dense",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "WMT-2026-1A-0024": [
+    "dense",
+    "hybrid"
+   ],
+   "BA-2025-1-0021": [
+    "dense"
+   ],
+   "BA-2025-1-0022": [
+    "dense",
+    "hybrid"
+   ],
+   "AAPL-2026-1A-0023": [
+    "dense",
+    "hybrid"
+   ],
+   "AAPL-2026-1-0017": [
+    "dense"
+   ],
+   "PEP-2025-1A-0021": [
+    "dense"
+   ],
+   "AAPL-2026-1A-0069": [
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "NVDA-2026-1C-0002": [
+    "hybrid+rerank"
+   ],
+   "GS-2025-7-0382": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "MSFT-2026-1A-0034": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ]
+  },
+  "judges": [
+   "AI"
+  ]
+ },
+ "T02": {
+  "contributors": {
+   "AAPL-2026-1A-0047": [
+    "bm25",
+    "bm25+prf",
+    "dense",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "AAPL-2026-1A-0052": [
+    "bm25",
+    "bm25+prf",
+    "dense",
+    "hybrid",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "AAPL-2026-1A-0028": [
+    "bm25",
+    "bm25+prf",
+    "dense",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "AAPL-2026-1A-0057": [
+    "bm25",
+    "bm25+prf",
+    "hybrid",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "CVX-2025-1A-0013": [
+    "bm25",
+    "bm25+prf",
+    "dense",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "AAPL-2026-1A-0056": [
+    "bm25",
+    "bm25+prf",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "AAPL-2026-1A-0053": [
+    "bm25",
+    "bm25+prf",
+    "dense",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "AMZN-2025-1A-0041": [
+    "bm25",
+    "bm25+prf"
+   ],
+   "TSLA-2025-7-0002": [
+    "boolean",
+    "hybrid+rerank"
+   ],
+   "MSFT-2026-1A-0051": [
+    "dense"
+   ],
+   "AAPL-2026-1A-0055": [
+    "dense",
+    "hybrid",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "MSFT-2026-1A-0053": [
+    "dense"
+   ],
+   "AAPL-2026-1A-0016": [
+    "hybrid"
+   ],
+   "GS-2025-7-0433": [
+    "hybrid+rerank"
+   ],
+   "AAPL-2026-7-0031": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "JPM-2025-1-0037": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "AAPL-2026-1-0015": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "AAPL-2026-1A-0060": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ]
+  },
+  "judges": [
+   "AI"
+  ]
+ },
+ "T03": {
+  "contributors": {
+   "JNJ-2025-8-0056": [
+    "bm25",
+    "bm25+prf",
+    "boolean",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "BAC-2025-7-0356": [
+    "bm25",
+    "bm25+prf",
+    "boolean",
+    "hybrid",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "AAPL-2026-7A-0004": [
+    "bm25",
+    "bm25+prf",
+    "boolean",
+    "dense",
+    "hybrid",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200"
+   ],
+   "NVDA-2026-7A-0003": [
+    "bm25",
+    "bm25+prf",
+    "boolean",
+    "hybrid",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200"
+   ],
+   "GS-2025-8-0165": [
+    "bm25",
+    "bm25+prf",
+    "boolean"
+   ],
+   "BA-2025-7A-0002": [
+    "bm25",
+    "bm25+prf",
+    "hybrid"
+   ],
+   "BAC-2025-7-0355": [
+    "bm25",
+    "boolean",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "KO-2025-7A-0002": [
+    "bm25",
+    "bm25+prf",
+    "hybrid"
+   ],
+   "BAC-2025-8-0106": [
+    "bm25+prf",
+    "boolean"
+   ],
+   "DIS-2025-X-0142": [
+    "boolean"
+   ],
+   "PFE-2025-1A-0022": [
+    "dense"
+   ],
+   "PFE-2025-7-0137": [
+    "dense"
+   ],
+   "TSLA-2025-7A-0001": [
+    "dense"
+   ],
+   "MSFT-2026-7A-0002": [
+    "dense"
+   ],
+   "INTC-2025-X-0209": [
+    "dense",
+    "hybrid+rerank"
+   ],
+   "WMT-2026-7A-0005": [
+    "dense",
+    "hybrid+rerank"
+   ],
+   "PFE-2025-7-0138": [
+    "dense",
+    "hybrid"
+   ],
+   "KO-2025-1A-0070": [
+    "hybrid",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "BAC-2025-7-0317": [
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "MSFT-2026-8-0051": [
+    "hybrid+rerank"
+   ],
+   "AMZN-2025-1A-0022": [
+    "hybrid+rerank"
+   ],
+   "NFLX-2025-7A-0001": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "KO-2025-7-0151": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "DIS-2025-7A-0001": [
+    "tfidf-champ-50"
+   ],
+   "JNJ-2025-7-0071": [
+    "tfidf-champ-50"
+   ]
+  },
+  "judges": [
+   "AI"
+  ]
+ },
+ "T04": {
+  "contributors": {
+   "MSFT-2026-1C-0001": [
+    "bm25",
+    "bm25+prf",
+    "boolean",
+    "dense",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "BAC-2025-7-0369": [
+    "bm25",
+    "bm25+prf"
+   ],
+   "PFE-2025-1C-0006": [
+    "bm25",
+    "bm25+prf"
+   ],
+   "NFLX-2025-1C-0003": [
+    "bm25",
+    "bm25+prf",
+    "boolean",
+    "hybrid",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "WMT-2026-1C-0008": [
+    "bm25",
+    "bm25+prf",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "TSLA-2025-1C-0004": [
+    "bm25",
+    "bm25+prf",
+    "dense",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "AAPL-2026-1C-0002": [
+    "bm25"
+   ],
+   "PFE-2025-1C-0008": [
+    "bm25",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "BA-2025-1C-0004": [
+    "bm25+prf",
+    "hybrid"
+   ],
+   "WMT-2026-1C-0003": [
+    "bm25+prf"
+   ],
+   "BAC-2025-1-0051": [
+    "boolean"
+   ],
+   "GS-2025-1A-0085": [
+    "dense",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "DIS-2025-1C-0003": [
+    "dense",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "DIS-2025-1A-0063": [
+    "dense"
+   ],
+   "UNH-2025-1A-0016": [
+    "dense"
+   ],
+   "JNJ-2025-1C-0002": [
+    "dense"
+   ],
+   "WMT-2026-1A-0050": [
+    "dense"
+   ],
+   "PEP-2025-1C-0004": [
+    "hybrid",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "DIS-2025-1C-0004": [
+    "hybrid"
+   ],
+   "JPM-2025-15-0534": [
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "BAC-2025-7-0368": [
+    "hybrid+rerank"
+   ],
+   "XOM-2025-1C-0003": [
+    "hybrid+rerank"
+   ],
+   "PFE-2025-1C-0007": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "KO-2025-1C-0005": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "CVX-2025-1C-0007": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ]
+  },
+  "judges": [
+   "AI"
+  ]
+ },
+ "T05": {
+  "contributors": {
+   "TSLA-2025-1A-0030": [
+    "bm25",
+    "bm25+prf",
+    "boolean",
+    "dense",
+    "hybrid",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "BA-2025-1A-0026": [
+    "bm25",
+    "bm25+prf",
+    "boolean",
+    "dense",
+    "hybrid",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "KO-2025-1A-0005": [
+    "bm25",
+    "bm25+prf",
+    "boolean",
+    "dense",
+    "hybrid",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "BA-2025-7-0042": [
+    "bm25",
+    "bm25+prf",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "PFE-2025-1A-0021": [
+    "bm25",
+    "bm25+prf",
+    "boolean",
+    "hybrid",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "PFE-2025-1A-0020": [
+    "bm25",
+    "boolean",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "INTC-2025-X-0285": [
+    "bm25",
+    "bm25+prf",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "PFE-2025-1A-0099": [
+    "bm25",
+    "bm25+prf",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "PFE-2025-7-0027": [
+    "bm25+prf",
+    "dense",
+    "hybrid"
+   ],
+   "WMT-2026-1A-0072": [
+    "boolean"
+   ],
+   "MSFT-2026-1A-0072": [
+    "boolean",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "INTC-2025-X-0283": [
+    "boolean",
+    "hybrid+rerank"
+   ],
+   "PEP-2025-7-0017": [
+    "dense"
+   ],
+   "PEP-2025-7-0018": [
+    "dense"
+   ],
+   "PEP-2025-1A-0023": [
+    "dense"
+   ],
+   "TSLA-2025-1A-0006": [
+    "dense"
+   ],
+   "MSFT-2026-7-0008": [
+    "hybrid",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "AAPL-2026-1A-0006": [
+    "hybrid+rerank"
+   ]
+  },
+  "judges": [
+   "AI"
+  ]
+ },
+ "T06": {
+  "contributors": {
+   "GS-2025-1A-0151": [
+    "bm25",
+    "bm25+prf",
+    "boolean",
+    "dense",
+    "hybrid",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "BA-2025-1A-0057": [
+    "bm25",
+    "bm25+prf",
+    "boolean",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "MSFT-2026-1-0010": [
+    "bm25",
+    "bm25+prf",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "PEP-2025-7-0014": [
+    "bm25",
+    "bm25+prf",
+    "boolean",
+    "hybrid",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "GS-2025-1-0155": [
+    "bm25",
+    "bm25+prf",
+    "hybrid+rerank"
+   ],
+   "NVDA-2026-1A-0111": [
+    "bm25",
+    "bm25+prf",
+    "hybrid",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "PEP-2025-1A-0043": [
+    "bm25"
+   ],
+   "PEP-2025-1A-0044": [
+    "bm25",
+    "hybrid"
+   ],
+   "KO-2025-1A-0100": [
+    "bm25+prf",
+    "dense",
+    "hybrid"
+   ],
+   "PEP-2025-1A-0045": [
+    "bm25+prf",
+    "dense",
+    "hybrid",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "PEP-2025-1-0043": [
+    "dense",
+    "hybrid+rerank"
+   ],
+   "KO-2025-1-0050": [
+    "dense",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "CVX-2025-X-0043": [
+    "dense"
+   ],
+   "XOM-2025-1A-0023": [
+    "dense"
+   ],
+   "MSFT-2026-1A-0075": [
+    "dense"
+   ],
+   "GS-2025-7-0442": [
+    "hybrid"
+   ],
+   "DIS-2025-1A-0034": [
+    "hybrid+rerank"
+   ],
+   "GS-2025-1-0154": [
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "CVX-2025-X-0170": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ]
+  },
+  "judges": [
+   "AI"
+  ]
+ },
+ "T07": {
+  "contributors": {
+   "UNH-2025-7-0053": [
+    "bm25",
+    "bm25+prf",
+    "boolean",
+    "dense",
+    "hybrid",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "NVDA-2026-5-0003": [
+    "bm25",
+    "bm25+prf",
+    "boolean",
+    "hybrid"
+   ],
+   "AAPL-2026-7-0041": [
+    "bm25",
+    "bm25+prf",
+    "boolean",
+    "dense",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "PEP-2025-5-0005": [
+    "bm25",
+    "bm25+prf"
+   ],
+   "CVX-2025-X-0076": [
+    "bm25",
+    "bm25+prf",
+    "boolean",
+    "dense",
+    "hybrid"
+   ],
+   "PEP-2025-7-0094": [
+    "bm25",
+    "boolean",
+    "dense",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "JPM-2025-5-0002": [
+    "bm25",
+    "bm25+prf",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "MSFT-2026-8-0088": [
+    "bm25"
+   ],
+   "UNH-2025-8-0098": [
+    "bm25+prf",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "UNH-2025-5-0003": [
+    "bm25+prf"
+   ],
+   "NVDA-2026-15-0109": [
+    "boolean",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "DIS-2025-X-0203": [
+    "boolean",
+    "dense",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "GS-2025-7-0196": [
+    "boolean"
+   ],
+   "MSFT-2026-5-0005": [
+    "dense"
+   ],
+   "MSFT-2026-5-0003": [
+    "dense",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "UNH-2025-8-0099": [
+    "dense"
+   ],
+   "WMT-2026-7-0072": [
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "XOM-2025-X-0155": [
+    "hybrid+rerank"
+   ],
+   "GS-2025-8-0326": [
+    "hybrid+rerank"
+   ],
+   "DIS-2025-5-0003": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "JNJ-2025-7-0006": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "NVDA-2026-5-0004": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "JPM-2025-15-0273": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ]
+  },
+  "judges": [
+   "AI"
+  ]
+ },
+ "T08": {
+  "contributors": {
+   "GS-2025-1A-0032": [
+    "bm25",
+    "bm25+prf",
+    "boolean",
+    "dense",
+    "hybrid",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "AAPL-2026-7-0007": [
+    "bm25",
+    "bm25+prf",
+    "boolean",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "XOM-2025-1A-0010": [
+    "bm25",
+    "bm25+prf",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "BAC-2025-1A-0007": [
+    "bm25",
+    "bm25+prf",
+    "dense",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "BAC-2025-1A-0034": [
+    "bm25",
+    "bm25+prf",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "JNJ-2025-1A-0030": [
+    "bm25",
+    "bm25+prf",
+    "dense",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "JPM-2025-1A-0030": [
+    "bm25",
+    "bm25+prf",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "BAC-2025-1A-0043": [
+    "bm25",
+    "bm25+prf",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "INTC-2025-X-0213": [
+    "dense"
+   ],
+   "BAC-2025-1A-0006": [
+    "dense",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "UNH-2025-7A-0003": [
+    "dense"
+   ],
+   "KO-2025-7-0153": [
+    "dense"
+   ],
+   "JNJ-2025-7-0093": [
+    "dense",
+    "hybrid"
+   ],
+   "BAC-2025-1A-0012": [
+    "hybrid"
+   ],
+   "BAC-2025-1A-0057": [
+    "hybrid"
+   ],
+   "PEP-2025-7-0244": [
+    "hybrid",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "BAC-2025-1A-0005": [
+    "hybrid+rerank"
+   ],
+   "TSLA-2025-7-0009": [
+    "hybrid+rerank"
+   ],
+   "BAC-2025-1A-0009": [
+    "hybrid+rerank"
+   ],
+   "KO-2025-7-0002": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ]
+  },
+  "judges": [
+   "AI"
+  ]
+ },
+ "T09": {
+  "contributors": {
+   "KO-2025-7-0019": [
+    "bm25",
+    "bm25+prf",
+    "dense",
+    "hybrid",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "KO-2025-1-0058": [
+    "bm25",
+    "bm25+prf",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "INTC-2025-X-0293": [
+    "bm25",
+    "bm25+prf",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "DIS-2025-1-0087": [
+    "bm25",
+    "bm25+prf",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "JPM-2025-1A-0121": [
+    "bm25",
+    "bm25+prf",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "KO-2025-1A-0013": [
+    "bm25",
+    "bm25+prf",
+    "hybrid"
+   ],
+   "GS-2025-1-0027": [
+    "bm25",
+    "bm25+prf",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "XOM-2025-1-0004": [
+    "bm25",
+    "bm25+prf",
+    "hybrid",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "JNJ-2025-1A-0041": [
+    "dense"
+   ],
+   "BAC-2025-1A-0130": [
+    "dense"
+   ],
+   "PEP-2025-1A-0016": [
+    "dense"
+   ],
+   "PEP-2025-1A-0015": [
+    "dense",
+    "hybrid"
+   ],
+   "GS-2025-1A-0145": [
+    "dense"
+   ],
+   "NVDA-2026-1A-0072": [
+    "dense",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "INTC-2025-X-0324": [
+    "dense",
+    "hybrid"
+   ],
+   "AAPL-2026-1A-0040": [
+    "hybrid"
+   ],
+   "KO-2025-1A-0041": [
+    "hybrid+rerank"
+   ],
+   "INTC-2025-X-0264": [
+    "hybrid+rerank"
+   ],
+   "KO-2025-1A-0014": [
+    "hybrid+rerank"
+   ],
+   "GS-2025-1-0028": [
+    "hybrid+rerank"
+   ],
+   "INTC-2025-X-0325": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "AAPL-2026-1A-0097": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ]
+  },
+  "judges": [
+   "AI"
+  ]
+ },
+ "T10": {
+  "contributors": {
+   "MSFT-2026-8-0099": [
+    "bm25",
+    "bm25+prf",
+    "hybrid",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "MSFT-2026-7-0012": [
+    "bm25",
+    "bm25+prf",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "MSFT-2026-1-0012": [
+    "bm25",
+    "bm25+prf"
+   ],
+   "MSFT-2026-8-0106": [
+    "bm25",
+    "bm25+prf",
+    "dense",
+    "hybrid"
+   ],
+   "MSFT-2026-7-0013": [
+    "bm25",
+    "bm25+prf",
+    "hybrid"
+   ],
+   "MSFT-2026-7-0022": [
+    "bm25",
+    "bm25+prf",
+    "hybrid",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "MSFT-2026-1-0014": [
+    "bm25",
+    "bm25+prf",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "MSFT-2026-7-0003": [
+    "bm25",
+    "bm25+prf",
+    "hybrid",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "MSFT-2026-1-0032": [
+    "dense",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "MSFT-2026-7-0005": [
+    "dense",
+    "hybrid+rerank"
+   ],
+   "MSFT-2026-1A-0009": [
+    "dense"
+   ],
+   "MSFT-2026-1-0009": [
+    "dense",
+    "hybrid"
+   ],
+   "MSFT-2026-7-0018": [
+    "dense",
+    "hybrid",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "MSFT-2026-1A-0016": [
+    "dense"
+   ],
+   "MSFT-2026-7-0002": [
+    "dense"
+   ],
+   "MSFT-2026-1-0017": [
+    "hybrid+rerank"
+   ],
+   "MSFT-2026-1-0022": [
+    "hybrid+rerank"
+   ],
+   "AMZN-2025-7-0002": [
+    "hybrid+rerank"
+   ],
+   "AMZN-2025-8-0002": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "AMZN-2025-9A-0005": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ]
+  },
+  "judges": [
+   "AI"
+  ]
+ },
+ "R01": {
+  "contributors": {
+   "MSFT-2026-8-0082": [
+    "bm25",
+    "bm25+prf",
+    "boolean",
+    "hybrid",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200"
+   ],
+   "TSLA-2025-8-0052": [
+    "bm25",
+    "bm25+prf",
+    "boolean",
+    "hybrid",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "MSFT-2026-7-0066": [
+    "bm25",
+    "bm25+prf",
+    "boolean",
+    "dense",
+    "hybrid",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "MSFT-2026-7-0012": [
+    "bm25",
+    "bm25+prf",
+    "boolean",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "KO-2025-8-0067": [
+    "bm25",
+    "bm25+prf",
+    "dense",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "KO-2025-7-0039": [
+    "bm25",
+    "bm25+prf",
+    "dense",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "NVDA-2026-7-0022": [
+    "bm25",
+    "bm25+prf",
+    "hybrid"
+   ],
+   "AAPL-2026-8-0023": [
+    "bm25"
+   ],
+   "TSLA-2025-8-0060": [
+    "bm25+prf",
+    "boolean"
+   ],
+   "PEP-2025-7-0224": [
+    "boolean"
+   ],
+   "JPM-2025-15-0808": [
+    "boolean"
+   ],
+   "MSFT-2026-7-0003": [
+    "boolean"
+   ],
+   "GS-2025-8-0045": [
+    "dense",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "KO-2025-8-0147": [
+    "dense",
+    "hybrid"
+   ],
+   "BAC-2025-1-0015": [
+    "dense"
+   ],
+   "XOM-2025-X-0239": [
+    "dense"
+   ],
+   "NFLX-2025-1A-0062": [
+    "dense"
+   ],
+   "UNH-2025-8-0039": [
+    "hybrid+rerank"
+   ],
+   "JPM-2025-15-0831": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "JNJ-2025-8-0090": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "PFE-2025-8-0187": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "INTC-2025-X-0549": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "JPM-2025-15-0648": [
+    "tfidf-champ-50"
+   ]
+  },
+  "judges": [
+   "AI"
+  ]
+ },
+ "R02": {
+  "contributors": {
+   "WMT-2026-7-0029": [
+    "bm25",
+    "bm25+prf",
+    "boolean",
+    "dense",
+    "hybrid",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "PEP-2025-7-0095": [
+    "bm25",
+    "bm25+prf",
+    "dense",
+    "hybrid",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "AMZN-2025-7-0059": [
+    "bm25",
+    "bm25+prf",
+    "dense",
+    "hybrid",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "AMZN-2025-7-0058": [
+    "bm25",
+    "bm25+prf",
+    "boolean",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "INTC-2025-X-0188": [
+    "bm25",
+    "bm25+prf",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "AMZN-2025-7-0061": [
+    "bm25",
+    "dense",
+    "hybrid"
+   ],
+   "PEP-2025-7-0070": [
+    "bm25",
+    "bm25+prf",
+    "dense",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "WMT-2026-7-0028": [
+    "bm25",
+    "bm25+prf",
+    "dense",
+    "hybrid",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "WMT-2026-7-0030": [
+    "bm25+prf",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "PEP-2025-7-0315": [
+    "boolean"
+   ],
+   "CVX-2025-X-0141": [
+    "dense",
+    "hybrid",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "CVX-2025-X-0143": [
+    "dense",
+    "hybrid",
+    "hybrid+rerank"
+   ]
+  },
+  "judges": [
+   "AI"
+  ]
+ },
+ "R03": {
+  "contributors": {
+   "JPM-2025-15-0579": [
+    "bm25",
+    "boolean",
+    "dense",
+    "hybrid",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "INTC-2025-X-0521": [
+    "bm25",
+    "bm25+prf",
+    "boolean",
+    "dense",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "GS-2025-8-0256": [
+    "bm25",
+    "bm25+prf",
+    "boolean",
+    "dense",
+    "hybrid"
+   ],
+   "INTC-2025-X-0375": [
+    "bm25",
+    "bm25+prf",
+    "boolean",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "KO-2025-7-0031": [
+    "bm25",
+    "bm25+prf",
+    "boolean",
+    "dense",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "JPM-2025-15-1001": [
+    "bm25",
+    "bm25+prf",
+    "boolean",
+    "hybrid",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "PFE-2025-7-0044": [
+    "bm25",
+    "boolean",
+    "dense",
+    "hybrid"
+   ],
+   "BA-2025-8-0053": [
+    "bm25",
+    "bm25+prf"
+   ],
+   "DIS-2025-X-0137": [
+    "bm25+prf"
+   ],
+   "DIS-2025-7-0149": [
+    "bm25+prf"
+   ],
+   "BAC-2025-8-0075": [
+    "boolean"
+   ],
+   "GS-2025-7-0029": [
+    "dense",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "INTC-2025-X-0493": [
+    "dense",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "MSFT-2026-8-0063": [
+    "dense"
+   ],
+   "BAC-2025-8-0077": [
+    "hybrid"
+   ],
+   "DIS-2025-7-0150": [
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "NVDA-2026-15-0050": [
+    "hybrid+rerank"
+   ],
+   "BAC-2025-7-0392": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "AMZN-2025-8-0063": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "PFE-2025-7-0039": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ]
+  },
+  "judges": [
+   "AI"
+  ]
+ },
+ "R04": {
+  "contributors": {
+   "AAPL-2026-8-0076": [
+    "bm25",
+    "bm25+prf",
+    "boolean",
+    "dense",
+    "hybrid",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "WMT-2026-8-0007": [
+    "bm25",
+    "bm25+prf",
+    "boolean",
+    "dense",
+    "hybrid",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "NFLX-2025-X-0036": [
+    "bm25",
+    "bm25+prf",
+    "boolean",
+    "dense",
+    "hybrid",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "PEP-2025-7-0309": [
+    "bm25",
+    "bm25+prf",
+    "boolean",
+    "dense",
+    "hybrid",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "AMZN-2025-8-0007": [
+    "bm25",
+    "bm25+prf",
+    "boolean",
+    "dense",
+    "hybrid",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "UNH-2025-8-0007": [
+    "bm25",
+    "bm25+prf",
+    "boolean",
+    "hybrid+rerank"
+   ],
+   "GS-2025-8-0011": [
+    "bm25",
+    "bm25+prf",
+    "boolean",
+    "dense",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "BAC-2025-8-0012": [
+    "bm25",
+    "bm25+prf",
+    "dense",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "NVDA-2026-15-0009": [
+    "boolean",
+    "hybrid+rerank"
+   ],
+   "DIS-2025-X-0077": [
+    "dense",
+    "hybrid",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "XOM-2025-X-0212": [
+    "hybrid+rerank"
+   ],
+   "DIS-2025-X-0078": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "JPM-2025-15-0617": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ]
+  },
+  "judges": [
+   "AI"
+  ]
+ },
+ "R05": {
+  "contributors": {
+   "KO-2025-7-0021": [
+    "bm25",
+    "bm25+prf",
+    "boolean",
+    "dense",
+    "hybrid",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "KO-2025-8-0020": [
+    "bm25",
+    "bm25+prf",
+    "boolean",
+    "dense",
+    "hybrid",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "GS-2025-8-0036": [
+    "bm25",
+    "bm25+prf",
+    "boolean",
+    "dense",
+    "hybrid",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "AMZN-2025-8-0026": [
+    "bm25",
+    "bm25+prf",
+    "boolean",
+    "hybrid",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "DIS-2025-X-0111": [
+    "bm25",
+    "bm25+prf",
+    "boolean",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "TSLA-2025-8-0040": [
+    "bm25",
+    "bm25+prf",
+    "boolean",
+    "dense",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "JPM-2025-15-0962": [
+    "bm25",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "XOM-2025-X-0236": [
+    "bm25",
+    "boolean"
+   ],
+   "JPM-2025-15-0960": [
+    "bm25+prf",
+    "hybrid",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "BAC-2025-8-0078": [
+    "bm25+prf",
+    "dense",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "WMT-2026-8-0030": [
+    "boolean"
+   ],
+   "TSLA-2025-8-0041": [
+    "dense",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "MSFT-2026-8-0031": [
+    "dense"
+   ],
+   "INTC-2025-X-0425": [
+    "dense",
+    "hybrid+rerank"
+   ],
+   "UNH-2025-8-0057": [
+    "hybrid+rerank"
+   ],
+   "GS-2025-7-0262": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ]
+  },
+  "judges": [
+   "AI"
+  ]
+ },
+ "R06": {
+  "contributors": {
+   "AAPL-2026-8-0026": [
+    "bm25",
+    "bm25+prf",
+    "boolean",
+    "dense",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "AAPL-2026-8-0070": [
+    "bm25",
+    "bm25+prf",
+    "boolean",
+    "dense",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "AAPL-2026-8-0050": [
+    "bm25",
+    "bm25+prf",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "AAPL-2026-7-0030": [
+    "bm25",
+    "hybrid"
+   ],
+   "AAPL-2026-8-0042": [
+    "bm25",
+    "dense",
+    "hybrid"
+   ],
+   "AAPL-2026-1-0004": [
+    "bm25"
+   ],
+   "AAPL-2026-1-0008": [
+    "bm25"
+   ],
+   "AAPL-2026-8-0003": [
+    "bm25",
+    "bm25+prf",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "AAPL-2026-8-0006": [
+    "bm25+prf",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "AAPL-2026-8-0008": [
+    "bm25+prf",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "AAPL-2026-8-0011": [
+    "bm25+prf",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "AAPL-2026-8-0014": [
+    "bm25+prf",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "AAPL-2026-7-0019": [
+    "dense",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "AAPL-2026-7-0021": [
+    "dense",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "AAPL-2026-7-0020": [
+    "dense",
+    "hybrid+rerank"
+   ],
+   "AAPL-2026-7-0012": [
+    "dense",
+    "hybrid"
+   ],
+   "AAPL-2026-1A-0042": [
+    "dense"
+   ],
+   "AAPL-2026-7-0013": [
+    "hybrid+rerank"
+   ],
+   "AAPL-2026-8-0005": [
+    "hybrid+rerank"
+   ],
+   "AAPL-2026-8-0017": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "AAPL-2026-8-0071": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "AAPL-2026-8-0080": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ]
+  },
+  "judges": [
+   "AI"
+  ]
+ },
+ "R07": {
+  "contributors": {
+   "MSFT-2026-7-0022": [
+    "bm25",
+    "bm25+prf",
+    "dense",
+    "hybrid",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "MSFT-2026-7-0013": [
+    "bm25",
+    "bm25+prf",
+    "hybrid",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "MSFT-2026-7-0012": [
+    "bm25",
+    "bm25+prf",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "MSFT-2026-7-0018": [
+    "bm25",
+    "bm25+prf",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "MSFT-2026-8-0099": [
+    "bm25",
+    "bm25+prf"
+   ],
+   "MSFT-2026-1-0012": [
+    "bm25",
+    "bm25+prf",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "MSFT-2026-7-0003": [
+    "bm25",
+    "bm25+prf",
+    "dense",
+    "hybrid",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "MSFT-2026-1-0014": [
+    "bm25",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "MSFT-2026-8-0106": [
+    "bm25+prf",
+    "dense",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "MSFT-2026-8-0104": [
+    "dense",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "MSFT-2026-7-0021": [
+    "dense",
+    "hybrid"
+   ],
+   "MSFT-2026-8-0102": [
+    "dense",
+    "hybrid"
+   ],
+   "MSFT-2026-7-0015": [
+    "dense",
+    "hybrid+rerank"
+   ],
+   "MSFT-2026-8-0098": [
+    "dense"
+   ],
+   "MSFT-2026-7-0023": [
+    "hybrid"
+   ],
+   "MSFT-2026-8-0082": [
+    "hybrid+rerank"
+   ],
+   "MSFT-2026-1-0021": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ]
+  },
+  "judges": [
+   "AI"
+  ]
+ },
+ "R08": {
+  "contributors": {
+   "TSLA-2025-7-0044": [
+    "bm25",
+    "bm25+prf",
+    "dense",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "TSLA-2025-8-0044": [
+    "bm25",
+    "bm25+prf",
+    "dense",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "TSLA-2025-8-0026": [
+    "bm25",
+    "bm25+prf",
+    "dense",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "TSLA-2025-7-0039": [
+    "bm25",
+    "bm25+prf",
+    "dense",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "TSLA-2025-1-0003": [
+    "bm25",
+    "bm25+prf",
+    "hybrid",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "TSLA-2025-8-0198": [
+    "bm25",
+    "bm25+prf"
+   ],
+   "TSLA-2025-8-0063": [
+    "bm25",
+    "bm25+prf"
+   ],
+   "TSLA-2025-8-0199": [
+    "bm25",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "TSLA-2025-8-0064": [
+    "bm25+prf",
+    "hybrid"
+   ],
+   "TSLA-2025-8-0053": [
+    "dense",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "TSLA-2025-1-0023": [
+    "dense"
+   ],
+   "TSLA-2025-8-0028": [
+    "dense",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "TSLA-2025-1A-0015": [
+    "dense"
+   ],
+   "TSLA-2025-7-0047": [
+    "hybrid+rerank"
+   ],
+   "TSLA-2025-8-0012": [
+    "hybrid+rerank"
+   ],
+   "TSLA-2025-8-0030": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "TSLA-2025-8-0035": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "TSLA-2025-8-0038": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "TSLA-2025-8-0024": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "TSLA-2025-8-0013": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "TSLA-2025-8-0002": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ]
+  },
+  "judges": [
+   "AI"
+  ]
+ },
+ "R09": {
+  "contributors": {
+   "WMT-2026-1-0008": [
+    "bm25",
+    "bm25+prf",
+    "boolean",
+    "hybrid",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "WMT-2026-7-0042": [
+    "bm25",
+    "bm25+prf",
+    "boolean",
+    "dense",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "WMT-2026-1-0012": [
+    "bm25",
+    "bm25+prf",
+    "boolean",
+    "hybrid+rerank"
+   ],
+   "WMT-2026-7-0016": [
+    "bm25",
+    "bm25+prf",
+    "boolean",
+    "dense",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "WMT-2026-1-0007": [
+    "bm25",
+    "bm25+prf",
+    "boolean",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "WMT-2026-7-0046": [
+    "bm25",
+    "bm25+prf",
+    "boolean",
+    "hybrid+rerank"
+   ],
+   "WMT-2026-7-0041": [
+    "bm25",
+    "boolean",
+    "dense",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "WMT-2026-8-0058": [
+    "bm25"
+   ],
+   "WMT-2026-8-0121": [
+    "bm25+prf",
+    "dense",
+    "hybrid"
+   ],
+   "WMT-2026-7-0012": [
+    "bm25+prf",
+    "dense"
+   ],
+   "WMT-2026-8-0054": [
+    "boolean"
+   ],
+   "WMT-2026-7-0045": [
+    "dense",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "WMT-2026-8-0122": [
+    "dense",
+    "hybrid"
+   ],
+   "WMT-2026-8-0114": [
+    "dense"
+   ],
+   "WMT-2026-8-0017": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "WMT-2026-8-0029": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "WMT-2026-8-0019": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "WMT-2026-8-0022": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "WMT-2026-8-0026": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "WMT-2026-2-0001": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "WMT-2026-8-0002": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ]
+  },
+  "judges": [
+   "AI"
+  ]
+ },
+ "R10": {
+  "contributors": {
+   "KO-2025-7-0063": [
+    "bm25",
+    "bm25+prf",
+    "hybrid+rerank",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "KO-2025-1A-0044": [
+    "bm25",
+    "bm25+prf",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "KO-2025-1-0012": [
+    "bm25",
+    "bm25+prf",
+    "boolean",
+    "dense",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "KO-2025-7-0064": [
+    "bm25",
+    "bm25+prf"
+   ],
+   "KO-2025-8-0108": [
+    "bm25"
+   ],
+   "KO-2025-1-0008": [
+    "bm25"
+   ],
+   "KO-2025-8-0018": [
+    "bm25",
+    "bm25+prf"
+   ],
+   "KO-2025-8-0191": [
+    "bm25",
+    "dense",
+    "hybrid"
+   ],
+   "KO-2025-7-0065": [
+    "bm25+prf"
+   ],
+   "KO-2025-1-0002": [
+    "bm25+prf"
+   ],
+   "KO-2025-7-0003": [
+    "bm25+prf"
+   ],
+   "KO-2025-7-0075": [
+    "dense",
+    "hybrid"
+   ],
+   "KO-2025-8-0232": [
+    "dense",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "KO-2025-8-0235": [
+    "dense",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "KO-2025-8-0004": [
+    "dense",
+    "hybrid",
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "KO-2025-1-0011": [
+    "dense",
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "KO-2025-7-0096": [
+    "dense"
+   ],
+   "KO-2025-7-0059": [
+    "hybrid",
+    "hybrid+rerank"
+   ],
+   "KO-2025-7-0006": [
+    "hybrid+rerank"
+   ],
+   "KO-2025-7-0067": [
+    "hybrid+rerank"
+   ],
+   "KO-2025-1-0001": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "KO-2025-8-0190": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "KO-2025-5-0005": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "KO-2025-1A-0095": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ],
+   "KO-2025-8-0246": [
+    "tfidf",
+    "tfidf-champ-200",
+    "tfidf-champ-50"
+   ]
+  },
+  "judges": [
+   "AI"
+  ]
+ }
+}
