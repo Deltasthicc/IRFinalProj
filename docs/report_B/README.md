@@ -18,7 +18,7 @@ Everything in this folder is a DRAFT written before any real result exists. Ever
 ## What only people (or a networked machine) can do, in this order
 
 1. Real corpus from Role A (`data/passages.jsonl`). Install `pip install -r requirements-ml.txt` on a machine with Hugging Face access.
-2. `make pools` -> three blind sheets. **Everyone judges ~300 passages** (`make judge` is a browser UI that saves as you go). Nobody opens `data/judgments/pool_key.json`.
+2. `make pools` -> blind sheets. DONE differently from the plan: an LLM judged all 589 pairs and a second LLM pass judged 91 (see `audit/`); no human judged. If people later grade the spare 91-row sheet with `make judge`, the human-vs-LLM kappa can replace the LLM-vs-LLM one. Nobody opens `data/judgments/pool_key.json` while judging.
 3. `make merge`, then `make tune` (dev split only, writes `bm25_params.json`).
 4. `make retrieval-dev`, `make ablation-dev` while building.
 5. After the feature freeze, once: `make retrieval-test`, then `python eval/hypotheses.py`. The test run is locked after its first execution.
