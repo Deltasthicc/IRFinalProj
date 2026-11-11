@@ -7,6 +7,7 @@ tiny fixture under tests/fixtures/, and say so, so a fixture can never pass as r
 from __future__ import annotations
 
 import json
+import os
 from dataclasses import asdict
 from pathlib import Path
 
@@ -39,7 +40,8 @@ def load_companies(path: Path | str) -> list[dict]:
 
 def load_corpus() -> tuple[list[Passage], list[dict], bool]:
     """Return (passages, companies, is_fixture). Prefers A's real data."""
-    real_p, real_c = DATA / "passages.jsonl", DATA / "companies.json"
+    base = Path(os.environ.get("TRADEMESH_DATA") or DATA)       # tests point this at an empty dir to force the fixture
+    real_p, real_c = base / "passages.jsonl", base / "companies.json"
     if real_p.exists() and real_c.exists():
         return load_passages(real_p), load_companies(real_c), False
     return (

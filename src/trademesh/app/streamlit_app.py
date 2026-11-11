@@ -29,7 +29,8 @@ def get_state() -> AppState:
 
 def passage_card(label: str, p, snippet: str | None = None, expanded: bool = False, score: float | None = None,
                  explain: list[tuple[str, float]] | None = None):
-    title = f"{label} {p.ticker} | FY{p.fiscal_year} | Item {p.item} | {p.kind}" + (f" | score {score:.3f}" if score is not None else "")
+    where = "Other sections" if p.item == "X" else f"Item {p.item}"
+    title = f"{label} {p.ticker} | FY{p.fiscal_year} | {where} | {p.kind}" + (f" | score {score:.3f}" if score is not None else "")
     with st.expander(title, expanded=expanded):
         st.markdown(snippet if snippet else p.text)
         st.caption(f"passage id: {p.id}" + (f" | page {p.page}" if p.page else ""))

@@ -1,0 +1,154 @@
+[
+ {
+  "ticker": "AAPL",
+  "name": "Apple Inc.",
+  "aliases": [
+   "Apple"
+  ]
+ },
+ {
+  "ticker": "MSFT",
+  "name": "Microsoft Corporation",
+  "aliases": [
+   "Microsoft"
+  ]
+ },
+ {
+  "ticker": "NVDA",
+  "name": "NVIDIA Corporation",
+  "aliases": [
+   "Nvidia"
+  ]
+ },
+ {
+  "ticker": "TSLA",
+  "name": "Tesla, Inc.",
+  "aliases": [
+   "Tesla"
+  ]
+ },
+ {
+  "ticker": "AMZN",
+  "name": "Amazon.com, Inc.",
+  "aliases": [
+   "Amazon"
+  ]
+ },
+ {
+  "ticker": "NFLX",
+  "name": "Netflix, Inc.",
+  "aliases": [
+   "Netflix"
+  ]
+ },
+ {
+  "ticker": "JPM",
+  "name": "JPMorgan Chase & Co.",
+  "aliases": [
+   "JPMorgan",
+   "JP Morgan",
+   "Chase"
+  ]
+ },
+ {
+  "ticker": "GS",
+  "name": "The Goldman Sachs Group, Inc.",
+  "aliases": [
+   "Goldman Sachs",
+   "Goldman"
+  ]
+ },
+ {
+  "ticker": "BAC",
+  "name": "Bank of America Corporation",
+  "aliases": [
+   "Bank of America",
+   "BofA"
+  ]
+ },
+ {
+  "ticker": "XOM",
+  "name": "Exxon Mobil Corporation",
+  "aliases": [
+   "Exxon Mobil",
+   "ExxonMobil",
+   "Exxon"
+  ]
+ },
+ {
+  "ticker": "CVX",
+  "name": "Chevron Corporation",
+  "aliases": [
+   "Chevron"
+  ]
+ },
+ {
+  "ticker": "WMT",
+  "name": "Walmart Inc.",
+  "aliases": [
+   "Walmart"
+  ]
+ },
+ {
+  "ticker": "KO",
+  "name": "The Coca-Cola Company",
+  "aliases": [
+   "Coca-Cola",
+   "Coca Cola",
+   "Coke"
+  ]
+ },
+ {
+  "ticker": "PEP",
+  "name": "PepsiCo, Inc.",
+  "aliases": [
+   "PepsiCo",
+   "Pepsi"
+  ]
+ },
+ {
+  "ticker": "PFE",
+  "name": "Pfizer Inc.",
+  "aliases": [
+   "Pfizer"
+  ]
+ },
+ {
+  "ticker": "JNJ",
+  "name": "Johnson & Johnson",
+  "aliases": [
+   "J&J"
+  ]
+ },
+ {
+  "ticker": "UNH",
+  "name": "UnitedHealth Group Incorporated",
+  "aliases": [
+   "UnitedHealth Group",
+   "UnitedHealth",
+   "United Health"
+  ]
+ },
+ {
+  "ticker": "BA",
+  "name": "The Boeing Company",
+  "aliases": [
+   "Boeing"
+  ]
+ },
+ {
+  "ticker": "DIS",
+  "name": "The Walt Disney Company",
+  "aliases": [
+   "Walt Disney",
+   "Disney"
+  ]
+ },
+ {
+  "ticker": "INTC",
+  "name": "Intel Corporation",
+  "aliases": [
+   "Intel"
+  ]
+ }
+]

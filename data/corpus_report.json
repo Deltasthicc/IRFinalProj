@@ -1,0 +1,477 @@
+{
+ "summary": {
+  "total_passages": 11964,
+  "companies": 20,
+  "by_kind": {
+   "text": 10912,
+   "table": 1052
+  },
+  "by_item": {
+   "1": 1132,
+   "1A": 1738,
+   "1C": 92,
+   "2": 107,
+   "3": 56,
+   "5": 101,
+   "7": 2409,
+   "7A": 71,
+   "8": 2717,
+   "9A": 100,
+   "15": 1427,
+   "X": 2014
+  },
+  "flags": []
+ },
+ "companies": [
+  {
+   "ticker": "AAPL",
+   "fiscal_year": 2026,
+   "blocks": 654,
+   "passages": 286,
+   "table_passages": 16,
+   "per_item": {
+    "1": 30,
+    "1A": 97,
+    "1C": 3,
+    "2": 1,
+    "3": 6,
+    "5": 8,
+    "7": 46,
+    "7A": 5,
+    "8": 85,
+    "9A": 5
+   },
+   "median_words": 115,
+   "max_words": 267,
+   "warnings": [],
+   "notes": []
+  },
+  {
+   "ticker": "MSFT",
+   "fiscal_year": 2026,
+   "blocks": 1192,
+   "passages": 373,
+   "table_passages": 20,
+   "per_item": {
+    "1": 53,
+    "1A": 94,
+    "1C": 4,
+    "2": 2,
+    "5": 7,
+    "7": 78,
+    "7A": 7,
+    "8": 120,
+    "9A": 8
+   },
+   "median_words": 125,
+   "max_words": 297,
+   "warnings": [],
+   "notes": []
+  },
+  {
+   "ticker": "NVDA",
+   "fiscal_year": 2026,
+   "blocks": 1084,
+   "passages": 406,
+   "table_passages": 25,
+   "per_item": {
+    "1": 62,
+    "1A": 136,
+    "1C": 4,
+    "2": 1,
+    "5": 10,
+    "7": 53,
+    "7A": 5,
+    "9A": 5,
+    "15": 130
+   },
+   "median_words": 129,
+   "max_words": 255,
+   "warnings": [],
+   "notes": [
+    "Item 8 is missing or a pointer: 130 financial-statement passages taken from Item 15"
+   ]
+  },
+  {
+   "ticker": "TSLA",
+   "fiscal_year": 2025,
+   "blocks": 867,
+   "passages": 460,
+   "table_passages": 20,
+   "per_item": {
+    "1": 61,
+    "1A": 102,
+    "1C": 6,
+    "2": 2,
+    "5": 7,
+    "7": 73,
+    "7A": 2,
+    "8": 201,
+    "9A": 6
+   },
+   "median_words": 137,
+   "max_words": 314,
+   "warnings": [],
+   "notes": []
+  },
+  {
+   "ticker": "AMZN",
+   "fiscal_year": 2025,
+   "blocks": 818,
+   "passages": 334,
+   "table_passages": 19,
+   "per_item": {
+    "1": 23,
+    "1A": 70,
+    "1C": 4,
+    "2": 4,
+    "5": 2,
+    "7": 66,
+    "7A": 9,
+    "8": 146,
+    "9A": 10
+   },
+   "median_words": 128,
+   "max_words": 259,
+   "warnings": [],
+   "notes": []
+  },
+  {
+   "ticker": "NFLX",
+   "fiscal_year": 2025,
+   "blocks": 749,
+   "passages": 372,
+   "table_passages": 30,
+   "per_item": {
+    "1": 13,
+    "1A": 89,
+    "1C": 5,
+    "2": 1,
+    "3": 1,
+    "5": 9,
+    "7": 62,
+    "7A": 8,
+    "9A": 10,
+    "X": 174
+   },
+   "median_words": 121,
+   "max_words": 278,
+   "warnings": [],
+   "notes": [
+    "no standard Item layout for Item 7/8: 174 passages from unsectioned text stored as item X"
+   ]
+  },
+  {
+   "ticker": "JPM",
+   "fiscal_year": 2025,
+   "blocks": 3414,
+   "passages": 1464,
+   "table_passages": 152,
+   "per_item": {
+    "1": 52,
+    "1A": 121,
+    "2": 3,
+    "5": 4,
+    "7": 1,
+    "8": 1,
+    "9A": 3,
+    "15": 1247,
+    "X": 32
+   },
+   "median_words": 129,
+   "max_words": 476,
+   "warnings": [],
+   "notes": [
+    "Item 8 is missing or a pointer: 1247 financial-statement passages taken from Item 15",
+    "no standard Item layout for Item 7/8: 32 passages from unsectioned text stored as item X"
+   ]
+  },
+  {
+   "ticker": "GS",
+   "fiscal_year": 2025,
+   "blocks": 2707,
+   "passages": 1295,
+   "table_passages": 109,
+   "per_item": {
+    "1": 182,
+    "1A": 166,
+    "2": 3,
+    "3": 2,
+    "5": 4,
+    "7": 447,
+    "8": 490,
+    "9A": 1
+   },
+   "median_words": 134,
+   "max_words": 650,
+   "warnings": [],
+   "notes": []
+  },
+  {
+   "ticker": "BAC",
+   "fiscal_year": 2025,
+   "blocks": 1817,
+   "passages": 997,
+   "table_passages": 94,
+   "per_item": {
+    "1": 51,
+    "1A": 131,
+    "2": 3,
+    "5": 3,
+    "7": 403,
+    "8": 403,
+    "9A": 3
+   },
+   "median_words": 136,
+   "max_words": 698,
+   "warnings": [],
+   "notes": []
+  },
+  {
+   "ticker": "XOM",
+   "fiscal_year": 2025,
+   "blocks": 1136,
+   "passages": 540,
+   "table_passages": 110,
+   "per_item": {
+    "1": 7,
+    "1A": 43,
+    "1C": 4,
+    "2": 57,
+    "5": 3,
+    "7A": 1,
+    "8": 1,
+    "9A": 3,
+    "X": 421
+   },
+   "median_words": 133,
+   "max_words": 515,
+   "warnings": [],
+   "notes": [
+    "no standard Item layout for Item 7/8: 421 passages from unsectioned text stored as item X"
+   ]
+  },
+  {
+   "ticker": "CVX",
+   "fiscal_year": 2025,
+   "blocks": 1329,
+   "passages": 641,
+   "table_passages": 104,
+   "per_item": {
+    "1": 100,
+    "1A": 41,
+    "1C": 7,
+    "2": 1,
+    "3": 3,
+    "5": 3,
+    "9A": 3,
+    "X": 483
+   },
+   "median_words": 125,
+   "max_words": 555,
+   "warnings": [],
+   "notes": [
+    "no standard Item layout for Item 7/8: 483 passages from unsectioned text stored as item X"
+   ]
+  },
+  {
+   "ticker": "WMT",
+   "fiscal_year": 2026,
+   "blocks": 853,
+   "passages": 394,
+   "table_passages": 34,
+   "per_item": {
+    "1": 42,
+    "1A": 100,
+    "1C": 8,
+    "2": 7,
+    "3": 6,
+    "5": 7,
+    "7": 88,
+    "7A": 8,
+    "8": 123,
+    "9A": 5
+   },
+   "median_words": 137,
+   "max_words": 384,
+   "warnings": [],
+   "notes": []
+  },
+  {
+   "ticker": "KO",
+   "fiscal_year": 2025,
+   "blocks": 1129,
+   "passages": 634,
+   "table_passages": 23,
+   "per_item": {
+    "1": 64,
+    "1A": 101,
+    "1C": 8,
+    "2": 3,
+    "3": 28,
+    "5": 7,
+    "7": 153,
+    "7A": 7,
+    "8": 261,
+    "9A": 2
+   },
+   "median_words": 142,
+   "max_words": 442,
+   "warnings": [],
+   "notes": []
+  },
+  {
+   "ticker": "PEP",
+   "fiscal_year": 2025,
+   "blocks": 1098,
+   "passages": 512,
+   "table_passages": 55,
+   "per_item": {
+    "1": 50,
+    "1A": 74,
+    "1C": 6,
+    "2": 2,
+    "3": 4,
+    "5": 5,
+    "7": 316,
+    "9A": 5,
+    "15": 50
+   },
+   "median_words": 124,
+   "max_words": 448,
+   "warnings": [],
+   "notes": [
+    "Item 8 is missing or a pointer: 50 financial-statement passages taken from Item 15"
+   ]
+  },
+  {
+   "ticker": "PFE",
+   "fiscal_year": 2025,
+   "blocks": 1396,
+   "passages": 671,
+   "table_passages": 34,
+   "per_item": {
+    "1": 112,
+    "1A": 100,
+    "1C": 8,
+    "2": 2,
+    "3": 5,
+    "5": 5,
+    "7": 141,
+    "8": 287,
+    "9A": 11
+   },
+   "median_words": 138,
+   "max_words": 454,
+   "warnings": [],
+   "notes": []
+  },
+  {
+   "ticker": "JNJ",
+   "fiscal_year": 2025,
+   "blocks": 937,
+   "passages": 451,
+   "table_passages": 33,
+   "per_item": {
+    "1": 41,
+    "1A": 48,
+    "1C": 4,
+    "2": 5,
+    "5": 4,
+    "7": 103,
+    "7A": 1,
+    "8": 242,
+    "9A": 3
+   },
+   "median_words": 140,
+   "max_words": 329,
+   "warnings": [],
+   "notes": []
+  },
+  {
+   "ticker": "UNH",
+   "fiscal_year": 2025,
+   "blocks": 898,
+   "passages": 355,
+   "table_passages": 24,
+   "per_item": {
+    "1": 55,
+    "1A": 79,
+    "1C": 6,
+    "2": 1,
+    "3": 1,
+    "5": 6,
+    "7": 71,
+    "7A": 5,
+    "8": 121,
+    "9A": 10
+   },
+   "median_words": 131,
+   "max_words": 713,
+   "warnings": [],
+   "notes": []
+  },
+  {
+   "ticker": "BA",
+   "fiscal_year": 2025,
+   "blocks": 1083,
+   "passages": 493,
+   "table_passages": 33,
+   "per_item": {
+    "1": 27,
+    "1A": 70,
+    "1C": 9,
+    "2": 4,
+    "5": 4,
+    "7": 135,
+    "7A": 4,
+    "8": 236,
+    "9A": 4
+   },
+   "median_words": 127,
+   "max_words": 255,
+   "warnings": [],
+   "notes": []
+  },
+  {
+   "ticker": "DIS",
+   "fiscal_year": 2025,
+   "blocks": 1404,
+   "passages": 637,
+   "table_passages": 75,
+   "per_item": {
+    "1": 107,
+    "1A": 76,
+    "1C": 6,
+    "2": 5,
+    "5": 3,
+    "7": 173,
+    "7A": 9,
+    "9A": 3,
+    "X": 255
+   },
+   "median_words": 107,
+   "max_words": 324,
+   "warnings": [],
+   "notes": [
+    "no standard Item layout for Item 7/8: 255 passages from unsectioned text stored as item X"
+   ]
+  },
+  {
+   "ticker": "INTC",
+   "fiscal_year": 2025,
+   "blocks": 1184,
+   "passages": 649,
+   "table_passages": 42,
+   "per_item": {
+    "X": 649
+   },
+   "median_words": 135,
+   "max_words": 357,
+   "warnings": [],
+   "notes": [
+    "no standard Item layout for Item 7/8: 649 passages from unsectioned text stored as item X"
+   ]
+  }
+ ]
+}

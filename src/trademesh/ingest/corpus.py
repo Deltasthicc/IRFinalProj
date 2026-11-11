@@ -21,33 +21,52 @@ from pathlib import Path
 
 from ..types import Passage
 from .chunk import chunk_item, words
-from .parse import KEEP_ITEMS, html_to_blocks, split_items
+from .parse import KEEP_ITEMS, html_to_blocks, split_items, uncovered
 
 ROOT = Path(__file__).resolve().parents[3]
 EXPECTED_TOTAL = (3000, 15000)       # sanity band around the proposal's 6,000 to 10,000
 MIN_ITEM_PASSAGES = {"1": 15, "1A": 15, "7": 15, "8": 20}
 
 
+MIN_FILING_PASSAGES = 100
+
+
 def build_passages(html: str, ticker: str, company: str, fiscal_year: int) -> tuple[list[Passage], dict]:
+    """Passages of one filing. Most 10-Ks put Items 7 and 8 under their own headings. Some do not: NVIDIA and Disney
+    put the financial statements under Item 15; JPMorgan, Chevron and Intel use a cross-reference index and their own
+    headings. Two fallbacks keep such filings searchable, and both are recorded as notes in the report:
+      - Item 8 missing or only a pointer -> take the Item 15 span (that is where the statements are);
+      - Item 7 or 8 still missing, or the whole filing tiny -> chunk every block no Item claimed as item "X"."""
     blocks = html_to_blocks(html)
-    items = split_items(blocks)
+    items = split_items(blocks, keep=KEEP_ITEMS + ["15"])
     passages: list[Passage] = []
     per_item: dict[str, int] = {}
+    chunks = {i: chunk_item(items[i], ticker, company, fiscal_year, i) for i in items}
     for item in KEEP_ITEMS:
-        if item in items:
-            ps = chunk_item(items[item], ticker, company, fiscal_year, item)
-            passages += ps
-            per_item[item] = len(ps)
-    warnings = [f"Item {i} not found" for i in KEEP_ITEMS if i in ("1", "1A", "7", "8") and i not in items]
-    warnings += [f"Item {i} has only {per_item.get(i, 0)} passages" for i, n in MIN_ITEM_PASSAGES.items()
-                 if i in per_item and per_item[i] < n]
+        if item in chunks:
+            passages += chunks[item]
+            per_item[item] = len(chunks[item])
+    notes: list[str] = []
+    if per_item.get("8", 0) < MIN_ITEM_PASSAGES["8"] and len(chunks.get("15", [])) >= MIN_ITEM_PASSAGES["8"]:
+        passages += chunks["15"]
+        per_item["15"] = len(chunks["15"])
+        notes.append(f"Item 8 is missing or a pointer: {per_item['15']} financial-statement passages taken from Item 15")
+    fin_ok = per_item.get("8", 0) >= MIN_ITEM_PASSAGES["8"] or per_item.get("15", 0) >= MIN_ITEM_PASSAGES["8"]
+    if per_item.get("7", 0) < MIN_ITEM_PASSAGES["7"] or not fin_ok or len(passages) < MIN_FILING_PASSAGES:
+        rest = chunk_item(uncovered(blocks, {i: items[i] for i in items if i in per_item}), ticker, company, fiscal_year, "X")
+        passages += rest
+        per_item["X"] = len(rest)
+        notes.append(f"no standard Item layout for Item 7/8: {len(rest)} passages from unsectioned text stored as item X")
+    warnings = []
+    if len(passages) < MIN_FILING_PASSAGES:
+        warnings.append(f"only {len(passages)} passages for the whole filing")
     tables = sum(p.kind == "table" for p in passages)
     if passages and tables == 0:
         warnings.append("no table passages at all")
     lens = [words(p.text) for p in passages]
     report = {"ticker": ticker, "fiscal_year": fiscal_year, "blocks": len(blocks), "passages": len(passages),
               "table_passages": tables, "per_item": per_item, "median_words": sorted(lens)[len(lens) // 2] if lens else 0,
-              "max_words": max(lens, default=0), "warnings": warnings}
+              "max_words": max(lens, default=0), "warnings": warnings, "notes": notes}
     return passages, report
 
 
@@ -98,6 +117,7 @@ def main(argv=None) -> int:
             filings.append({"ticker": c["ticker"], "fiscal_year": filing.fiscal_year, "accession": filing.accession,
                             "report_date": filing.report_date, "url": filing.url})
             print(f"{c['ticker']:5} FY{filing.fiscal_year}: {rep['passages']:5} passages ({rep['table_passages']} tables)"
+                  + (f"  NOTE {rep['notes']}" if rep.get("notes") else "")
                   + (f"  WARN {rep['warnings']}" if rep["warnings"] else ""))
 
     out = Path(args.out)
