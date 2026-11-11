@@ -1,0 +1,42 @@
+{
+  "tfidf": {
+    "MAP_full": 0.4550016150223026,
+    "MAP_without_own_unique": 0.4550016150223026,
+    "tau_system_order": 0.9642857142857143
+  },
+  "tfidf-champ-50": {
+    "MAP_full": 0.4312202700102122,
+    "MAP_without_own_unique": 0.4287032300453461,
+    "tau_system_order": 0.8214285714285714
+  },
+  "tfidf-champ-200": {
+    "MAP_full": 0.4550016150223026,
+    "MAP_without_own_unique": 0.4550016150223026,
+    "tau_system_order": 0.9642857142857143
+  },
+  "boolean": {
+    "MAP_full": 0.21609947438956784,
+    "MAP_without_own_unique": 0.20198691158347012,
+    "tau_system_order": 0.8214285714285714
+  },
+  "bm25": {
+    "MAP_full": 0.6041409195054985,
+    "MAP_without_own_unique": 0.6007658291011961,
+    "tau_system_order": 0.8214285714285714
+  },
+  "bm25+prf": {
+    "MAP_full": 0.6045340183387061,
+    "MAP_without_own_unique": 0.5997708072767364,
+    "tau_system_order": 0.75
+  },
+  "dense": {
+    "MAP_full": 0.6041315342105705,
+    "MAP_without_own_unique": 0.5069004568072905,
+    "tau_system_order": 0.8928571428571429
+  },
+  "hybrid": {
+    "MAP_full": 0.6829629003904784,
+    "MAP_without_own_unique": 0.6706729602138289,
+    "tau_system_order": 0.9642857142857143
+  }
+}
