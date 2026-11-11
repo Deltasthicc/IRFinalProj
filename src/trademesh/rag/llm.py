@@ -163,11 +163,25 @@ class LLMClient:
         return "".join(p.get("text", "") for p in parts).strip()
 
 
-def _post(requests, url: str, headers: dict, body: dict, retries: int = 2) -> dict:
+def _post(requests, url: str, headers: dict, body: dict, retries: int = 3) -> dict:
+    """POST with retries on transient failures (HTTP 429/5xx, read timeouts, dropped connections).
+
+    Gemini 3.x can spend a long time thinking on a long prompt, so the read timeout is generous
+    (LLM_TIMEOUT seconds, default 180). A retry is safe: the request is deterministic and the
+    disk cache only stores a finished answer.
+    """
+    timeout = float(os.getenv("LLM_TIMEOUT", "180"))
+    transient = (requests.exceptions.Timeout, requests.exceptions.ConnectionError)
     for attempt in range(retries + 1):
-        r = requests.post(url, headers=headers, json=body, timeout=90)
+        try:
+            r = requests.post(url, headers=headers, json=body, timeout=timeout)
+        except transient:
+            if attempt < retries:
+                time.sleep(3 * (attempt + 1))
+                continue
+            raise
         if r.status_code in (429, 500, 502, 503, 529) and attempt < retries:
-            time.sleep(2 * (attempt + 1))
+            time.sleep(3 * (attempt + 1))
             continue
         r.raise_for_status()
         return r.json()
