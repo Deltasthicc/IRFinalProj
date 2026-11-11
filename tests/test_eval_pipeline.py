@@ -27,7 +27,7 @@ def words(t):
 
 
 def test_pipeline_refuses_then_runs(tmp_path):
-    env = {**os.environ, "TRADEMESH_JUDGMENTS": str(tmp_path), "PYTHONPATH": str(ROOT / "src")}
+    env = {**os.environ, "TRADEMESH_JUDGMENTS": str(tmp_path), "TRADEMESH_DATA": str(tmp_path / "nodata"), "PYTHONPATH": str(ROOT / "src")}
     # 1) without --allow-stub the fixture is refused
     p = run("run_retrieval", env, check=False)
     assert p.returncode != 0 and "Refusing" in (p.stdout + p.stderr)

@@ -1,0 +1,142 @@
+[
+ {
+  "ticker": "AAPL",
+  "fiscal_year": 2026,
+  "accession": "0000320193-26-000026",
+  "report_date": "2026-09-26",
+  "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000026/aapl-20260926.htm"
+ },
+ {
+  "ticker": "MSFT",
+  "fiscal_year": 2026,
+  "accession": "0001193125-26-323660",
+  "report_date": "2026-06-30",
+  "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
+ },
+ {
+  "ticker": "NVDA",
+  "fiscal_year": 2026,
+  "accession": "0001045810-26-000021",
+  "report_date": "2026-01-25",
+  "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm"
+ },
+ {
+  "ticker": "TSLA",
+  "fiscal_year": 2025,
+  "accession": "0001628280-26-003952",
+  "report_date": "2025-12-31",
+  "url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026003952/tsla-20251231.htm"
+ },
+ {
+  "ticker": "AMZN",
+  "fiscal_year": 2025,
+  "accession": "0001018724-26-000004",
+  "report_date": "2025-12-31",
+  "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000004/amzn-20251231.htm"
+ },
+ {
+  "ticker": "NFLX",
+  "fiscal_year": 2025,
+  "accession": "0001065280-26-000034",
+  "report_date": "2025-12-31",
+  "url": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000034/nflx-20251231.htm"
+ },
+ {
+  "ticker": "JPM",
+  "fiscal_year": 2025,
+  "accession": "0001628280-26-008131",
+  "report_date": "2025-12-31",
+  "url": "https://www.sec.gov/Archives/edgar/data/19617/000162828026008131/jpm-20251231.htm"
+ },
+ {
+  "ticker": "GS",
+  "fiscal_year": 2025,
+  "accession": "0000886982-26-000091",
+  "report_date": "2025-12-31",
+  "url": "https://www.sec.gov/Archives/edgar/data/886982/000088698226000091/gs-20251231.htm"
+ },
+ {
+  "ticker": "BAC",
+  "fiscal_year": 2025,
+  "accession": "0000070858-26-000157",
+  "report_date": "2025-12-31",
+  "url": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000157/bac-20251231.htm"
+ },
+ {
+  "ticker": "XOM",
+  "fiscal_year": 2025,
+  "accession": "0000034088-26-000045",
+  "report_date": "2025-12-31",
+  "url": "https://www.sec.gov/Archives/edgar/data/34088/000003408826000045/xom-20251231.htm"
+ },
+ {
+  "ticker": "CVX",
+  "fiscal_year": 2025,
+  "accession": "0000093410-26-000078",
+  "report_date": "2025-12-31",
+  "url": "https://www.sec.gov/Archives/edgar/data/93410/000009341026000078/cvx-20251231.htm"
+ },
+ {
+  "ticker": "WMT",
+  "fiscal_year": 2026,
+  "accession": "0000104169-26-000055",
+  "report_date": "2026-01-31",
+  "url": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000055/wmt-20260131.htm"
+ },
+ {
+  "ticker": "KO",
+  "fiscal_year": 2025,
+  "accession": "0001628280-26-010047",
+  "report_date": "2025-12-31",
+  "url": "https://www.sec.gov/Archives/edgar/data/21344/000162828026010047/ko-20251231.htm"
+ },
+ {
+  "ticker": "PEP",
+  "fiscal_year": 2025,
+  "accession": "0000077476-26-000007",
+  "report_date": "2025-12-27",
+  "url": "https://www.sec.gov/Archives/edgar/data/77476/000007747626000007/pep-20251227.htm"
+ },
+ {
+  "ticker": "PFE",
+  "fiscal_year": 2025,
+  "accession": "0000078003-26-000026",
+  "report_date": "2025-12-31",
+  "url": "https://www.sec.gov/Archives/edgar/data/78003/000007800326000026/pfe-20251231.htm"
+ },
+ {
+  "ticker": "JNJ",
+  "fiscal_year": 2025,
+  "accession": "0000200406-26-000016",
+  "report_date": "2025-12-28",
+  "url": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000016/jnj-20251228.htm"
+ },
+ {
+  "ticker": "UNH",
+  "fiscal_year": 2025,
+  "accession": "0000731766-26-000062",
+  "report_date": "2025-12-31",
+  "url": "https://www.sec.gov/Archives/edgar/data/731766/000073176626000062/unh-20251231.htm"
+ },
+ {
+  "ticker": "BA",
+  "fiscal_year": 2025,
+  "accession": "0001628280-26-004357",
+  "report_date": "2025-12-31",
+  "url": "https://www.sec.gov/Archives/edgar/data/12927/000162828026004357/ba-20251231.htm"
+ },
+ {
+  "ticker": "DIS",
+  "fiscal_year": 2025,
+  "accession": "0001744489-25-000155",
+  "report_date": "2025-09-27",
+  "url": "https://www.sec.gov/Archives/edgar/data/1744489/000174448925000155/dis-20250927.htm"
+ },
+ {
+  "ticker": "INTC",
+  "fiscal_year": 2025,
+  "accession": "0000050863-26-000011",
+  "report_date": "2025-12-27",
+  "url": "https://www.sec.gov/Archives/edgar/data/50863/000005086326000011/intc-20251227.htm"
+ }
+]

@@ -42,6 +42,7 @@ def test_highlight_citations():
 def test_state_loads_fixture_with_warnings(monkeypatch, tmp_path):
     monkeypatch.setenv("LLM_PROVIDER", "stub")
     monkeypatch.setenv("LLM_CACHE_DIR", str(tmp_path))
+    monkeypatch.setenv("TRADEMESH_DATA", str(tmp_path))          # empty dir: the fixture, even when a real corpus exists
     s = load_state()
     # Role B's ranking package is now discovered, so the dev stub is no longer used:
     # the remaining warnings are the fixture and the stub LLM.

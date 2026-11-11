@@ -75,7 +75,8 @@ def test_build_passages_table_chunk_keeps_labels_and_caption():
     assert max(len(p.text.split()) for p in ps if p.kind == "text") <= 200
     assert any(p.text.startswith("Supply chain. ") for p in ps)                # heading carried into the passage
     assert any("Item 1A not found" in w for w in rep["warnings"]) is False
-    assert "Item 8 has only" in " ".join(rep["warnings"])                       # the tiny Item 8 is flagged
+    assert "only" in " ".join(rep["warnings"])                                  # a tiny filing is flagged
+    assert any("item X" in n for n in rep["notes"])   # and tries the unsectioned-text fallback
 
 
 def test_large_table_is_split_with_header_repeated():
@@ -156,3 +157,68 @@ def test_cli_from_html(tmp_path):
     assert json.loads(lines[0])["company"] == "Apple Inc."
     assert json.loads((out / "companies.json").read_text())[0]["ticker"] == "AAPL"
     assert "summary" in json.loads((out / "corpus_report.json").read_text())
+
+
+def test_running_page_headers_do_not_split_an_item_and_split_words_are_rejoined():
+    pages = "".join(f'<div>Item 7</div><div>{MDA[i * 400:(i + 1) * 400]}</div>' for i in range(6))
+    html = f"""<html><body>
+<div>ITEM 6. RESERVED</div><div>{BIZ[:400]}</div>
+<div><span>ITEM 7. MANAGEMENT</span><span>'S DISCUSSION</span></div>
+{pages}
+<div><span>QUALITAT</span><span>IVE</span> disclosures</div>
+<div>Item 8</div><div><span>ITEM 8. FINANCIAL STATE</span><span>MENTS</span></div><div>{BIZ}</div>
+</body></html>"""
+    blocks = html_to_blocks(html)
+    items = split_items(blocks)
+    text7 = " ".join(b.text for b in items["7"])
+    assert "segment 39" in text7 or "segment 3" in text7          # the whole Item survives, not one page of it
+    assert len(text7) > 2000
+    assert not any(b.text == "Item 7" for b in items["7"])        # running headers are not content
+    assert "QUALITATIVE disclosures" in text7
+    assert any("FINANCIAL STATEMENTS" in b.text for b in blocks)
+
+
+def _filing(*parts: str) -> str:
+    return "<html><body>" + "".join(f"<div>{p}</div>" for p in parts) + "</body></html>"
+
+
+def test_financials_under_item_15_are_taken_when_item_8_is_only_a_pointer():
+    body = " ".join(f"Note {i} describes revenue recognition and income taxes for the year." for i in range(600))
+    html = _filing("Item 1. Business", BIZ * 2, "Item 7. Management's Discussion and Analysis", MDA * 2,
+                   "Item 8. Financial Statements and Supplementary Data",
+                   "The information required by this Item is set forth in Item 15. of this report, filed herewith.",
+                   "Item 15. Exhibit and Financial Statement Schedules", body)
+    ps, rep = build_passages(html, "NVDA", "NVIDIA", 2026)
+    assert rep["per_item"].get("15", 0) >= 20 and any(p.item == "15" for p in ps)
+    assert any("Item 15" in n for n in rep["notes"])
+
+
+def test_filing_without_item_headings_still_gets_passages():
+    html = _filing("FORM 10-K CROSS-REFERENCE INDEX", "Item 1 Business page 3", "Business",
+                   *[f"{BIZ} {MDA} {RISK}" for _ in range(6)])
+    ps, rep = build_passages(html, "INTC", "Intel", 2025)
+    assert len(ps) > 20 and {p.item for p in ps} == {"X"}
+    assert any("item X" in n for n in rep["notes"])
+
+
+def test_edgar_looks_in_older_submission_files(tmp_path):
+    tickers = {"0": {"cik_str": 34088, "ticker": "XOM", "title": "Exxon"}}
+    empty = {"form": ["4", "4"], "accessionNumber": ["a", "b"], "primaryDocument": ["x", "y"], "reportDate": ["", ""], "filingDate": ["", ""]}
+    older = {"form": ["4", "10-K"], "accessionNumber": ["c", "0000034088-26-000010"], "primaryDocument": ["z", "xom-20251231.htm"],
+             "reportDate": ["", "2025-12-31"], "filingDate": ["", "2026-02-18"]}
+    routes = {"https://www.sec.gov/files/company_tickers.json": FakeResp(200, json.dumps(tickers).encode()),
+              "https://data.sec.gov/submissions/CIK0000034088.json": FakeResp(200, json.dumps(
+                  {"filings": {"recent": empty, "files": [{"name": "CIK0000034088-submissions-001.json"}]}}).encode()),
+              "https://data.sec.gov/submissions/CIK0000034088-submissions-001.json": FakeResp(200, json.dumps(older).encode())}
+    f = client(tmp_path, routes).latest_10k("XOM")
+    assert (f.accession, f.fiscal_year) == ("0000034088-26-000010", 2025)
+
+
+def test_xom_uses_the_predecessor_cik_for_its_10k(tmp_path):
+    tickers = {"0": {"cik_str": 2115436, "ticker": "XOM", "title": "ExxonMobil Holdings Corp"}}
+    subs = {"filings": {"recent": {"form": ["10-K"], "accessionNumber": ["0000034088-26-000010"], "primaryDocument": ["xom.htm"],
+                                   "reportDate": ["2025-12-31"], "filingDate": ["2026-02-18"]}}}
+    routes = {"https://www.sec.gov/files/company_tickers.json": FakeResp(200, json.dumps(tickers).encode()),
+              "https://data.sec.gov/submissions/CIK0000034088.json": FakeResp(200, json.dumps(subs).encode())}
+    f = client(tmp_path, routes).latest_10k("XOM")
+    assert (f.cik, f.fiscal_year) == (34088, 2025)

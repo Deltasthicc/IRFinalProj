@@ -20,6 +20,10 @@ from pathlib import Path
 
 TICKERS_URL = "https://www.sec.gov/files/company_tickers.json"
 SUBMISSIONS_URL = "https://data.sec.gov/submissions/CIK{cik:010d}.json"
+# A ticker can move to a new registrant while the old one filed the 10-K. XOM: on 2026-07-01 Exxon Mobil Corporation
+# (CIK 34088, New Jersey) became a subsidiary of ExxonMobil Holdings Corporation (CIK 2115436), which now owns the
+# "XOM" ticker in company_tickers.json but has filed no 10-K yet. The FY2025 10-K is under the old CIK.
+CIK_OVERRIDES = {"XOM": 34088}
 DOC_URL = "https://www.sec.gov/Archives/edgar/data/{cik}/{acc}/{doc}"
 
 
@@ -96,19 +100,33 @@ class EdgarClient:
 
     def ticker_to_cik(self) -> dict[str, int]:
         data = self.get_json(TICKERS_URL)
-        return {row["ticker"].upper(): int(row["cik_str"]) for row in data.values()}
+        ciks = {row["ticker"].upper(): int(row["cik_str"]) for row in data.values()}
+        ciks.update(CIK_OVERRIDES)
+        return ciks
 
     def latest_10k(self, ticker: str, ciks: dict[str, int] | None = None) -> Filing:
         ciks = ciks or self.ticker_to_cik()
         cik = ciks.get(ticker.upper())
         if cik is None:
             raise EdgarError(f"unknown ticker {ticker}")
-        recent = self.get_json(SUBMISSIONS_URL.format(cik=cik))["filings"]["recent"]
-        for i, form in enumerate(recent["form"]):
-            if form == "10-K":                              # the list is newest first; 10-K/A is a different form string
-                return Filing(ticker.upper(), cik, recent["accessionNumber"][i], recent["primaryDocument"][i],
-                              recent["reportDate"][i], recent["filingDate"][i])
+        sub = self.get_json(SUBMISSIONS_URL.format(cik=cik))["filings"]
+        found = self._first_10k(ticker, cik, sub["recent"])
+        if found:
+            return found
+        for extra in sub.get("files", []):                  # busy filers (insider Forms 4) push the 10-K out of "recent"
+            older = self.get_json("https://data.sec.gov/submissions/" + extra["name"])
+            found = self._first_10k(ticker, cik, older)
+            if found:
+                return found
         raise EdgarError(f"no 10-K in the recent filings of {ticker}")
+
+    @staticmethod
+    def _first_10k(ticker: str, cik: int, block: dict) -> "Filing | None":
+        for i, form in enumerate(block["form"]):
+            if form == "10-K":                              # newest first; 10-K/A is a different form string
+                return Filing(ticker.upper(), cik, block["accessionNumber"][i], block["primaryDocument"][i],
+                              block["reportDate"][i], block["filingDate"][i])
+        return None
 
     def download_html(self, filing: Filing) -> str:
         return self.get(filing.url).decode("utf-8", errors="replace")
