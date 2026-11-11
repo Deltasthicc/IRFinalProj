@@ -57,7 +57,7 @@ def test_app_runs_every_tab_without_crashing(monkeypatch, tmp_path):
     monkeypatch.setenv("LLM_CACHE_DIR", str(tmp_path))
     at = AppTest.from_file(str(APP), default_timeout=60).run()
     assert not at.exception
-    assert len(at.tabs) == 4
+    assert len(at.tabs) == 5
     at.text_input(key="ask_q").set_value("What does Tesla say about supplier concentration?").run()
     assert not at.exception
     assert any("Answer" in s.value for s in at.subheader)
@@ -67,3 +67,22 @@ def test_app_runs_every_tab_without_crashing(monkeypatch, tmp_path):
     assert any("not available yet" in i.value for i in at.info)
     at.toggle[0].set_value(True).run()   # closed-book toggle
     assert not at.exception
+
+
+def test_results_loader_and_evaluation_tab(monkeypatch, tmp_path):
+    import json
+
+    from trademesh.app import backend
+    # nothing there -> a message, not an exception
+    monkeypatch.setattr(backend, "RESULT_DIRS", [tmp_path])
+    assert backend.load_results()[0] is None
+    # SYNTHETIC file, only to check that the loader and the tab render a results payload
+    fake = {"n_needs": 2, "baseline": "bm25", "overall": {"bm25": {"P@5": .5, "nDCG@10": .6, "AP": .4}},
+            "by_type": {"bm25": {"entity": {"nDCG@10": .6}}}, "pr_11pt": {"bm25": [1.0] * 11}}
+    (tmp_path / "retrieval_dev.json").write_text(json.dumps(fake))
+    data, why = backend.load_results()
+    assert why == "" and data["split"] == "dev" and data["hypotheses"] == []
+    (tmp_path / "retrieval_test.json").write_text(json.dumps(fake))
+    assert backend.load_results()[0]["split"] == "test"            # the locked run wins over dev
+    (tmp_path / "retrieval_test.json").write_text("{not json")
+    assert backend.load_results()[0] is None                       # malformed: reported, never raised

@@ -95,6 +95,26 @@ def _validate_vision(d: dict) -> None:
     assert isinstance(d["queries"], list)
 
 
+RESULT_DIRS = [DATA / "results", ROOT / "eval" / "out"]      # never eval/out/dryrun: dry runs are not results
+
+
+def load_results() -> tuple[dict | None, str]:
+    """Locked retrieval results for the Evaluation tab: retrieval_test.json (+ hypotheses_test.json) from
+    data/results/ or eval/out/. Falls back to the dev run, labelled as such."""
+    for split in ("test", "dev"):
+        for d in RESULT_DIRS:
+            f = d / f"retrieval_{split}.json"
+            if f.exists():
+                data, why = _load_json(f, lambda x: x["overall"])
+                if data is None:
+                    return None, why
+                h = d / f"hypotheses_{split}.json"
+                data["split"] = split
+                data["hypotheses"] = json.loads(h.read_text()) if h.exists() else []
+                return data, ""
+    return None, "not available yet: run eval/run_retrieval.py after judging (see docs/report_B/README.md)."
+
+
 def load_graph(path: Path = GRAPH_PATH) -> tuple[dict | None, str]:
     return _load_json(path, _validate_graph)
 

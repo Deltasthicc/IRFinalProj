@@ -13,3 +13,6 @@ eval/out/dryrun/
 cache/
 
 data/judgments/dryrun/
+
+data/raw/
+data/raw_html/

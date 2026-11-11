@@ -1,4 +1,5 @@
-.PHONY: test run entity-eval abstention rag-study docker pools judge tune retrieval-dev retrieval-test ablation-dev pool-bias cost
+# ---- Role A: corpus, indexes, graph ----
+.PHONY: data graph test run entity-eval abstention rag-study docker pools judge tune retrieval-dev retrieval-test ablation-dev pool-bias cost
 
 test:
 	python -m pytest -q
@@ -44,4 +45,14 @@ retrieval-test:   ## ONCE, after the feature freeze
 	python eval/pool_bias.py
 	python eval/cost_table.py
 
-.PHONY: merge
+.PHONY: merge freeze-results
+
+data:             ## download the newest 10-K of each company and build data/passages.jsonl (needs SEC_USER_AGENT; READ data/corpus_report.json)
+	python -m trademesh.ingest.corpus
+
+graph:            ## company mention graph, PageRank and HITS -> data/graph/company_graph.json
+	python -m trademesh.graph.mentions
+
+freeze-results:   ## copy the locked results where the app's Evaluation tab (and Docker) can read them
+	mkdir -p data/results
+	cp eval/out/retrieval_test.json eval/out/hypotheses_test.json eval/out/ablation_test.json data/results/

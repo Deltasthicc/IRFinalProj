@@ -8,6 +8,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # code and the small offline fixture; real data and the LLM cache are mounted by docker-compose
 COPY src ./src
+COPY .streamlit ./.streamlit
 COPY tests/fixtures ./tests/fixtures
 COPY data/needs ./data/needs
 
