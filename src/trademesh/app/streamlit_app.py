@@ -12,13 +12,14 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 import streamlit as st  # noqa: E402
 
-from trademesh.app.backend import (graph_dot, highlight_citations, load_graph, load_state,  # noqa: E402
+from trademesh.app import style  # noqa: E402
+from trademesh.app.backend import (graph_dot, highlight_citations, load_graph, load_results, load_state,  # noqa: E402
                                    load_vision, AppState)
 from trademesh.rag.llm import CacheMiss, LiveCallCapReached  # noqa: E402
 from trademesh.rag.pipeline import RagConfig, RagResult  # noqa: E402
 from trademesh.text import content_terms, kwic  # noqa: E402
 
-st.set_page_config(page_title="TradeMesh", layout="wide")
+st.set_page_config(page_title="TradeMesh", page_icon="📈", layout="wide")
 
 
 @st.cache_resource
@@ -26,11 +27,16 @@ def get_state() -> AppState:
     return load_state()
 
 
-def passage_card(label: str, p, snippet: str | None = None, expanded: bool = False, score: float | None = None):
+def passage_card(label: str, p, snippet: str | None = None, expanded: bool = False, score: float | None = None,
+                 explain: list[tuple[str, float]] | None = None):
     title = f"{label} {p.ticker} | FY{p.fiscal_year} | Item {p.item} | {p.kind}" + (f" | score {score:.3f}" if score is not None else "")
     with st.expander(title, expanded=expanded):
         st.markdown(snippet if snippet else p.text)
         st.caption(f"passage id: {p.id}" + (f" | page {p.page}" if p.page else ""))
+        if explain:
+            st.markdown("**Why this score** (each query term's BM25 contribution)")
+            import pandas as pd
+            st.bar_chart(pd.DataFrame({"contribution": [w for _, w in explain]}, index=[t for t, _ in explain]), height=140)
 
 
 def trust_panel(res: RagResult, tau: float, state: AppState):
@@ -129,7 +135,8 @@ def tab_ask(state: AppState, cfg: RagConfig, retriever: str, use_reranker: bool)
 def tab_search(state: AppState, cfg: RagConfig):
     q = st.text_input("Search query", key="search_q", placeholder="e.g. supplier concentration")
     names = list(state.retrievers)
-    chosen = st.multiselect("Retrievers (pick up to 3 to compare side by side)", names, default=names[:1], max_selections=3)
+    preset = [n for n in ("bm25", "tfidf", "hybrid") if n in names][:2] or names[:1]
+    chosen = st.multiselect("Retrievers (pick up to 3 to compare side by side)", names, default=preset, max_selections=3)
     companies = ["All"] + sorted({p.ticker for p in state.passages})
     ticker = st.selectbox("Company filter", companies)
     k = st.slider("Results", 3, 20, 8)
@@ -149,9 +156,11 @@ def tab_search(state: AppState, cfg: RagConfig):
                 hits = [h for h in hits if by_id[h.passage_id].ticker == ticker]
             if not hits:
                 st.write("No results.")
+            explainer = getattr(state.retrievers[name], "explain", None)
             for rank, h in enumerate(hits[:k], 1):
                 p = by_id[h.passage_id]
-                passage_card(f"#{rank}", p, snippet=kwic(p.text, terms), score=h.score)
+                passage_card(f"#{rank}", p, snippet=kwic(p.text, terms), score=h.score,
+                             explain=explainer(q, h.passage_id) if explainer else None)
 
 
 def tab_graph():
@@ -162,6 +171,13 @@ def tab_graph():
     st.caption("Edge A -> B: A's filing mentions B. PageRank, hubs and authorities are computed by Role A's code.")
     import pandas as pd
     df = pd.DataFrame(graph["nodes"]).sort_values("pagerank", ascending=False)
+    corr = graph.get("correlations") or {}
+    if corr:
+        c = st.columns(3)
+        c[0].metric("PageRank vs in-degree (Spearman)", f"{corr.get('pagerank_vs_indegree_spearman', float('nan')):.2f}",
+                    help="Near 1 means PageRank adds little beyond counting mentions (H10).")
+        c[1].metric("Authority vs in-degree (Spearman)", f"{corr.get('authority_vs_indegree_spearman', float('nan')):.2f}")
+        c[2].metric("Edges", graph.get("params", {}).get("n_edges", len(graph["edges"])))
     st.dataframe(df, use_container_width=True, hide_index=True)
     st.graphviz_chart(graph_dot(graph))
 
@@ -183,16 +199,42 @@ def tab_pages():
                     st.write(f"{r['ticker']} p.{r['page']} (image missing)")
 
 
+def tab_eval():
+    res, why = load_results()
+    if res is None:
+        st.info(f"Retrieval results are {why}")
+        return
+    import pandas as pd
+    st.caption(f"{'Locked TEST run' if res['split'] == 'test' else 'DEVELOPMENT run (tuning data, not the final result)'}: "
+               f"{res['n_needs']} information needs, pooled blind judgments, baseline {res['baseline']}.")
+    cols = ["P@5", "P@10", "AP", "MRR", "nDCG@10", "bpref", "judged@10"]
+    df = pd.DataFrame(res["overall"]).T[[c for c in cols if c in next(iter(res["overall"].values()))]]
+    df = df.rename(columns={"AP": "MAP"})
+    st.dataframe(df.style.format("{:.3f}").highlight_max(axis=0, color="#D7ECFF"), use_container_width=True)
+    st.markdown("**11-point interpolated precision-recall**")
+    st.line_chart(pd.DataFrame(res["pr_11pt"], index=[f"{i / 10:.1f}" for i in range(11)]), height=260)
+    st.markdown("**By need type (nDCG@10)**")
+    st.dataframe(pd.DataFrame({s: {t: v["nDCG@10"] for t, v in d.items()} for s, d in res["by_type"].items()}).style.format("{:.3f}"),
+                 use_container_width=True)
+    if res.get("hypotheses"):
+        st.markdown("**Hypotheses, decided by rules fixed before the test run**")
+        h = pd.DataFrame(res["hypotheses"])
+        keep = [c for c in ("id", "comparison", "mean_diff", "ci_low", "ci_high", "wins", "losses", "ties", "verdict") if c in h]
+        st.dataframe(h[keep], use_container_width=True, hide_index=True)
+
+
 def main():
-    st.title("TradeMesh")
-    st.caption("Search and cited question answering over 10-K filings (CSD358)")
+    st.markdown(style.CSS, unsafe_allow_html=True)
     state = get_state()
+    st.markdown(style.hero(len(state.passages), len(state.companies), state.is_fixture, len(state.retrievers)), unsafe_allow_html=True)
     for w in state.warnings:
         st.warning(w)
 
     with st.sidebar:
         st.header("Settings")
-        retriever = st.selectbox("Retriever for answers", list(state.retrievers))
+        names = list(state.retrievers)
+        default = next((n for n in ("hybrid", "bm25") if n in names), names[0])      # the strongest available, not alphabetical luck
+        retriever = st.selectbox("Retriever for answers", names, index=names.index(default))
         use_reranker = st.checkbox("Use cross-encoder reranker", value=state.reranker is not None,
                                    disabled=state.reranker is None,
                                    help="Available when Role B's reranker is installed.")
@@ -204,9 +246,10 @@ def main():
         st.caption(f"Passages: {len(state.passages)} | Companies: {len(state.companies)}")
     cfg = RagConfig(tau=tau, lam=lam)
 
-    ask, search, graph, pages = st.tabs(["Ask", "Search", "Filing graph", "Pages"])
+    ask, search, graph, pages, evaluation = st.tabs(["Ask", "Search", "Filing graph", "Pages", "Evaluation"])
     for tab, fn in ((ask, lambda: tab_ask(state, cfg, retriever, use_reranker)),
-                    (search, lambda: tab_search(state, cfg)), (graph, tab_graph), (pages, tab_pages)):
+                    (search, lambda: tab_search(state, cfg)), (graph, tab_graph), (pages, tab_pages),
+                    (evaluation, tab_eval)):
         with tab:
             try:
                 fn()
