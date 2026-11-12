@@ -1,4 +1,4 @@
-# 8. Experiments and results: RAG study, abstention and entity correction (Role C)
+# 10.11 Experiments and results: RAG study, abstention and entity correction (Role C)
 
 **Status:** the RAG study and the abstention study are run and filled below (test split, run once). Every number comes from a file in `eval/out/`. **All answer ratings, citation checks and retrieval judgments in this project are LLM-assisted; no human validated them.** See `docs/report_C/audit/README.md` for how the rating was done and its limits. The section prior was not evaluated (stated at the end).
 
