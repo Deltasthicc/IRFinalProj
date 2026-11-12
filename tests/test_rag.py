@@ -228,6 +228,10 @@ def test_gemini_request_and_response(tmp_path, monkeypatch):
             return {"candidates": [{"content": {"parts": [{"text": "Sales rose 4 percent [P1]."}]}}]}
 
     class FakeRequests:
+        class exceptions:                      # what llm._post catches and retries on
+            Timeout = TimeoutError
+            ConnectionError = ConnectionError
+
         @staticmethod
         def post(url, headers, json, timeout):
             seen.update(url=url, headers=headers, body=json)
@@ -235,7 +239,8 @@ def test_gemini_request_and_response(tmp_path, monkeypatch):
 
     import sys
     monkeypatch.setitem(sys.modules, "requests", FakeRequests)
-    c = LLMClient(provider="gemini", cache_dir=tmp_path)
+    monkeypatch.setenv("LLM_MIN_INTERVAL", "0")
+    c = LLMClient(provider="gemini", model="gemini-3.5-flash", cache_dir=tmp_path)
     r = c.complete("be brief", "question?")
     assert r.text == "Sales rose 4 percent [P1]." and not r.cached
     assert seen["url"].endswith("/models/gemini-3.5-flash:generateContent")
@@ -243,3 +248,21 @@ def test_gemini_request_and_response(tmp_path, monkeypatch):
     assert seen["body"]["generationConfig"]["temperature"] == 0
     assert seen["body"]["systemInstruction"]["parts"][0]["text"] == "be brief"
     assert c.complete("be brief", "question?").cached        # second call served from disk
+
+
+def test_sentence_split_keeps_abbreviations_together():
+    from trademesh.rag.verifier import split_sentences
+    s = split_sentences("Elon Musk leads Tesla [P1]. Although Mr. Musk has other roles [P1]. "
+                        "For fiscal 2026, Walmart U.S. net sales rose [P2]. Sales fell. [P3]")
+    assert s == ["Elon Musk leads Tesla [P1].", "Although Mr. Musk has other roles [P1].",
+                 "For fiscal 2026, Walmart U.S. net sales rose [P2].", "Sales fell. [P3]"]
+
+
+def test_verifier_does_not_flag_abbreviations_but_still_flags_uncited_sentences():
+    from trademesh.rag.verifier import verify
+    p = Passage(id="X-1", ticker="TSLA", company="Tesla", fiscal_year=2025, item="1A", kind="text",
+                text="Mr. Musk does not devote his full time to Tesla.")
+    ok = verify("Although Mr. Musk has other roles, he leads Tesla [P1].", [p])
+    assert ok.passed and not ok.uncited_sentences
+    bad = verify("Mr. Musk leads Tesla [P1]. The company is profitable.", [p])
+    assert not bad.passed and bad.uncited_sentences == ["The company is profitable."]

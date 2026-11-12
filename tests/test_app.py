@@ -58,7 +58,8 @@ def test_app_runs_every_tab_without_crashing(monkeypatch, tmp_path):
     monkeypatch.setenv("LLM_CACHE_DIR", str(tmp_path))
     at = AppTest.from_file(str(APP), default_timeout=60).run()
     assert not at.exception
-    assert len(at.tabs) == 5
+    labels = {t.label for t in at.tabs}
+    assert {"Ask", "Search", "Filing graph", "Pages", "Evaluation", "Retrieval", "RAG answers", "Abstention"} <= labels
     at.text_input(key="ask_q").set_value("What does Tesla say about supplier concentration?").run()
     assert not at.exception
     assert any("Answer" in s.value for s in at.subheader)
@@ -87,3 +88,23 @@ def test_results_loader_and_evaluation_tab(monkeypatch, tmp_path):
     assert backend.load_results()[0]["split"] == "test"            # the locked run wins over dev
     (tmp_path / "retrieval_test.json").write_text("{not json")
     assert backend.load_results()[0] is None                       # malformed: reported, never raised
+
+
+def test_rag_study_loader_reports_missing_and_malformed(monkeypatch, tmp_path):
+    from trademesh.app import backend
+    monkeypatch.setattr(backend, "RESULT_DIRS", [tmp_path])
+    data, why = backend.load_rag_study()
+    assert data is None and "not available yet" in why
+    (tmp_path / "rag_scores_test.json").write_text("{not json", encoding="utf-8")
+    data, why = backend.load_rag_study()
+    assert data is None and "could not read" in why
+    (tmp_path / "rag_scores_test.json").write_text(json.dumps({"configs": {}}), encoding="utf-8")
+    assert backend.load_rag_study()[0] is None
+
+
+def test_rag_study_loader_reads_the_real_results_when_present():
+    from trademesh.app import backend
+    data, why = backend.load_rag_study()
+    if data is None:
+        pytest.skip(why)
+    assert {"closed_book", "bm25_rag", "best_rag"} <= set(data["scores"]["configs"])
