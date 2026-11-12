@@ -1,6 +1,6 @@
 # 8. Experiments and results: RAG study, abstention and entity correction (Role C)
 
-**Status:** the RAG study and the abstention study are run and filled below (test split, run once). Every number comes from a file in `eval/out/`. **All answer ratings, citation checks and retrieval judgments in this project are LLM-assisted; no human validated them.** See `docs/report_C/audit/README.md` for how the rating was done and its limits. Still open: the entity run with the real company list and the section prior (marked `TODO(run)` where they appear).
+**Status:** the RAG study and the abstention study are run and filled below (test split, run once). Every number comes from a file in `eval/out/`. **All answer ratings, citation checks and retrieval judgments in this project are LLM-assisted; no human validated them.** See `docs/report_C/audit/README.md` for how the rating was done and its limits. Still open: the section prior (marked `TODO(run)` where it appears).
 
 ## Entity correction (run)
 
@@ -11,7 +11,9 @@
 | Wrong company / no match | 0 / 1 |
 | Agreement with brute-force Levenshtein | 40/40 |
 
-Source: `python eval/entity_eval.py` (`eval/out/entity_eval.json`), dictionary = proposal company list with our aliases. Failure: `MSTF` for `MSFT` (a transposition is two edits; short strings allow one). TODO(run): repeat with Role A's `data/companies.json`.
+By error type: deletion 15/15, insertion 2/2, spacing 3/3, substitution 10/10, transposition 4/4, ticker 5/6.
+
+Source: `python eval/entity_eval.py` (`eval/out/entity_eval.json`), dictionary = Role A's `data/companies.json` (the same 39 of 40 as with the earlier proposal list). Failure: `MSTF` for `MSFT` (a transposition is two edits; short strings allow one). The 40 typo'd inputs were written by us, so this measures the matcher on typo types we thought of, not on real user typos.
 
 ## RAG study: closed-book vs BM25-RAG vs best-RAG (20 test questions)
 

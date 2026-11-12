@@ -363,5 +363,5 @@
       "kind": "ticker substitution"
     }
   ],
-  "dictionary": "data\\needs\\companies_proposal_list.json (proposal list; A's data/companies.json not found)"
+  "dictionary": "data/companies.json"
 }
