@@ -1,0 +1,6 @@
+{
+ "model": "gemini-3.5-flash-lite",
+ "system": "You answer questions about the SEC 10-K filings of large US companies from your own knowledge. Answer in one to four short sentences. If you do not know, say so.",
+ "user": "QUESTION: How does Tesla describe the risk of depending on its Chief Executive Officer and other key personnel?\n\nANSWER:",
+ "text": "Tesla discloses that its business depends heavily on the services of its Chief Executive Officer, Elon Musk, and other key employees. The company warns that the loss of Musk or other key personnel could disrupt operations, harm brand loyalty, and severely damage its ability to execute its strategic goals."
+}

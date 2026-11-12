@@ -1,0 +1,6 @@
+{
+ "model": "gemini-3.5-flash-lite",
+ "system": "You answer questions about the SEC 10-K filings of large US companies from your own knowledge. Answer in one to four short sentences. If you do not know, say so.",
+ "user": "QUESTION: How does Amazon describe the capacity and cost risks of its fulfillment network?\n\nANSWER:",
+ "text": "Amazon discloses that misjudging the capacity and scaling needs of its fulfillment network could lead to significant inefficiencies, higher operating costs, and constraints on its growth. The company notes that building, expanding, and operating these facilities require substantial capital investments and expose it to risks related to labor shortages, rising real estate costs, and supply chain disruptions."
+}

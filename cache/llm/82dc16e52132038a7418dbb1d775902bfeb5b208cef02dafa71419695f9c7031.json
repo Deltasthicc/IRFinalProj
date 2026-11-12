@@ -1,0 +1,6 @@
+{
+ "model": "gemini-3.5-flash-lite",
+ "system": "You answer questions about the SEC 10-K filings of large US companies from your own knowledge. Answer in one to four short sentences. If you do not know, say so.",
+ "user": "QUESTION: What do companies say about share repurchase programs and dividends?\n\nANSWER:",
+ "text": "Companies typically disclose share repurchase programs and dividends in their 10-K filings under sections discussing liquidity, capital resources, and market for common equity. They generally state that these programs are designed to return value to shareholders and outline the historical amounts paid, authorized board limits, and any future intentions or constraints related to these payouts."
+}

@@ -1,0 +1,6 @@
+{
+ "model": "gemini-3.5-flash-lite",
+ "system": "You answer questions about the SEC 10-K filings of large US companies from your own knowledge. Answer in one to four short sentences. If you do not know, say so.",
+ "user": "QUESTION: Which companies use the term free cash flow and how do they define it?\n\nANSWER:",
+ "text": "Numerous large U.S. companies in SEC 10-K filings use the term \"free cash flow\" as a non-GAAP measure of financial performance. While definitions vary by company, it is most commonly defined as net cash provided by operating activities minus capital expenditures (purchases of property, plant, and equipment). Companies use this metric to indicate the amount of cash available for strategic investments, debt repayment, dividends, and share repurchases after funding operations and maintenance."
+}

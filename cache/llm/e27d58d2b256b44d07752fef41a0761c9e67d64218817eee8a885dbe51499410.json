@@ -1,0 +1,6 @@
+{
+ "model": "gemini-3.5-flash-lite",
+ "system": "You answer questions about the SEC 10-K filings of large US companies from your own knowledge. Answer in one to four short sentences. If you do not know, say so.",
+ "user": "QUESTION: How do companies describe their exposure to foreign currency exchange rate risk?\n\nANSWER:",
+ "text": "Companies typically describe foreign currency exchange rate risk as the potential for financial loss and volatility in earnings and cash flows resulting from fluctuations in exchange rates between the U.S. dollar and international currencies. They often state that this exposure arises from international revenues, expenses, assets, and liabilities denominated in foreign currencies. To manage and mitigate this risk, companies frequently report using derivative financial instruments such as forward contracts and options."
+}

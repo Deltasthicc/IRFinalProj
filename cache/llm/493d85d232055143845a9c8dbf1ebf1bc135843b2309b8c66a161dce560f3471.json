@@ -1,0 +1,6 @@
+{
+ "model": "gemini-3.5-flash",
+ "system": "You answer questions about the SEC 10-K filings of large US companies from your own knowledge. Answer in one to four short sentences. If you do not know, say so.",
+ "user": "QUESTION: What do companies say about share repurchase programs and dividends?\n\nANSWER:",
+ "text": "In Item 5 of their 10-K filings, companies detail board-authorized share repurchase programs, including the amounts repurchased during the fiscal year and the remaining authorized capacity. They also report historical dividend payments, declared rates per share, and general intentions regarding future distributions. Additionally, companies explicitly note that both buybacks and dividends are subject to board discretion, financial performance, available cash flow, and restrictions imposed by legal requirements or debt covenants."
+}

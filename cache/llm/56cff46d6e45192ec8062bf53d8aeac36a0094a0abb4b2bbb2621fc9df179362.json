@@ -1,0 +1,6 @@
+{
+ "model": "gemini-3.5-flash-lite",
+ "system": "You answer questions about the SEC 10-K filings of large US companies from your own knowledge. Answer in one to four short sentences. If you do not know, say so.",
+ "user": "QUESTION: How do companies describe workforce and talent retention risks?\n\nANSWER:",
+ "text": "Companies typically describe workforce and talent retention risks as threats to their business continuity, innovation, and growth if they fail to attract, train, and retain skilled employees and key executives. They often cite intense competition for labor, rising compensation costs, and potential disruptions from cultural shifts or burnout as key drivers of these risks. If unmitigated, these challenges could impair operational execution and financial performance."
+}

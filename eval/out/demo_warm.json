@@ -1,0 +1,132 @@
+{
+  "retriever": "hybrid",
+  "rows": [
+    {
+      "label": "1 numeric answer, cited",
+      "question": "What was Microsoft's revenue by segment in the latest fiscal year?",
+      "closed_book": false,
+      "status": "rag",
+      "cached": true,
+      "corrections": [],
+      "companies": [],
+      "verifier_passed": true,
+      "verifier_flags": [],
+      "answer": "In the latest fiscal year (2026), Microsoft's segment revenues were $139,996 million for Productivity and Business Processes, $137,791 million for Intelligent Cloud, and $54,052 million for More Personal Computing [P5]."
+    },
+    {
+      "label": "1b same question, closed-book (no passages)",
+      "question": "What was Microsoft's revenue by segment in the latest fiscal year?",
+      "closed_book": true,
+      "status": "closed_book",
+      "cached": true,
+      "corrections": [],
+      "companies": [],
+      "verifier_passed": null,
+      "verifier_flags": [],
+      "answer": "In its fiscal year 2024 10-K filing, Microsoft reported revenue across three main segments: Productivity and Business Processes ($69.3 billion), Intelligent Cloud ($105.4 billion), and More Personal Computing ($54.7 billion)."
+    },
+    {
+      "label": "2 typo corrected to Tesla",
+      "question": "How does Telsa describe the risk of depending on its Chief Executive Officer?",
+      "closed_book": false,
+      "status": "rag",
+      "cached": false,
+      "corrections": [
+        [
+          "Telsa",
+          "Tesla, Inc."
+        ]
+      ],
+      "companies": [
+        "TSLA"
+      ],
+      "verifier_passed": true,
+      "verifier_flags": [],
+      "answer": "Tesla states that it is highly dependent on the services of Elon Musk, who is the Technoking of Tesla and Chief Executive Officer [P1]. Although Mr. Musk spends significant time with Tesla and is highly active in management, he does not devote his full time and attention to Tesla because he also holds management positions at other companies and is involved in other ventures [P1]."
+    },
+    {
+      "label": "3 should decline (future year)",
+      "question": "What was Apple's net sales in fiscal year 2031?",
+      "closed_book": false,
+      "status": "declined",
+      "cached": true,
+      "corrections": [],
+      "companies": [],
+      "verifier_passed": true,
+      "verifier_flags": [],
+      "answer": "INSUFFICIENT EVIDENCE"
+    },
+    {
+      "label": "4 compare two companies",
+      "question": "Compare how Microsoft and Amazon describe competition in cloud services.",
+      "closed_book": false,
+      "status": "compare",
+      "cached": true,
+      "corrections": [],
+      "companies": [
+        "MSFT",
+        "AMZN"
+      ],
+      "verifier_passed": true,
+      "verifier_flags": [],
+      "answer": "Microsoft states that Azure faces diverse competition from cloud service providers and open-source offerings [P2]. Amazon notes that as cloud services and other international services grow, competition will intensify through the adoption of evolving business models [P5]. Additionally, Amazon faces competition driven by new and enhanced technologies, including web and infrastructure computing services [P4]."
+    },
+    {
+      "label": "backup A numeric answer",
+      "question": "What were Coca-Cola's net operating revenues by segment in the latest fiscal year?",
+      "closed_book": false,
+      "status": "rag",
+      "cached": true,
+      "corrections": [
+        [
+          "Coca-Cola's",
+          "The Coca-Cola Company"
+        ]
+      ],
+      "companies": [
+        "KO"
+      ],
+      "verifier_passed": true,
+      "verifier_flags": [],
+      "answer": "For the year ended December 31, 2025, total net operating revenues (including intersegment revenues) were $11,513 million for EMEA, $6,334 million for Latin America, $19,586 million for North America, $5,638 million for Asia Pacific, $5,735 million for Bottling Investments, and $144 million for Corporate [P3]. Third-party net operating revenues for the same period were $10,833 million for EMEA, $6,331 million for Latin America, $19,579 million for North America, $5,328 million for Asia Pacific, $5,726 million for Bottling Investments, and $144 million for Corporate [P3]."
+    },
+    {
+      "label": "backup A closed-book",
+      "question": "What were Coca-Cola's net operating revenues by segment in the latest fiscal year?",
+      "closed_book": true,
+      "status": "closed_book",
+      "cached": true,
+      "corrections": [],
+      "companies": [],
+      "verifier_passed": null,
+      "verifier_flags": [],
+      "answer": "I do not know the exact net operating revenues by segment for Coca-Cola's latest fiscal year without access to real-time financial data. Generally, Coca-Cola reports its revenues across operating segments such as Europe, Middle East and Africa; Latin America; North America; Asia Pacific; Global Ventures; and Bottling Investments."
+    },
+    {
+      "label": "backup B easy entity question",
+      "question": "How does Amazon describe the capacity and cost risks of its fulfillment network?",
+      "closed_book": false,
+      "status": "rag",
+      "cached": true,
+      "corrections": [],
+      "companies": [
+        "AMZN"
+      ],
+      "verifier_passed": true,
+      "verifier_flags": [],
+      "answer": "Failures to predict customer demand or optimize and operate the fulfillment network can result in excess or insufficient fulfillment capacity, service interruptions, increased costs, and impairment charges [P1]. Additionally, failing to optimize inventory management or staffing increases net shipping costs by increasing the distance products are shipped and reducing units per shipment or delivery, while regional labor market constraints increase payroll costs [P4]."
+    },
+    {
+      "label": "backup C should decline (1995)",
+      "question": "What was Pfizer's revenue in 1995?",
+      "closed_book": false,
+      "status": "declined",
+      "cached": true,
+      "corrections": [],
+      "companies": [],
+      "verifier_passed": true,
+      "verifier_flags": [],
+      "answer": "INSUFFICIENT EVIDENCE"
+    }
+  ]
+}

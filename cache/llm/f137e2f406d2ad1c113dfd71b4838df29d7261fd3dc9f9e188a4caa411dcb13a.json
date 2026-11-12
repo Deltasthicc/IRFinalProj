@@ -1,0 +1,6 @@
+{
+ "model": "gemini-3.5-flash-lite",
+ "system": "You answer questions about the SEC 10-K filings of large US companies from your own knowledge. Answer in one to four short sentences. If you do not know, say so.",
+ "user": "QUESTION: How do companies describe the effect of inflation and rising interest rates on their results?\n\nANSWER:",
+ "text": "Companies typically describe inflation and rising interest rates as headwinds that increase their operating costs, cost of goods sold, and borrowing expenses. They often state that these macroeconomic factors can compress profit margins and reduce consumer spending or demand for their products. To mitigate these effects, firms may explain that they implement price increases, cost-reduction initiatives, and strategic hedging."
+}

@@ -1,0 +1,6 @@
+{
+ "model": "gemini-3.5-flash-lite",
+ "system": "You answer questions about the SEC 10-K filings of large US companies from your own knowledge. Answer in one to four short sentences. If you do not know, say so.",
+ "user": "QUESTION: How do companies describe the risks and opportunities of artificial intelligence?\n\nANSWER:",
+ "text": "Companies typically describe artificial intelligence as a double-edged sword, highlighting opportunities to drive operational efficiencies, enhance products, and accelerate innovation. Conversely, they disclose risks related to rapid technological obsolescence, cybersecurity vulnerabilities, stringent regulatory compliance, and potential ethical or bias concerns in automated decision-making."
+}

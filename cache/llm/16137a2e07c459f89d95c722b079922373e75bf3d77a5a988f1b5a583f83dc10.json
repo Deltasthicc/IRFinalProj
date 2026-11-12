@@ -1,0 +1,6 @@
+{
+ "model": "gemini-3.5-flash-lite",
+ "system": "You answer questions about the SEC 10-K filings of large US companies from your own knowledge. Answer in one to four short sentences. If you do not know, say so.",
+ "user": "QUESTION: What were Coca-Cola's net operating revenues by segment in the latest fiscal year?\n\nANSWER:",
+ "text": "I do not know the exact net operating revenues by segment for Coca-Cola's latest fiscal year without access to real-time financial data. Generally, Coca-Cola reports its revenues across operating segments such as Europe, Middle East and Africa; Latin America; North America; Asia Pacific; Global Ventures; and Bottling Investments."
+}

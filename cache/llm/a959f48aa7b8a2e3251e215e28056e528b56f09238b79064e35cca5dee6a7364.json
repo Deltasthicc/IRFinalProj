@@ -1,0 +1,6 @@
+{
+ "model": "gemini-3.5-flash-lite",
+ "system": "You answer questions about the SEC 10-K filings of large US companies from your own knowledge. Answer in one to four short sentences. If you do not know, say so.",
+ "user": "QUESTION: What critical audit matters do auditors report?\n\nANSWER:",
+ "text": "Critical audit matters (CAMs) are matters arising from the audit of the financial statements that were communicated or required to be communicated to the audit committee, relate to accounts or disclosures that are material, and involved especially challenging, subjective, or complex auditor judgment. Examples frequently reported in 10-K filings include the valuation of goodwill, complex revenue recognition, and uncertain tax positions."
+}

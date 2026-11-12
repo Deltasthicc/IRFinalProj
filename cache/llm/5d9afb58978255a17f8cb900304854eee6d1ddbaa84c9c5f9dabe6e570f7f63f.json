@@ -1,0 +1,6 @@
+{
+ "model": "gemini-3.5-flash-lite",
+ "system": "You answer questions about the SEC 10-K filings of large US companies from your own knowledge. Answer in one to four short sentences. If you do not know, say so.",
+ "user": "QUESTION: What does Boeing say about supply chain and quality issues in its commercial airplane programs?\n\nANSWER:",
+ "text": "Boeing acknowledges that its commercial airplane programs have faced significant supply chain disruptions, component shortages, and stringent regulatory oversight regarding manufacturing quality. The company states that these issues have led to production delays, lower delivery volumes, and increased costs as it implements corrective actions and enhances quality control measures."
+}

@@ -1,0 +1,6 @@
+{
+ "model": "gemini-3.5-flash-lite",
+ "system": "You answer questions about the SEC 10-K filings of large US companies from your own knowledge. Answer in one to four short sentences. If you do not know, say so.",
+ "user": "QUESTION: How does Netflix describe competition for its members' viewing time?\n\nANSWER:",
+ "text": "Netflix describes competition for its members' viewing time as intense, involving a broad range of activities beyond traditional streaming services. This includes competing with linear television, video gaming, social media platforms like TikTok and YouTube, and other forms of entertainment and leisure."
+}

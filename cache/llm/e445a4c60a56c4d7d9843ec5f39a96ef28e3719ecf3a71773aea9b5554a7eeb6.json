@@ -1,0 +1,6 @@
+{
+ "model": "gemini-3.5-flash-lite",
+ "system": "You answer questions about the SEC 10-K filings of large US companies from your own knowledge. Answer in one to four short sentences. If you do not know, say so.",
+ "user": "QUESTION: What does Pfizer say about patent expiration and loss of exclusivity for its products?\n\nANSWER:",
+ "text": "Pfizer discloses that the loss of patent protection and subsequent generic competition can cause a rapid and severe decline in sales for affected products. The company states that the expiration of patents often leads to the introduction of lower-priced generic equivalents, which significantly impacts its market share, revenues, and overall financial results. To mitigate these risks, Pfizer relies on continuous innovation, defending its intellectual property, and launching new products."
+}

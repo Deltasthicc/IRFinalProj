@@ -1,0 +1,6 @@
+{
+ "model": "gemini-3.5-flash-lite",
+ "system": "You answer questions about the SEC 10-K filings of large US companies from your own knowledge. Answer in one to four short sentences. If you do not know, say so.",
+ "user": "QUESTION: What were Walmart's net sales by segment in the latest fiscal year?\n\nANSWER:",
+ "text": "In fiscal year 2024, Walmart's net sales by segment were $441.8 billion for Walmart U.S., $113.8 billion for Walmart International, and $100.0 billion for Sam's Club."
+}

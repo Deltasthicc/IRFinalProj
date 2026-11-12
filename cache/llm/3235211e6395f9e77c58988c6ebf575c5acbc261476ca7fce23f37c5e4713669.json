@@ -1,0 +1,6 @@
+{
+ "model": "gemini-3.5-flash-lite",
+ "system": "You answer questions about the SEC 10-K filings of large US companies from your own knowledge. Answer in one to four short sentences. If you do not know, say so.",
+ "user": "QUESTION: How do companies describe climate change and sustainability regulation?\n\nANSWER:",
+ "text": "Companies typically describe climate change and sustainability regulations as complex and evolving risks that could significantly impact their operations, supply chains, and compliance costs. They often highlight potential financial liabilities and operational disruptions arising from new greenhouse gas emission limits, carbon pricing, and stricter environmental reporting mandates. Additionally, disclosures frequently mention the growing strategic pressure from investors, consumers, and regulators to meet specific sustainability targets."
+}

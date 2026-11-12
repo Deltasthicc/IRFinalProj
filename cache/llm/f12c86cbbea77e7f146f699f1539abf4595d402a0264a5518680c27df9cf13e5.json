@@ -1,0 +1,6 @@
+{
+ "model": "gemini-3.5-flash-lite",
+ "system": "You answer questions about the SEC 10-K filings of large US companies from your own knowledge. Answer in one to four short sentences. If you do not know, say so.",
+ "user": "QUESTION: How does Exxon Mobil describe the risks of climate change regulation to its business?\n\nANSWER:",
+ "text": "ExxonMobil describes climate change regulations as a risk that could increase compliance costs, operational expenses, and capital expenditures. The company warns that policies aimed at reducing greenhouse gas emissions may also reduce demand for its oil and gas products. Additionally, it highlights that future regulations could lead to asset impairments or make certain projects economically unviable."
+}

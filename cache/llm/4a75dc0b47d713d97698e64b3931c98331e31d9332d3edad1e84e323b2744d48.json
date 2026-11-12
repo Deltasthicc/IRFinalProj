@@ -1,0 +1,6 @@
+{
+ "model": "gemini-3.5-flash-lite",
+ "system": "You answer questions about the SEC 10-K filings of large US companies from your own knowledge. Answer in one to four short sentences. If you do not know, say so.",
+ "user": "QUESTION: What is a remaining performance obligation and how do companies disclose it?\n\nANSWER:",
+ "text": "A remaining performance obligation represents the total transaction price allocated to product and service promises that are unsatisfied or partially unsatisfied at the end of a reporting period. Companies disclose this metric in their 10-K filings along with a qualitative breakdown of when they expect to recognize these amounts as revenue, typically categorized into current and non-current timeframes."
+}
