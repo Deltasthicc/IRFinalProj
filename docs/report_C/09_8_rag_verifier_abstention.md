@@ -11,7 +11,7 @@ The context is the top five passages, labelled `[P1]` to `[P5]`, each with a hea
 The verifier uses no language model. For an answer `a` and context `P1..Pn` it checks:
 
 1. **Citations exist.** Every `[Pi]` in `a` has 1 ≤ i ≤ n.
-2. **Citations are present.** `a` cites at least one passage; sentences with no citation are listed.
+2. **Citations are present.** `a` cites at least one passage; sentences with no citation are listed. Sentences are split after `.`, `!` or `?` followed by a space, except after abbreviations such as Mr., Dr., U.S. and e.g.; a fragment that is only a citation (`Sales rose. [P1]`) belongs to the previous sentence.
 3. **Numbers are grounded.** Every number in `a` occurs in a cited passage.
 
 Numbers are normalised before comparison: `$` and thousands separators are removed, `%` and "percent" are ignored, and the words *thousand, million, billion, trillion* (and `bn`, `mn`) scale the value, so `$1.2 billion` and `1,200 million` are the same number. If a passage says "(in thousands)", "(in millions)" or "(in billions)", its plain numbers also count at that scale. The fiscal year in the passage header counts as present. Item numbers, "10-K" and the labels themselves are not treated as claims. Matching is exact on the normalised value, because the prompt asks for verbatim figures; a rounded figure ("$383.3 billion" for 383,285 million) is therefore flagged. This is strict by design and is listed under limitations.

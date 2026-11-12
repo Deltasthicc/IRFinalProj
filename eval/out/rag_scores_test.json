@@ -19,7 +19,7 @@
       "n_citations_judged": 35,
       "number_grounding": 1.0,
       "n_answers_with_numbers": 4,
-      "verifier_pass_rate": 0.95
+      "verifier_pass_rate": 1.0
     },
     "best_rag": {
       "n_rated": 20,
@@ -29,7 +29,7 @@
       "n_citations_judged": 60,
       "number_grounding": 1.0,
       "n_answers_with_numbers": 5,
-      "verifier_pass_rate": 0.95
+      "verifier_pass_rate": 1.0
     }
   },
   "kappa": 0.8864711447492905,

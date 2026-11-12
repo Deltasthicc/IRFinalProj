@@ -51,7 +51,7 @@
         "numbers_grounded": true,
         "n_numbers": 0,
         "model": "gemini-3.5-flash-lite",
-        "cached": false
+        "cached": true
       },
       "best_rag": {
         "mode": "rag",
@@ -72,10 +72,8 @@
           3,
           5
         ],
-        "verifier_passed": false,
-        "verifier_flags": [
-          "1 sentence(s) without a citation"
-        ],
+        "verifier_passed": true,
+        "verifier_flags": [],
         "numbers_grounded": true,
         "n_numbers": 0,
         "model": "gemini-3.5-flash-lite",
@@ -121,7 +119,7 @@
         "numbers_grounded": true,
         "n_numbers": 0,
         "model": "gemini-3.5-flash-lite",
-        "cached": false
+        "cached": true
       },
       "best_rag": {
         "mode": "rag",
@@ -141,10 +139,8 @@
           3,
           4
         ],
-        "verifier_passed": false,
-        "verifier_flags": [
-          "2 sentence(s) without a citation"
-        ],
+        "verifier_passed": true,
+        "verifier_flags": [],
         "numbers_grounded": true,
         "n_numbers": 0,
         "model": "gemini-3.5-flash-lite",
@@ -192,7 +188,7 @@
         "numbers_grounded": true,
         "n_numbers": 0,
         "model": "gemini-3.5-flash-lite",
-        "cached": false
+        "cached": true
       },
       "best_rag": {
         "mode": "rag",
@@ -218,7 +214,7 @@
         "numbers_grounded": true,
         "n_numbers": 0,
         "model": "gemini-3.5-flash-lite",
-        "cached": false
+        "cached": true
       }
     },
     {
@@ -263,7 +259,7 @@
         "numbers_grounded": true,
         "n_numbers": 0,
         "model": "gemini-3.5-flash-lite",
-        "cached": false
+        "cached": true
       },
       "best_rag": {
         "mode": "rag",
@@ -287,7 +283,7 @@
         "numbers_grounded": true,
         "n_numbers": 0,
         "model": "gemini-3.5-flash-lite",
-        "cached": false
+        "cached": true
       }
     },
     {
@@ -328,14 +324,12 @@
           3,
           4
         ],
-        "verifier_passed": false,
-        "verifier_flags": [
-          "1 sentence(s) without a citation"
-        ],
+        "verifier_passed": true,
+        "verifier_flags": [],
         "numbers_grounded": true,
         "n_numbers": 0,
         "model": "gemini-3.5-flash-lite",
-        "cached": false
+        "cached": true
       },
       "best_rag": {
         "mode": "rag",
@@ -357,14 +351,12 @@
           4,
           5
         ],
-        "verifier_passed": false,
-        "verifier_flags": [
-          "4 sentence(s) without a citation"
-        ],
+        "verifier_passed": true,
+        "verifier_flags": [],
         "numbers_grounded": true,
         "n_numbers": 0,
         "model": "gemini-3.5-flash-lite",
-        "cached": false
+        "cached": true
       }
     },
     {
@@ -412,7 +404,7 @@
         "numbers_grounded": true,
         "n_numbers": 13,
         "model": "gemini-3.5-flash-lite",
-        "cached": false
+        "cached": true
       },
       "best_rag": {
         "mode": "rag",
@@ -438,7 +430,7 @@
         "numbers_grounded": true,
         "n_numbers": 8,
         "model": "gemini-3.5-flash-lite",
-        "cached": false
+        "cached": true
       }
     },
     {
@@ -482,7 +474,7 @@
         "numbers_grounded": true,
         "n_numbers": 0,
         "model": "gemini-3.5-flash-lite",
-        "cached": false
+        "cached": true
       },
       "best_rag": {
         "mode": "rag",
@@ -508,7 +500,7 @@
         "numbers_grounded": true,
         "n_numbers": 0,
         "model": "gemini-3.5-flash-lite",
-        "cached": false
+        "cached": true
       }
     },
     {
@@ -554,7 +546,7 @@
         "numbers_grounded": true,
         "n_numbers": 0,
         "model": "gemini-3.5-flash-lite",
-        "cached": false
+        "cached": true
       },
       "best_rag": {
         "mode": "rag",
@@ -625,7 +617,7 @@
         "numbers_grounded": true,
         "n_numbers": 2,
         "model": "gemini-3.5-flash-lite",
-        "cached": false
+        "cached": true
       },
       "best_rag": {
         "mode": "rag",
@@ -650,7 +642,7 @@
         "numbers_grounded": true,
         "n_numbers": 2,
         "model": "gemini-3.5-flash-lite",
-        "cached": false
+        "cached": true
       }
     },
     {
@@ -694,7 +686,7 @@
         "numbers_grounded": true,
         "n_numbers": 8,
         "model": "gemini-3.5-flash-lite",
-        "cached": false
+        "cached": true
       },
       "best_rag": {
         "mode": "rag",
@@ -717,7 +709,7 @@
         "numbers_grounded": true,
         "n_numbers": 8,
         "model": "gemini-3.5-flash-lite",
-        "cached": false
+        "cached": true
       }
     }
   ]

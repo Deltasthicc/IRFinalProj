@@ -1282,7 +1282,7 @@
         "numbers_grounded": null,
         "n_numbers": null,
         "model": "gemini-3.5-flash-lite",
-        "cached": false
+        "cached": true
       },
       "bm25_rag": {
         "mode": "rag",
@@ -1301,14 +1301,12 @@
           3,
           5
         ],
-        "verifier_passed": false,
-        "verifier_flags": [
-          "1 sentence(s) without a citation"
-        ],
+        "verifier_passed": true,
+        "verifier_flags": [],
         "numbers_grounded": true,
         "n_numbers": 3,
         "model": "gemini-3.5-flash-lite",
-        "cached": false
+        "cached": true
       },
       "best_rag": {
         "mode": "rag",
@@ -1328,14 +1326,12 @@
           4,
           5
         ],
-        "verifier_passed": false,
-        "verifier_flags": [
-          "1 sentence(s) without a citation"
-        ],
+        "verifier_passed": true,
+        "verifier_flags": [],
         "numbers_grounded": true,
         "n_numbers": 5,
         "model": "gemini-3.5-flash-lite",
-        "cached": false
+        "cached": true
       }
     },
     {
@@ -1356,7 +1352,7 @@
         "numbers_grounded": null,
         "n_numbers": null,
         "model": "gemini-3.5-flash-lite",
-        "cached": false
+        "cached": true
       },
       "bm25_rag": {
         "mode": "rag",
@@ -1379,7 +1375,7 @@
         "numbers_grounded": true,
         "n_numbers": 8,
         "model": "gemini-3.5-flash-lite",
-        "cached": false
+        "cached": true
       },
       "best_rag": {
         "mode": "rag",
@@ -1402,7 +1398,7 @@
         "numbers_grounded": true,
         "n_numbers": 14,
         "model": "gemini-3.5-flash-lite",
-        "cached": false
+        "cached": true
       }
     }
   ]
