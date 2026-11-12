@@ -28,6 +28,6 @@ Dry runs on the fixture go to `eval/out/dryrun/` and are refused unless `--allow
 
 ## Things to decide or check
 
-* The README names Ruchir Sharma for B; confirm who actually owns B so work is not duplicated.
+* Role B is owned by Tanish Shitanshu (see "Team and roles" in the root README).
 * `references.md` marks which citations were checked against a source and which still need a check.
 * Role A's systems (TF-IDF, champion lists, Boolean/phrase) join the comparison automatically when `trademesh.index.build_retrievers` exists; H1 needs a retriever named `tfidf`.
