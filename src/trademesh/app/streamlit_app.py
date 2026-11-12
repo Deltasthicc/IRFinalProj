@@ -13,7 +13,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 import streamlit as st  # noqa: E402
 
 from trademesh.app import style  # noqa: E402
-from trademesh.app.backend import (graph_dot, highlight_citations, load_graph, load_rag_study, load_results,  # noqa: E402
+from trademesh.app.backend import (graph_dot, highlight_citations, load_graph, md_safe, load_rag_study, load_results,  # noqa: E402
                                    load_state, load_vision, AppState)
 from trademesh.rag.llm import CacheMiss, LiveCallCapReached  # noqa: E402
 from trademesh.rag.pipeline import RagConfig, RagResult  # noqa: E402
@@ -32,7 +32,7 @@ def passage_card(label: str, p, snippet: str | None = None, expanded: bool = Fal
     where = "Other sections" if p.item == "X" else f"Item {p.item}"
     title = f"{label} {p.ticker} | FY{p.fiscal_year} | {where} | {p.kind}" + (f" | score {score:.3f}" if score is not None else "")
     with st.expander(title, expanded=expanded):
-        st.markdown(snippet if snippet else p.text)
+        st.markdown(md_safe(snippet if snippet else p.text))
         st.caption(f"passage id: {p.id}" + (f" | page {p.page}" if p.page else ""))
         if explain:
             st.markdown("**Why this score** (each query term's BM25 contribution)")
@@ -105,7 +105,7 @@ def tab_ask(state: AppState, cfg: RagConfig, retriever: str, use_reranker: bool)
     if res.mode == "closed_book":
         st.subheader("Answer (closed-book, unverified)")
         st.warning("No evidence was used. Treat this as the baseline, not as a sourced answer.")
-        st.markdown(res.answer)
+        st.markdown(md_safe(res.answer))
         return
 
     st.subheader("Answer")
@@ -176,6 +176,8 @@ def tab_graph():
     st.caption("Edge A -> B: A's filing mentions B. PageRank, hubs and authorities are computed by Role A's code.")
     import pandas as pd
     df = pd.DataFrame(graph["nodes"]).sort_values("pagerank", ascending=False)
+    num_cols = [c for c in ("pagerank", "hub", "authority") if c in df.columns]
+    df[num_cols] = df[num_cols].astype(float).round(4)  # hide floating-point noise such as 2e-17
     corr = graph.get("correlations") or {}
     if corr:
         c = st.columns(3)
