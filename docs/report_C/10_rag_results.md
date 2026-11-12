@@ -1,6 +1,6 @@
 # 8. Experiments and results: RAG study, abstention and entity correction (Role C)
 
-**Status:** the RAG study and the abstention study are run and filled below (test split, run once). Every number comes from a file in `eval/out/`. **All answer ratings, citation checks and retrieval judgments in this project are LLM-assisted; no human validated them.** See `docs/report_C/audit/README.md` for how the rating was done and its limits. Still open: the section prior (marked `TODO(run)` where it appears).
+**Status:** the RAG study and the abstention study are run and filled below (test split, run once). Every number comes from a file in `eval/out/`. **All answer ratings, citation checks and retrieval judgments in this project are LLM-assisted; no human validated them.** See `docs/report_C/audit/README.md` for how the rating was done and its limits. The section prior was not evaluated (stated at the end).
 
 ## Entity correction (run)
 
@@ -75,10 +75,10 @@ Positive class = should abstain. The unanswerable questions are 10 questions wri
 
 Command: `python eval/abstention_eval.py --retriever hybrid --reranker` (the score-only baseline: add `--score-only`; its output is `eval/out/abstention_scoreonly.json`).
 
-**Why the score rule fails.** The score comes from the hybrid retriever before reranking. Reciprocal rank fusion scores depend on rank positions, not on how well a passage matches, so the confidences of the unanswerable questions (0.0023 to 0.0105) are mixed in with those of the answerable ones; the question about Pfizer's 1995 revenue (U09) has the highest confidence of all 40 items. A threshold on this score cannot separate the two groups.
+**Why the score rule fails.** The score comes from the hybrid retriever before reranking. Reciprocal rank fusion scores depend on rank positions, not on how well a passage matches, so the confidences of the unanswerable questions (0.0023 to 0.0105) are mixed in with those of the answerable ones; the question about Pfizer's 1995 revenue (U09) has the highest confidence of all 40 items, tied with the answerable question R03 at the precision shown. A threshold on this score cannot separate the two groups.
 
 **Reading the perfect score with care.** 6 of 6 correct abstentions on test has a 95% exact lower bound of about 0.54, and 26 of 26 correct decisions about 0.87. The unanswerable questions are easy: they are clearly outside the corpus (a future fiscal year, a home address, a stock forecast, a secret recipe, employees in one country), written by us. None is a near-miss such as a company and topic that the filings cover with the specific figure missing. The first run of the abstention script (the score-only rule above) was seen on the test items before we turned to the model verdict, so the comparison of the two rules was not fixed in advance; both rules are reported in full. The verdict behaviour belongs to the weaker generator used here.
 
 ## Section prior
 
-λ tuned on the 10 dev queries by nDCG@10: TODO(run) (`tune_lambda` in `query/section_prior.py`, needs Role B's judgments file).
+Not evaluated. The mechanism is implemented and unit-tested (`query/section_prior.py`), but we did not tune or test λ; λ = 0 in every reported run, so no result in this report depends on it.

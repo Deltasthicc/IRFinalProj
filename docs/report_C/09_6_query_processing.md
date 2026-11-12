@@ -18,7 +18,7 @@ where B(·) is the set of bigrams. Entries with J < 0.2 are dropped and the best
 
 *Use.* The detected companies are removed from the question to give the *topic query*, and retrieval is restricted to those companies (entity filter). The interface tells the user when a correction was made ("Did you mean Tesla?").
 
-*Evaluation.* On 40 typo'd company names and tickers the matcher reaches **39/40 = 0.975** correct (0 wrong company, 1 no match); the bigram shortlist agrees with a brute-force Levenshtein scan over the whole dictionary on all 40 inputs (`eval/entity_eval.py`, output in `eval/out/entity_eval.json`). The one failure is the ticker typo `MSTF` for `MSFT`: a transposition costs two edits in plain Levenshtein distance, which the one-edit limit for short strings rejects. A Damerau variant that counts a transposition as one edit would fix it; we kept plain Levenshtein, as planned, and report the failure. The typo set was written by us and the dictionary uses the suggested company list with our aliases; results should be re-run on the final `data/companies.json`. TODO(run): re-run after Role A's company file lands.
+*Evaluation.* On 40 typo'd company names and tickers the matcher reaches **39/40 = 0.975** correct (0 wrong company, 1 no match); the bigram shortlist agrees with a brute-force Levenshtein scan over the whole dictionary on all 40 inputs (`eval/entity_eval.py`, output in `eval/out/entity_eval.json`). The one failure is the ticker typo `MSTF` for `MSFT`: a transposition costs two edits in plain Levenshtein distance, which the one-edit limit for short strings rejects. A Damerau variant that counts a transposition as one edit would fix it; we kept plain Levenshtein, as planned, and report the failure. The typo set was written by us, so this measures the matcher on typo types we thought of, not on real user typos. The result is the same with the proposal company list and with the final `data/companies.json` (39/40 both times), and the 40 inputs were not changed between the two runs.
 
 ## Section prior
 
@@ -26,7 +26,7 @@ Filings differ in how often a section holds what analysts ask about: risk factor
 
 final(q, d) = base(q, d) + λ · g(section(d)),  g ∈ [0, 1].
 
-`base` is min-max normalised over the candidate list first, so λ means the same for BM25, dense and hybrid scores. `g` is set by hand per Item (for example 1.0 for Items 1A and 7, 0.8 for Items 1 and 8, 0.1 for Items 1B, 4 and 9). λ is chosen from {0, 0.05, 0.1, 0.2, 0.3, 0.5} by mean nDCG@10 on the 10 development queries only, with ties going to the smaller λ. TODO(run): λ and its effect on nDCG@10 once the judgments exist; the code is `query/section_prior.py` (`tune_lambda`).
+`base` is min-max normalised over the candidate list first, so λ means the same for BM25, dense and hybrid scores. `g` is set by hand per Item (for example 1.0 for Items 1A and 7, 0.8 for Items 1 and 8, 0.1 for Items 1B, 4 and 9). `tune_lambda` in `query/section_prior.py` can choose λ from {0, 0.05, 0.1, 0.2, 0.3, 0.5} by mean nDCG@10 on the 10 development queries, with ties going to the smaller λ. We implemented and unit-tested the prior but did not run that tuning or evaluate its effect: λ = 0 in every reported run, so the section prior is not part of any result in this report and we make no claim about it.
 
 ## Table chunks, as they relate to querying
 
