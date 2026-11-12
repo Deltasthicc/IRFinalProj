@@ -1,10 +1,16 @@
 [theme]
-base = "light"
-primaryColor = "#0B5FFF"
-backgroundColor = "#FFFFFF"
-secondaryBackgroundColor = "#F2F5FA"
-textColor = "#14213D"
+base = "dark"
+primaryColor = "#F2B84B"
+backgroundColor = "#07080B"
+secondaryBackgroundColor = "#101218"
+textColor = "#EDEBE6"
 font = "sans serif"
+baseRadius = "large"
+borderColor = "#2A2D36"
+
+[server]
+address = "127.0.0.1"           # local runs listen on this machine only (the Dockerfile overrides it with 0.0.0.0)
+enableStaticServing = true      # serves src/trademesh/app/static (hero photographs) at /app/static
 
 [browser]
 gatherUsageStats = false

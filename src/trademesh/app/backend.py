@@ -26,6 +26,15 @@ from ..retrievers import available_retrievers, get_reranker
 from ..text import tokenize
 from ..types import Passage, Reranker, Retriever
 
+
+# The same questions eval/demo_warm.py puts in the answer cache, so they work offline once it is warm.
+EXAMPLES = [
+    ("Typo / CEO risk", "How does Telsa describe the risk of depending on its Chief Executive Officer?"),
+    ("Compare / cloud", "Compare how Microsoft and Amazon describe competition in cloud services."),
+    ("Figure / segments", "What was Microsoft's revenue by segment in the latest fiscal year?"),
+    ("Trap / future year", "What was Apple's net sales in fiscal year 2031?"),
+]
+
 GRAPH_PATH = DATA / "graph" / "company_graph.json"
 VISION_PATH = DATA / "vision" / "results.json"
 
@@ -149,11 +158,13 @@ def load_vision(path: Path = VISION_PATH) -> tuple[dict | None, str]:
 
 
 def graph_dot(graph: dict, top: int = 20) -> str:
-    """Graphviz DOT for the top-`top` companies by PageRank (node size ~ PageRank)."""
+    """Graphviz DOT for the top-`top` companies by PageRank (node size ~ PageRank), in the app's dark palette."""
     nodes = sorted(graph["nodes"], key=lambda n: -n["pagerank"])[:top]
     keep = {n["ticker"] for n in nodes}
     top_pr = max((n["pagerank"] for n in nodes), default=1) or 1
-    lines = ["digraph G {", "rankdir=LR;", 'node [shape=circle, style=filled, fillcolor="#d7ecff", fontsize=10];']
+    lines = ["digraph G {", "rankdir=LR;", 'bgcolor="transparent";',
+             'node [shape=circle, style=filled, fillcolor="#101218", color="#EDEBE6", fontcolor="#EDEBE6", fontsize=10];',
+             'edge [color="#6B6E7B"];']
     for n in nodes:
         w = 0.4 + 0.8 * n["pagerank"] / top_pr
         lines.append(f'"{n["ticker"]}" [width={w:.2f}, fixedsize=true];')
@@ -173,3 +184,59 @@ def highlight_citations(answer: str) -> str:
     """Bold the [Pn] markers so they stand out in the markdown answer (and escape dollar signs)."""
     import re
     return re.sub(r"\[P(\d+)\]", r"**[P\1]**", md_safe(answer))
+
+
+ENTITY_EVAL = ROOT / "eval" / "out" / "entity_eval.json"
+
+
+def load_entity_eval(path: Path = ENTITY_EVAL) -> dict | None:
+    """Result of eval/entity_eval.py, if it has been run (real numbers only; never invented)."""
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return None
+
+
+def readiness(state: AppState) -> list[tuple[str, bool, str]]:
+    """What is wired up and what is still missing (name, ready, detail)."""
+    graph_ok = load_graph()[0] is not None
+    vision_ok = load_vision()[0] is not None
+    return [
+        ("Corpus", not state.is_fixture, f"{len(state.passages):,} passages" if not state.is_fixture else "using the test fixture"),
+        ("Retrievers", not state.using_stub, ", ".join(state.retrievers) if not state.using_stub else "dev BM25 stub"),
+        ("Reranker", state.reranker is not None, "cross-encoder installed" if state.reranker else "not installed (pip install -r requirements-ml.txt)"),
+        ("LLM", not state.llm.is_stub, f"{state.llm.provider} / {state.llm.model}"),
+        ("Company graph", graph_ok, "data/graph/company_graph.json" if graph_ok else "not produced yet"),
+        ("Page images", vision_ok, "data/vision/results.json" if vision_ok else "vision track is gated, not run"),
+    ]
+
+
+def headline_numbers() -> list[tuple[str, str, str, bool]]:
+    """Four bento tiles for the System tab, built only from result files that exist.
+    Each is (label, big value, sub text, pending). Missing results show as pending, never as a guess."""
+    rag, _ = load_rag_study()
+    ret, _ = load_results()
+    ent = load_entity_eval()
+    tiles: list[tuple[str, str, str, bool]] = []
+    cfg = (rag or {}).get("scores", {}).get("configs", {})
+    if "best_rag" in cfg and "closed_book" in cfg:
+        tiles.append(("Answer quality, best-RAG (0 to 2)", f'{cfg["best_rag"]["mean_rating"]:.2f}',
+                      f'vs {cfg["closed_book"]["mean_rating"]:.2f} closed-book, 20 test questions, LLM-rated', False))
+    else:
+        tiles.append(("Answer quality, best-RAG", "-", "RAG study not run yet", True))
+    tiles.append(("Entity accuracy", f'{ent["accuracy"] * 100:.1f}%' if ent else "-",
+                  f'{ent["correct"]}/{ent["n"]} misspelt names' if ent else "run eval/entity_eval.py", ent is None))
+    ab = (rag or {}).get("abstention")
+    if ab:
+        t = ab["test"]
+        tiles.append(("Unanswerable declined", f'{t["tp"]}/{t["tp"] + t["fn"]}', f'{t["fp"]} wrongly declined of {t["fp"] + t["tn"]} answerable', False))
+    else:
+        tiles.append(("Unanswerable declined", "-", "abstention study not run yet", True))
+    if ret and ret.get("overall"):
+        best = max(ret["overall"], key=lambda k: ret["overall"][k].get("nDCG@10", 0))
+        base = ret.get("baseline")
+        sub = f'nDCG@10, {best}' + (f' vs {ret["overall"][base]["nDCG@10"]:.3f} {base}' if base in ret["overall"] and base != best else "")
+        tiles.append(("Best retrieval", f'{ret["overall"][best]["nDCG@10"]:.3f}', f'{sub}, {ret["n_needs"]} {ret["split"]} needs', False))
+    else:
+        tiles.append(("Best retrieval", "-", "retrieval study not run yet", True))
+    return tiles

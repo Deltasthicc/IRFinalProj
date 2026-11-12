@@ -23,9 +23,9 @@ from trademesh.query.entities import EntityMatcher  # noqa: E402
 def load_dictionary() -> tuple[list[dict], str]:
     real = DATA / "companies.json"
     if real.exists():
-        return load_companies(real), str(real.relative_to(ROOT))
+        return load_companies(real), real.relative_to(ROOT).as_posix()
     path = NEEDS / "companies_proposal_list.json"
-    return load_companies(path), str(path.relative_to(ROOT)) + " (proposal list; A's data/companies.json not found)"
+    return load_companies(path), path.relative_to(ROOT).as_posix() + " (proposal list; A's data/companies.json not found)"
 
 
 def evaluate(companies: list[dict], rows: list[dict]) -> dict:
