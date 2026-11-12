@@ -129,7 +129,7 @@ The default is bm25 with stop-word removal, no stemming, numbers kept and no met
 | D prf | k=10, m=10 | 0.551 | 0.676 | -0.023 | [-0.048, -0.001] | 0.059 |
 | D prf | k=10, m=20 | 0.551 | 0.677 | -0.023 | [-0.046, +0.002] | 0.067 |
 
-H5 (table chunks and numeric tokens matter for table needs) was run over all 20 needs only. The five-table-need subset analysis was not computed. TODO(run): per-need ablation values are not stored, and the test run is locked.
+H5 (table chunks and numeric tokens matter for table needs) was run over all 20 needs only: dropping table chunks changes nDCG@10 by -0.001 (CI -0.002 to +0.000) and dropping numeric tokens by +0.009 (CI -0.009 to +0.030), so over all needs we find no effect of either. The analysis restricted to the five table needs, where an effect should show, was not computed: per-need ablation values were not stored, and the test run is locked. H5 is therefore neither supported nor refuted. One preprocessing result worth noting: adding the metadata prefix (company, year, section) to passages improved nDCG@10 by +0.083 (CI +0.011 to +0.170) in the best variant (no stemming, numbers off), the largest preprocessing effect we measured.
 
 ## 10.6 Speed and cost (H7)
 
@@ -146,7 +146,7 @@ Index: 11964 passages, BM25 build 0.64 s. Latency per query (ms) and quality:
 | dense | 5.29 | 6.80 | 0.606 | 0.782 |
 | hybrid | 5.47 | 7.53 | 0.678 | 0.784 |
 
-Reranking the top 30 with the cross-encoder adds p50 106.3 ms and p95 211.0 ms per query. This figure was printed by `eval/cost_table.py` but is not stored in `cost_table.json`; hybrid+rerank is therefore about the hybrid latency plus this. TODO(run): store the rerank latency in the JSON on the next cost run (a cost-only rerun does not touch the locked retrieval results).
+Reranking the top 30 with the cross-encoder adds p50 106.3 ms and p95 211.0 ms per query. This figure comes from the console output of `eval/cost_table.py` and is not stored in `cost_table.json`; hybrid+rerank is therefore about the hybrid latency plus this. It was measured on one laptop, once.
 
 ## 10.7 Pool-bias checks
 
