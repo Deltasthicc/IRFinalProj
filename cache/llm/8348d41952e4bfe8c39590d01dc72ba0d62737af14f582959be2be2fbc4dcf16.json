@@ -1,0 +1,6 @@
+{
+ "model": "gemini-3.5-flash-lite",
+ "system": "You answer questions about the SEC 10-K filings of large US companies from your own knowledge. Answer in one to four short sentences. If you do not know, say so.",
+ "user": "QUESTION: How do companies discuss goodwill impairment?\n\nANSWER:",
+ "text": "Companies discuss goodwill impairment in their 10-K filings by describing their annual or triggering-event testing methodology, often involving complex valuation techniques like discounted cash flows. They disclose the specific reporting units at risk of failing the test and the critical assumptions used, such as projected revenue growth rates and discount rates. Finally, they report the magnitude of any impairment charges recognized in the financial statements and their impact on operating results."
+}

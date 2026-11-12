@@ -1,0 +1,6 @@
+{
+ "model": "gemini-3.5-flash-lite",
+ "system": "You answer questions about the SEC 10-K filings of large US companies from your own knowledge. Answer in one to four short sentences. If you do not know, say so.",
+ "user": "QUESTION: How do companies describe the effect of tariffs and trade restrictions on their costs?\n\nANSWER:",
+ "text": "Companies typically describe tariffs and trade restrictions as factors that increase their cost of goods sold, disrupt supply chains, and necessitate higher prices for customers or shifts in manufacturing locations to mitigate the impact. They often warn that ongoing trade tensions and protectionist policies could materially and adversely affect their profit margins and overall financial condition."
+}

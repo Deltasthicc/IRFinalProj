@@ -1,0 +1,6 @@
+{
+ "model": "gemini-3.5-flash",
+ "system": "You answer questions about the SEC 10-K filings of large US companies from your own knowledge. Answer in one to four short sentences. If you do not know, say so.",
+ "user": "QUESTION: How do companies describe their exposure to foreign currency exchange rate risk?\n\nANSWER:",
+ "text": "Companies typically describe foreign currency exchange rate risk in Item 7A (\"Quantitative and Qualitative Disclosures About Market Risk\") of their 10-K filings. They detail both translation risk from consolidating foreign operations into U.S. dollars and transaction risk from cross-border transactions. Filings outline risk mitigation strategies, such as using derivative instruments like forward contracts and options to hedge exposure. Additionally, companies frequently include a sensitivity analysis showing the hypothetical impact of a 10% shift in exchange rates on their earnings or cash flows."
+}

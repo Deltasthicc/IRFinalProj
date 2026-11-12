@@ -1,0 +1,6 @@
+{
+ "model": "gemini-3.5-flash-lite",
+ "system": "You answer questions about the SEC 10-K filings of large US companies from your own knowledge. Answer in one to four short sentences. If you do not know, say so.",
+ "user": "QUESTION: What export control restrictions does NVIDIA say affect sales of its data center products to China?\n\nANSWER:",
+ "text": "NVIDIA states that U.S. export control regulations, specifically those updated by the Biden administration in late 2023, require a license for exporting advanced AI chips like the A100, H100, A800, and H800 to China and other specified destinations. These restrictions have significantly impacted their data center product sales and competitive position in the Chinese market."
+}

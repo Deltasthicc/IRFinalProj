@@ -1,0 +1,6 @@
+{
+ "model": "gemini-3.5-flash-lite",
+ "system": "You answer questions about the SEC 10-K filings of large US companies from your own knowledge. Answer in one to four short sentences. If you do not know, say so.",
+ "user": "QUESTION: What are variable interest entities and which company consolidates them?\n\nANSWER:",
+ "text": "Variable interest entities (VIEs) are legal structures used for business operations that lack sufficient equity at risk or whose equity investors lack the traditional powers and obligations of ownership. Under US GAAP, a company must consolidate a VIE if it is deemed the \"primary beneficiary,\" meaning it has the power to direct the activities of the VIE that most significantly impact its economic performance and the obligation to absorb losses or receive benefits that could be significant. Numerous large US companies, such as major banks (e.g., JPMorgan Chase) and automakers (e.g., Ford), consolidate VIEs depending on their specific financing and operational arrangements."
+}

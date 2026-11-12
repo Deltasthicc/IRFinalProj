@@ -1,0 +1,6 @@
+{
+ "model": "gemini-3.5-flash",
+ "system": "You answer questions about the SEC 10-K filings of large US companies from your own knowledge. Answer in one to four short sentences. If you do not know, say so.",
+ "user": "QUESTION: Which companies describe supplier concentration as a risk, and how?\n\nANSWER:",
+ "text": "Many large companies, including Apple, Tesla, and Boeing, disclose supplier concentration as a major risk factor in their 10-K filings. Apple highlights its reliance on single-source or limited-source partners for critical components and assembly, such as TSMC for custom chips, warning that disruptions could severely impact product availability and revenue. Similarly, Tesla and Boeing warn that depending on single-source suppliers for key inputs—like battery cells or specialized aerostructures—exposes them to potential production delays, quality control issues, and cost inflation."
+}

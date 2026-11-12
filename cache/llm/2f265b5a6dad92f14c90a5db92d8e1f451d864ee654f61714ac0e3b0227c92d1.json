@@ -1,0 +1,6 @@
+{
+ "model": "gemini-3.5-flash-lite",
+ "system": "You answer questions about the SEC 10-K filings of large US companies from your own knowledge. Answer in one to four short sentences. If you do not know, say so.",
+ "user": "QUESTION: Compare how Microsoft and Amazon describe competition in cloud services.\n\nANSWER:",
+ "text": "Microsoft describes its cloud competition in Azure primarily against established players like Amazon Web Services (AWS) and Google Cloud, emphasizing integrated enterprise ecosystems, hybrid capabilities, and AI services. Amazon highlights AWS competition broadly across price, breadth of service offerings, speed of innovation, and global footprint, while also noting competition from traditional enterprise software vendors moving into cloud."
+}

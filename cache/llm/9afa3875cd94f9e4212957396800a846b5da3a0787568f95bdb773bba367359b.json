@@ -1,0 +1,6 @@
+{
+ "model": "gemini-3.5-flash-lite",
+ "system": "You answer questions about the SEC 10-K filings of large US companies from your own knowledge. Answer in one to four short sentences. If you do not know, say so.",
+ "user": "QUESTION: How does JPMorgan Chase describe the way it manages credit risk?\n\nANSWER:",
+ "text": "JPMorgan Chase manages credit risk through a centralized framework that establishes independent oversight, comprehensive credit approval processes, and strict portfolio limits. The firm utilizes sophisticated rating systems and quantitative models to monitor borrower creditworthiness and measure potential exposures across various economic scenarios. Additionally, management actively mitigates risk through collateral requirements, credit derivatives, and proactive portfolio diversification."
+}

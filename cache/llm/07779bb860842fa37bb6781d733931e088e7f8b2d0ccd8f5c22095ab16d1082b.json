@@ -1,0 +1,6 @@
+{
+ "model": "gemini-3.5-flash-lite",
+ "system": "You answer questions about the SEC 10-K filings of large US companies from your own knowledge. Answer in one to four short sentences. If you do not know, say so.",
+ "user": "QUESTION: What was Apple's total net sales in the latest fiscal year?\n\nANSWER:",
+ "text": "In Apple's fiscal year 2023 (ended September 30, 2023), the company reported total net sales of $383.28 billion."
+}

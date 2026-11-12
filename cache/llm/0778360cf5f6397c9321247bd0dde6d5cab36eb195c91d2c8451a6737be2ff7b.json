@@ -1,0 +1,6 @@
+{
+ "model": "gemini-3.5-flash-lite",
+ "system": "You answer questions about the SEC 10-K filings of large US companies from your own knowledge. Answer in one to four short sentences. If you do not know, say so.",
+ "user": "QUESTION: What were Tesla's total revenues by source in the latest fiscal year?\n\nANSWER:",
+ "text": "In its 2023 fiscal year, Tesla reported total revenues of $96.77 billion. The vast majority of this came from its Automotive segment ($82.42 billion), followed by Energy Generation and Storage ($6.04 billion) and Services and Other ($8.31 billion)."
+}

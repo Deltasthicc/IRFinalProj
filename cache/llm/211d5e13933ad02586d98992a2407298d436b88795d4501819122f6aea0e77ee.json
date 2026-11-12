@@ -1,0 +1,6 @@
+{
+ "model": "gemini-3.5-flash-lite",
+ "system": "You answer questions about the SEC 10-K filings of large US companies from your own knowledge. Answer in one to four short sentences. If you do not know, say so.",
+ "user": "QUESTION: Which companies describe supplier concentration as a risk, and how?\n\nANSWER:",
+ "text": "Many large US companies, particularly in technology, retail, and manufacturing like Apple, Tesla, and Nike, disclose supplier concentration as a risk in their 10-K filings. They typically explain that relying on a single or a limited number of third-party suppliers for critical components or finished goods exposes them to severe disruptions if those partners face financial distress, operational failures, capacity constraints, or geopolitical tensions. These companies warn that such disruptions could lead to production delays, increased costs, and a significant loss of revenue."
+}

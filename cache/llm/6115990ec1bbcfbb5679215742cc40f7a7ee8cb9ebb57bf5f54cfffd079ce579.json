@@ -1,0 +1,6 @@
+{
+ "model": "gemini-3.5-flash",
+ "system": "You answer questions about the SEC 10-K filings of large US companies from your own knowledge. Answer in one to four short sentences. If you do not know, say so.",
+ "user": "QUESTION: How does Apple describe its dependence on outsourcing partners to manufacture its products?\n\nANSWER:",
+ "text": "In its 10-K filings, Apple states that substantially all of its hardware products are manufactured by third-party outsourcing partners, primarily located in Asia. The company notes that it relies on a limited number of these partners for final assembly and certain key components. Consequently, Apple highlights that any disruptions, quality control issues, capacity constraints, or geopolitical instabilities affecting these partners could adversely impact its product availability and financial results."
+}

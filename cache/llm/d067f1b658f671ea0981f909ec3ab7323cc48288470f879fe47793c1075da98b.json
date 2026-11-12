@@ -1,0 +1,6 @@
+{
+ "model": "gemini-3.5-flash-lite",
+ "system": "You answer questions about the SEC 10-K filings of large US companies from your own knowledge. Answer in one to four short sentences. If you do not know, say so.",
+ "user": "QUESTION: What cybersecurity incidents and risks do companies disclose?\n\nANSWER:",
+ "text": "In their 10-K filings, companies disclose cybersecurity risks such as potential data breaches, unauthorized access, ransomware attacks, and system failures that could disrupt operations or compromise sensitive data. They also report on the costs of compliance, potential financial losses, reputational damage, and insurance coverage related to these threats. Additionally, companies outline their governance structures and processes for assessing and managing material risks from cybersecurity threats."
+}

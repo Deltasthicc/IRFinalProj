@@ -1,0 +1,6 @@
+{
+ "model": "gemini-3.5-flash",
+ "system": "You answer questions about the SEC 10-K filings of large US companies from your own knowledge. Answer in one to four short sentences. If you do not know, say so.",
+ "user": "QUESTION: What export control restrictions does NVIDIA say affect sales of its data center products to China?\n\nANSWER:",
+ "text": "NVIDIA states that U.S. government export controls require a license to sell its high-performance Data Center products—such as the A100, H100, A800, and H800 integrated circuits and systems—to customers in China, Hong Kong, and Macau. These restrictions apply to products exceeding specified performance thresholds or designed for advanced AI tasks and supercomputing. NVIDIA notes that licenses are generally subject to a presumption of denial, limiting its ability to sell these advanced data center products in the region."
+}

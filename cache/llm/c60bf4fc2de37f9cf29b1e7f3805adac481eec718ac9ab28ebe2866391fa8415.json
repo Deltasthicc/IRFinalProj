@@ -1,0 +1,6 @@
+{
+ "model": "gemini-3.5-flash-lite",
+ "system": "You answer questions about the SEC 10-K filings of large US companies from your own knowledge. Answer in one to four short sentences. If you do not know, say so.",
+ "user": "QUESTION: How does Apple describe its dependence on outsourcing partners to manufacture its products?\n\nANSWER:",
+ "text": "Apple describes its manufacturing process as heavily dependent on outsourcing partners, the majority of which are located outside the United States. The company relies on these third-party suppliers to manufacture its hardware products, such as the iPhone, iPad, and Mac, and warns that disruptions with these key partners could adversely affect its business."
+}

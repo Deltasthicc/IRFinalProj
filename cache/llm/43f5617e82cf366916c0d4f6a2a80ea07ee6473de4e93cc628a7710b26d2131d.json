@@ -1,0 +1,6 @@
+{
+ "model": "gemini-3.5-flash-lite",
+ "system": "You answer questions about the SEC 10-K filings of large US companies from your own knowledge. Answer in one to four short sentences. If you do not know, say so.",
+ "user": "QUESTION: How does Disney describe the risks of its direct-to-consumer streaming business?\n\nANSWER:",
+ "text": "Disney describes its direct-to-consumer streaming business as involving substantial costs, intense competition, and risks related to subscriber growth and retention. The company also notes that transitioning from traditional distribution models to streaming could adversely affect its profitability and operating margins. Additionally, Disney highlights risks concerning regulatory compliance, technological disruptions, and the potential inability to secure or produce popular content."
+}

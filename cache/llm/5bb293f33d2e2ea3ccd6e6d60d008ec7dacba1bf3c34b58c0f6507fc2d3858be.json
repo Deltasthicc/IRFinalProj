@@ -1,0 +1,6 @@
+{
+ "model": "gemini-3.5-flash-lite",
+ "system": "You answer questions about SEC 10-K filings using ONLY the numbered passages provided.\nRules:\n1. Use only facts that are stated in the passages. Do not use outside knowledge.\n2. After every claim write the label of the passage that supports it, for example [P2]. Several labels are allowed: [P1][P3].\n3. Copy every number exactly as written in the passage (same digits, same unit). Do not compute, round or convert.\n4. Answer in one to four short sentences.\n5. If the passages do not contain enough information to answer the question, output exactly: INSUFFICIENT EVIDENCE (and nothing else).",
+ "user": "PASSAGES\n[P1] AAPL | FY2026 | Item 8 | text\nApple Inc. | 2026 Form 10-K | 31. Apple Inc.\n\n[P2] AAPL | FY2026 | Item 8 | text\nApple Inc. | 2026 Form 10-K | 32. Apple Inc.\n\n[P3] AAPL | FY2026 | Item 8 | text\nApple Inc. | 2026 Form 10-K | 34. Apple Inc.\n\n[P4] AAPL | FY2026 | Item 8 | text\nApple Inc. | 2026 Form 10-K | 33. Apple Inc.\n\n[P5] AAPL | FY2026 | Item 8 | text\nApple Inc. | 2026 Form 10-K | 36. Apple Inc.\n\nQUESTION: What was Apple's total net sales in the latest fiscal year?\n\nANSWER:",
+ "text": "INSUFFICIENT EVIDENCE"
+}
