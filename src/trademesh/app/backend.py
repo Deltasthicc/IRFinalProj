@@ -164,7 +164,12 @@ def graph_dot(graph: dict, top: int = 20) -> str:
     return "\n".join(lines)
 
 
+def md_safe(text: str) -> str:
+    """Escape dollar signs so Streamlit markdown does not treat money amounts as LaTeX."""
+    return text.replace("\\$", "$").replace("$", "\\$")
+
+
 def highlight_citations(answer: str) -> str:
-    """Bold the [Pn] markers so they stand out in the markdown answer."""
+    """Bold the [Pn] markers so they stand out in the markdown answer (and escape dollar signs)."""
     import re
-    return re.sub(r"\[P(\d+)\]", r"**[P\1]**", answer)
+    return re.sub(r"\[P(\d+)\]", r"**[P\1]**", md_safe(answer))

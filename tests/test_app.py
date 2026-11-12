@@ -3,7 +3,7 @@ from pathlib import Path
 
 import pytest
 
-from trademesh.app.backend import graph_dot, highlight_citations, load_graph, load_state, load_vision
+from trademesh.app.backend import graph_dot, highlight_citations, load_graph, load_state, load_vision, md_safe
 
 APP = Path(__file__).resolve().parents[1] / "src" / "trademesh" / "app" / "streamlit_app.py"
 
@@ -37,6 +37,12 @@ def test_graph_loads_and_renders_dot(tmp_path):
 
 def test_highlight_citations():
     assert highlight_citations("Sales rose [P1][P2].") == "Sales rose **[P1]****[P2]**."
+
+
+def test_dollar_signs_are_escaped_so_markdown_does_not_render_latex():
+    assert md_safe("$139,996 million and $54,052 million") == r"\$139,996 million and \$54,052 million"
+    assert md_safe(r"already \$5") == r"already \$5"  # no double escaping
+    assert highlight_citations("Revenue was $5 million [P1].") == r"Revenue was \$5 million **[P1]**."
 
 
 def test_state_loads_fixture_with_warnings(monkeypatch, tmp_path):
