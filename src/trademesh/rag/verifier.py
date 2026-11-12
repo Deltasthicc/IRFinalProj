@@ -89,6 +89,30 @@ def _has(values: set[float], v: float) -> bool:
     return any(math.isclose(v, x, rel_tol=1e-9, abs_tol=1e-9) for x in values)
 
 
+# Abbreviations that end in a period without ending the sentence ("Mr. Musk", "Walmart U.S. sales").
+_ABBREV_END = re.compile(r"(?:\b(?:Mr|Mrs|Ms|Dr|Prof|Jr|Sr|St|No|Nos|vs|Fig|Vol|Cf)\.|\b(?:e\.g|i\.e|U\.S|U\.K|U\.S\.A)\.)$")
+
+
+def split_sentences(answer: str) -> list[str]:
+    """Split an answer into sentences for the every-sentence-cited check.
+
+    Splits after . ! ? plus whitespace, but not after an abbreviation such as "Mr." or "U.S.", and a
+    fragment that is only a citation ("Sales rose. [P1]") belongs to the previous sentence."""
+    pieces: list[str] = []
+    for s in re.split(r"(?<=[.!?])\s+", answer.strip()):
+        if pieces and s and _ABBREV_END.search(pieces[-1]):
+            pieces[-1] += " " + s
+        elif s:
+            pieces.append(s)
+    sentences: list[str] = []
+    for s in pieces:
+        if sentences and not CITE_RE.sub("", s).strip(" .,;"):
+            sentences[-1] += " " + s
+        else:
+            sentences.append(s)
+    return sentences
+
+
 def verify(answer: str, passages: list[Passage]) -> VerifierResult:
     res = VerifierResult()
     if is_insufficient(answer):
@@ -102,13 +126,7 @@ def verify(answer: str, passages: list[Passage]) -> VerifierResult:
     if not res.cited:
         res.flags.append("answer contains no citation")
 
-    sentences: list[str] = []
-    for s in re.split(r"(?<=[.!?])\s+", answer.strip()):
-        # "Sales rose. [P1]": a fragment that is only a citation belongs to the previous sentence
-        if sentences and s and not CITE_RE.sub("", s).strip(" .,;"):
-            sentences[-1] += " " + s
-        elif s:
-            sentences.append(s)
+    sentences = split_sentences(answer)
     res.uncited_sentences = [s for s in sentences if not CITE_RE.search(s)]
     if res.cited and res.uncited_sentences:
         res.flags.append(f"{len(res.uncited_sentences)} sentence(s) without a citation")

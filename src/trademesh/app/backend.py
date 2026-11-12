@@ -115,6 +115,31 @@ def load_results() -> tuple[dict | None, str]:
     return None, "not available yet: run eval/run_retrieval.py after judging (see docs/report_B/README.md)."
 
 
+def load_rag_study() -> tuple[dict | None, str]:
+    """RAG answer ratings, paired bootstrap and abstention results for the Evaluation tab (test split).
+    Needs eval/out/rag_scores_test.json; the bootstrap and abstention files are optional."""
+    def find(name: str) -> Path | None:
+        return next((d / name for d in RESULT_DIRS if (d / name).exists()), None)
+
+    scores = find("rag_scores_test.json")
+    if scores is None:
+        return None, "not available yet: run eval/rag_score.py (see docs/report_C/audit/README.md)."
+    out: dict = {}
+    for key, name in (("scores", "rag_scores_test.json"), ("bootstrap", "rag_bootstrap_test.json"),
+                      ("abstention", "abstention_eval.json"), ("abstention_score_only", "abstention_scoreonly.json")):
+        f = find(name)
+        if f is None:
+            out[key] = None
+            continue
+        try:
+            out[key] = json.loads(f.read_text(encoding="utf-8"))
+        except Exception as e:  # a malformed file must never crash the app
+            return None, f"could not read {_rel(f)}: {e}"
+    if not out["scores"].get("configs"):
+        return None, f"could not read {_rel(scores)}: no 'configs' entry."
+    return out, ""
+
+
 def load_graph(path: Path = GRAPH_PATH) -> tuple[dict | None, str]:
     return _load_json(path, _validate_graph)
 

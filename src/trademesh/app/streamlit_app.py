@@ -13,8 +13,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 import streamlit as st  # noqa: E402
 
 from trademesh.app import style  # noqa: E402
-from trademesh.app.backend import (graph_dot, highlight_citations, load_graph, load_results, load_state,  # noqa: E402
-                                   load_vision, AppState)
+from trademesh.app.backend import (graph_dot, highlight_citations, load_graph, load_rag_study, load_results,  # noqa: E402
+                                   load_state, load_vision, AppState)
 from trademesh.rag.llm import CacheMiss, LiveCallCapReached  # noqa: E402
 from trademesh.rag.pipeline import RagConfig, RagResult  # noqa: E402
 from trademesh.text import content_terms, kwic  # noqa: E402
@@ -45,9 +45,13 @@ def trust_panel(res: RagResult, tau: float, state: AppState):
     if res.abstained:
         st.warning(f"Abstained: {res.abstain_reason}")
     cols = st.columns(3)
-    cols[0].metric("Best retrieval score", f"{res.confidence:.3f}", help="best score / number of content words in the query")
-    cols[1].metric("Threshold tau", f"{tau:.3f}")
+    cols[0].metric("Retrieval score", f"{res.confidence:.3f}",
+                   help="Shown for inspection only, NOT used to decide abstention. Best score divided by the number of content words in the query. In our abstention study this score did not "
+                        "separate answerable from unanswerable questions (Evaluation tab, Abstention), so it is shown for inspection only.")
+    cols[1].metric("Threshold tau", "off" if tau == 0 else f"{tau:.3f}",
+                   help="tau was tuned on the dev questions and came out as 0, which switches the score rule off.")
     cols[2].metric("Answer source", "cache" if res.cached else ("live call" if res.cached is False else "none"))
+    st.caption("The system abstains when the model itself answers INSUFFICIENT EVIDENCE.")
     v = res.verifier
     if v is None:
         st.info("No verifier result: the model was not called or this is a closed-book answer.")
@@ -200,14 +204,90 @@ def tab_pages():
                     st.write(f"{r['ticker']} p.{r['page']} (image missing)")
 
 
+def tab_rag_eval():
+    study, why = load_rag_study()
+    if study is None:
+        st.info(f"RAG study results are {why}")
+        return
+    import pandas as pd
+    st.warning("All answer ratings and citation checks are LLM-assisted (two passes by one language model); no human validated them. "
+               "20 test questions, one small generator (gemini-3.5-flash-lite).")
+    names = {"closed_book": "Closed-book", "bm25_rag": "BM25-RAG", "best_rag": "Best-RAG (hybrid + rerank)"}
+    pct = lambda x: "n/a" if x is None else f"{x:.3f}"
+    rows = []
+    for k, label in names.items():
+        c = study["scores"]["configs"].get(k)
+        if not c:
+            continue
+        rows.append({"Configuration": label, "Mean rating (0-2)": f"{c['mean_rating']:.3f}", "Rated 2": f"{c['share_rated_2']:.0%}",
+                     "Citation precision": pct(c.get("citation_precision")), "Number grounding": pct(c.get("number_grounding")),
+                     "Verifier pass": pct(c.get("verifier_pass_rate"))})
+    st.markdown("**Answer quality on the 20 test questions**")
+    st.dataframe(pd.DataFrame(rows), use_container_width=True, hide_index=True)
+    if "kappa" in study["scores"]:
+        st.caption(f"Cohen's kappa between the two rating passes: {study['scores']['kappa']:.3f} on {study['scores']['n_double_rated']} answers "
+                   f"(same model both times, so probably optimistic).")
+    b = study.get("bootstrap")
+    if b:
+        st.markdown(f"**Paired bootstrap over questions** ({b['resamples']:,} resamples; difference in mean rating, 95% interval)")
+        pairs = []
+        for k, v in b["pairs"].items():
+            a, c = k.split(" - ")
+            pairs.append({"Comparison": f"{names.get(a, a)} minus {names.get(c, c)}", "Difference": f"{v['mean_diff']:+.3f}",
+                          "95% interval": f"[{v['ci95'][0]:+.3f}, {v['ci95'][1]:+.3f}]",
+                          "Better / worse / tied": f"{v['better']} / {v['worse']} / {v['tied']}",
+                          "Excludes 0": "yes" if v["ci95"][0] > 0 or v["ci95"][1] < 0 else "no"})
+        st.dataframe(pd.DataFrame(pairs), use_container_width=True, hide_index=True)
+        bt = pd.DataFrame(b["by_type"]).T.rename(columns=names)
+        n = bt.pop("n")
+        bt.insert(0, "n", n.astype(int))
+        st.markdown("**By question type** (6 to 7 questions each: descriptive only)")
+        st.dataframe(bt.style.format({c: "{:.2f}" for c in bt.columns if c != "n"}), use_container_width=True)
+
+
+def tab_abstention_eval():
+    study, why = load_rag_study()
+    if study is None or not study.get("abstention"):
+        st.info(f"Abstention results are {why or 'not available yet: run eval/abstention_eval.py.'}")
+        return
+    import pandas as pd
+
+    def rows(label, d):
+        out = []
+        for part, name in (("dev_tuned", "Dev (tuned on)"), ("test", "Test (headline)")):
+            m = d[part]
+            out.append({"Rule": label, "Items": name, "Precision": f"{m['precision']:.3f}", "Recall": f"{m['recall']:.3f}",
+                        "F1": f"{m['f1']:.3f}", "tp / fp / fn / tn": f"{m['tp']} / {m['fp']} / {m['fn']} / {m['tn']}"})
+        return out
+
+    table = rows("Model verdict (tau tuned on dev = 0, so score rule off)", study["abstention"])
+    if study.get("abstention_score_only"):
+        table = rows(f"Retrieval score only (tau = {study['abstention_score_only']['tau']:.4f})", study["abstention_score_only"]) + table
+    st.markdown("**Should the system abstain? Positive class = should abstain** (test: 20 answerable and 6 unanswerable questions)")
+    st.dataframe(pd.DataFrame(table), use_container_width=True, hide_index=True)
+    st.caption("The retrieval score comes from rank fusion, so it reflects ranks, not match quality, and does not separate the two groups. "
+               "6 of 6 correct abstentions has a 95% lower bound of about 0.54, and the unanswerable questions are easy (clearly outside the corpus). "
+               "The score-only numbers were seen on the test items before the model-verdict rule was chosen.")
+
+
 def tab_eval():
+    retrieval, rag, abst = st.tabs(["Retrieval", "RAG answers", "Abstention"])
+    with retrieval:
+        tab_retrieval_eval()
+    with rag:
+        tab_rag_eval()
+    with abst:
+        tab_abstention_eval()
+
+
+def tab_retrieval_eval():
     res, why = load_results()
     if res is None:
         st.info(f"Retrieval results are {why}")
         return
     import pandas as pd
     st.caption(f"{'Locked TEST run' if res['split'] == 'test' else 'DEVELOPMENT run (tuning data, not the final result)'}: "
-               f"{res['n_needs']} information needs, pooled blind judgments, baseline {res['baseline']}.")
+               f"{res['n_needs']} information needs, pooled judgments (LLM-assisted, no human validation), baseline {res['baseline']}.")
     cols = ["P@5", "P@10", "AP", "MRR", "nDCG@10", "bpref", "judged@10"]
     df = pd.DataFrame(res["overall"]).T[[c for c in cols if c in next(iter(res["overall"].values()))]]
     df = df.rename(columns={"AP": "MAP"})
@@ -240,7 +320,7 @@ def main():
                                    disabled=state.reranker is None,
                                    help="Available when Role B's reranker is installed.")
         tau = st.number_input("Abstention threshold tau", min_value=0.0, value=0.0, step=0.1,
-                              help="Abstain when the best score is below tau. Tuned on dev queries; 0 = off.")
+                              help="Abstain when the best score is below tau. Tuned on the dev queries it came out as 0 (off): the model's own verdict did the work.")
         lam = st.number_input("Section prior lambda", min_value=0.0, max_value=2.0, value=0.0, step=0.05,
                               help="final = base + lambda * g(Item). 0 = off.")
         st.caption(f"LLM: {state.llm.provider} / {state.llm.model}")
