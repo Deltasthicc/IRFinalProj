@@ -1,7 +1,15 @@
 # TradeMesh
 
 Search and cited question answering over the latest 10-K filings of about 20 companies (CSD358 Information Retrieval, Monsoon 2026).
-This repository currently holds the **query, RAG and app** part (Role C). The data, indexes and vision track (Role A) and the rankers and evaluation (Role B) plug in through the interfaces below.
+This repository holds the whole project: data, indexes, graph and vision track (Role A), rankers and evaluation (Role B), and query processing, RAG and the app (Role C).
+
+## Team and roles
+
+| Member | Role | What they own |
+|---|---|---|
+| Tanish Shitanshu | **Role B** (lead) and most of **Role A** | **Role B:** BM25 from scratch with tuning, dense retrieval, rank fusion (RRF), cross-encoder reranking, pseudo-relevance feedback (`src/trademesh/ranking/`); the evaluation protocol, pooling, judgments, paired bootstrap, hypotheses and ablations (`src/trademesh/evaluation/`, `data/judgments/`, `data/results/`, and the retrieval scripts in `eval/`: `run_retrieval`, `make_pools`, `tune_bm25`, `hypotheses`, `ablation`, `pool_bias`, `speed_quality`, `cost_table`); the Report B sections (`docs/report_B/`). **Role A:** corpus download, parsing and chunking (`src/trademesh/ingest/`); TF-IDF, champion lists, positional index and wildcard search (`src/trademesh/index/`); the company mention graph with PageRank and HITS (`src/trademesh/graph/`); the vision track (`src/trademesh/vision/`); the Report A notes (`docs/report_A/`). |
+| Ruchir Sharma | **Role A** (one part) | The Boolean retriever (`src/trademesh/index/boolean.py`) |
+| Shashwat Rajan | **Role C** | Query processing, RAG pipeline, verifier, abstention, the Streamlit app and the Report C sections (`src/trademesh/query/`, `src/trademesh/rag/`, `src/trademesh/app/`, `docs/report_C/`, and the RAG scripts in `eval/`: `entity_eval`, `rag_run`, `rag_sheets`, `rag_score`, `abstention_eval`) |
 
 ## Run it
 
@@ -40,7 +48,11 @@ python -m pytest -q        # offline, no network, no key
 | `src/trademesh/rag/abstain.py` | abstention rule, tau tuning, P/R/F1/accuracy |
 | `src/trademesh/rag/pipeline.py` | entities -> retrieve -> context -> LLM -> verify -> abstain; compare mode |
 | `src/trademesh/app/` | Streamlit app (Ask, Search, Filing graph, Pages) and its testable back end |
-| `src/trademesh/dev_stub.py` | **dev-only** in-memory BM25, to be dropped when B's BM25 lands |
+| `src/trademesh/dev_stub.py` | **dev-only** in-memory BM25 fallback, used only when Role B's rankers are not installed |
+| `src/trademesh/ingest/`, `index/`, `graph/`, `vision/` | Role A: corpus, TF-IDF / Boolean / positional / wildcard indexes, mention graph, page-image scoring |
+| `src/trademesh/ranking/`, `evaluation/` | Role B: BM25, dense, RRF fusion, reranker, PRF; metrics, pooling, qrels, bootstrap |
+| `data/judgments/`, `data/results/` | judged pools, qrels, test-run result files |
+| `docs/report_A/`, `docs/report_B/` | report notes for Role A and the Report B sections |
 | `data/needs/` | 30 information needs (10 dev, 20 test), 10 unanswerable questions, 40 typo'd company names |
 | `eval/` | `entity_eval.py`, `rag_run.py`, `rag_sheets.py`, `rag_score.py`, `abstention_eval.py` |
 | `docs/report_C/` | report drafts for Role C's sections and the model figure |
