@@ -1,0 +1,362 @@
+{
+  "retriever": "hybrid",
+  "score_only": false,
+  "tau": 0.0,
+  "reportable": true,
+  "dev_tuned": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "accuracy": 1.0,
+    "tp": 4,
+    "fp": 0,
+    "fn": 0,
+    "tn": 10
+  },
+  "test": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "accuracy": 1.0,
+    "tp": 6,
+    "fp": 0,
+    "fn": 0,
+    "tn": 20
+  },
+  "all_items": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "accuracy": 1.0,
+    "tp": 10,
+    "fp": 0,
+    "fn": 0,
+    "tn": 30
+  },
+  "n": {
+    "dev": 14,
+    "test": 26
+  },
+  "items": [
+    {
+      "id": "E01",
+      "split": "dev",
+      "question": "How does Apple describe its dependence on outsourcing partners to manufacture its products?",
+      "should_abstain": false,
+      "confidence": 0.006504494976203068,
+      "model_said_insufficient": false
+    },
+    {
+      "id": "E02",
+      "split": "test",
+      "question": "How does Tesla describe the risk of depending on its Chief Executive Officer and other key personnel?",
+      "should_abstain": false,
+      "confidence": 0.002977667493796526,
+      "model_said_insufficient": false
+    },
+    {
+      "id": "E03",
+      "split": "dev",
+      "question": "What export control restrictions does NVIDIA say affect sales of its data center products to China?",
+      "should_abstain": false,
+      "confidence": 0.0036429872495446266,
+      "model_said_insufficient": false
+    },
+    {
+      "id": "E04",
+      "split": "test",
+      "question": "How does Amazon describe the capacity and cost risks of its fulfillment network?",
+      "should_abstain": false,
+      "confidence": 0.006453291699193339,
+      "model_said_insufficient": false
+    },
+    {
+      "id": "E05",
+      "split": "test",
+      "question": "How does Netflix describe competition for its members' viewing time?",
+      "should_abstain": false,
+      "confidence": 0.007936507936507936,
+      "model_said_insufficient": false
+    },
+    {
+      "id": "E06",
+      "split": "test",
+      "question": "How does JPMorgan Chase describe the way it manages credit risk?",
+      "should_abstain": false,
+      "confidence": 0.006066864592745579,
+      "model_said_insufficient": false
+    },
+    {
+      "id": "E07",
+      "split": "dev",
+      "question": "How does Exxon Mobil describe the risks of climate change regulation to its business?",
+      "should_abstain": false,
+      "confidence": 0.002325581395348837,
+      "model_said_insufficient": false
+    },
+    {
+      "id": "E08",
+      "split": "test",
+      "question": "What does Pfizer say about patent expiration and loss of exclusivity for its products?",
+      "should_abstain": false,
+      "confidence": 0.006504494976203068,
+      "model_said_insufficient": false
+    },
+    {
+      "id": "E09",
+      "split": "test",
+      "question": "What does Boeing say about supply chain and quality issues in its commercial airplane programs?",
+      "should_abstain": false,
+      "confidence": 0.004646067840145048,
+      "model_said_insufficient": false
+    },
+    {
+      "id": "E10",
+      "split": "test",
+      "question": "How does Disney describe the risks of its direct-to-consumer streaming business?",
+      "should_abstain": false,
+      "confidence": 0.006504494976203068,
+      "model_said_insufficient": false
+    },
+    {
+      "id": "T01",
+      "split": "dev",
+      "question": "Which companies describe supplier concentration as a risk, and how?",
+      "should_abstain": false,
+      "confidence": 0.009243431465653687,
+      "model_said_insufficient": false
+    },
+    {
+      "id": "T02",
+      "split": "test",
+      "question": "How do companies describe the risks and opportunities of artificial intelligence?",
+      "should_abstain": false,
+      "confidence": 0.008000512032770097,
+      "model_said_insufficient": false
+    },
+    {
+      "id": "T03",
+      "split": "dev",
+      "question": "How do companies describe their exposure to foreign currency exchange rate risk?",
+      "should_abstain": false,
+      "confidence": 0.005377743082661116,
+      "model_said_insufficient": false
+    },
+    {
+      "id": "T04",
+      "split": "test",
+      "question": "What cybersecurity incidents and risks do companies disclose?",
+      "should_abstain": false,
+      "confidence": 0.007936507936507936,
+      "model_said_insufficient": false
+    },
+    {
+      "id": "T05",
+      "split": "test",
+      "question": "How do companies describe the effect of tariffs and trade restrictions on their costs?",
+      "should_abstain": false,
+      "confidence": 0.006166982922201138,
+      "model_said_insufficient": false
+    },
+    {
+      "id": "T06",
+      "split": "test",
+      "question": "How do companies describe climate change and sustainability regulation?",
+      "should_abstain": false,
+      "confidence": 0.00819672131147541,
+      "model_said_insufficient": false
+    },
+    {
+      "id": "T07",
+      "split": "dev",
+      "question": "What do companies say about share repurchase programs and dividends?",
+      "should_abstain": false,
+      "confidence": 0.008130618720253835,
+      "model_said_insufficient": false
+    },
+    {
+      "id": "T08",
+      "split": "test",
+      "question": "How do companies describe the effect of inflation and rising interest rates on their results?",
+      "should_abstain": false,
+      "confidence": 0.00546448087431694,
+      "model_said_insufficient": false
+    },
+    {
+      "id": "T09",
+      "split": "test",
+      "question": "How do companies describe workforce and talent retention risks?",
+      "should_abstain": false,
+      "confidence": 0.008130618720253835,
+      "model_said_insufficient": false
+    },
+    {
+      "id": "T10",
+      "split": "test",
+      "question": "Compare how Microsoft and Amazon describe competition in cloud services.",
+      "should_abstain": false,
+      "confidence": 0.007634201221472195,
+      "model_said_insufficient": false
+    },
+    {
+      "id": "R01",
+      "split": "dev",
+      "question": "What is a remaining performance obligation and how do companies disclose it?",
+      "should_abstain": false,
+      "confidence": 0.00819672131147541,
+      "model_said_insufficient": false
+    },
+    {
+      "id": "R02",
+      "split": "dev",
+      "question": "Which companies use the term free cash flow and how do they define it?",
+      "should_abstain": false,
+      "confidence": 0.004609494070852385,
+      "model_said_insufficient": false
+    },
+    {
+      "id": "R03",
+      "split": "test",
+      "question": "How do companies discuss goodwill impairment?",
+      "should_abstain": false,
+      "confidence": 0.010504549214226633,
+      "model_said_insufficient": false
+    },
+    {
+      "id": "R04",
+      "split": "test",
+      "question": "What critical audit matters do auditors report?",
+      "should_abstain": false,
+      "confidence": 0.006403688524590165,
+      "model_said_insufficient": false
+    },
+    {
+      "id": "R05",
+      "split": "test",
+      "question": "What are variable interest entities and which company consolidates them?",
+      "should_abstain": false,
+      "confidence": 0.006504494976203068,
+      "model_said_insufficient": false
+    },
+    {
+      "id": "R06",
+      "split": "dev",
+      "question": "What was Apple's total net sales in the latest fiscal year?",
+      "should_abstain": false,
+      "confidence": 0.004574063231850118,
+      "model_said_insufficient": false
+    },
+    {
+      "id": "R07",
+      "split": "test",
+      "question": "What was Microsoft's revenue by segment in the latest fiscal year?",
+      "should_abstain": false,
+      "confidence": 0.00546448087431694,
+      "model_said_insufficient": false
+    },
+    {
+      "id": "R08",
+      "split": "dev",
+      "question": "What were Tesla's total revenues by source in the latest fiscal year?",
+      "should_abstain": false,
+      "confidence": 0.00273224043715847,
+      "model_said_insufficient": false
+    },
+    {
+      "id": "R09",
+      "split": "test",
+      "question": "What were Walmart's net sales by segment in the latest fiscal year?",
+      "should_abstain": false,
+      "confidence": 0.004539722572509459,
+      "model_said_insufficient": false
+    },
+    {
+      "id": "R10",
+      "split": "test",
+      "question": "What were Coca-Cola's net operating revenues by segment in the latest fiscal year?",
+      "should_abstain": false,
+      "confidence": 0.004646067840145048,
+      "model_said_insufficient": false
+    },
+    {
+      "id": "U01",
+      "split": "dev",
+      "question": "What was Apple's net sales in fiscal year 2031?",
+      "should_abstain": true,
+      "confidence": 0.004596622889305816,
+      "model_said_insufficient": true
+    },
+    {
+      "id": "U02",
+      "split": "dev",
+      "question": "What is the home address of Tesla's Chief Executive Officer?",
+      "should_abstain": true,
+      "confidence": 0.0022988505747126436,
+      "model_said_insufficient": true
+    },
+    {
+      "id": "U03",
+      "split": "dev",
+      "question": "Will NVIDIA's stock price rise next quarter?",
+      "should_abstain": true,
+      "confidence": 0.00468384074941452,
+      "model_said_insufficient": true
+    },
+    {
+      "id": "U04",
+      "split": "dev",
+      "question": "What was Spotify's gross margin last year?",
+      "should_abstain": true,
+      "confidence": 0.006124357176250585,
+      "model_said_insufficient": true
+    },
+    {
+      "id": "U05",
+      "split": "test",
+      "question": "How many Microsoft employees work in Brazil?",
+      "should_abstain": true,
+      "confidence": 0.004098360655737705,
+      "model_said_insufficient": true
+    },
+    {
+      "id": "U06",
+      "split": "test",
+      "question": "How many Netflix subscribers are there in India?",
+      "should_abstain": true,
+      "confidence": 0.0035087719298245615,
+      "model_said_insufficient": true
+    },
+    {
+      "id": "U07",
+      "split": "test",
+      "question": "What salary does Amazon pay a warehouse manager in Texas?",
+      "should_abstain": true,
+      "confidence": 0.002702702702702703,
+      "model_said_insufficient": true
+    },
+    {
+      "id": "U08",
+      "split": "test",
+      "question": "Which analyst firms recommend buying JPMorgan stock?",
+      "should_abstain": true,
+      "confidence": 0.0053508150248051025,
+      "model_said_insufficient": true
+    },
+    {
+      "id": "U09",
+      "split": "test",
+      "question": "What was Pfizer's revenue in 1995?",
+      "should_abstain": true,
+      "confidence": 0.010514985924821993,
+      "model_said_insufficient": true
+    },
+    {
+      "id": "U10",
+      "split": "test",
+      "question": "What is the recipe of Coca-Cola's secret formula?",
+      "should_abstain": true,
+      "confidence": 0.00546448087431694,
+      "model_said_insufficient": true
+    }
+  ]
+}
