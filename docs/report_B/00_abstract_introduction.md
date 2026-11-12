@@ -18,6 +18,6 @@ Analysts who ask questions about company filings need exact figures and the pass
 
 **Contributions.** (1) A working, tested retrieval stack in which every ranker is written from the lecture formulas and its behaviour can be explained term by term. (2) A pooled test collection with blind LLM-assisted judging, consistency between two LLM passes measured by kappa, and three explicit checks for pooling bias. (3) Hypotheses and decision rules fixed before the test run, applied mechanically, so that failed hypotheses are reported as findings. (4) A comparison of our ordering with published results (BEIR, DPR, FinanceBench, ColPali). (5) A verified-RAG pipeline that abstains, evaluated by two-pass LLM-assisted ratings (no human validation) and automatic grounding checks (Role C).
 
-**Related work.** See section 6 of the proposal; the references are in `references.md`.
+**Related work.** Related work follows the project proposal; the verified references are in `references.md`.
 
-**Outline.** Section 2 describes the data and model; sections 9.x the methods; section 10 the experiments; section 11 conclusions and limitations.
+**Outline.** Section 6 describes the proposed model (corpus, indexes, retrieval and RAG stages); section 9 the methods (9.3 to 9.5 ranking, 9.6 query processing, 9.8 RAG, verifier and abstention, 9.10 evaluation protocol); section 10 the experiments and results (10.1 to 10.10 retrieval, 10.11 RAG); section 11 conclusions and limitations.

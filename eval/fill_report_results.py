@@ -38,7 +38,7 @@ e0, n0, k0 = agree("ai_pass1_initial", "ai2_pass2_initial")
 e1, n1, k1 = agree("ai_pass1_corrected", "ai2_pass2_corrected")
 grades = Counter(r["rel"] for r in sheets["AI"])
 
-L = ["# 10. Retrieval results (Role B)", "",
+L = ["# 10. Experiments and results: retrieval study, 10.1 to 10.10 (Role B; the RAG study is 10.11, Role C)", "",
      "All numbers below are read from the locked test-split files (`eval/out/*_test.json`, `pool_bias.json`, `cost_table.json`). "
      "The test split was run once, after the freeze; the lock files are `eval/out/.testrun_*`. Regenerate this page with `python eval/fill_report_results.py`.", "",
      "## 10.1 Judgments and agreement", "",

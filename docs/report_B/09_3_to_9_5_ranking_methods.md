@@ -29,7 +29,7 @@ It uses ranks only, so BM25 scores (unbounded) and cosine scores (between -1 and
 
 **Cross-encoder.** The top 30 hybrid candidates are rescored by `cross-encoder/ms-marco-MiniLM-L-6-v2`, which reads the query and the passage together (Nogueira and Cho 2019) and so can use word-level interactions that two independent embeddings miss. It is too slow to run over the whole corpus, hence the two-stage design; the top 5 go to the RAG prompt. Scores are passed through a sigmoid so the abstention threshold tau of Role C is comparable across queries.
 
-Why expect each step to help or not (H2 to H4): BEIR (Thakur et al. 2021) found BM25 a strong baseline that dense retrievers often fail to beat out of domain, and re-ranking with a cross-encoder to be the most consistent improvement; DPR (Karpukhin et al. 2020) found dense retrieval better on paraphrase-heavy questions and BM25 better where exact entity strings matter. Our corpus is entity- and number-heavy, so we predict a tie or BM25 win on entity and terminology needs and a dense win on topical needs.
+Why expect each step to help or not (H2 to H4): BEIR (Thakur et al. 2021) found BM25 a robust baseline that dense retrievers often fail to beat out of domain, and re-ranking and late-interaction models to be best on average, at high computational cost; DPR (Karpukhin et al. 2020) found dense retrieval better than BM25 on most datasets, with BM25 ahead where questions and passages share many words (SQuAD) and dense retrieval weaker on rare salient phrases. Our corpus is entity- and number-heavy, so we predict a tie or BM25 win on entity and terminology needs and a dense win on topical needs.
 
 ## 9.5 Pseudo-relevance feedback (Rocchio 1971)
 

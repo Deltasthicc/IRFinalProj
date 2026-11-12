@@ -1,4 +1,4 @@
-# 10. Retrieval results (Role B)
+# 10. Experiments and results: retrieval study, 10.1 to 10.10 (Role B; the RAG study is 10.11, Role C)
 
 All numbers below are read from the locked test-split files (`eval/out/*_test.json`, `pool_bias.json`, `cost_table.json`). The test split was run once, after the freeze; the lock files are `eval/out/.testrun_*`. Regenerate this page with `python eval/fill_report_results.py`.
 
@@ -167,7 +167,7 @@ The two reranked systems entered the pool as well but are not part of this leave
 
 Spearman correlation between retrieval quality (nDCG@5 of the retriever behind each RAG configuration, from our LLM-assisted judgments) and the answer rating (0-2, mean of the two LLM rating passes), over the 20 test needs and the two RAG configurations (BM25-RAG and best-RAG): **rho = 0.007 over 40 (need, configuration) pairs** (`python eval/retrieval_vs_answer.py --split test`, `eval/out/retrieval_vs_answer.json`).
 
-This is no detectable relationship. The approximate 95% interval is about -0.31 to +0.31 (Fisher transform, treating the 40 pairs as independent; they are not, since each need appears twice, so the true interval is wider). The result therefore does not show that retrieval quality is unrelated to answer quality. It shows only that on these 20 questions nDCG@5 did not predict the rating. Two likely reasons, both untested: the rating scale has three values with many ties, and in many cases a retrieved set containing a few good passages is enough for the generator, so differences below the top few ranks do not change the answer. The comparison that does carry information is the paired one in section 10 of the RAG report: replacing BM25 with hybrid + rerank raised the mean answer rating by +0.375 (95% interval +0.150 to +0.650).
+This is no detectable relationship. The approximate 95% interval is about -0.31 to +0.31 (Fisher transform, treating the 40 pairs as independent; they are not, since each need appears twice, so the true interval is wider). The result therefore does not show that retrieval quality is unrelated to answer quality. It shows only that on these 20 questions nDCG@5 did not predict the rating. Two likely reasons, both untested: the rating scale has three values with many ties, and in many cases a retrieved set containing a few good passages is enough for the generator, so differences below the top few ranks do not change the answer. The comparison that does carry information is the paired one in section 10.11 (the RAG study): replacing BM25 with hybrid + rerank raised the mean answer rating by +0.375 (95% interval +0.150 to +0.650).
 
 ## 10.9 Reading the results
 
