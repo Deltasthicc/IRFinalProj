@@ -231,10 +231,12 @@ def headline_numbers() -> list[tuple[str, str, str, bool]]:
     ret, _ = load_results()
     ent = load_entity_eval()
     tiles: list[tuple[str, str, str, bool]] = []
-    cfg = (rag or {}).get("scores", {}).get("configs", {})
+    human = load_human_scores()
+    cfg = (human or {}).get("configs") or (rag or {}).get("scores", {}).get("configs", {})
+    who = "rated blind by one human" if human else "LLM-rated"
     if "best_rag" in cfg and "closed_book" in cfg:
         tiles.append(("Answer quality, best-RAG (0 to 2)", f'{cfg["best_rag"]["mean_rating"]:.2f}',
-                      f'vs {cfg["closed_book"]["mean_rating"]:.2f} closed-book, 20 test questions, LLM-rated', False))
+                      f'vs {cfg["closed_book"]["mean_rating"]:.2f} closed-book, 20 test questions, {who}', False))
     else:
         tiles.append(("Answer quality, best-RAG", "-", "RAG study not run yet", True))
     tiles.append(("Entity accuracy", f'{ent["accuracy"] * 100:.1f}%' if ent else "-",

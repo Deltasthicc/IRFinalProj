@@ -94,7 +94,7 @@ python eval/rag_sheets.py --split test              # blind rating sheet + separ
 python eval/rag_score.py --split test               # scores from the human-filled sheets
 ```
 
-The scripts prepare the sheets and compute the scores; they never invent a rating. In the reported study the answer ratings, citation checks and retrieval judgments were made by a language model in two passes (disclosed in the report, audit files in `docs/report_C/audit/`), and no human validated them. A blind human re-rating is prepared in `eval/human/` (run `streamlit run eval/human_app.py`; the guide is `eval/human/README.md`); once it is done, `python eval/human_score.py` writes the human scores and the app's Evaluation tab shows them.
+The scripts prepare the sheets and compute the scores; they never invent a rating. The answer ratings and citation checks of the RAG study were made twice: first by a language model in two passes (audit files in `docs/report_C/audit/`), then blind by one human rater (`eval/human/`, scorer `eval/human_score.py`). The human ratings are the primary result and are stricter (mean 0.70 / 0.90 / 1.15 for closed-book / BM25-RAG / best-RAG against 1.18 / 1.33 / 1.70 from the model); the retrieval relevance judgments remain model-assisted, with no human validation.
 
 ## Credits
 

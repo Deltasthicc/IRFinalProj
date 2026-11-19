@@ -54,6 +54,30 @@ def paired_bootstrap(per: dict, qids: list[str], resamples: int = 10000, seed: i
     return out
 
 
+def leave_one_out(per: dict, qids: list[str]) -> dict:
+    """Range of each mean difference when one question is dropped at a time (no question is special-cased)."""
+    out = {}
+    for a, b in PAIRS:
+        diffs = [sum(per[a][q] - per[b][q] for q in qids if q != drop) / (len(qids) - 1) for drop in qids]
+        out[f"{a} - {b}"] = {"min": min(diffs), "max": max(diffs)}
+    return out
+
+
+def rq3_with_human(pairs: list, order: list[tuple[str, str]], human: dict) -> dict:
+    """RQ3 (does better retrieval give better answers?) recomputed with the human ratings.
+
+    `pairs` is eval/out/retrieval_vs_answer.json: [nDCG@5, answer rating] per (need, configuration), in `order`. Only the
+    nDCG@5 values are reused; the answer ratings are replaced by the human ones. Interval: Fisher z approximation."""
+    import math
+
+    from trademesh.evaluation.metrics import spearman
+    xs = [p[0] for p in pairs]
+    ys = [human[k] for k in order]
+    rho = spearman(xs, ys)
+    z, se = math.atanh(max(-0.999999, min(0.999999, rho))), 1.06 / math.sqrt(len(xs) - 3)
+    return {"spearman": rho, "n": len(xs), "ci95_approx": [math.tanh(z - 1.96 * se), math.tanh(z + 1.96 * se)]}
+
+
 def retrieval_validation(names: list[str]) -> dict | None:
     """Agreement between each human's relevance grades and the model-assisted grades, on the passages the human judged."""
     llm = {}
@@ -135,6 +159,25 @@ def main() -> None:
     report: dict = {"split": "test", "rated_by": [r["name"] for r in raters], "configs": configs, "n_questions": len(common_q),
                     "bootstrap": paired_bootstrap(per, common_q) if len(common_q) == len(qids) else None}
 
+    if report.get("bootstrap"):
+        report["leave_one_out"] = leave_one_out(per, common_q)
+
+    # RQ3 with human ratings: reuse the stored nDCG@5 values, but only if they line up with the model-rated run exactly
+    rq3_path, llm_path0 = OUT / "retrieval_vs_answer.json", OUT / "rating_sheet.csv"
+    if rq3_path.exists() and llm_path0.exists() and (OUT / "rating_key.json").exists() and len(raters) == 1:
+        from eval.common import NEEDS
+        pairs = json.loads(rq3_path.read_text(encoding="utf-8"))["pairs"]
+        test_ids = [n["id"] for n in read_csv(NEEDS / "needs.csv") if n["split"] == "test"]
+        order = [(q, c) for c in ("bm25_rag", "best_rag") for q in test_ids]
+        lk = json.loads((OUT / "rating_key.json").read_text(encoding="utf-8"))
+        lr = defaultdict(list)
+        for row in read_csv(llm_path0):
+            if row["rating"].strip() != "":
+                lr[(row["question_id"], lk[row["question_id"]][row["label"]])].append(int(row["rating"]))
+        aligned = len(order) == len(pairs) and all(k in lr and abs(sum(lr[k]) / len(lr[k]) - p[1]) < 1e-9 for k, p in zip(order, pairs))
+        if aligned and all(k in raters[0]["ratings"] for k in order):
+            report["rq3_human"] = rq3_with_human(pairs, order, raters[0]["ratings"])
+
     # agreement between humans
     if len(raters) >= 2:
         a, b = raters[0]["ratings"], raters[1]["ratings"]
@@ -170,6 +213,11 @@ def main() -> None:
     if report.get("bootstrap"):
         for k, v in report["bootstrap"].items():
             print(f"  {k}: {v['mean_diff']:+.3f}  95% CI [{v['ci95'][0]:+.3f}, {v['ci95'][1]:+.3f}]  better {v['better']} / worse {v['worse']} / tied {v['tied']}")
+    if report.get("rq3_human"):
+        r3 = report["rq3_human"]
+        print(f"  RQ3 with human ratings: Spearman {r3['spearman']:+.3f} over {r3['n']} pairs, approx 95% CI [{r3['ci95_approx'][0]:+.2f}, {r3['ci95_approx'][1]:+.2f}]")
+    for k, v in (report.get("leave_one_out") or {}).items():
+        print(f"  leave-one-question-out {k}: {v['min']:+.3f} to {v['max']:+.3f}")
     for k, v in (report.get("vs_model") or {}).items():
         print(f"  {k}: identical {v['identical']:.0%}, kappa {v['kappa']:.3f}")
     if not args.no_md:
@@ -196,6 +244,17 @@ def write_markdown(rep: dict, qtype: dict, qids: list[str], per: dict) -> None:
             L.append(f"| {NAMES[a]} minus {NAMES[b]} | {v['mean_diff']:+.3f} | [{v['ci95'][0]:+.3f}, {v['ci95'][1]:+.3f}] | {v['better']} / {v['worse']} / {v['tied']} |")
     if "kappa_between_humans" in rep:
         L += ["", f"Cohen's kappa between the two human raters: {rep['kappa_between_humans']:.3f} on {rep['n_double_rated']} answers."]
+    if rep.get("leave_one_out"):
+        L += ["", "Leave-one-question-out range of each mean difference (a robustness check; no question is treated specially):", ""]
+        for k, v in rep["leave_one_out"].items():
+            a, b = k.split(" - ")
+            L.append(f"* {NAMES[a]} minus {NAMES[b]}: {v['min']:+.3f} to {v['max']:+.3f}")
+    if rep.get("rq3_human"):
+        r3 = rep["rq3_human"]
+        L += ["", f"**Does better retrieval give better answers (RQ3), with human ratings.** Spearman correlation between retrieval quality (nDCG@5 of the "
+                  f"retriever behind each RAG configuration, from the model-assisted relevance judgments) and the human answer rating: "
+                  f"{r3['spearman']:+.3f} over {r3['n']} (question, configuration) pairs, approximate 95% interval "
+                  f"[{r3['ci95_approx'][0]:+.2f}, {r3['ci95_approx'][1]:+.2f}] (Fisher z). No relation can be claimed."]
     if rep.get("vs_model"):
         L += ["", "## Comparison with the earlier model-assisted ratings", "",
               "| Pair | Answers | Identical | Cohen's kappa | Mean (human / model) | Human higher / lower |", "|---|---|---|---|---|---|"]

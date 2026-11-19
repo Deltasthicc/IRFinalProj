@@ -223,3 +223,17 @@ def test_rating_app_saves_every_step_and_never_shows_a_system_name(tmp_path, mon
     at.radio(key=cit_keys[0]).set_value("1").run()
     assert not at.exception
     assert len(list(csv.DictReader(open(tmp_path / "raters" / "Sam" / "citations.csv", encoding="utf-8")))) == 1
+
+
+def test_leave_one_out_and_rq3_helpers():
+    per = {"closed_book": {"a": 0, "b": 0, "c": 0}, "bm25_rag": {"a": 1, "b": 1, "c": 1}, "best_rag": {"a": 2, "b": 2, "c": 0}}
+    loo = hs.leave_one_out(per, ["a", "b", "c"])
+    assert loo["best_rag - closed_book"] == {"min": 1.0, "max": 2.0}                 # dropping c gives 2.0, dropping a or b gives 1.0
+    assert loo["bm25_rag - closed_book"] == {"min": 1.0, "max": 1.0}
+    pairs = [[0.1, 9], [0.4, 9], [0.7, 9], [0.9, 9], [0.2, 9], [0.5, 9]]               # the stored ratings (9) are ignored
+    order = [("q1", "bm25_rag"), ("q2", "bm25_rag"), ("q3", "bm25_rag"), ("q1", "best_rag"), ("q2", "best_rag"), ("q3", "best_rag")]
+    human = {k: v for k, v in zip(order, [0, 1, 1, 2, 0, 2])}
+    r = hs.rq3_with_human(pairs, order, human)
+    assert r["n"] == 6 and -1 <= r["spearman"] <= 1 and r["ci95_approx"][0] < r["spearman"] < r["ci95_approx"][1]
+    perfect = hs.rq3_with_human(pairs, order, {k: p[0] * 10 for k, p in zip(order, pairs)})
+    assert abs(perfect["spearman"] - 1) < 1e-9

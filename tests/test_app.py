@@ -182,8 +182,10 @@ def test_headline_numbers_come_from_the_real_result_files():
     if rag is None or ret is None:
         pytest.skip("result files not present")
     tiles = {t[0]: t for t in backend.headline_numbers()}
-    best = rag["scores"]["configs"]["best_rag"]["mean_rating"]
+    human = backend.load_human_scores()                                   # the human ratings win when they exist
+    best = (human["configs"] if human else rag["scores"]["configs"])["best_rag"]["mean_rating"]
     assert tiles["Answer quality, best-RAG (0 to 2)"][1] == f"{best:.2f}"
+    assert ("human" in tiles["Answer quality, best-RAG (0 to 2)"][2]) == bool(human)
     assert tiles["Unanswerable declined"][1] == "6/6"
     top = max(v["nDCG@10"] for v in ret["overall"].values())
     assert tiles["Best retrieval"][1] == f"{top:.3f}"
