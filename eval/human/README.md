@@ -45,8 +45,19 @@ sentence cites several passages, each passage counts if it supports its own part
 
 ## How to run it
 
+From the project folder (`IRFinalProject`). The project's virtual environment is the `.venv` folder inside it.
+
+```powershell
+# PowerShell on Windows (works without activating anything)
+.\.venv\Scripts\python.exe -m streamlit run eval/human_app.py
+
+# or activate once, then plain `streamlit` works in that window
+.\.venv\Scripts\Activate.ps1
+streamlit run eval/human_app.py
+# if PowerShell blocks the script ("execution policy"): Set-ExecutionPolicy -Scope Process RemoteSigned
+```
 ```bash
-# from the project folder, with the virtual environment active (see the main README)
+# Git Bash / macOS / Linux, with the environment active
 streamlit run eval/human_app.py
 ```
 
@@ -62,7 +73,7 @@ TRADEMESH_JUDGMENTS=eval/human/judgments streamlit run eval/judge_app.py --serve
 ```
 ```powershell
 # PowerShell
-$env:TRADEMESH_JUDGMENTS = "eval/human/judgments"; streamlit run eval/judge_app.py --server.port 8502
+$env:TRADEMESH_JUDGMENTS = "eval/human/judgments"; .\.venv\Scripts\python.exe -m streamlit run eval/judge_app.py --server.port 8502
 ```
 
 Pick your name in that app's sidebar. A second person needs their own sheet: `python eval/human_prepare.py --names TheirName --sheets-only`
@@ -73,6 +84,7 @@ Pick your name in that app's sidebar. A second person needs their own sheet: `py
 ```bash
 python eval/human_score.py                 # all raters found under eval/human/raters/
 python eval/human_score.py --raters Shashwat,Ruchir     # or choose raters
+# PowerShell without activating the environment:  .\.venv\Scripts\python.exe eval/human_score.py
 ```
 
 It refuses to score incomplete sheets (add `--allow-partial` only to check progress). It writes
