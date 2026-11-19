@@ -52,7 +52,7 @@ def hero() -> str:
             f"<span class=\"inl\" style=\"background-image:url('{img('nyse-sign.jpg')}')\"></span> "
             'Trust every <em>number</em>.</h1>'
             '<p class="tm-hero-p">Search 10-K filings, get a cited answer, and see which passage backs each claim.</p>'
-            f'<figure class="tm-hero-img"><img src="{img("hero-wall-street.jpg")}" alt="Wall Street seen from a rooftop, 1930s" loading="lazy"></figure></section>')
+            f'<figure class="tm-hero-img"><img src="{img("hero-wall-street.jpg")}" alt="Wall Street seen from a rooftop, 1930s"></figure></section>')
 
 
 def marquee(companies: list[tuple[str, str]]) -> str:
