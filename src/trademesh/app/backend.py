@@ -149,6 +149,19 @@ def load_rag_study() -> tuple[dict | None, str]:
     return out, ""
 
 
+def load_human_scores() -> dict | None:
+    """Blind human ratings of the RAG answers (eval/human_score.py), if they exist. None until a person has rated."""
+    for d in RESULT_DIRS:
+        f = d / "rag_scores_human.json"
+        if f.exists():
+            try:
+                data = json.loads(f.read_text(encoding="utf-8"))
+                return data if data.get("configs") else None
+            except Exception:   # a malformed file must never crash the app
+                return None
+    return None
+
+
 def load_graph(path: Path = GRAPH_PATH) -> tuple[dict | None, str]:
     return _load_json(path, _validate_graph)
 

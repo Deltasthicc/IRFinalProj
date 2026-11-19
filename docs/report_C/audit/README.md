@@ -1,6 +1,8 @@
 # Audit trail for the RAG answer ratings and citation checks (test split)
 
 **Everything in this folder is LLM-assisted. No human rated these answers or checked these citations.**
+A blind human re-rating is prepared in `eval/human/` (see `eval/human/README.md`); its results, when done, are written to
+`eval/out/rag_scores_human.json` and `docs/report_C/human_rating_results.md`, and these model-assisted files are kept for comparison.
 Both passes were made by the same language model (Claude), so agreement between them is a consistency
 check, not independent validation.
 

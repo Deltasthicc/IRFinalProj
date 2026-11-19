@@ -68,6 +68,7 @@ python -m pytest -q        # offline, no network, no key
 | `docs/report_A/`, `docs/report_B/` | report notes for Role A and the Report B sections |
 | `data/needs/` | 30 information needs (10 dev, 20 test), 10 unanswerable questions, 40 typo'd company names |
 | `eval/` | `entity_eval.py`, `rag_run.py`, `rag_sheets.py`, `rag_score.py`, `abstention_eval.py` |
+| `eval/human_*.py`, `eval/human/` | the blind **human rating** package: tool, blank sheets, scorer and step-by-step guide (`eval/human/README.md`) |
 | `docs/report_C/` | report drafts for Role C's sections and the model figure |
 | `tests/` | pytest suite and the clearly marked fixture |
 
@@ -93,7 +94,7 @@ python eval/rag_sheets.py --split test              # blind rating sheet + separ
 python eval/rag_score.py --split test               # scores from the human-filled sheets
 ```
 
-The scripts prepare the sheets and compute the scores; they never invent a rating. In the reported study the answer ratings, citation checks and retrieval judgments were made by a language model in two passes (disclosed in the report, audit files in `docs/report_C/audit/`), and no human validated them. A human re-rating is the main thing that would strengthen the results.
+The scripts prepare the sheets and compute the scores; they never invent a rating. In the reported study the answer ratings, citation checks and retrieval judgments were made by a language model in two passes (disclosed in the report, audit files in `docs/report_C/audit/`), and no human validated them. A blind human re-rating is prepared in `eval/human/` (run `streamlit run eval/human_app.py`; the guide is `eval/human/README.md`); once it is done, `python eval/human_score.py` writes the human scores and the app's Evaluation tab shows them.
 
 ## Credits
 

@@ -16,7 +16,7 @@ import streamlit as st  # noqa: E402
 
 from trademesh.app import ui  # noqa: E402
 from trademesh.app.backend import (EXAMPLES, AppState, graph_dot, headline_numbers, load_entity_eval, load_graph,  # noqa: E402
-                                   load_rag_study, load_results, load_state, load_vision, readiness)
+                                   load_human_scores, load_rag_study, load_results, load_state, load_vision, readiness)
 from trademesh.rag.llm import CacheMiss, LiveCallCapReached  # noqa: E402
 from trademesh.rag.pipeline import RagConfig, RagResult  # noqa: E402
 from trademesh.text import content_terms, kwic  # noqa: E402
@@ -308,8 +308,20 @@ def eval_rag() -> None:
         return
     import pandas as pd
     md(ui.heading("RAG answers", "flask", "20 test questions"))
-    md(ui.panel("Read this first", "All answer ratings and citation checks are LLM-assisted (two passes by one language model); no human validated them. "
-                "20 test questions, one small generator (gemini-3.5-flash-lite).", alert=True))
+    human = load_human_scores()
+    if human:
+        hc = human["configs"]
+        md(ui.panel("Human ratings (blind)", f'Rated by {ui.esc(", ".join(human["rated_by"]))}, who did not see which system wrote each answer. '
+                    "These are the ratings to cite; the model-assisted ratings further down are kept for comparison.")
+           + ui.panel("Mean answer rating by humans (0 to 2)", ui.bar_rows([(CONFIG_NAMES[k], hc[k]["mean_rating"], f'{hc[k]["mean_rating"]:.2f}')
+                                                                        for k in CONFIG_NAMES if k in hc], vmax=2.0)))
+        agree = human.get("vs_model") or {}
+        if agree:
+            first = next(iter(agree.values()))
+            st.caption(f"Human vs model-assisted ratings: {first['identical']:.0%} identical, Cohen's kappa {first['kappa']:.3f} on {first['n']} answers.")
+    else:
+        md(ui.panel("Read this first", "All answer ratings and citation checks below are LLM-assisted (two passes by one language model); no human validated them. "
+                    "20 test questions, one small generator (gemini-3.5-flash-lite). A blind human re-rating is prepared in eval/human/.", alert=True))
     pct = lambda x: "n/a" if x is None else f"{x:.3f}"
     cfgs = study["scores"]["configs"]
     md(ui.panel("Mean answer rating (0 to 2)", ui.bar_rows([(CONFIG_NAMES[k], cfgs[k]["mean_rating"], f'{cfgs[k]["mean_rating"]:.2f}')

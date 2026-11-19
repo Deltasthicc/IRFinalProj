@@ -238,3 +238,30 @@ def test_example_questions_are_the_demo_cache_questions():
     assert len(EXAMPLES) == 4
     for label, q in EXAMPLES:
         assert q in known, f"{label}: {q!r} is not a demo/study question, so it would not be cached"
+
+
+def test_human_scores_loader_and_evaluation_panel(monkeypatch, tmp_path):
+    pytest.importorskip("streamlit")
+    import shutil
+
+    from streamlit.testing.v1 import AppTest
+    from trademesh.app import backend
+
+    monkeypatch.setattr(backend, "RESULT_DIRS", [tmp_path])
+    assert backend.load_human_scores() is None
+    (tmp_path / "rag_scores_human.json").write_text("{not json", encoding="utf-8")
+    assert backend.load_human_scores() is None                                    # malformed: ignored, never raised
+    for name in ("rag_scores_test.json", "rag_bootstrap_test.json", "abstention_eval.json", "abstention_scoreonly.json"):
+        shutil.copy(backend.ROOT / "eval" / "out" / name, tmp_path / name)
+    fake = {"split": "test", "rated_by": ["Sam"], "n_questions": 20,
+            "configs": {"closed_book": {"mean_rating": 1.0}, "bm25_rag": {"mean_rating": 1.2}, "best_rag": {"mean_rating": 1.9}},
+            "vs_model": {"Sam vs model pass AI": {"n": 60, "identical": 0.8, "kappa": 0.7}}}
+    (tmp_path / "rag_scores_human.json").write_text(json.dumps(fake), encoding="utf-8")
+    assert backend.load_human_scores()["rated_by"] == ["Sam"]
+    monkeypatch.setenv("LLM_PROVIDER", "stub")
+    monkeypatch.setenv("LLM_CACHE_DIR", str(tmp_path / "cache"))
+    at = AppTest.from_file(str(APP), default_timeout=90).run()
+    assert not at.exception
+    text = _md(at)
+    assert "Human ratings (blind)" in text and "Rated by Sam" in text and "1.90" in text
+    assert "Read this first" not in text                                          # the model-only notice is replaced
