@@ -15,8 +15,8 @@
     },
     "bm25_rag": {
       "n_rated": 20,
-      "mean_rating": 0.9,
-      "share_rated_2": 0.05,
+      "mean_rating": 0.8,
+      "share_rated_2": 0.0,
       "citation_precision": 0.9428571428571428,
       "n_citations_judged": 35,
       "number_grounding": 1.0,
@@ -24,7 +24,7 @@
     },
     "best_rag": {
       "n_rated": 20,
-      "mean_rating": 1.15,
+      "mean_rating": 1.2,
       "share_rated_2": 0.2,
       "citation_precision": 0.9666666666666667,
       "n_citations_judged": 60,
@@ -35,76 +35,76 @@
   "n_questions": 20,
   "bootstrap": {
     "bm25_rag - closed_book": {
-      "mean_diff": 0.2,
+      "mean_diff": 0.1,
       "ci95": [
-        -0.1,
-        0.5
+        -0.15,
+        0.35
       ],
-      "better": 5,
+      "better": 4,
       "worse": 2,
-      "tied": 13
+      "tied": 14
     },
     "best_rag - closed_book": {
-      "mean_diff": 0.45,
+      "mean_diff": 0.5,
       "ci95": [
         0.2,
-        0.75
+        0.8
       ],
-      "better": 7,
+      "better": 8,
       "worse": 0,
-      "tied": 13
+      "tied": 12
     },
     "best_rag - bm25_rag": {
-      "mean_diff": 0.25,
+      "mean_diff": 0.4,
       "ci95": [
-        -0.1,
-        0.55
+        0.2,
+        0.6
       ],
-      "better": 7,
-      "worse": 1,
+      "better": 8,
+      "worse": 0,
       "tied": 12
     }
   },
   "leave_one_out": {
     "bm25_rag - closed_book": {
-      "min": 0.10526315789473684,
-      "max": 0.2631578947368421
+      "min": 0.05263157894736842,
+      "max": 0.15789473684210525
     },
     "best_rag - closed_book": {
-      "min": 0.3684210526315789,
-      "max": 0.47368421052631576
+      "min": 0.42105263157894735,
+      "max": 0.5263157894736842
     },
     "best_rag - bm25_rag": {
-      "min": 0.21052631578947367,
-      "max": 0.3684210526315789
+      "min": 0.3684210526315789,
+      "max": 0.42105263157894735
     }
   },
   "rq3_human": {
-    "spearman": -0.07885294565234972,
+    "spearman": 0.0,
     "n": 40,
     "ci95_approx": [
-      -0.39741247496133264,
-      0.25666819832664717
+      -0.3288652263592654,
+      0.3288652263592654
     ]
   },
   "vs_model": {
     "shash vs model pass AI": {
       "n": 60,
-      "identical": 0.43333333333333335,
-      "kappa": 0.17241379310344832,
-      "mean_human": 0.9166666666666666,
+      "identical": 0.4666666666666667,
+      "kappa": 0.225181598062954,
+      "mean_human": 0.9,
       "mean_model": 1.4333333333333333,
-      "human_higher": 1,
-      "human_lower": 33
+      "human_higher": 0,
+      "human_lower": 32
     },
     "shash vs model pass AI2": {
       "n": 60,
-      "identical": 0.5,
-      "kappa": 0.21908893709327543,
-      "mean_human": 0.9166666666666666,
+      "identical": 0.5333333333333333,
+      "kappa": 0.27272727272727265,
+      "mean_human": 0.9,
       "mean_model": 1.3666666666666667,
-      "human_higher": 1,
-      "human_lower": 29
+      "human_higher": 0,
+      "human_lower": 28
     }
   },
   "retrieval_validation": null

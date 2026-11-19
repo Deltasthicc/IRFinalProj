@@ -7,31 +7,31 @@ Rated by shash, each blind to which system wrote an answer (the order of the thr
 | Configuration | Mean rating (0-2) | Rated 2 | Citation precision | Number grounding |
 |---|---|---|---|---|
 | Closed-book | 0.700 | 0% | n/a (0 judged) | n/a |
-| BM25-RAG | 0.900 | 5% | 0.943 (35 judged) | 1.000 |
-| Best-RAG (hybrid + rerank) | 1.150 | 20% | 0.967 (60 judged) | 1.000 |
+| BM25-RAG | 0.800 | 0% | 0.943 (35 judged) | 1.000 |
+| Best-RAG (hybrid + rerank) | 1.200 | 20% | 0.967 (60 judged) | 1.000 |
 
 Paired bootstrap over questions (10,000 resamples, difference in mean rating, 95% interval):
 
 | Comparison | Difference | 95% interval | Better / worse / tied |
 |---|---|---|---|
-| BM25-RAG minus Closed-book | +0.200 | [-0.100, +0.500] | 5 / 2 / 13 |
-| Best-RAG (hybrid + rerank) minus Closed-book | +0.450 | [+0.200, +0.750] | 7 / 0 / 13 |
-| Best-RAG (hybrid + rerank) minus BM25-RAG | +0.250 | [-0.100, +0.550] | 7 / 1 / 12 |
+| BM25-RAG minus Closed-book | +0.100 | [-0.150, +0.350] | 4 / 2 / 14 |
+| Best-RAG (hybrid + rerank) minus Closed-book | +0.500 | [+0.200, +0.800] | 8 / 0 / 12 |
+| Best-RAG (hybrid + rerank) minus BM25-RAG | +0.400 | [+0.200, +0.600] | 8 / 0 / 12 |
 
 Leave-one-question-out range of each mean difference (a robustness check; no question is treated specially):
 
-* BM25-RAG minus Closed-book: +0.105 to +0.263
-* Best-RAG (hybrid + rerank) minus Closed-book: +0.368 to +0.474
-* Best-RAG (hybrid + rerank) minus BM25-RAG: +0.211 to +0.368
+* BM25-RAG minus Closed-book: +0.053 to +0.158
+* Best-RAG (hybrid + rerank) minus Closed-book: +0.421 to +0.526
+* Best-RAG (hybrid + rerank) minus BM25-RAG: +0.368 to +0.421
 
-**Does better retrieval give better answers (RQ3), with human ratings.** Spearman correlation between retrieval quality (nDCG@5 of the retriever behind each RAG configuration, from the model-assisted relevance judgments) and the human answer rating: -0.079 over 40 (question, configuration) pairs, approximate 95% interval [-0.40, +0.26] (Fisher z). No relation can be claimed.
+**Does better retrieval give better answers (RQ3), with human ratings.** Spearman correlation between retrieval quality (nDCG@5 of the retriever behind each RAG configuration, from the model-assisted relevance judgments) and the human answer rating: +0.000 over 40 (question, configuration) pairs, approximate 95% interval [-0.33, +0.33] (Fisher z). No relation can be claimed.
 
 ## Comparison with the earlier model-assisted ratings
 
 | Pair | Answers | Identical | Cohen's kappa | Mean (human / model) | Human higher / lower |
 |---|---|---|---|---|---|
-| shash vs model pass AI | 60 | 43% | 0.172 | 0.92 / 1.43 | 1 / 33 |
-| shash vs model pass AI2 | 60 | 50% | 0.219 | 0.92 / 1.37 | 1 / 29 |
+| shash vs model pass AI | 60 | 47% | 0.225 | 0.90 / 1.43 | 0 / 32 |
+| shash vs model pass AI2 | 60 | 53% | 0.273 | 0.90 / 1.37 | 0 / 28 |
 
 ## Citation precision and number grounding
 
