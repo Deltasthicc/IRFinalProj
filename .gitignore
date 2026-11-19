@@ -16,3 +16,6 @@ data/judgments/dryrun/
 
 data/raw/
 data/raw_html/
+
+# dense embeddings are recomputed on first use and cached here (18 MB for the corpus); not committed
+cache/emb_*.npy

@@ -23,7 +23,7 @@ from trademesh.text import content_terms, kwic  # noqa: E402
 
 st.set_page_config(page_title="TradeMesh", page_icon="■", layout="wide")
 
-@st.cache_resource(show_spinner="Building the search indexes for the filings (first load only, about 15 seconds)")
+@st.cache_resource(show_spinner="Building the search indexes for the filings (first load only: about 15 seconds, about a minute with the dense model)")
 def get_state() -> AppState:
     return load_state()
 
