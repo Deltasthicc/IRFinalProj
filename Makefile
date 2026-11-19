@@ -1,5 +1,5 @@
 # ---- Role A: corpus, indexes, graph ----
-.PHONY: data graph test run entity-eval abstention rag-study docker pools judge tune retrieval-dev retrieval-test ablation-dev pool-bias cost
+.PHONY: human-rate human-score data graph test run entity-eval abstention rag-study docker pools judge tune retrieval-dev retrieval-test ablation-dev pool-bias cost
 
 test:
 	python -m pytest -q
@@ -56,3 +56,9 @@ graph:            ## company mention graph, PageRank and HITS -> data/graph/comp
 freeze-results:   ## copy the locked results where the app's Evaluation tab (and Docker) can read them
 	mkdir -p data/results
 	cp eval/out/retrieval_test.json eval/out/hypotheses_test.json eval/out/ablation_test.json data/results/
+
+human-rate:       ## blind human rating of the RAG answers (guide: eval/human/README.md)
+	streamlit run eval/human_app.py
+
+human-score:      ## score the human ratings and compare with the model-assisted ones
+	python eval/human_score.py

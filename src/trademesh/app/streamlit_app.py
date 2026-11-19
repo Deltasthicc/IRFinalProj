@@ -1,92 +1,163 @@
-"""TradeMesh Streamlit app: Ask | Search | Filing graph | Pages.
+"""TradeMesh Streamlit app: Ask | Search | Graph | Pages | Evaluation | System.
 
 Run:  streamlit run src/trademesh/app/streamlit_app.py
-A tab whose back end is not ready shows a "not available yet" message and never crashes.
+Look: dark glass, "cinematic" (see ui.py and cinematic.css). A tab whose back end is not ready shows a
+"no signal" panel and never crashes.
 """
 from __future__ import annotations
 
 import sys
+from collections import Counter
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 import streamlit as st  # noqa: E402
 
-from trademesh.app import style  # noqa: E402
-from trademesh.app.backend import (graph_dot, highlight_citations, load_graph, md_safe, load_rag_study, load_results,  # noqa: E402
-                                   load_state, load_vision, AppState)
+from trademesh.app import ui  # noqa: E402
+from trademesh.app.backend import (EXAMPLES, AppState, graph_dot, headline_numbers, load_entity_eval, load_graph,  # noqa: E402
+                                   load_human_scores, load_rag_study, load_results, load_state, load_vision, readiness)
 from trademesh.rag.llm import CacheMiss, LiveCallCapReached  # noqa: E402
 from trademesh.rag.pipeline import RagConfig, RagResult  # noqa: E402
 from trademesh.text import content_terms, kwic  # noqa: E402
 
-st.set_page_config(page_title="TradeMesh", page_icon="📈", layout="wide")
+st.set_page_config(page_title="TradeMesh", page_icon="■", layout="wide")
 
-
-@st.cache_resource
+@st.cache_resource(show_spinner="Building the search indexes for the filings (first load only, about 15 seconds)")
 def get_state() -> AppState:
     return load_state()
 
 
-def passage_card(label: str, p, snippet: str | None = None, expanded: bool = False, score: float | None = None,
-                 explain: list[tuple[str, float]] | None = None):
-    where = "Other sections" if p.item == "X" else f"Item {p.item}"
-    title = f"{label} {p.ticker} | FY{p.fiscal_year} | {where} | {p.kind}" + (f" | score {score:.3f}" if score is not None else "")
-    with st.expander(title, expanded=expanded):
-        st.markdown(md_safe(snippet if snippet else p.text))
-        st.caption(f"passage id: {p.id}" + (f" | page {p.page}" if p.page else ""))
-        if explain:
-            st.markdown("**Why this score** (each query term's BM25 contribution)")
-            import pandas as pd
-            st.bar_chart(pd.DataFrame({"contribution": [w for _, w in explain]}, index=[t for t, _ in explain]), height=140)
+def md(html: str) -> None:
+    st.markdown(html, unsafe_allow_html=True)
 
 
-def trust_panel(res: RagResult, tau: float, state: AppState):
-    st.subheader("Trust panel")
+# ---------------------------------------------------------------- header
+
+def status_chips(state: AppState) -> str:
+    live = not state.llm.is_stub
+    return ui.chips([
+        ("Corpus", "Test fixture" if state.is_fixture else "10-K filings", "bad" if state.is_fixture else "on"),
+        ("Retrievers", "Dev stub" if state.using_stub else f"{len(state.retrievers)} live", "bad" if state.using_stub else "on"),
+        ("LLM", f"{state.llm.provider} / {state.llm.model}" if live else "Stub", "on" if live else "bad"),
+        ("Passages", f"{len(state.passages):,}", ""),
+        ("Companies", str(len(state.companies)), ""),
+        ("LLM calls", f"{state.llm.live_calls} live / {state.llm.cache_hits} cache", ""),
+    ])
+
+
+def header(state: AppState):
+    """Draw the hero, call-to-action buttons, marquee and status; return the chip slot so call counts refresh after a run."""
+    md(ui.css() + ui.hero())
+    c1, c2, _ = st.columns([1.1, 1.5, 3])
+    c1.button("Ask with a typo", type="primary", key="cta_typo", width="stretch",
+              on_click=lambda: st.session_state.update(ask_q=EXAMPLES[0][1]))
+    c2.button("Compare two companies", key="cta_compare", width="stretch",
+              on_click=lambda: st.session_state.update(ask_q=EXAMPLES[1][1]))
+    md(ui.marquee([(c["ticker"], c["name"]) for c in state.companies]))
+    slot = st.empty()
+    slot.markdown(status_chips(state), unsafe_allow_html=True)
+    md(ui.hazard(state.warnings))
+    return slot
+
+
+# ---------------------------------------------------------------- ask
+
+def ask_pipeline(res: RagResult) -> str:
+    v = res.verifier
+    tickers = ", ".join(dict.fromkeys(m.ticker for m in res.mentions)) or "none"
+    llm_called = res.cached is not None
+    verdict = ("skip", "-") if v is None else (("ok", "Pass") if v.passed else ("warn", "Flag"))
+    return ui.pipeline([
+        ("Query", f"{len(res.question.split())} words", "ok"),
+        ("Entity", tickers + (f" / {len(res.corrections)} fixed" if res.corrections else ""), "ok" if res.mentions else "skip"),
+        ("Retrieve", f"{len(res.passages)} passages", "ok" if res.passages else "warn"),
+        ("Context", f"P1-P{len(res.passages)}" if res.passages else "-", "ok" if res.passages else "skip"),
+        ("LLM", ("Cache" if res.cached else "Live") if llm_called else "Skipped", "ok" if llm_called else "skip"),
+        ("Verify", verdict[1], verdict[0]),
+        ("Decision", "Abstain" if res.abstained else "Answer", "warn" if res.abstained else "ok"),
+    ])
+
+
+def trust_panel(res: RagResult, tau: float, state: AppState) -> None:
+    md('<span class="tm-pin"></span>' + ui.heading("Trust panel", "shield", "verifier"))
+    scale = max(res.confidence, tau, 1e-9) * 1.3
+    md(ui.panel("Retrieval score (for inspection)",
+                ui.bar(res.confidence / scale, marker=(tau / scale) if tau > 0 else None) +
+                f'<span style="font-size:.78rem">score <b>{res.confidence:.2f}</b> / tau <b>{"off" if tau == 0 else f"{tau:.2f}"}</b></span>'
+                '<br><span style="font-size:.72rem;opacity:.65">Not used to decide abstention: in our study this score did not separate '
+                'answerable from unanswerable questions. The system abstains when the model itself says the evidence is insufficient.</span>'))
     if res.abstained:
-        st.warning(f"Abstained: {res.abstain_reason}")
-    cols = st.columns(3)
-    cols[0].metric("Retrieval score", f"{res.confidence:.3f}",
-                   help="Shown for inspection only, NOT used to decide abstention. Best score divided by the number of content words in the query. In our abstention study this score did not "
-                        "separate answerable from unanswerable questions (Evaluation tab, Abstention), so it is shown for inspection only.")
-    cols[1].metric("Threshold tau", "off" if tau == 0 else f"{tau:.3f}",
-                   help="tau was tuned on the dev questions and came out as 0, which switches the score rule off.")
-    cols[2].metric("Answer source", "cache" if res.cached else ("live call" if res.cached is False else "none"))
-    st.caption("The system abstains when the model itself answers INSUFFICIENT EVIDENCE.")
+        md(ui.panel("Abstained", esc_reason(res), alert=True))
     v = res.verifier
     if v is None:
-        st.info("No verifier result: the model was not called or this is a closed-book answer.")
+        md(ui.checks([("Verifier", None, "no model answer to check (closed-book, or abstained before the call)")]))
         return
     if res.abstained and res.model_said_insufficient:
-        st.success("The model declined to answer (nothing to verify).")
+        md(ui.checks([("Model declined", True, "nothing to verify")]))
         return
-    (st.success if v.passed else st.error)("Verifier: all checks passed" if v.passed else "Verifier: FLAGGED")
-    rows = [("Cited passages exist", not v.invalid_cites, ", ".join(f"[P{i}]" for i in v.cited) or "none cited"),
-            ("Answer has a citation", bool(v.cited), ""),
-            ("Every sentence cited", not v.uncited_sentences, f"{len(v.uncited_sentences)} uncited" if v.uncited_sentences else "")]
+    md(ui.checks([
+        ("Citations exist", not v.invalid_cites, ", ".join(f"P{i}" for i in v.cited) or "none cited"),
+        ("Answer cited", bool(v.cited), ""),
+        ("Every sentence cited", not v.uncited_sentences, f"{len(v.uncited_sentences)} without citation" if v.uncited_sentences else ""),
+        ("Numbers grounded", (not v.ungrounded) if v.numbers else None, "" if v.numbers else "no numbers in answer"),
+    ]))
     if v.numbers:
-        rows.append(("Numbers found in cited passages", not v.ungrounded,
-                     "; ".join(f"{n.raw}: " + (("in " + ",".join(f"[P{i}]" for i in n.grounded_in)) if n.grounded_in else
-                               ("only in uncited " + ",".join(f"[P{i}]" for i in n.in_uncited) if n.in_uncited else "not found"))
-                               for n in v.numbers)))
+        chips = "".join(
+            f'<span class="tm-num{"" if n.grounded_in else " bad"}">{ui.esc(n.raw)} '
+            f'{"in " + "/".join(f"P{i}" for i in n.grounded_in) if n.grounded_in else ("only in uncited P" + "/".join(map(str, n.in_uncited)) if n.in_uncited else "not found")}</span>'
+            for n in v.numbers)
+        md(ui.panel("Numbers in the answer", chips))
+    md(ui.panel("Run", f'Model {ui.esc(res.model or "n/a")}<br>Source {"cache" if res.cached else "live call"}<br>Mode {ui.esc(res.mode)}'
+                + ('<br><span style="opacity:.65">Stub LLM: this verifies a quoted sentence, not a model answer.</span>' if state.llm.is_stub else "")))
+
+
+def esc_reason(res: RagResult) -> str:
+    return f'<span style="font-size:.9rem">{ui.esc(res.abstain_reason)}</span>'
+
+
+def evidence(res: RagResult) -> None:
+    md(ui.heading("Evidence", "db", f"{len(res.passages)} passages"))
+    if not res.passages:
+        md(ui.panel("No evidence", "No passage was retrieved."))
+        return
+    cited = set(res.verifier.cited) if res.verifier else set()
+    top = max((h.score for h in res.hits), default=1.0) or 1.0
+
+    def card(i: int) -> str:
+        return ui.passage_card(f"P{i}", res.passages[i - 1], res.hits[i - 1].score, top,
+                               cited=i in cited, dim=bool(cited) and i not in cited)
+
+    if res.mode == "compare":
+        cols = st.columns(len(res.by_company))
+        for col, (ticker, labels) in zip(cols, res.by_company.items()):
+            with col:
+                md(f'<span class="tm-tag">{ui.esc(ticker)}</span>' + "".join(card(i) for i in labels))
     else:
-        rows.append(("Numbers found in cited passages", True, "no numbers in the answer"))
-    for name, ok, detail in rows:
-        st.markdown(f"- {'PASS' if ok else '**FLAG**'} {name}" + (f" ({detail})" if detail else ""))
-    if state.llm.is_stub:
-        st.caption("Stub LLM in use: this panel verifies a quoted sentence, not a model answer.")
+        md("".join(card(i) for i in range(1, len(res.passages) + 1)))
 
 
-def tab_ask(state: AppState, cfg: RagConfig, retriever: str, use_reranker: bool):
-    q = st.text_input("Ask about the filings", placeholder="e.g. How does Tesla describe supplier concentration risk?", key="ask_q")
-    c1, c2 = st.columns(2)
-    closed = c1.toggle("Closed-book (no passages, same model)", value=False,
-                       help="The baseline from the RAG study: the model answers from memory, with no evidence and no verification.")
-    force_compare = c2.toggle("Compare mode", value=False, help="One sub-query per company. Switches on by itself when 2+ companies are named.")
+def corrected(typed: str, name: str) -> str:
+    return (f'<div class="tm-panel alert">{ui.icon("warn", 16)} Corrected &nbsp;<b>{ui.esc(typed)}</b> '
+            f'&gt;&gt;&gt; <b>{ui.esc(name)}</b></div>')
+
+
+def tab_ask(state: AppState, cfg: RagConfig, retriever: str, use_reranker: bool) -> None:
+    md(ui.heading("Ask the filings", "chat", "cited and verified"))
+    cols = st.columns(len(EXAMPLES))
+    for col, (label, q) in zip(cols, EXAMPLES):
+        col.button(label, key=f"ex_{label}", width="stretch",
+                   on_click=lambda q=q: st.session_state.update(ask_q=q))
+    q = st.text_input("Question", placeholder="e.g. How does Tesla describe supplier concentration risk?", key="ask_q")
+    c1, c2, _ = st.columns([2, 2, 3])
+    closed = c1.toggle("Closed-book", help="Same model, no passages: the no-evidence baseline of the RAG study.")
+    force_compare = c2.toggle("Compare", help="One sub-query per company. Switches on by itself when 2+ companies are named.")
     if not q.strip():
+        md(ui.empty_state("Awaiting query", "Pick an example above or type a question", "search"))
         return
     pipe = state.pipeline(retriever, cfg, use_reranker)
     try:
-        with st.spinner("Retrieving and answering..."):
+        with st.spinner("Retrieving, answering, verifying"):
             res = pipe.answer(q, closed_book=closed, compare=True if force_compare else None)
     except CacheMiss:
         st.error("This question is not in the answer cache and LLM_OFFLINE=1 is set. Unset it to make a live call.")
@@ -99,133 +170,170 @@ def tab_ask(state: AppState, cfg: RagConfig, retriever: str, use_reranker: bool)
         return
 
     for typed, name in res.corrections:
-        st.info(f"Did you mean **{name}**? Searching for it instead of '{typed}'.")
-    st.caption(f"Mode: {res.mode} | model: {res.model or 'n/a'} | {state.llm.usage_line()}")
-
+        md(corrected(typed, name))
     if res.mode == "closed_book":
-        st.subheader("Answer (closed-book, unverified)")
-        st.warning("No evidence was used. Treat this as the baseline, not as a sourced answer.")
-        st.markdown(md_safe(res.answer))
+        md(ui.panel("Closed-book / no evidence / unverified", f'<div class="tm-answer">{ui.cite_html(res.answer)}</div>', alert=True))
         return
-
-    st.subheader("Answer")
-    if res.abstained:
-        st.error("INSUFFICIENT EVIDENCE: the system declined to answer.")
-        if res.answer and res.answer.strip().upper() != "INSUFFICIENT EVIDENCE":
-            with st.expander("What the model wrote before it was withheld"):
-                st.markdown(highlight_citations(res.answer))
-    else:
-        st.markdown(highlight_citations(res.answer))
-
+    md(ask_pipeline(res))
     left, right = st.columns([3, 2])
     with left:
-        st.subheader("Evidence")
-        cited = set(res.verifier.cited) if res.verifier else set()
-        if res.mode == "compare":
-            cols = st.columns(len(res.by_company))
-            for col, (ticker, labels) in zip(cols, res.by_company.items()):
-                with col:
-                    st.markdown(f"**{ticker}**")
-                    for i in labels:
-                        passage_card(f"[P{i}]", res.passages[i - 1], expanded=i in cited, score=res.hits[i - 1].score)
+        md(ui.heading("Answer", "chat"))
+        if res.abstained:
+            md(ui.panel("Abstained", '<div class="tm-answer"><b>Insufficient evidence.</b> The system declined to answer.</div>', alert=True))
+            if res.answer and res.answer.strip().upper() != "INSUFFICIENT EVIDENCE":
+                md(ui.panel("What the model wrote before it was withheld", f'<div class="tm-answer" style="font-size:1rem">{ui.cite_html(res.answer)}</div>'))
         else:
-            for i, p in enumerate(res.passages, 1):
-                passage_card(f"[P{i}]", p, expanded=i in cited, score=res.hits[i - 1].score)
-        if not res.passages:
-            st.write("No passages were retrieved.")
+            md(ui.panel("Answer", f'<div class="tm-answer">{ui.cite_html(res.answer)}</div>'))
+        evidence(res)
     with right:
         trust_panel(res, cfg.tau, state)
 
 
-def tab_search(state: AppState, cfg: RagConfig):
-    q = st.text_input("Search query", key="search_q", placeholder="e.g. supplier concentration")
+# ---------------------------------------------------------------- search
+
+def tab_search(state: AppState) -> None:
+    md(ui.heading("Search engine", "search", "side by side"))
+    q = st.text_input("Query", key="search_q", placeholder="e.g. supplier concentration")
     names = list(state.retrievers)
     preset = [n for n in ("bm25", "tfidf", "hybrid") if n in names][:2] or names[:1]
-    chosen = st.multiselect("Retrievers (pick up to 3 to compare side by side)", names, default=preset, max_selections=3)
-    companies = ["All"] + sorted({p.ticker for p in state.passages})
-    ticker = st.selectbox("Company filter", companies)
-    k = st.slider("Results", 3, 20, 8)
+    c1, c2, c3 = st.columns([3, 2, 1])
+    chosen = c1.multiselect("Retrievers (up to 3)", names, default=preset, max_selections=3)
+    ticker = c2.selectbox("Company", ["All"] + sorted({p.ticker for p in state.passages}))
+    k = c3.number_input("Top K", 3, 20, 8)
     if not q.strip() or not chosen:
+        md(ui.empty_state("No query", "Enter terms to rank passages", "search"))
         return
     mentions = state.matcher.find_mentions(q)
     for typed, name in state.matcher.corrections(mentions):
-        st.info(f"Did you mean **{name}**? ('{typed}')")
+        md(corrected(typed, name))
     by_id = {p.id: p for p in state.passages}
     terms = content_terms(state.matcher.strip_mentions(q, mentions) if mentions else q)
-    cols = st.columns(len(chosen))
-    for col, name in zip(cols, chosen):
+    for col, name in zip(st.columns(len(chosen)), chosen):
         with col:
-            st.markdown(f"**{name}**")
-            hits = state.retrievers[name].search(q, k=300)
+            retr = state.retrievers[name]
+            hits = retr.search(q, k=300)
             if ticker != "All":
                 hits = [h for h in hits if by_id[h.passage_id].ticker == ticker]
+            hits = hits[: int(k)]
+            md(ui.heading(name.split(" (")[0], "bars", f"{len(hits)} hits"))
             if not hits:
-                st.write("No results.")
-            explainer = getattr(state.retrievers[name], "explain", None)
-            for rank, h in enumerate(hits[:k], 1):
-                p = by_id[h.passage_id]
-                passage_card(f"#{rank}", p, snippet=kwic(p.text, terms), score=h.score,
-                             explain=explainer(q, h.passage_id) if explainer else None)
+                md(ui.panel("Result", "No results."))
+                continue
+            by_item = Counter(by_id[h.passage_id].item for h in hits)
+            md(ui.panel("Hits by 10-K item", ui.bar_rows([("Other" if it == "X" else f"Item {it}", n, str(n)) for it, n in by_item.most_common(6)])))
+            top = hits[0].score or 1.0
+            explainer = getattr(retr, "explain", None)
+            md("".join(ui.passage_card(f"#{r}", by_id[h.passage_id], h.score, top, snippet=kwic(by_id[h.passage_id].text, terms),
+                                       explain=explainer(q, h.passage_id) if explainer else None)
+                       for r, h in enumerate(hits, 1)))
 
 
-def tab_graph():
+# ---------------------------------------------------------------- graph / pages
+
+def tab_graph() -> None:
+    md(ui.heading("Filing graph", "graph", "who mentions whom"))
     graph, why = load_graph()
     if graph is None:
-        st.info(f"Filing graph is {why}")
+        md(ui.empty_state("No signal", f"Filing graph is {why}", "graph", "manhattan-1931.jpg"))
         return
-    st.caption("Edge A -> B: A's filing mentions B. PageRank, hubs and authorities are computed by Role A's code.")
-    import pandas as pd
-    df = pd.DataFrame(graph["nodes"]).sort_values("pagerank", ascending=False)
-    num_cols = [c for c in ("pagerank", "hub", "authority") if c in df.columns]
-    df[num_cols] = df[num_cols].astype(float).round(4)  # hide floating-point noise such as 2e-17
+    nodes = sorted(graph["nodes"], key=lambda n: -n["pagerank"])
     corr = graph.get("correlations") or {}
+    tiles = [("Companies", str(len(nodes)), "nodes", False),
+             ("Mentions", str(graph.get("params", {}).get("n_edges", len(graph["edges"]))), "edges", False),
+             ("Top PageRank", nodes[0]["ticker"] if nodes else "-", "highest score", False)]
     if corr:
-        c = st.columns(3)
-        c[0].metric("PageRank vs in-degree (Spearman)", f"{corr.get('pagerank_vs_indegree_spearman', float('nan')):.2f}",
-                    help="Near 1 means PageRank adds little beyond counting mentions (H10).")
-        c[1].metric("Authority vs in-degree (Spearman)", f"{corr.get('authority_vs_indegree_spearman', float('nan')):.2f}")
-        c[2].metric("Edges", graph.get("params", {}).get("n_edges", len(graph["edges"])))
-    st.dataframe(df, use_container_width=True, hide_index=True)
+        tiles.append(("PageRank vs in-degree", f'{corr.get("pagerank_vs_indegree_spearman", float("nan")):.2f}',
+                      "Spearman. Near 1 means PageRank adds little beyond counting mentions (H10)", False))
+    md(ui.tiles(tiles))
+    md(ui.panel("PageRank (top 12)", ui.bar_rows([(n["ticker"], n["pagerank"], f'{n["pagerank"]:.3f}') for n in nodes[:12]])))
     st.graphviz_chart(graph_dot(graph))
+    cols = [c for c in ("ticker", "pagerank", "hub", "authority", "in_degree") if c in nodes[0]]
+    md(ui.table([c.replace("_", " ") for c in cols],
+                [[round(n[c], 4) if isinstance(n[c], float) else n[c] for c in cols] for n in nodes]))
 
 
-def tab_pages():
+def tab_pages() -> None:
+    md(ui.heading("Page retrieval", "page", "vision track, gated"))
     vision, why = load_vision()
     if vision is None:
-        st.info(f"Page-image retrieval is {why} (the vision track is gated).")
+        md(ui.empty_state("No signal", f"Page-image retrieval is {why} (the vision track is gated)", "page", "manhattan-1931.jpg"))
         return
     for q in vision["queries"]:
-        st.markdown(f"**{q['query']}**")
+        md(f'<span class="tm-tag">{ui.esc(q["query"])}</span>')
         cols = st.columns(max(1, min(4, len(q["results"]))))
         for col, r in zip(cols, q["results"]):
             with col:
                 img = Path(r.get("image", ""))
                 if img.exists():
-                    st.image(str(img), caption=f"{r['ticker']} p.{r['page']} score {r['score']:.2f}")
+                    st.image(str(img), caption=f"{r['ticker']} p.{r['page']} / {r['score']:.2f}")
                 else:
-                    st.write(f"{r['ticker']} p.{r['page']} (image missing)")
+                    md(ui.panel(f"{r['ticker']} p.{r['page']}", "Image missing"))
 
 
-def tab_rag_eval():
-    study, why = load_rag_study()
-    if study is None:
-        st.info(f"RAG study results are {why}")
+# ---------------------------------------------------------------- evaluation
+
+CONFIG_NAMES = {"closed_book": "Closed-book", "bm25_rag": "BM25-RAG", "best_rag": "Best-RAG (hybrid + rerank)"}
+
+
+def eval_retrieval() -> None:
+    res, why = load_results()
+    if res is None:
+        md(ui.empty_state("No signal", f"Retrieval results are {why}", "bars", "manhattan-1931.jpg"))
         return
     import pandas as pd
-    st.warning("All answer ratings and citation checks are LLM-assisted (two passes by one language model); no human validated them. "
-               "20 test questions, one small generator (gemini-3.5-flash-lite).")
-    names = {"closed_book": "Closed-book", "bm25_rag": "BM25-RAG", "best_rag": "Best-RAG (hybrid + rerank)"}
+    md(ui.heading("Retrieval", "bars", "locked test run" if res["split"] == "test" else "development run"))
+    st.caption(f"{'Locked TEST run' if res['split'] == 'test' else 'DEVELOPMENT run (tuning data, not the final result)'}: "
+               f"{res['n_needs']} information needs, pooled judgments (LLM-assisted, no human validation), baseline {res['baseline']}.")
+    ndcg = sorted(((k, v["nDCG@10"]) for k, v in res["overall"].items() if "nDCG@10" in v), key=lambda t: -t[1])
+    md(ui.panel("nDCG@10 by system", ui.bar_rows([(k, v, f"{v:.3f}") for k, v in ndcg], vmax=1.0)))
+    cols = ["P@5", "P@10", "AP", "MRR", "nDCG@10", "bpref", "judged@10"]
+    df = pd.DataFrame(res["overall"]).T[[c for c in cols if c in next(iter(res["overall"].values()))]].rename(columns={"AP": "MAP"})
+    st.dataframe(df.style.format("{:.3f}"), width="stretch")
+    md(ui.heading("Precision-recall", "trend", "11-point interpolated"))
+    st.line_chart(pd.DataFrame(res["pr_11pt"], index=[f"{i / 10:.1f}" for i in range(11)]), height=260)
+    st.markdown("**By need type (nDCG@10)**")
+    st.dataframe(pd.DataFrame({s: {t: v["nDCG@10"] for t, v in d.items()} for s, d in res["by_type"].items()}).style.format("{:.3f}"),
+                 width="stretch")
+    if res.get("hypotheses"):
+        st.markdown("**Hypotheses, decided by rules fixed before the test run**")
+        h = pd.DataFrame(res["hypotheses"])
+        keep = [c for c in ("id", "comparison", "mean_diff", "ci_low", "ci_high", "wins", "losses", "ties", "verdict") if c in h]
+        st.dataframe(h[keep], width="stretch", hide_index=True)
+
+
+def eval_rag() -> None:
+    study, why = load_rag_study()
+    if study is None:
+        md(ui.empty_state("No signal", f"RAG study results are {why}", "flask", "manhattan-1931.jpg"))
+        return
+    import pandas as pd
+    md(ui.heading("RAG answers", "flask", "20 test questions"))
+    human = load_human_scores()
+    if human:
+        hc = human["configs"]
+        md(ui.panel("Human ratings (blind)", f'Rated by {ui.esc(", ".join(human["rated_by"]))}, who did not see which system wrote each answer. '
+                    "These are the ratings to cite; the model-assisted ratings further down are kept for comparison.")
+           + ui.panel("Mean answer rating by the human rater (0 to 2)", ui.bar_rows([(CONFIG_NAMES[k], hc[k]["mean_rating"], f'{hc[k]["mean_rating"]:.2f}')
+                                                                        for k in CONFIG_NAMES if k in hc], vmax=2.0)))
+        agree = human.get("vs_model") or {}
+        if agree:
+            first = next(iter(agree.values()))
+            st.caption(f"Human vs model-assisted ratings: {first['identical']:.0%} identical, Cohen's kappa {first['kappa']:.3f} on {first['n']} answers.")
+    else:
+        md(ui.panel("Read this first", "All answer ratings and citation checks below are LLM-assisted (two passes by one language model); no human validated them. "
+                    "20 test questions, one small generator (gemini-3.5-flash-lite). A blind human re-rating is prepared in eval/human/.", alert=True))
     pct = lambda x: "n/a" if x is None else f"{x:.3f}"
+    cfgs = study["scores"]["configs"]
+    md(ui.panel("Mean answer rating, model-assisted first pass (0 to 2)", ui.bar_rows([(CONFIG_NAMES[k], cfgs[k]["mean_rating"], f'{cfgs[k]["mean_rating"]:.2f}')
+                                                           for k in CONFIG_NAMES if k in cfgs], vmax=2.0)))
     rows = []
-    for k, label in names.items():
-        c = study["scores"]["configs"].get(k)
-        if not c:
-            continue
-        rows.append({"Configuration": label, "Mean rating (0-2)": f"{c['mean_rating']:.3f}", "Rated 2": f"{c['share_rated_2']:.0%}",
-                     "Citation precision": pct(c.get("citation_precision")), "Number grounding": pct(c.get("number_grounding")),
-                     "Verifier pass": pct(c.get("verifier_pass_rate"))})
-    st.markdown("**Answer quality on the 20 test questions**")
-    st.dataframe(pd.DataFrame(rows), use_container_width=True, hide_index=True)
+    for k, label in CONFIG_NAMES.items():
+        c = cfgs.get(k)
+        if c:
+            rows.append({"Configuration": label, "Mean rating (0-2)": f"{c['mean_rating']:.3f}", "Rated 2": f"{c['share_rated_2']:.0%}",
+                         "Citation precision": pct(c.get("citation_precision")), "Number grounding": pct(c.get("number_grounding")),
+                         "Verifier pass": pct(c.get("verifier_pass_rate"))})
+    st.dataframe(pd.DataFrame(rows), width="stretch", hide_index=True)
     if "kappa" in study["scores"]:
         st.caption(f"Cohen's kappa between the two rating passes: {study['scores']['kappa']:.3f} on {study['scores']['n_double_rated']} answers "
                    f"(same model both times, so probably optimistic).")
@@ -235,24 +343,25 @@ def tab_rag_eval():
         pairs = []
         for k, v in b["pairs"].items():
             a, c = k.split(" - ")
-            pairs.append({"Comparison": f"{names.get(a, a)} minus {names.get(c, c)}", "Difference": f"{v['mean_diff']:+.3f}",
+            pairs.append({"Comparison": f"{CONFIG_NAMES.get(a, a)} minus {CONFIG_NAMES.get(c, c)}", "Difference": f"{v['mean_diff']:+.3f}",
                           "95% interval": f"[{v['ci95'][0]:+.3f}, {v['ci95'][1]:+.3f}]",
                           "Better / worse / tied": f"{v['better']} / {v['worse']} / {v['tied']}",
                           "Excludes 0": "yes" if v["ci95"][0] > 0 or v["ci95"][1] < 0 else "no"})
-        st.dataframe(pd.DataFrame(pairs), use_container_width=True, hide_index=True)
-        bt = pd.DataFrame(b["by_type"]).T.rename(columns=names)
+        st.dataframe(pd.DataFrame(pairs), width="stretch", hide_index=True)
+        bt = pd.DataFrame(b["by_type"]).T.rename(columns=CONFIG_NAMES)
         n = bt.pop("n")
         bt.insert(0, "n", n.astype(int))
         st.markdown("**By question type** (6 to 7 questions each: descriptive only)")
-        st.dataframe(bt.style.format({c: "{:.2f}" for c in bt.columns if c != "n"}), use_container_width=True)
+        st.dataframe(bt.style.format({c: "{:.2f}" for c in bt.columns if c != "n"}), width="stretch")
 
 
-def tab_abstention_eval():
+def eval_abstention() -> None:
     study, why = load_rag_study()
     if study is None or not study.get("abstention"):
-        st.info(f"Abstention results are {why or 'not available yet: run eval/abstention_eval.py.'}")
+        md(ui.empty_state("No signal", f"Abstention results are {why or 'not available yet: run eval/abstention_eval.py.'}", "scales", "manhattan-1931.jpg"))
         return
     import pandas as pd
+    md(ui.heading("Abstention", "scales", "should the system decline?"))
 
     def rows(label, d):
         out = []
@@ -266,78 +375,81 @@ def tab_abstention_eval():
     if study.get("abstention_score_only"):
         table = rows(f"Retrieval score only (tau = {study['abstention_score_only']['tau']:.4f})", study["abstention_score_only"]) + table
     st.markdown("**Should the system abstain? Positive class = should abstain** (test: 20 answerable and 6 unanswerable questions)")
-    st.dataframe(pd.DataFrame(table), use_container_width=True, hide_index=True)
+    st.dataframe(pd.DataFrame(table), width="stretch", hide_index=True)
     st.caption("The retrieval score comes from rank fusion, so it reflects ranks, not match quality, and does not separate the two groups. "
                "6 of 6 correct abstentions has a 95% lower bound of about 0.54, and the unanswerable questions are easy (clearly outside the corpus). "
                "The score-only numbers were seen on the test items before the model-verdict rule was chosen.")
 
 
-def tab_eval():
-    retrieval, rag, abst = st.tabs(["Retrieval", "RAG answers", "Abstention"])
-    with retrieval:
-        tab_retrieval_eval()
-    with rag:
-        tab_rag_eval()
-    with abst:
-        tab_abstention_eval()
+def tab_eval() -> None:
+    retrieval, rag, abstention = st.tabs(["Retrieval", "RAG answers", "Abstention"])
+    for tab, fn in ((retrieval, eval_retrieval), (rag, eval_rag), (abstention, eval_abstention)):
+        with tab:
+            fn()
 
 
-def tab_retrieval_eval():
-    res, why = load_results()
-    if res is None:
-        st.info(f"Retrieval results are {why}")
-        return
-    import pandas as pd
-    st.caption(f"{'Locked TEST run' if res['split'] == 'test' else 'DEVELOPMENT run (tuning data, not the final result)'}: "
-               f"{res['n_needs']} information needs, pooled judgments (LLM-assisted, no human validation), baseline {res['baseline']}.")
-    cols = ["P@5", "P@10", "AP", "MRR", "nDCG@10", "bpref", "judged@10"]
-    df = pd.DataFrame(res["overall"]).T[[c for c in cols if c in next(iter(res["overall"].values()))]]
-    df = df.rename(columns={"AP": "MAP"})
-    st.dataframe(df.style.format("{:.3f}").highlight_max(axis=0, color="#D7ECFF"), use_container_width=True)
-    st.markdown("**11-point interpolated precision-recall**")
-    st.line_chart(pd.DataFrame(res["pr_11pt"], index=[f"{i / 10:.1f}" for i in range(11)]), height=260)
-    st.markdown("**By need type (nDCG@10)**")
-    st.dataframe(pd.DataFrame({s: {t: v["nDCG@10"] for t, v in d.items()} for s, d in res["by_type"].items()}).style.format("{:.3f}"),
-                 use_container_width=True)
-    if res.get("hypotheses"):
-        st.markdown("**Hypotheses, decided by rules fixed before the test run**")
-        h = pd.DataFrame(res["hypotheses"])
-        keep = [c for c in ("id", "comparison", "mean_diff", "ci_low", "ci_high", "wins", "losses", "ties", "verdict") if c in h]
-        st.dataframe(h[keep], use_container_width=True, hide_index=True)
+# ---------------------------------------------------------------- system
+
+def tab_system(state: AppState) -> None:
+    md(ui.heading("System", "cpu", "status, results, tools"))
+    md(ui.pipeline([
+        ("Query", "Entities + spelling", "ok"), ("Retrieve", "BM25 / dense / hybrid", "ok"),
+        ("Rerank", "Cross-encoder", "ok" if state.reranker else "skip"), ("Context", "Top-5 [P1..P5]", "ok"),
+        ("LLM", "Temp 0 / cached", "ok"), ("Verify", "Cites + numbers", "ok"), ("Abstain", "Model verdict", "ok"),
+    ]))
+
+    md(ui.heading("Readiness", "check", "what is wired up"))
+    md(ui.checks([(name, ok, detail) for name, ok, detail in readiness(state)]))
+
+    md(ui.heading("Results", "bars", "real numbers only"))
+    md(ui.tiles(headline_numbers(), bento=True))
+    ev = load_entity_eval()
+    if ev:
+        md(ui.panel("Entity accuracy by typo kind",
+                    ui.bar_rows([(k.capitalize(), v["correct"] / v["n"], f'{v["correct"]}/{v["n"]}') for k, v in ev["by_kind"].items()], vmax=1.0)))
+        if ev["failures"]:
+            md(ui.panel("Missed", " ".join(f'<span class="tm-num bad">{ui.esc(f["typo"])} &gt; {ui.esc(f["expected"])}</span>' for f in ev["failures"]), alert=True))
+
+    md(ui.heading("Typo lab", "target", "try the spelling module"))
+    t = st.text_input("Type a company name or ticker, misspelt on purpose", key="typo_q", placeholder="e.g. Micorsoft")
+    if t.strip():
+        m = state.matcher.match_string(t)
+        if m:
+            md(ui.panel("Match", f'<span class="tm-answer"><b>{ui.esc(t)}</b> &gt;&gt;&gt; <b>{ui.esc(state.matcher.names[m.ticker])}</b> ({ui.esc(m.ticker)})</span>'
+                                 f'<br><span style="font-size:.78rem;opacity:.7">Edits {m.distance} / Jaccard {m.jaccard:.2f} / via {ui.esc(m.surface)}</span>'))
+        else:
+            md(ui.panel("No match", f"Nothing within 2 edits (1 for short strings). The dictionary has {len(state.companies)} companies.", alert=True))
 
 
-def main():
-    st.markdown(style.CSS, unsafe_allow_html=True)
+# ---------------------------------------------------------------- main
+
+def main() -> None:
     state = get_state()
-    st.markdown(style.hero(len(state.passages), len(state.companies), state.is_fixture, len(state.retrievers)), unsafe_allow_html=True)
-    for w in state.warnings:
-        st.warning(w)
-
     with st.sidebar:
-        st.header("Settings")
+        md('<span class="tm-tag">Controls</span>')
         names = list(state.retrievers)
         default = next((n for n in ("hybrid", "bm25") if n in names), names[0])      # the strongest available, not alphabetical luck
         retriever = st.selectbox("Retriever for answers", names, index=names.index(default))
-        use_reranker = st.checkbox("Use cross-encoder reranker", value=state.reranker is not None,
-                                   disabled=state.reranker is None,
-                                   help="Available when Role B's reranker is installed.")
+        use_reranker = st.checkbox("Cross-encoder reranker", value=state.reranker is not None,
+                                   disabled=state.reranker is None, help="Available when Role B's reranker is installed.")
         tau = st.number_input("Abstention threshold tau", min_value=0.0, value=0.0, step=0.1,
                               help="Abstain when the best score is below tau. Tuned on the dev queries it came out as 0 (off): the model's own verdict did the work.")
         lam = st.number_input("Section prior lambda", min_value=0.0, max_value=2.0, value=0.0, step=0.05,
                               help="final = base + lambda * g(Item). 0 = off.")
-        st.caption(f"LLM: {state.llm.provider} / {state.llm.model}")
-        st.caption(f"Passages: {len(state.passages)} | Companies: {len(state.companies)}")
     cfg = RagConfig(tau=tau, lam=lam)
+    chip_slot = header(state)
 
-    ask, search, graph, pages, evaluation = st.tabs(["Ask", "Search", "Filing graph", "Pages", "Evaluation"])
-    for tab, fn in ((ask, lambda: tab_ask(state, cfg, retriever, use_reranker)),
-                    (search, lambda: tab_search(state, cfg)), (graph, tab_graph), (pages, tab_pages),
-                    (evaluation, tab_eval)):
+    tabs = st.tabs(["Ask", "Search", "Graph", "Pages", "Evaluation", "System"])
+    runners = [lambda: tab_ask(state, cfg, retriever, use_reranker), lambda: tab_search(state), tab_graph, tab_pages,
+               tab_eval, lambda: tab_system(state)]
+    for tab, fn in zip(tabs, runners):
         with tab:
             try:
                 fn()
             except Exception as e:  # a broken tab must not take the app down
                 st.error(f"This tab hit an error: {e}")
+    chip_slot.markdown(status_chips(state), unsafe_allow_html=True)   # refresh LLM call counts
+    md(ui.footer())
 
 
 main()

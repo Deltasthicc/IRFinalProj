@@ -5,7 +5,10 @@
 #   pip install -r requirements.txt && streamlit run src/trademesh/app/streamlit_app.py
 services:
   app:
-    build: .
+    build:
+      context: .
+      args:
+        INSTALL_ML: ${INSTALL_ML:-0}     # 1 = also install dense retrieval and the reranker (see README)
     ports:
       - "8501:8501"
     env_file:
@@ -16,6 +19,8 @@ services:
     volumes:
       - ./data:/app/data         # processed passages and indexes from Role A, plus data/needs
       - ./cache:/app/cache       # LLM answer cache: lets the demo run offline
+      - ./eval/out:/app/eval/out:ro   # locked study results shown on the Evaluation and System tabs
+      - hf-cache:/root/.cache/huggingface   # embedding / reranker models, downloaded once (only with INSTALL_ML=1)
     restart: unless-stopped
 
   ollama:
@@ -30,3 +35,4 @@ services:
 
 volumes:
   ollama:
+  hf-cache:

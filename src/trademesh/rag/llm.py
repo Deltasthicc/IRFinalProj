@@ -23,7 +23,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
 
-DEFAULT_MODELS = {"gemini": "gemini-3.5-flash", "anthropic": "claude-haiku-5-5", "openai": "gpt-4o-mini",
+# The gemini default is the model the RAG study and the committed demo cache used, so the offline demo hits the cache.
+DEFAULT_MODELS = {"gemini": "gemini-3.5-flash-lite", "anthropic": "claude-haiku-5-5", "openai": "gpt-4o-mini",
                   "stub": "stub-extractive"}
 
 

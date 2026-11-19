@@ -9,8 +9,8 @@ eval/out/private/
 
 eval/out/dryrun/
 
-# LLM answer cache: ignored while the corpus is the test fixture; commit the real cache before the demo
-cache/
+# LLM answer cache: the answers under cache/llm are committed on purpose (offline demo). Only the call log is local.
+cache/llm/calls.jsonl
 
 data/judgments/dryrun/
 

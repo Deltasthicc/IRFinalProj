@@ -20,14 +20,27 @@ cp .env.example .env                                   # then choose an LLM prov
 streamlit run src/trademesh/app/streamlit_app.py
 ```
 
-or with Docker (packaging only):
+The first load builds the search indexes for the 11,964 passages (about 15 seconds, once per session).
+
+**Best retrieval setup (optional).** Dense retrieval, the hybrid retriever and the cross-encoder reranker need `pip install -r requirements-ml.txt` (about 1 GB with PyTorch; the two small models download on first use). Without it the app still runs on TF-IDF, Boolean, BM25 and BM25 with pseudo-relevance feedback, and the System tab shows the reranker as not installed. The reported best-RAG numbers and the committed demo cache come from the hybrid retriever with the reranker, so install it to reproduce them.
+
+With Docker (packaging only):
 
 ```bash
-docker compose up --build          # http://localhost:8501
-docker compose --profile local-llm up --build    # also starts a local Ollama
+docker compose up --build                       # http://localhost:8501
+INSTALL_ML=1 docker compose up --build          # also install dense retrieval and the reranker
+docker compose --profile local-llm up --build   # also start a local Ollama
 ```
 
-Without Role A's `data/passages.jsonl` and `data/companies.json` the app runs on a tiny **test fixture of invented text** and says so in a warning banner. Without a key (`LLM_PROVIDER=stub`) answers are extractive quotes. Neither can produce a reportable number: the eval scripts refuse to run on them unless you pass `--allow-stub` (dry runs go to `eval/out/dryrun/`).
+Without Role A's `data/passages.jsonl` and `data/companies.json` the app runs on a tiny **test fixture of invented text** and says so in a warning. Without a key (`LLM_PROVIDER=stub`) answers are extractive quotes. Neither can produce a reportable number: the eval scripts refuse to run on them unless you pass `--allow-stub` (dry runs go to `eval/out/dryrun/`).
+
+### The app
+
+Six tabs: **Ask** (cited answer, clickable evidence, a trust panel with the verifier's checks, closed-book toggle, compare mode), **Search** (several retrievers side by side, snippets, per-term score explanations), **Graph** (company mention graph, PageRank), **Pages** (page-image retrieval; the vision track was gated and not run, so this tab says so), **Evaluation** (the locked retrieval, RAG and abstention results) and **System** (what is wired up, headline numbers, and a spelling-correction playground). The look is a dark glass theme; its markup is in `src/trademesh/app/ui.py` and its stylesheet in `src/trademesh/app/cinematic.css`.
+
+### Offline demo
+
+Every LLM call is cached by the hash of (model, prompt). To check that the demo works with no network, run `LLM_OFFLINE=1 python eval/demo_warm.py` (a question that is not cached stops the run), then start the app with `LLM_OFFLINE=1`. The example buttons use the questions that `eval/demo_warm.py` caches. The cache was built with `gemini-3.5-flash-lite` and the hybrid retriever plus reranker, so the offline demo needs that setup (see above).
 
 ## Tests
 
@@ -47,7 +60,7 @@ python -m pytest -q        # offline, no network, no key
 | `src/trademesh/rag/verifier.py` | cited ids exist, every number occurs in a cited passage |
 | `src/trademesh/rag/abstain.py` | abstention rule, tau tuning, P/R/F1/accuracy |
 | `src/trademesh/rag/pipeline.py` | entities -> retrieve -> context -> LLM -> verify -> abstain; compare mode |
-| `src/trademesh/app/` | Streamlit app (Ask, Search, Filing graph, Pages) and its testable back end |
+| `src/trademesh/app/` | Streamlit app and its testable back end: `streamlit_app.py` (layout), `ui.py` (HTML blocks), `cinematic.css` (look), `icons.py` (Phosphor icons), `static/` (photographs), `backend.py` (data loading, no Streamlit) |
 | `src/trademesh/dev_stub.py` | **dev-only** in-memory BM25 fallback, used only when Role B's rankers are not installed |
 | `src/trademesh/ingest/`, `index/`, `graph/`, `vision/` | Role A: corpus, TF-IDF / Boolean / positional / wildcard indexes, mention graph, page-image scoring |
 | `src/trademesh/ranking/`, `evaluation/` | Role B: BM25, dense, RRF fusion, reranker, PRF; metrics, pooling, qrels, bootstrap |
@@ -55,6 +68,7 @@ python -m pytest -q        # offline, no network, no key
 | `docs/report_A/`, `docs/report_B/` | report notes for Role A and the Report B sections |
 | `data/needs/` | 30 information needs (10 dev, 20 test), 10 unanswerable questions, 40 typo'd company names |
 | `eval/` | `entity_eval.py`, `rag_run.py`, `rag_sheets.py`, `rag_score.py`, `abstention_eval.py` |
+| `eval/human_*.py`, `eval/human/` | the blind **human rating** package: tool, blank sheets, scorer and step-by-step guide (`eval/human/README.md`) |
 | `docs/report_C/` | report drafts for Role C's sections and the model figure |
 | `tests/` | pytest suite and the clearly marked fixture |
 
@@ -67,7 +81,7 @@ python -m pytest -q        # offline, no network, no key
 ## LLM settings (Gemini, Anthropic, OpenAI-compatible, Ollama)
 
 Using Gemini: get a key at https://aistudio.google.com/apikey, then in `.env` set
-`LLM_PROVIDER=gemini` and `GEMINI_API_KEY=...` (optionally `LLM_MODEL=`, default `gemini-3.5-flash`).
+`LLM_PROVIDER=gemini` and `GEMINI_API_KEY=...` (optionally `LLM_MODEL=`, default `gemini-3.5-flash-lite`, the model the RAG study and the committed demo cache used).
 The key stays in `.env`, which is git-ignored. See `.env.example` for all options. Every call is cached under `LLM_CACHE_DIR` by the hash of (model, prompt, parameters) and logged to `calls.jsonl`, so the demo can run offline from the cache (`LLM_OFFLINE=1`). The eval scripts print the number of live (uncached) calls. Keys live only in `.env`, which is git-ignored.
 
 ## Evaluation (Role C)
@@ -80,4 +94,10 @@ python eval/rag_sheets.py --split test              # blind rating sheet + separ
 python eval/rag_score.py --split test               # scores from the human-filled sheets
 ```
 
-Human judgments and ratings are filled by people; the scripts only prepare sheets and compute scores.
+The scripts prepare the sheets and compute the scores; they never invent a rating. The answer ratings and citation checks of the RAG study were made twice: first by a language model in two passes (audit files in `docs/report_C/audit/`), then blind by one human rater (`eval/human/`, scorer `eval/human_score.py`). The human ratings are the primary result and are stricter (mean 0.70 / 0.80 / 1.20 for closed-book / BM25-RAG / best-RAG against 1.18 / 1.33 / 1.70 from the model); the retrieval relevance judgments remain model-assisted, with no human validation.
+
+## Credits
+
+* Photographs (served from `src/trademesh/app/static/`, details in `credits.json` and the app footer): Berenice Abbott, "Wall Street, from roof of Irving Trust Co. Building" (public domain); Billie Grace Ward, "Sign of the New York Stock Exchange, Broad Street" (CC0); "Manhattan 1931" (public domain). All from Wikimedia Commons.
+* Icons: [Phosphor Icons](https://phosphoricons.com), bold weight, MIT licence.
+* Fonts: Outfit and JetBrains Mono from Google Fonts (loaded by the browser; the page falls back to system fonts offline).
