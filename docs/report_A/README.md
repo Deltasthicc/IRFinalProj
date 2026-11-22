@@ -1,4 +1,4 @@
-# Role A: data, index, graph, vision (code written, not yet run on real filings)
+# Role A: data, index, graph, vision (code notes; run on the real filings, see the report for results)
 
 ## Run order on a machine with internet
 

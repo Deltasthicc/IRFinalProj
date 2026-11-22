@@ -70,6 +70,7 @@ python -m pytest -q        # offline, no network, no key
 | `eval/` | `entity_eval.py`, `rag_run.py`, `rag_sheets.py`, `rag_score.py`, `abstention_eval.py` |
 | `eval/human_*.py`, `eval/human/` | the blind **human rating** package: tool, blank sheets, scorer and step-by-step guide (`eval/human/README.md`) |
 | `docs/report_C/` | report drafts for Role C's sections and the model figure |
+| `docs/report/` | **the final report** (`TradeMesh_Report.pdf`, built from the drafts and `parts/` by `python docs/report/build_report.py`; needs `requirements-dev.txt` and Chrome or Edge), its figures, and `REQUIREMENTS_TRACEABILITY.md` (every requested item: done, or why not) |
 | `tests/` | pytest suite and the clearly marked fixture |
 
 ## Interfaces for the other roles
@@ -89,6 +90,7 @@ The key stays in `.env`, which is git-ignored. See `.env.example` for all option
 ```bash
 python eval/entity_eval.py                          # 40 typo'd names -> eval/out/entity_eval.json
 python eval/abstention_eval.py                      # tau tuned on dev, headline on test
+python eval/tune_section_prior.py                   # lambda of the section prior, dev needs only -> eval/out/section_prior_dev.json
 python eval/rag_run.py --split test                 # closed-book vs BM25-RAG vs best-RAG
 python eval/rag_sheets.py --split test              # blind rating sheet + separate key + citation sheet
 python eval/rag_score.py --split test               # scores from the human-filled sheets

@@ -1,0 +1,13 @@
+## 7.7 Company mention graph (PageRank and HITS)
+
+The graph links the 20 companies by how their filings talk about each other. There is an edge A -> B if at least m = 2 passages of A's filing mention company B. Mentions are found by strict matching, not by the typo-tolerant entity matcher of section 9.6: company names and aliases of at least four characters, matched case-sensitively as whole words, never tickers (which collide with ordinary words such as BA or KO) and never a company's own names. Fuzzy matching would create false edges in running prose. The edge weight is the number of mentioning passages.
+
+PageRank (Brin and Page 1998) is computed by power iteration with damping d = 0.85:
+
+    PR(v) = (1 - d)/|V| + d * sum over u -> v of PR(u) / outdeg(u)
+
+Companies with no outgoing edge (dangling nodes) spread their rank uniformly over all nodes, so the scores always sum to one. Iteration starts from the uniform vector and stops when the L1 change falls below 1e-12 or after 1000 iterations. HITS (Kleinberg 1999) alternates authority a = A^T h and hub h = A a from all-ones vectors, L2-normalising both vectors at every step, with the same stopping rule. In-degree is the plain count of incoming edges. There is no ground truth for importance, so we make no business claims.
+
+**Result (H10).** H10 predicts that PageRank ranks companies differently from in-degree. The stored graph has 20 nodes and 14 edges; ten companies have no outgoing edge and nine have no incoming edge (data/graph/company_graph.json). PageRank and in-degree are strongly correlated (Spearman 0.933, Kendall 0.600), as are authority and in-degree (Spearman 0.957), while PageRank and authority agree less (Spearman 0.801). The Kendall value is computed without tie correction and in-degree has many ties, which lowers it. On this graph H10 is therefore not supported: PageRank adds little beyond counting mentions. The clearest local difference is XOM, which has in-degree 1 yet ranks second by PageRank (0.0978, just behind AAPL at 0.0984), because its single in-link comes from CVX, which itself has an in-link. HITS is degenerate on a graph this sparse and fragmented: only three companies receive a non-zero authority score and four a non-zero hub score, so its scores should not be read as a full ranking.
+
+The unit tests check PageRank against a hand-solved two-node graph with a dangling node, uniform scores on a symmetric cycle, that a star's centre ranks first and scores sum to one, that HITS separates hubs from authorities with unit-length vectors, and that mention matching is whole-word, case-sensitive, excludes self-mentions and applies the threshold m.

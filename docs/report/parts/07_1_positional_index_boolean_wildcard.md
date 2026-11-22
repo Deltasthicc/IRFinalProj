@@ -1,0 +1,13 @@
+## 7.1 Positional inverted index, Boolean, phrase and wildcard search
+
+The Boolean and phrase machinery follows the standard treatment in Manning et al. 2008. Each passage is a document. The index maps a term to two parallel lists: the passage numbers in ascending order and, for each, the sorted token positions of the term. The analyzer is the one used elsewhere except that stop words are kept, because removing them would shift positions and break phrases such as "the company".
+
+**Intersection with skip pointers.** AND is the merge of two sorted lists. For a list of length L the skip spacing is int(sqrt(L)), at least 1. Skips are implicit: position i carries one if i is a multiple of the spacing and i + spacing lies inside the list. While one list's current entry is smaller than the other's, the merge follows skips as long as the landing entry does not exceed the other entry, and otherwise advances by one. The function also returns the number of comparisons, so the saving can be measured.
+
+**Phrase and proximity.** Candidates are the intersection of the terms' lists. For each candidate we keep a frontier of positions and, for each next term, retain the positions q for which some frontier position p satisfies 0 < q - p <= g. A phrase is g = 1; larger g gives "within g tokens, in order".
+
+**Boolean queries.** A recursive-descent parser accepts AND, OR, NOT (upper case only), parentheses, quoted phrases and terms with "*". Precedence is NOT, AND, OR; adjacent terms mean AND; NOT is the complement within all passages. The unranked retriever used in the comparison orders matches by the summed counts of the query terms, ties by passage number.
+
+**Wildcards.** For one star, X*Y, a permuterm index (all rotations of term + "$", sorted) answers the prefix query Y$X by binary search. For several stars, a 2-gram index over "$term$" intersects the posting sets of the pattern's bigrams and filters the survivors with a regular expression, since bigrams alone admit false positives. The expanded terms are OR-ed.
+
+The unit tests check that skip and plain intersection both equal set intersection on random lists and that skips use under a fifth of the comparisons on a long-versus-short pair; that Boolean, phrase (including word order and stop-word phrases) and proximity queries return hand-chosen passages; that numbers match with or without thousands separators; and that both wildcard routes agree with brute force. No stored result measures the skip-pointer saving or wildcard latency. The only stored figures here are for the unranked Boolean retriever on the 20 test needs: nDCG@10 0.364 and MAP 0.220, against 0.699 nDCG@10 for BM25 (eval/out/retrieval_test.json).
