@@ -257,6 +257,7 @@ FIGS_META = {
     "fig_pagerank.png": ("The 12 highest-ranked companies in the mention graph: PageRank (bars) and the number of incoming mentions (diamonds).", FIGS / "fig_pagerank.png", 100),
 }
 FIGS_META.update({
+    "fig_glance_s.png": ("Main results of the study at a glance.", FIGS / "fig_glance_s.png", 0, "col"),
     "fig_hypotheses_s.png": ("Status of the 11 hypotheses. Green: supported; light green: partly; amber: unclear; red: not supported; grey: not tested.", FIGS / "fig_hypotheses_s.png", 0, "col"),
     "fig_rating_dist_s.png": ("How often each rater gave 0, 1 or 2 to the 20 answers of each kind; the two raters differ mostly by one point.", FIGS / "fig_rating_dist_s.png", 0, "col"),
     "fig_ablation_s.png": ("Each change from the table above as a difference from plain BM25, with its 95% interval.", FIGS / "fig_ablation_s.png", 0, "col"),
@@ -393,7 +394,7 @@ figure { margin: 2mm 0 3mm; text-align: center; }
 figure.wide { column-span: all; break-inside: avoid; }
 figure.col { break-inside: avoid; margin: 1.5mm 0 2.5mm; }
 figure.col img { max-width: 100%; max-height: 62mm; }
-.example { border: .6pt solid #6a3d8f; background: #f7f2fb; padding: 1.5mm 2.2mm; margin: 1.5mm 0 2.5mm; font-size: 8.6pt; line-height: 1.2; break-inside: avoid; text-align: left; }
+.example { border: .6pt solid #6a3d8f; background: #f7f2fb; padding: 1.5mm 2.2mm; margin: 1.5mm 0 2.5mm; font-size: 8.6pt; line-height: 1.2; break-inside: avoid; text-align: left; column-span: all; }
 figure img { max-height: 70mm; }
 .row { display: flex; justify-content: center; gap: 4mm; } .row img { width: 64mm; max-height: none; }
 figcaption { font-size: 8.2pt; text-align: justify; margin: 1mm 8mm 0; line-height: 1.15; }

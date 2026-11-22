@@ -75,6 +75,28 @@ def glance():
     plt.close(fig)
 
 
+def glance_small():
+    """The same four headline numbers as a compact 2 x 2 panel that fits one column."""
+    ret, hum = J("eval/out/retrieval_test.json")["overall"], J("eval/out/rag_scores_human.json")
+    ent, ab = J("eval/out/entity_eval.json"), J("eval/out/abstention_eval.json")["test"]
+    tiles = [(f"{ret['hybrid+rerank']['nDCG@10']:.3f}", "nDCG@10, best retriever", f"BM25: {ret['bm25']['nDCG@10']:.3f}", DARK),
+             (f"{hum['configs']['best_rag']['mean_rating']:.2f} / 2", "mean human rating (0-2)", f"without retrieval: {hum['configs']['closed_book']['mean_rating']:.3f}", MID),
+             (f"{ent['accuracy'] * 100:.1f}%", "misspelt names fixed", f"{ent['correct']} of {ent['n']}", ORANGE),
+             (f"{ab['tp']} / {ab['tp'] + ab['fn']}", "unanswerable declined", f"{ab['fp']} answerable declined", "#2f7d4f")]
+    fig, ax = plt.subplots(figsize=(3.35, 1.75))
+    ax.set_xlim(0, 100)
+    ax.set_ylim(0, 54)
+    ax.axis("off")
+    for i, (big, label, sub, col) in enumerate(tiles):
+        x, y = 1 + (i % 2) * 50, 28 - (i // 2) * 27
+        ax.add_patch(FancyBboxPatch((x, y), 47, 24, boxstyle="round,pad=0.2,rounding_size=1.2", fc="white", ec=col, lw=1.1))
+        ax.text(x + 23.5, y + 16.3, big, ha="center", va="center", fontsize=12.5, fontweight="bold", color=col)
+        ax.text(x + 23.5, y + 8.4, label, ha="center", va="center", fontsize=5.6)
+        ax.text(x + 23.5, y + 4.0, sub, ha="center", va="center", fontsize=5.2, color="#555")
+    fig.savefig(HERE / "fig_glance_s.png", dpi=220, bbox_inches="tight")
+    plt.close(fig)
+
+
 def network():
     g = J("data/graph/company_graph.json")
     G = nx.DiGraph()
@@ -192,6 +214,7 @@ def rating_distribution():
 if __name__ == "__main__":
     corpus()
     glance()
+    glance_small()
     network()
     ablation()
     hypotheses()
