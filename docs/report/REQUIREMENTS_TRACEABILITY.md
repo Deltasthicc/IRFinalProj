@@ -1,6 +1,6 @@
 # Requirements traceability: every item asked for, and where it is (or why it is not)
 
-Sources: the instructor's email (report sections, reference format, ZIP contents), the approved plan `TradeMesh_v2_Proposal.pdf` (Core / Plan / Gate / Stretch / Skip tiers, hypotheses H1 to H11, rubric mapping) and our own chat decisions. "Report" means `docs/report/TradeMesh_Report.pdf`; section numbers are the instructor's.
+Sources: the instructor's email (report sections, reference format, ZIP contents), the approved plan `TradeMesh_v2_Proposal.pdf` (Core / Plan / Gate / Stretch / Skip tiers, hypotheses H1 to H11, rubric mapping) and our own chat decisions. "Report" means `docs/report/TradeMesh_Report_IEEE.pdf`, an IEEE-style two-column paper. The instructor's section order is kept; the numbering follows the IEEE convention (the Abstract and References are unnumbered, Introduction = I, Literature review = II, Objective = III, Proposed model = IV, Methodology = V, Experiments and results = VI, Conclusions and limitations = VII), with lettered subsections, so a reference such as 7.6 below (methodology, sixth subsection) is section V-F of the paper; the rule is section n = Roman numeral of n minus 2 (3 to 9 become I to VII) and subsection m = letter m. The tables below keep the decimal form of the instructor's list. Citations in the text are author-year and the reference list uses the instructor's required format, because her email prescribes it.
 
 Status: **Done** = built and in the report. **Done, changed** = done but not exactly as planned (the change is stated in the report). **Not done, justified** = deliberately not done, with the reason.
 
@@ -18,7 +18,7 @@ Status: **Done** = built and in the report. **Done, changed** = done but not exa
 | 8 | Experiments and results: datasets, graphs/tables, precision, recall, accuracy, F1, discussion, comparison with at least one existing paper | Done: 8.1 datasets; P/R/F1@5,10, MAP, MRR, nDCG, bpref, PR curves, ablations, speed, pool-bias checks; entity accuracy; abstention P/R/F1/accuracy; comparison with BEIR, DPR, RRF, BERT reranking, FinanceBench, ColPali (8.11) | Section 8, 9 figures |
 | 9 | Conclusions and limitations | Done | Section 9 |
 | 10 | References in the instructor's format ("Author, Initial., Year, Month. Title. In Proceedings ... (pp. x-y).") | Done: 25 references, alphabetical, instructor format; all checked against publisher, ACL Anthology, arXiv or two databases | Section 10 |
-| 11 | Submission: ZIP with report PDF, GitHub link, source code and dataset | Done (see `SUBMISSION_CHECKLIST.md`): ZIP `CSD358_Trademesh`, member names to be added | ZIP |
+| 11 | Submission: ZIP named CSD358_GroupMember1_Member2_Member3, with report PDF, GitHub link, source code and dataset | Done: `CSD358_ShashwatRajan_TanishShitanshu_RuchirSharma.zip` (name chosen by the team; names and roll numbers are in the report title block) | ZIP |
 
 ## B. The approved plan: Core items (never cut)
 

@@ -27,4 +27,4 @@ TradeMesh answers questions over the most recent 10-K of 20 companies. A user ca
 
 ### 3.6 Organisation of the report
 
-Section 4 reviews related work and states what is new. Section 5 gives the objectives, research questions and hypotheses. Section 6 presents the proposed model with a diagram. Section 7 describes the methods and formulas (7.1 to 7.10). Section 8 describes the datasets and reports experiments, results and a comparison with published findings (8.1 to 8.12). Section 9 gives conclusions and limitations, and section 10 lists the references.
+The rest of the paper is organised as follows. Section 4 reviews related work and states what is new. Section 5 gives the objectives, research questions and hypotheses. Section 6 presents the proposed model. Section 7 describes the methods and formulas (7.1 to 7.10). Section 8 describes the datasets and reports the experiments, results and a comparison with published findings (8.1 to 8.12). Section 9 gives the conclusions and limitations, and the references follow.

@@ -1,6 +1,6 @@
 """Assemble the final report from its parts and render it to PDF.
 
-    python docs/report/build_report.py            # writes TradeMesh_Report.md, .html and (if Chrome/Edge is found) .pdf
+    python docs/report/build_report.py            # writes TradeMesh_Report_IEEE.md, .html and (if Chrome/Edge is found) .pdf
 
 Sources: the new parts in docs/report/parts/, the role drafts in docs/report_B and docs/report_C (renumbered to the
 instructor's ten-section layout), the figures in docs/report/figures/ and docs/report_C/fig_model.svg.
@@ -22,7 +22,7 @@ HERE = Path(__file__).resolve().parent
 DOCS = HERE.parent
 PARTS, FIGS = HERE / "parts", HERE / "figures"
 B, C = DOCS / "report_B", DOCS / "report_C"
-OUT = HERE / "TradeMesh_Report"
+OUT = HERE / "TradeMesh_Report_IEEE"
 
 
 def read(p: Path) -> str:
@@ -183,13 +183,111 @@ for name, head in placement:
     text = insert_before(text, head, block, at_end_of=name not in before_heading)
 text = text.replace("@@FIG_MODEL@@", figure_md(C / "fig_model.svg", MODEL_CAP))
 
-# number the figures in order of appearance; the .md file gets a text note, the HTML gets the embedded image
+# ---------------------------------------------------------------------------------------------------------------
+# IEEE conference layout: Roman-numeral sections (I to VII), lettered subsections, two columns, numbered tables and figures.
+# The instructor's section order is kept (introduction, literature review, objective, proposed model, methodology,
+# experiments, conclusions, references); only the numbering follows the IEEE convention. Citations stay author-year and the
+# reference list keeps the instructor's required format.
+# ---------------------------------------------------------------------------------------------------------------
+ROMAN = {3: "I", 4: "II", 5: "III", 6: "IV", 7: "V", 8: "VI", 9: "VII"}
+AUTHORS = [("Shashwat Rajan", "2510111019"), ("Tanish Shitanshu", "2510110008"), ("Ruchir Sharma", "2310110728")]
+TITLE = "TradeMesh: Search and Verified Question Answering over SEC 10-K Filings"
+TABLE_CAPTIONS = [
+    "Pre-declared hypotheses and their outcomes on the test split",
+    "Retrieval systems and the sections that describe them",
+    "The filing corpus: 20 companies and 11,964 passages",
+    "Relevance judgments and agreement between the two model passes",
+    "Retrieval effectiveness on the 20 test needs",
+    "Paired bootstrap differences from BM25 with 95% intervals",
+    "nDCG@10 by need type",
+    "Outcome of the pre-declared retrieval hypotheses",
+    "Ablations of preprocessing, structure, fusion and feedback",
+    "Latency and quality by retrieval system",
+    "Pool-bias check: leave-one-system-out",
+    "Observed ordering compared with published findings",
+    "Entity correction on 40 misspelt company names",
+    "Human ratings of the three answer configurations",
+    "Human ratings: paired differences between configurations",
+    "Human mean rating by question type",
+    "Model-assisted ratings of the three answer configurations",
+    "Model-assisted ratings: paired differences between configurations",
+    "Model-assisted mean rating by question type",
+    "Abstention with the retrieval-score rule only",
+    "Abstention with the model verdict combined with the score threshold",
+]
 FIG_RE = re.compile(r"@@FIG:([\w.]+)@@(.*?)@@END@@", re.S)
-md_for_file = FIG_RE.sub(lambda m: f"*[Figure: {m.group(1)}]* {m.group(2)}", text)
+
+
+def roman(n: int) -> str:
+    out = ""
+    for v, s in [(1000, "M"), (900, "CM"), (500, "D"), (400, "CD"), (100, "C"), (90, "XC"), (50, "L"), (40, "XL"),
+                 (10, "X"), (9, "IX"), (5, "V"), (4, "IV"), (1, "I")]:
+        while n >= v:
+            out, n = out + s, n - v
+    return out
+
+
+def ieeeify(t: str) -> tuple[str, str, str, list[str]]:
+    """Return (body markdown, abstract, keywords, log of converted cross-references)."""
+    m = re.search(r"^## 2\. Abstract\n\n(.*?)\n\n\*\*Keywords:\*\* (.*?)\n", t, flags=re.M | re.S)
+    if not m:
+        sys.exit("build_report: abstract or keywords not found")
+    abstract, keywords = m.group(1).strip(), m.group(2).strip().rstrip(".")
+    t = t[:m.start()] + t[m.end():]
+    t = re.sub(r"\A# .*?(?=^## )", "", t, flags=re.M | re.S)                  # the old title block
+    valid = {(int(a), int(b)) for a, b in re.findall(r"^#{2,3} (\d+)\.(\d+) ", t, flags=re.M)}
+    out = []
+    for line in t.split("\n"):
+        top = re.match(r"^## (\d+)\. (.*)$", line)
+        sub = re.match(r"^#{2,3} (\d+)\.(\d+) (.*)$", line)
+        other = re.match(r"^#{3,4} (.*)$", line)
+        if top:
+            n = int(top.group(1))
+            out.append("## REFERENCES" if n == 10 else f"## {ROMAN[n]}. {top.group(2)}")
+        elif sub:
+            out.append(f"### {chr(64 + int(sub.group(2)))}. {sub.group(3)}")
+        elif other:
+            out.append(f"#### {other.group(1)}")
+        else:
+            out.append(line)
+    t = "\n".join(out)
+    log: list[str] = []
+
+    def ref_a(mm: re.Match) -> str:
+        n, k = int(mm.group(1)), int(mm.group(2))
+        if (n, k) not in valid:
+            return mm.group(0)
+        log.append(mm.string[max(0, mm.start() - 40):mm.end() + 25].replace("\n", " "))
+        return f"{ROMAN[n]}-{chr(64 + k)}"
+
+    def ref_b(mm: re.Match) -> str:
+        n = int(mm.group(2))
+        if n not in ROMAN:
+            sys.exit(f"build_report: bare section reference to {n} cannot be converted: {mm.group(0)!r}")
+        return f"{mm.group(1)} {ROMAN[n]}"
+
+    segs = re.split(r"(`[^`]*`|@@FIG:.*?@@END@@|https?://\S+)", t, flags=re.S)
+    for i in range(0, len(segs), 2):
+        segs[i] = re.sub(r"(?<![\w.\-+/])(\d{1,2})\.(\d{1,2})(?![\w%]|\.\d)", ref_a, segs[i])
+        segs[i] = re.sub(r"\b([Ss]ections?) (\d{1,2})\b(?![\d.]|-)", ref_b, segs[i])
+    return "".join(segs), abstract, keywords, log
+
+
+text, abstract_md, keywords_md, ref_log = ieeeify(text)
+md_for_file = (f"# {TITLE}\n\n" + ", ".join(f"{n} ({r})" for n, r in AUTHORS) + "\n\n**Abstract.** " + abstract_md
+               + "\n\n**Index Terms.** " + keywords_md + ".\n\n" + FIG_RE.sub(lambda m: f"*[Fig.: {m.group(1)}]* {m.group(2)}", text))
 OUT.with_suffix(".md").write_text(md_for_file, encoding="utf-8")
+print(f"{len(ref_log)} cross-references converted")
+if "--show-refs" in sys.argv:
+    for c in ref_log:
+        print("   ", c)
 
 count = 0
 figs_html: list[str] = []
+
+
+def inline(md_text: str) -> str:
+    return markdown.markdown(md_text).removeprefix("<p>").removesuffix("</p>")
 
 
 def stash_fig(m: re.Match) -> str:
@@ -197,36 +295,75 @@ def stash_fig(m: re.Match) -> str:
     global count
     count += 1
     path = (C if m.group(1) == "fig_model.svg" else FIGS) / m.group(1)
-    cap = markdown.markdown(m.group(2)).removeprefix("<p>").removesuffix("</p>")
-    figs_html.append(f'<figure><img alt="Figure {count}" src="{data_uri(path)}"><figcaption><b>Figure {count}.</b> {cap}</figcaption></figure>')
+    figs_html.append(f'<figure class="wide"><img alt="Fig. {count}" src="{data_uri(path)}">'
+                     f"<figcaption>Fig. {count}. {inline(m.group(2))}</figcaption></figure>")
     return "\n\nFIGPLACEHOLDER" + str(count - 1) + "X\n\n"
 
 
 html_body = markdown.markdown(FIG_RE.sub(stash_fig, text), extensions=["tables", "fenced_code", "sane_lists"])
 html_body = re.sub(r"<p>FIGPLACEHOLDER(\d+)X</p>", lambda m: figs_html[int(m.group(1))], html_body)
 
+tables = re.findall(r"<table>.*?</table>", html_body, flags=re.S)
+if len(tables) != len(TABLE_CAPTIONS):
+    sys.exit(f"build_report: {len(tables)} tables found but {len(TABLE_CAPTIONS)} captions written; update TABLE_CAPTIONS")
+table_no = iter(range(len(tables)))
+
+
+def wrap_table(m: re.Match) -> str:
+    k = next(table_no)
+    tb = m.group(0)
+    cols = tb.split("</tr>")[0].count("<th")
+    narrow = cols <= 3 and len(re.sub(r"<[^>]+>", "", tb)) < 1100
+    return (f'<div class="tbl {"narrow" if narrow else "wide"}"><div class="tcap">TABLE {roman(k + 1)}<br>'
+            f"{TABLE_CAPTIONS[k].upper()}</div>{tb}</div>")
+
+
+html_body = re.sub(r"<table>.*?</table>", wrap_table, html_body, flags=re.S)
+html_body = re.sub(r"(<h2>REFERENCES</h2>)(.*)", lambda m: m.group(1) + m.group(2).replace("<p>", '<p class="ref">'), html_body, flags=re.S)
+
 CSS = """
-@page { size: A4; margin: 20mm 18mm 20mm 18mm; }
-body { font-family: Georgia, 'Times New Roman', serif; font-size: 10.5pt; line-height: 1.42; color: #111; max-width: 178mm; margin: 0 auto; }
-h1 { font-size: 22pt; margin: 40mm 0 6mm; line-height: 1.2; }
-h2 { font-size: 15pt; margin: 9mm 0 3mm; border-bottom: 1px solid #999; padding-bottom: 1mm; break-after: avoid; }
-h3 { font-size: 12pt; margin: 6mm 0 2mm; break-after: avoid; }
-h4 { font-size: 10.5pt; margin: 4mm 0 1mm; break-after: avoid; }
-p, li { text-align: justify; hyphens: auto; }
-code { font-family: Consolas, 'Courier New', monospace; font-size: 9pt; background: #f2f2f2; padding: 0 1px; word-break: break-word; }
-pre { background: #f6f6f6; border: 1px solid #ddd; padding: 2mm 3mm; font-size: 9pt; white-space: pre-wrap; break-inside: avoid; }
-pre code { background: none; }
-table { border-collapse: collapse; width: 100%; margin: 3mm 0; font-size: 8.4pt; line-height: 1.25; break-inside: auto; }
-th, td { border: 1px solid #aaa; padding: 1mm 1.6mm; vertical-align: top; text-align: left; overflow-wrap: anywhere; }
-th { background: #e9e9e9; }
+@page { size: A4; margin: 15mm 14mm 17mm 14mm; @bottom-center { content: counter(page); font: 8pt 'Times New Roman', serif; } }
+* { box-sizing: border-box; }
+body { font-family: 'Times New Roman', Times, serif; font-size: 9.6pt; line-height: 1.19; color: #000; margin: 0; }
+.front { text-align: center; margin-bottom: 4mm; }
+.front h1 { font-size: 20pt; font-weight: normal; line-height: 1.15; margin: 2mm 0 5mm; }
+.authors { display: flex; justify-content: center; gap: 12mm; }
+.authors div { font-size: 9pt; line-height: 1.25; }
+.authors b { font-weight: normal; font-size: 11pt; }
+.front .small { font-size: 8.5pt; margin-top: 3mm; }
+.cols { column-count: 2; column-gap: 6.5mm; column-fill: balance; }
+.cols p, .cols li { text-align: justify; hyphens: auto; margin: 0 0 1.6mm; orphans: 2; widows: 2; }
+.abs { font-weight: bold; font-size: 9pt; line-height: 1.17; }
+h2 { font-size: 9.6pt; font-weight: normal; text-transform: uppercase; text-align: center; margin: 3.5mm 0 1.4mm; break-after: avoid; letter-spacing: .02em; }
+h3 { font-size: 9.6pt; font-weight: normal; font-style: italic; margin: 2.4mm 0 1mm; break-after: avoid; }
+h4 { font-size: 9.6pt; font-weight: normal; font-style: italic; margin: 1.6mm 0 .6mm; break-after: avoid; }
+ul, ol { margin: 0 0 1.6mm; padding-left: 5mm; }
+code { font-family: Consolas, 'Courier New', monospace; font-size: 7.6pt; overflow-wrap: anywhere; }
+pre { font-family: Consolas, 'Courier New', monospace; font-size: 7.6pt; margin: 1mm 0 2mm; white-space: pre-wrap; break-inside: avoid; }
+pre code { font-size: 7.6pt; }
+.tbl { margin: 2mm 0 3mm; }
+.tbl.wide { column-span: all; }
+.tbl.narrow { break-inside: avoid; }
+.tcap { font-size: 7.6pt; text-align: center; margin-bottom: 1mm; line-height: 1.15; }
+table { border-collapse: collapse; width: 100%; font-size: 7.4pt; line-height: 1.13; }
+th, td { border: .4pt solid #444; padding: .5mm 1.1mm; vertical-align: top; text-align: left; overflow-wrap: anywhere; }
+th { font-weight: bold; background: #efefef; }
 tr { break-inside: avoid; }
-figure { margin: 4mm 0; text-align: center; break-inside: avoid; }
-figure img { max-width: 100%; max-height: 105mm; }
-figcaption { font-size: 9pt; text-align: justify; margin-top: 1.5mm; }
-h1 + p, h1 ~ p:nth-of-type(-n+4) { text-align: left; }
-h2:first-of-type { break-before: page; }
+figure { margin: 2mm 0 3mm; text-align: center; }
+figure.wide { column-span: all; break-inside: avoid; }
+figure img { max-width: 118mm; max-height: 78mm; }
+figcaption { font-size: 8pt; text-align: justify; margin: 1mm 4mm 0; line-height: 1.15; }
+p.ref { font-size: 7.8pt; text-align: left; padding-left: 4mm; text-indent: -4mm; margin: 0 0 .9mm; hyphens: none; overflow-wrap: anywhere; }
 """
-html = f"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>TradeMesh report</title><style>{CSS}</style></head><body>{html_body}</body></html>"
+authors_html = "".join(f"<div><b>{n}</b><br>Roll no. {r}<br>CSD358 Information Retrieval<br>Shiv Nadar Institution of Eminence</div>"
+                       for n, r in AUTHORS)
+front = (f'<div class="front"><h1>{TITLE}</h1><div class="authors">{authors_html}</div>'
+         f'<div class="small">Course project, CSD358 Information Retrieval, Monsoon 2026 (instructor: Sonia Khetarpaul). '
+         f'Code, data and results: https://github.com/Deltasthicc/IRFinalProj</div></div>')
+abstract_html = (f'<p class="abs"><i>Abstract</i>\u2014{inline(abstract_md)}</p>'
+                 f'<p class="abs"><i>Index Terms</i>\u2014{inline(keywords_md)}.</p>')
+html = (f"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>{TITLE}</title><style>{CSS}</style></head>"
+        f"<body>{front}<div class='cols'>{abstract_html}{html_body}</div></body></html>")
 OUT.with_suffix(".html").write_text(html, encoding="utf-8")
 
 # ---------------------------------------------------------------------------------------------------------------
@@ -242,6 +379,6 @@ if browser:
     pdf = OUT.with_suffix(".pdf")
     subprocess.run([browser, "--headless=new", "--disable-gpu", "--no-pdf-header-footer", f"--print-to-pdf={pdf}",
                     OUT.with_suffix(".html").as_uri()], check=True, timeout=240)
-    print("wrote", pdf, pdf.stat().st_size // 1024, "KB;", count, "figures")
+    print("wrote", pdf, pdf.stat().st_size // 1024, "KB;", count, "figures,", len(tables), "tables")
 else:
     print("no Chrome/Edge found; open the .html and print to PDF")

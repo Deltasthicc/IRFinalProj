@@ -21,4 +21,7 @@ data/raw_html/
 cache/emb_*.npy
 
 # the assembled report keeps its PDF and markdown; the HTML embeds every figure and is rebuilt on demand
+docs/report/TradeMesh_Report_IEEE.html
+# superseded single-column report (the PDF was open in a viewer when the IEEE version replaced it)
+docs/report/TradeMesh_Report.pdf
 docs/report/TradeMesh_Report.html

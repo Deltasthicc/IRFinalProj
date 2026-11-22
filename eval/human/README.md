@@ -108,6 +108,27 @@ Then, by hand, and honestly:
    git push
    ```
 
+## Second rater (Ruchir): hand-in steps
+
+1. `git pull` the latest `main` (or the branch you were told to use) so you have the same blind answers as the first rater.
+   Never run `eval/human_prepare.py --force`: it would reshuffle the labels and make the existing ratings unusable.
+2. Run the rating app (see "How to run it"), type your name exactly as `Ruchir` in the sidebar, and complete steps 1, 2 and 3
+   (reference answers, 60 ratings, 95 citation checks). Step 4 is optional; your blank sheet is
+   `eval/human/judgments/pool_sheet_Ruchir.csv`.
+3. Do not open `eval/human/key_DO_NOT_OPEN.json` or look at the first rater's folder before you have finished.
+4. Hand in by pushing your folder to GitHub, on any branch:
+   ```bash
+   git checkout -b ruchir/human-ratings
+   git add eval/human/raters/Ruchir eval/human/judgments/pool_sheet_Ruchir.csv
+   git commit -m "Add Ruchir's blind human ratings"
+   git push -u origin ruchir/human-ratings
+   ```
+5. On the first rater's machine, `python eval/watch_ratings.py --once` fetches the remote, checks that every answer, citation
+   and reference is filled in and valid, imports the folder, and runs `eval/human_score.py` over both raters (mean rating per
+   question, kappa between the two humans, each rater alone). It refuses an incomplete sheet and prints what is missing.
+   `python eval/watch_ratings.py --interval 300` keeps checking every five minutes. It imports data only (it never runs
+   anything from the remote) and never writes prose: the wording in the report and README is updated by hand from the new numbers.
+
 ## Files
 
 | File | What |

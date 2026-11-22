@@ -1,0 +1,94 @@
+"""Build the submission ZIP from the last commit plus the built report.
+
+    python docs/report/make_submission_zip.py                       # -> ../CSD358_ShashwatRajan_TanishShitanshu_RuchirSharma.zip
+    python docs/report/make_submission_zip.py --out C:\\path\\name.zip
+
+The instructor's template is CSD358_GroupMember1_Member2_Member3; the team chose the three full names as the ZIP name.
+Contents: the report PDF, GITHUB_LINK.txt, the requirements traceability table, `code/` (git archive of HEAD, so only committed
+files, never .env or caches), and `dataset/` (processed passages, needs, judgments, graph, results, human ratings).
+Commit first: the code folder is exactly HEAD. The script refuses to run if the report PDF is older than the report sources.
+"""
+from __future__ import annotations
+
+import argparse
+import subprocess
+import sys
+import tarfile
+import zipfile
+from io import BytesIO
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[2]
+NAME = "CSD358_ShashwatRajan_TanishShitanshu_RuchirSharma"
+README = """TradeMesh: Search and Verified Question Answering over SEC 10-K Filings
+CSD358 Information Retrieval, Monsoon 2026
+Shashwat Rajan (2510111019), Tanish Shitanshu (2510110008), Ruchir Sharma (2310110728)
+
+Contents
+  TradeMesh_Report_IEEE.pdf        the report (IEEE-style paper; the instructor's sections, in her order)
+  GITHUB_LINK.txt                  the repository
+  REQUIREMENTS_TRACEABILITY.md     every requested item: where it is, or why it is not
+  code/                            full source (python package src/trademesh, tests, eval scripts, app, Dockerfile, report build)
+  dataset/data/                    processed passages (passages.jsonl, 11,964), companies, filings list,
+                                   information needs (needs/needs.csv, unanswerable.csv, typos.csv),
+                                   relevance judgments (judgments/), company graph, retrieval results
+  dataset/human_ratings/           the blind human ratings of the RAG answers (one folder per rater) and the blind answer file
+  dataset/results/                 every result file behind the report's numbers (eval/out)
+
+Run (details in code/README.md)
+  cd code
+  pip install -r requirements.txt            (add requirements-ml.txt for the dense retriever and reranker)
+  python -m pytest -q                        (offline)
+  python -m streamlit run src/trademesh/app/streamlit_app.py
+  or: docker compose up --build
+
+Raw filings are not shipped; python -m trademesh.ingest.corpus downloads them again from SEC EDGAR
+(needs SEC_USER_AGENT with a contact email).
+No API key is included. Live answers need GEMINI_API_KEY in a local .env; cached demo answers work offline (LLM_OFFLINE=1).
+"""
+
+
+def main() -> None:
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("--out", default=str(ROOT.parent / f"{NAME}.zip"))
+    args = ap.parse_args()
+    pdf = ROOT / "docs/report/TradeMesh_Report_IEEE.pdf"
+    sources = [*(ROOT / "docs/report/parts").glob("*.md"), *(ROOT / "docs/report_B").glob("*.md"), *(ROOT / "docs/report_C").glob("*.md")]
+    if not pdf.exists() or any(s.stat().st_mtime > pdf.stat().st_mtime + 1 for s in sources):
+        sys.exit("The report PDF is missing or older than its sources: run python docs/report/build_report.py first.")
+    dirty = subprocess.run(["git", "-C", str(ROOT), "status", "--porcelain", "--untracked-files=no"], capture_output=True, text=True).stdout.strip()
+    if dirty:
+        sys.exit("Uncommitted changes (the code folder is exactly HEAD). Commit first:\n" + dirty)
+    archive = subprocess.run(["git", "-C", str(ROOT), "archive", "HEAD"], capture_output=True, check=True).stdout
+    out = Path(args.out)
+    out.unlink(missing_ok=True)
+    with zipfile.ZipFile(out, "w", zipfile.ZIP_DEFLATED) as z, tarfile.open(fileobj=BytesIO(archive)) as tar:
+        for m in tar.getmembers():
+            if m.isfile():
+                z.writestr(f"{NAME}/code/{m.name}", tar.extractfile(m).read())
+
+        def add(src: Path, dest: str) -> None:
+            if src.is_file():
+                z.write(src, f"{NAME}/{dest}")
+
+        add(pdf, "TradeMesh_Report_IEEE.pdf")
+        add(ROOT / "docs/report/REQUIREMENTS_TRACEABILITY.md", "REQUIREMENTS_TRACEABILITY.md")
+        z.writestr(f"{NAME}/GITHUB_LINK.txt", "Code, data and results: https://github.com/Deltasthicc/IRFinalProj\n")
+        z.writestr(f"{NAME}/README.txt", README)
+        for p in (ROOT / "data").rglob("*"):
+            rel = p.relative_to(ROOT / "data")
+            if p.is_file() and rel.parts[0] not in ("raw", "raw_html"):
+                add(p, f"dataset/data/{rel.as_posix()}")
+        for p in (ROOT / "eval/human/raters").rglob("*"):
+            add(p, f"dataset/human_ratings/raters/{p.relative_to(ROOT / 'eval/human/raters').as_posix()}")
+        add(ROOT / "eval/human/blind_answers.json", "dataset/human_ratings/blind_answers.json")
+        for p in (ROOT / "eval/out").glob("*"):
+            if p.suffix in (".json", ".csv"):
+                add(p, f"dataset/results/{p.name}")
+    names = zipfile.ZipFile(out).namelist()
+    bad = [n for n in names if any(s in n.lower() for s in (".env\0", "secret")) or n.endswith("/.env")]
+    print(f"wrote {out} ({out.stat().st_size // 1024} KB, {len(names)} files); suspicious names: {bad or 'none'}")
+
+
+if __name__ == "__main__":
+    main()
