@@ -1,8 +1,9 @@
 # Role B: ranking, evaluation, report sections
 
-This folder holds the source text of the ranking and retrieval-evaluation sections of the report. The final report,
-`docs/report/TradeMesh_Report_IEEE.pdf`, is assembled from these files and the parts in `docs/report/parts/` by
-`python docs/report/build_report.py`; edit the sources, not the PDF. Every number in these files comes from `eval/out/*.json`
+This folder holds the source text of the ranking and retrieval-evaluation sections of the report. The detailed
+report, `docs/report/TradeMesh_Report_Detailed.pdf`, is assembled from these files and the parts in `docs/report/parts/` by
+`python docs/report/build_report.py`; the short report `docs/report/TradeMesh_Report.pdf` is built by `build_concise.py` from
+`docs/report/concise/paper.md` and the result files. Edit the sources, not the PDFs. Every number in these files comes from `eval/out/*.json`
 (the locked test-split run) and can be regenerated with `python eval/fill_report_results.py`.
 
 ## What is here

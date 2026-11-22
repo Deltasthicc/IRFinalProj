@@ -25,9 +25,10 @@ CSD358 Information Retrieval, Monsoon 2026
 Shashwat Rajan (2510111019), Tanish Shitanshu (2510110008), Ruchir Sharma (2310110728)
 
 Contents
-  TradeMesh_Report_IEEE.pdf        the report (IEEE-style paper; the instructor's sections, in her order)
+  TradeMesh_Report.pdf             the report: a short IEEE-style paper with the instructor's sections, in her order
   GITHUB_LINK.txt                  the repository
   REQUIREMENTS_TRACEABILITY.md     every requested item: where it is, or why it is not
+  extra/TradeMesh_Report_Detailed.pdf   the long version with every table and ablation (optional reading)
   code/                            full source (python package src/trademesh, tests, eval scripts, app, Dockerfile, report build)
   dataset/data/                    processed passages (passages.jsonl, 11,964), companies, filings list,
                                    information needs (needs/needs.csv, unanswerable.csv, typos.csv),
@@ -52,10 +53,13 @@ def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--out", default=str(ROOT.parent / f"{NAME}.zip"))
     args = ap.parse_args()
-    pdf = ROOT / "docs/report/TradeMesh_Report_IEEE.pdf"
-    sources = [*(ROOT / "docs/report/parts").glob("*.md"), *(ROOT / "docs/report_B").glob("*.md"), *(ROOT / "docs/report_C").glob("*.md")]
-    if not pdf.exists() or any(s.stat().st_mtime > pdf.stat().st_mtime + 1 for s in sources):
-        sys.exit("The report PDF is missing or older than its sources: run python docs/report/build_report.py first.")
+    pdf = ROOT / "docs/report/TradeMesh_Report.pdf"
+    detailed = ROOT / "docs/report/TradeMesh_Report_Detailed.pdf"
+    short_sources = [ROOT / "docs/report/concise/paper.md", ROOT / "docs/report/build_concise.py", *(ROOT / "eval/out").glob("*.json")]
+    long_sources = [*(ROOT / "docs/report/parts").glob("*.md"), *(ROOT / "docs/report_B").glob("*.md"), *(ROOT / "docs/report_C").glob("*.md")]
+    for f, srcs, cmd in ((pdf, short_sources, "build_concise.py"), (detailed, long_sources, "build_report.py")):
+        if not f.exists() or any(s.stat().st_mtime > f.stat().st_mtime + 1 for s in srcs):
+            sys.exit(f"{f.name} is missing or older than its sources: run python docs/report/{cmd} first.")
     dirty = subprocess.run(["git", "-C", str(ROOT), "status", "--porcelain", "--untracked-files=no"], capture_output=True, text=True).stdout.strip()
     if dirty:
         sys.exit("Uncommitted changes (the code folder is exactly HEAD). Commit first:\n" + dirty)
@@ -71,7 +75,8 @@ def main() -> None:
             if src.is_file():
                 z.write(src, f"{NAME}/{dest}")
 
-        add(pdf, "TradeMesh_Report_IEEE.pdf")
+        add(pdf, "TradeMesh_Report.pdf")
+        add(detailed, "extra/TradeMesh_Report_Detailed.pdf")
         add(ROOT / "docs/report/REQUIREMENTS_TRACEABILITY.md", "REQUIREMENTS_TRACEABILITY.md")
         z.writestr(f"{NAME}/GITHUB_LINK.txt", "Code, data and results: https://github.com/Deltasthicc/IRFinalProj\n")
         z.writestr(f"{NAME}/README.txt", README)

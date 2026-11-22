@@ -1,6 +1,6 @@
 # Requirements traceability: every item asked for, and where it is (or why it is not)
 
-Sources: the instructor's email (report sections, reference format, ZIP contents), the approved plan `TradeMesh_v2_Proposal.pdf` (Core / Plan / Gate / Stretch / Skip tiers, hypotheses H1 to H11, rubric mapping) and our own chat decisions. "Report" means `docs/report/TradeMesh_Report_IEEE.pdf`, an IEEE-style two-column paper. The instructor's section order is kept; the numbering follows the IEEE convention (the Abstract and References are unnumbered, Introduction = I, Literature review = II, Objective = III, Proposed model = IV, Methodology = V, Experiments and results = VI, Conclusions and limitations = VII), with lettered subsections, so a reference such as 7.6 below (methodology, sixth subsection) is section V-F of the paper; the rule is section n = Roman numeral of n minus 2 (3 to 9 become I to VII) and subsection m = letter m. The tables below keep the decimal form of the instructor's list. Citations in the text are author-year and the reference list uses the instructor's required format, because her email prescribes it.
+Sources: the instructor's email (report sections, reference format, ZIP contents), the approved plan `TradeMesh_v2_Proposal.pdf` (Core / Plan / Gate / Stretch / Skip tiers, hypotheses H1 to H11, rubric mapping) and our own chat decisions. "Report" means `docs/report/TradeMesh_Report.pdf`, a short IEEE-style two-column paper (8 pages, 11 figures, 5 tables, 25 references) written in plain language. It follows the instructor's section order with IEEE numbering (the Abstract and References are unnumbered; Introduction = I, Related work = II, Objective = III, Proposed model = IV, Methodology = V, Experiments and results = VI, Conclusions and limitations = VII). The long version with every table, ablation and pool-bias check is `docs/report/TradeMesh_Report_Detailed.pdf` (23 pages, also in the ZIP under `extra/`); the decimal section numbers below (for example 7.6) refer to that detailed version, where section n is Roman numeral n minus 2 and subsection m is letter m (7.6 = V-F). Citations in the text are author-year and the reference list uses the instructor's required format, because her email prescribes it.
 
 Status: **Done** = built and in the report. **Done, changed** = done but not exactly as planned (the change is stated in the report). **Not done, justified** = deliberately not done, with the reason.
 
@@ -9,7 +9,7 @@ Status: **Done** = built and in the report. **Done, changed** = done but not exa
 | # | Required | Status | Where |
 |---|---|---|---|
 | 1 | Title | Done | Title block |
-| 2 | Abstract | Done (205 words; the plan said about 150, the email set no length) | Section 2 |
+| 2 | Abstract | Done (152 words in the short report; the plan said about 150) | Section 2 |
 | 3 | Introduction: background, importance, motivation, contributions | Done | 3.1 to 3.6 |
 | 4 | Literature review: at least 5 to 7 papers, plus what is new | Done: 25 references (24 distinct papers and one book chapter) in six themes, novelty stated modestly | Section 4, 4.7 |
 | 5 | Objective | Done: aim, 7 objectives, RQ1 to RQ5, H1 to H11 with outcomes | Section 5 |
@@ -94,7 +94,7 @@ Status: **Done** = built and in the report. **Done, changed** = done but not exa
 | Demo | Six-tab app: cited Q&A with trust panel, closed-book toggle, compare mode, Boolean/phrase/wildcard and side-by-side rankers, spelling-corrected names, an unanswerable question that abstains, filing graph, Evaluation and System tabs. `docker compose up` or plain Python. Cached offline mode. `docs/demo_script.md` has the 8-minute run of show and fixes. Pages view says the vision track was not built |
 | Viva | Every formula is in section 7; `docs/demo_script.md` section 3 has short answers; each member must still be able to explain the others' modules (the plan's mock-Viva rule) |
 | Novelty | Section 4.7: domain test collection, controlled comparison, deterministic verifier with abstention and a negative result on score thresholds, pre-declared hypotheses with bootstrap, graph analysis. Text-versus-vision study not delivered |
-| Report | 10 sections in the instructor's order, 9 figures, tables, 25 references, comparison with published work |
+| Report | 10 sections in the instructor's order, 11 figures (pipeline diagram, answer-checking flow, two app screenshots, 7 plots), 5 tables, 25 references, comparison with published work |
 
 ## H. Why more filings or datasets were not added
 
