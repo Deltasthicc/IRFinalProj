@@ -44,8 +44,12 @@ def main() -> None:
         box.press("Enter")
         page.wait_for_timeout(8_000)
         shot(page, OUT / "app_search.png")
+        for tab, name in (("Evaluation", "app_eval.png"), ("Graph", "app_graph.png")):
+            page.get_by_role("tab", name=tab).click()
+            page.wait_for_timeout(9_000)
+            shot(page, OUT / name)
         b.close()
-    print("saved app_ask.png, app_search.png")
+    print("saved app_ask.png, app_search.png, app_eval.png, app_graph.png")
 
 
 if __name__ == "__main__":

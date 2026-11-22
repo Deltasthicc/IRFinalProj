@@ -23,3 +23,4 @@ cache/emb_*.npy
 # the reports keep their PDF and markdown; the HTML embeds every figure and is rebuilt on demand
 docs/report/TradeMesh_Report.html
 docs/report/TradeMesh_Report_Detailed.html
+docs/report/*_Draft.*
