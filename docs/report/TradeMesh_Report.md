@@ -23,13 +23,13 @@ We address them by placing retrieval before generation. The language model recei
 4. An evaluation protocol with hypotheses fixed before the test run, bootstrap confidence intervals and blind human ratings.
 5. A working web application and a container image for demonstration.
 
-Fig. 1 summarises the main results. The remainder of the paper is organised as follows: Section II reviews related work, Section III states the objectives, Section IV describes the proposed model, Section V presents the methodology, Section VI reports the experiments and results, and Section VII gives the conclusions and limitations.
+### C. Summary of results
 
+On 20 held-out test questions, hybrid retrieval with cross-encoder reranking achieved an nDCG@10 of 0.828, compared with 0.699 for BM25. In a blind rating by two human raters, answers produced with this retriever received a mean score of 1.20 on a scale from 0 to 2, compared with 0.575 for answers produced without retrieval. The spelling module corrected 39 of 40 misspelt company names (97.5%), and the system declined all 6 unanswerable test questions while declining 0 of the 20 answerable ones.
 
+### D. Organisation of the paper
 
-[figure]
-
-
+The remainder of the paper is organised as follows. Section II reviews related work, Section III states the objectives, Section IV describes the proposed model, Section V presents the methodology, and Section VI reports the experiments and results. Section VII gives the conclusions and limitations.
 
 ## II. Related Work
 
@@ -63,7 +63,7 @@ Eleven hypotheses were fixed before the test run; they are listed with their out
 
 ## IV. Proposed Model
 
-Fig. 2 shows the pipeline. In the **offline** stage, performed once, each filing is downloaded from SEC EDGAR, divided into passages by 10-K section (every table is kept as a single chunk), and indexed. In the **online** stage, every question is processed in six steps: (1) company names are detected and spelling mistakes are corrected; (2) candidate passages are retrieved with BM25 and dense search, and the two rankings are fused; (3) the candidates are reranked and the best five are kept; (4) a language model writes an answer that cites them as [P1] to [P5]; (5) a checker verifies the citations and numbers; (6) the system presents the answer or declines with "insufficient evidence".
+Fig. 1 shows the pipeline. In the **offline** stage, performed once, each filing is downloaded from SEC EDGAR, divided into passages by 10-K section (every table is kept as a single chunk), and indexed. In the **online** stage, every question is processed in six steps: (1) company names are detected and spelling mistakes are corrected; (2) candidate passages are retrieved with BM25 and dense search, and the two rankings are fused; (3) the candidates are reranked and the best five are kept; (4) a language model writes an answer that cites them as [P1] to [P5]; (5) a checker verifies the citations and numbers; (6) the system presents the answer or declines with "insufficient evidence".
 
 
 
@@ -71,7 +71,7 @@ Fig. 2 shows the pipeline. In the **offline** stage, performed once, each filing
 
 
 
-The system is delivered as a six-tab web application (Ask, Search, Graph, Pages, Evaluation, System) and a Docker image. Fig. 3 shows two of its tabs. In the Ask tab, a misspelt company name ("Telsa") is corrected before searching, and the answer carries a citation (P1) that opens the supporting passage. The Search tab runs up to three retrievers side by side and highlights the query words. The Evaluation and Graph tabs (Fig. 4) present the stored results and the company graph, read directly from the result files.
+The system is delivered as a six-tab web application (Ask, Search, Graph, Pages, Evaluation, System) and a Docker image. Fig. 2 shows two of its tabs. In the Ask tab, a misspelt company name ("Telsa") is corrected before searching, and the answer carries a citation (P1) that opens the supporting passage. The Search tab runs up to three retrievers side by side and highlights the query words. The Evaluation and Graph tabs (Fig. 3) present the stored results and the company graph, read directly from the result files.
 
 
 
@@ -121,7 +121,7 @@ The query processor detects company names, including misspelt ones, with a bigra
 
 <p class="formula">PR(v) = (1 &minus; d) / |V| + d &sum; PR(u) / outdeg(u), over all companies u that mention v</p>
 
-For **answers**, the language model is instructed to use only the five passages, to cite every claim and otherwise to reply "INSUFFICIENT EVIDENCE" (temperature 0). The **verifier** checks that every citation exists and that every number in the answer appears in a cited passage. The system declines when the model reports that the evidence is insufficient. Fig. 5 shows this flow, and the box below gives a real example from the application.
+For **answers**, the language model is instructed to use only the five passages, to cite every claim and otherwise to reply "INSUFFICIENT EVIDENCE" (temperature 0). The **verifier** checks that every citation exists and that every number in the answer appears in a cited passage. The system declines when the model reports that the evidence is insufficient. Fig. 4 shows this flow, and the box below gives a real example from the application.
 
 
 
@@ -193,7 +193,7 @@ Hybrid retrieval with reranking performs best (nDCG@10 0.828), followed by dense
 
 
 
-Hybrid retrieval with reranking was the best system for every type of question (Fig. 9). BM25 was weakest on questions about a single named company (nDCG@10 0.58 against 0.71).
+Hybrid retrieval with reranking was the best system for every type of question (Fig. 8). BM25 was weakest on questions about a single named company (nDCG@10 0.58 against 0.71).
 
 ### C. Design choices and hypotheses
 

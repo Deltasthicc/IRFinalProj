@@ -17,9 +17,13 @@ We address them by placing retrieval before generation. The language model recei
 4. An evaluation protocol with hypotheses fixed before the test run, bootstrap confidence intervals and blind human ratings.
 5. A working web application and a container image for demonstration.
 
-[[fig:fig_glance_s.png]] summarises the main results. The remainder of the paper is organised as follows: Section II reviews related work, Section III states the objectives, Section IV describes the proposed model, Section V presents the methodology, Section VI reports the experiments and results, and Section VII gives the conclusions and limitations.
+### C. Summary of results
 
-@@FIG:fig_glance_s.png@@
+On 20 held-out test questions, hybrid retrieval with cross-encoder reranking achieved an nDCG@10 of {{ndcg_best}}, compared with {{ndcg_bm25}} for BM25. In a blind rating by two human raters, answers produced with this retriever received a mean score of {{h_best}} on a scale from 0 to 2, compared with {{h_cb}} for answers produced without retrieval. The spelling module corrected {{entity_ok}} of {{entity_n}} misspelt company names ({{entity_pct}}%), and the system declined all {{abst_pos}} unanswerable test questions while declining {{abst_fp}} of the 20 answerable ones.
+
+### D. Organisation of the paper
+
+The remainder of the paper is organised as follows. Section II reviews related work, Section III states the objectives, Section IV describes the proposed model, Section V presents the methodology, and Section VI reports the experiments and results. Section VII gives the conclusions and limitations.
 
 ## II. Related Work
 
