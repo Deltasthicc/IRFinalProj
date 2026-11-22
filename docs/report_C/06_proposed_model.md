@@ -12,11 +12,13 @@ TradeMesh answers questions over the latest 10-K filings of about 20 companies. 
 
 **Online, stage 2 (generate and check).** The *context builder* labels the five passages `[P1]` to `[P5]` with ticker, fiscal year and Item. The language model (temperature 0, every call cached) must answer only from them, cite every claim, and otherwise output exactly `INSUFFICIENT EVIDENCE`. A deterministic *verifier* then checks the citations and every number, and an *abstention rule* decides whether to show the answer.
 
-**Application.** The Streamlit app has four tabs:
+**Application.** The Streamlit app has six tabs:
 
 * **Ask**: the answer with bold `[Pn]` markers, expandable evidence (cited passages open by default), a trust panel with the verifier results, a compare-companies mode and a closed-book toggle that shows the no-evidence baseline.
-* **Search**: the classic engine. The user picks up to three retrievers, sees them side by side with key-word-in-context snippets and can filter by company.
-* **Filing graph**: the company mention graph with PageRank, hub and authority scores.
-* **Pages**: page-image retrieval results from the vision track.
+* **Search**: the classic engine. The user picks up to three retrievers, sees them side by side with key-word-in-context snippets and a per-term score explanation, and can filter by company.
+* **Graph**: the company mention graph with PageRank, hub and authority scores.
+* **Pages**: page-image retrieval from the vision track; it states that the track was not built.
+* **Evaluation**: the stored retrieval, answer-rating, abstention and entity results, read from the result files.
+* **System**: a readiness checklist, headline numbers and a spelling-correction lab.
 
 A tab whose back end is not ready shows a "not available yet" message instead of failing.

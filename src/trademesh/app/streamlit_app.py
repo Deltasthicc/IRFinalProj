@@ -311,14 +311,19 @@ def eval_rag() -> None:
     human = load_human_scores()
     if human:
         hc = human["configs"]
-        md(ui.panel("Human ratings (blind)", f'Rated by {ui.esc(", ".join(human["rated_by"]))}, who did not see which system wrote each answer. '
-                    "These are the ratings to cite; the model-assisted ratings further down are kept for comparison.")
-           + ui.panel("Mean answer rating by the human rater (0 to 2)", ui.bar_rows([(CONFIG_NAMES[k], hc[k]["mean_rating"], f'{hc[k]["mean_rating"]:.2f}')
+        n_r = len(human["rated_by"])
+        md(ui.panel("Human ratings (blind)", f'Rated by {ui.esc(", ".join(human["rated_by"]))}, who did not see which system wrote each answer'
+                    + (f"; the figures are the mean of the {n_r} raters. " if n_r > 1 else ". ")
+                    + "These are the ratings to cite; the model-assisted ratings further down are kept for comparison.")
+           + ui.panel("Mean answer rating by the human rater" + ("s" if n_r > 1 else "") + " (0 to 2)", ui.bar_rows([(CONFIG_NAMES[k], hc[k]["mean_rating"], f'{hc[k]["mean_rating"]:.2f}')
                                                                         for k in CONFIG_NAMES if k in hc], vmax=2.0)))
-        agree = human.get("vs_model") or {}
-        if agree:
-            first = next(iter(agree.values()))
-            st.caption(f"Human vs model-assisted ratings: {first['identical']:.0%} identical, Cohen's kappa {first['kappa']:.3f} on {first['n']} answers.")
+        if n_r > 1 and human.get("per_rater"):
+            st.caption("Each rater alone (mean 0 to 2; closed-book / BM25-RAG / best-RAG): " + "; ".join(
+                f"{n}: {m['closed_book']:.2f} / {m['bm25_rag']:.2f} / {m['best_rag']:.2f}" for n, m in human["per_rater"].items()))
+        if human.get("kappa_between_humans") is not None:
+            st.caption(f"Agreement between the human raters: Cohen's kappa {human['kappa_between_humans']:.3f} on {human['n_double_rated']} answers.")
+        for who_vs, v in (human.get("vs_model") or {}).items():
+            st.caption(f"{who_vs}: {v['identical']:.0%} identical, Cohen's kappa {v['kappa']:.3f} on {v['n']} answers.")
     else:
         md(ui.panel("Read this first", "All answer ratings and citation checks below are LLM-assisted (two passes by one language model); no human validated them. "
                     "20 test questions, one small generator (gemini-3.5-flash-lite). A blind human re-rating is prepared in eval/human/.", alert=True))

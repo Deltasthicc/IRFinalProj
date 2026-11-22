@@ -164,7 +164,7 @@ def main() -> None:
 
     # RQ3 with human ratings: reuse the stored nDCG@5 values, but only if they line up with the model-rated run exactly
     rq3_path, llm_path0 = OUT / "retrieval_vs_answer.json", OUT / "rating_sheet.csv"
-    if rq3_path.exists() and llm_path0.exists() and (OUT / "rating_key.json").exists() and len(raters) == 1:
+    if rq3_path.exists() and llm_path0.exists() and (OUT / "rating_key.json").exists():
         from eval.common import NEEDS
         pairs = json.loads(rq3_path.read_text(encoding="utf-8"))["pairs"]
         test_ids = [n["id"] for n in read_csv(NEEDS / "needs.csv") if n["split"] == "test"]
@@ -175,8 +175,13 @@ def main() -> None:
             if row["rating"].strip() != "":
                 lr[(row["question_id"], lk[row["question_id"]][row["label"]])].append(int(row["rating"]))
         aligned = len(order) == len(pairs) and all(k in lr and abs(sum(lr[k]) / len(lr[k]) - p[1]) < 1e-9 for k, p in zip(order, pairs))
-        if aligned and all(k in raters[0]["ratings"] for k in order):
-            report["rq3_human"] = rq3_with_human(pairs, order, raters[0]["ratings"])
+        if aligned and all(all(k in r["ratings"] for r in raters) for k in order):
+            mean_r = {k: sum(r["ratings"][k] for r in raters) / len(raters) for k in order}      # one value per (question, configuration)
+            report["rq3_human"] = rq3_with_human(pairs, order, mean_r)
+
+    # each rater on their own (the headline above is the mean over raters)
+    report["per_rater"] = {r["name"]: {c: sum(v for (q, cfg), v in r["ratings"].items() if cfg == c) /
+                                       max(1, sum(1 for (q, cfg) in r["ratings"] if cfg == c)) for c in CONFIGS} for r in raters}
 
     # agreement between humans
     if len(raters) >= 2:
@@ -242,6 +247,11 @@ def write_markdown(rep: dict, qtype: dict, qids: list[str], per: dict) -> None:
         for k, v in rep["bootstrap"].items():
             a, b = k.split(" - ")
             L.append(f"| {NAMES[a]} minus {NAMES[b]} | {v['mean_diff']:+.3f} | [{v['ci95'][0]:+.3f}, {v['ci95'][1]:+.3f}] | {v['better']} / {v['worse']} / {v['tied']} |")
+    if len(rep.get("per_rater", {})) >= 2:
+        L += ["", "Each rater on their own (mean rating, 0-2); the table above is the mean over raters:", "",
+              "| Rater | " + " | ".join(NAMES[c] for c in CONFIGS) + " |", "|---|" + "---|" * len(CONFIGS)]
+        for n, m in rep["per_rater"].items():
+            L.append(f"| {n} | " + " | ".join(f"{m[c]:.3f}" for c in CONFIGS) + " |")
     if "kappa_between_humans" in rep:
         L += ["", f"Cohen's kappa between the two human raters: {rep['kappa_between_humans']:.3f} on {rep['n_double_rated']} answers."]
     if rep.get("leave_one_out"):

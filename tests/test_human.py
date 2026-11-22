@@ -150,6 +150,8 @@ def test_two_raters_give_a_kappa_and_the_citation_rule_is_strict(tmp_path, monke
     assert [rep["configs"][c]["mean_rating"] for c in CONFIGS] == [0.0, 1.5, 2.0]        # mean over raters
     cp = [rep["configs"][c]["n_citations_judged"] for c in CONFIGS]
     assert cp == [0, 4, 8]
+    assert rep["per_rater"]["Sam"] == {"closed_book": 0.0, "bm25_rag": 1.0, "best_rag": 2.0}
+    assert rep["per_rater"]["Alex"] == {"closed_book": 0.0, "bm25_rag": 2.0, "best_rag": 2.0}
 
 
 def test_incomplete_sheets_are_refused(tmp_path, monkeypatch):

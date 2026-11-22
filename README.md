@@ -7,9 +7,9 @@ This repository holds the whole project: data, indexes, graph and vision track (
 
 | Member | Role | What they own |
 |---|---|---|
-| Tanish Shitanshu | **Role B** (lead) and most of **Role A** | **Role B:** BM25 from scratch with tuning, dense retrieval, rank fusion (RRF), cross-encoder reranking, pseudo-relevance feedback (`src/trademesh/ranking/`); the evaluation protocol, pooling, judgments, paired bootstrap, hypotheses and ablations (`src/trademesh/evaluation/`, `data/judgments/`, `data/results/`, and the retrieval scripts in `eval/`: `run_retrieval`, `make_pools`, `tune_bm25`, `hypotheses`, `ablation`, `pool_bias`, `speed_quality`, `cost_table`); the Report B sections (`docs/report_B/`). **Role A:** corpus download, parsing and chunking (`src/trademesh/ingest/`); TF-IDF, champion lists, positional index and wildcard search (`src/trademesh/index/`); the company mention graph with PageRank and HITS (`src/trademesh/graph/`); the vision track (`src/trademesh/vision/`); the Report A notes (`docs/report_A/`). |
-| Ruchir Sharma | **Role A** (one part) | The Boolean retriever (`src/trademesh/index/boolean.py`) |
-| Shashwat Rajan | **Role C** | Query processing, RAG pipeline, verifier, abstention, the Streamlit app and the Report C sections (`src/trademesh/query/`, `src/trademesh/rag/`, `src/trademesh/app/`, `docs/report_C/`, and the RAG scripts in `eval/`: `entity_eval`, `rag_run`, `rag_sheets`, `rag_score`, `abstention_eval`) |
+| Tanish Shitanshu (2510110008) | **Role B** (lead) and most of **Role A** | **Role B:** BM25 from scratch with tuning, dense retrieval, rank fusion (RRF), cross-encoder reranking, pseudo-relevance feedback (`src/trademesh/ranking/`); the evaluation protocol, pooling, judgments, paired bootstrap, hypotheses and ablations (`src/trademesh/evaluation/`, `data/judgments/`, `data/results/`, and the retrieval scripts in `eval/`: `run_retrieval`, `make_pools`, `tune_bm25`, `hypotheses`, `ablation`, `pool_bias`, `speed_quality`, `cost_table`); the Report B sections (`docs/report_B/`). **Role A:** corpus download, parsing and chunking (`src/trademesh/ingest/`); TF-IDF, champion lists, positional index and wildcard search (`src/trademesh/index/`); the company mention graph with PageRank and HITS (`src/trademesh/graph/`); the vision track (`src/trademesh/vision/`); the Report A notes (`docs/report_A/`). |
+| Ruchir Sharma (2310110728) | **Role A** (one part) | The Boolean retriever (`src/trademesh/index/boolean.py`) |
+| Shashwat Rajan (2510111019) | **Role C** | Query processing, RAG pipeline, verifier, abstention, the Streamlit app and the Report C sections (`src/trademesh/query/`, `src/trademesh/rag/`, `src/trademesh/app/`, `docs/report_C/`, and the RAG scripts in `eval/`: `entity_eval`, `rag_run`, `rag_sheets`, `rag_score`, `abstention_eval`) |
 
 ## Run it
 
@@ -70,6 +70,7 @@ python -m pytest -q        # offline, no network, no key
 | `eval/` | `entity_eval.py`, `rag_run.py`, `rag_sheets.py`, `rag_score.py`, `abstention_eval.py` |
 | `eval/human_*.py`, `eval/human/` | the blind **human rating** package: tool, blank sheets, scorer and step-by-step guide (`eval/human/README.md`) |
 | `docs/report_C/` | report drafts for Role C's sections and the model figure |
+| `docs/report/` | **the final report** (`TradeMesh_Report_IEEE.pdf`, an IEEE-style two-column paper, built from the drafts and `parts/` by `python docs/report/build_report.py`; needs `requirements-dev.txt` and Chrome or Edge), its figures, and `REQUIREMENTS_TRACEABILITY.md` (every requested item: done, or why not) |
 | `tests/` | pytest suite and the clearly marked fixture |
 
 ## Interfaces for the other roles
@@ -89,12 +90,14 @@ The key stays in `.env`, which is git-ignored. See `.env.example` for all option
 ```bash
 python eval/entity_eval.py                          # 40 typo'd names -> eval/out/entity_eval.json
 python eval/abstention_eval.py                      # tau tuned on dev, headline on test
+python eval/tune_section_prior.py                   # lambda of the section prior, dev needs only -> eval/out/section_prior_dev.json
 python eval/rag_run.py --split test                 # closed-book vs BM25-RAG vs best-RAG
 python eval/rag_sheets.py --split test              # blind rating sheet + separate key + citation sheet
 python eval/rag_score.py --split test               # scores from the human-filled sheets
+python eval/watch_ratings.py --once                 # import another rater's finished sheets from GitHub and re-score
 ```
 
-The scripts prepare the sheets and compute the scores; they never invent a rating. The answer ratings and citation checks of the RAG study were made twice: first by a language model in two passes (audit files in `docs/report_C/audit/`), then blind by one human rater (`eval/human/`, scorer `eval/human_score.py`). The human ratings are the primary result and are stricter (mean 0.70 / 0.80 / 1.20 for closed-book / BM25-RAG / best-RAG against 1.18 / 1.33 / 1.70 from the model); the retrieval relevance judgments remain model-assisted, with no human validation.
+The scripts prepare the sheets and compute the scores; they never invent a rating. The answer ratings and citation checks of the RAG study were made twice: first by a language model in two passes (audit files in `docs/report_C/audit/`), then blind by two human raters, Shashwat Rajan and Ruchir Sharma (`eval/human/`, scorer `eval/human_score.py`). The human ratings are the primary result and are stricter (mean of the two raters 0.575 / 0.90 / 1.20 for closed-book / BM25-RAG / best-RAG against 1.18 / 1.33 / 1.70 from the model; the raters agree exactly on 41 of 60 answers, kappa 0.39; Ruchir checked 48 of the 95 citations); the retrieval relevance judgments remain model-assisted, with no human validation. Ruchir Sharma's sheets were imported with `python eval/watch_ratings.py --from-dir <folder> --name Ruchir --allow-partial-citations` (his citation sheet is partial); `python eval/watch_ratings.py --once` does the same from GitHub for any further rater, and the headline is the mean over raters with the kappa between them (hand-in steps in `eval/human/README.md`).
 
 ## Credits
 

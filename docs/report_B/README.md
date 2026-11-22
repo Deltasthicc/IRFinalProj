@@ -1,33 +1,34 @@
-# Role B: ranking, evaluation, report lead
+# Role B: ranking, evaluation, report sections
 
-Everything in this folder is a DRAFT written before any real result exists. Every number that has to come from a run is written
-`TODO(run)` and names the command that produces it. Nothing here may be filled in by hand-estimating.
+This folder holds the source text of the ranking and retrieval-evaluation sections of the report. The final report,
+`docs/report/TradeMesh_Report_IEEE.pdf`, is assembled from these files and the parts in `docs/report/parts/` by
+`python docs/report/build_report.py`; edit the sources, not the PDF. Every number in these files comes from `eval/out/*.json`
+(the locked test-split run) and can be regenerated with `python eval/fill_report_results.py`.
 
-## What is done (code, tested on the fixture only)
+## What is here
 
-| Part | Where | Status |
+| File | Content | Section of the report |
 |---|---|---|
-| BM25 from scratch, explain(), k1/b tuning | `src/trademesh/ranking/bm25.py`, `eval/tune_bm25.py` | code + tests done |
-| Dense retriever (pluggable encoder, cached) | `ranking/dense.py` | code done; needs `requirements-ml.txt` + model download |
-| RRF, CombSUM, CombMNZ, hybrid | `ranking/fusion.py` | done |
-| Cross-encoder rerank (top 30, calibrated scores) | `ranking/rerank.py` | code done; needs model download |
-| Rocchio PRF | `ranking/prf.py` | done |
-| Metrics, qrels, pooling, bootstrap, kappa, bpref | `src/trademesh/evaluation/` | done, hand-checked tests |
-| Eval scripts | `eval/{make_pools,judge_app,run_retrieval,ablation,pool_bias,speed_quality,cost_table,retrieval_vs_answer,hypotheses}.py` | done, smoke-tested end to end on the fixture with SYNTHETIC judgments |
+| `09_3_to_9_5_ranking_methods.md` | BM25, dense, hybrid, cross-encoder, pseudo-relevance feedback | V-C to V-E |
+| `09_10_evaluation_protocol.md` | collection, pooling, metrics, significance, pool-bias checks | V-J |
+| `10_retrieval_results.md` | judgments and agreement, main comparison, by-type results, hypotheses, ablations, speed, pool bias, retrieval vs answer quality | VI-B to VI-J |
+| `10_paper_comparison.md` | observed ordering against BEIR, DPR, RRF, BERT reranking, FinanceBench and ColPali | VI-K |
+| `00_abstract_introduction.md` | an earlier abstract and introduction, superseded by `docs/report/parts/02_abstract.md` and `03_introduction.md` | not used |
+| `references.md` | the verified bibliographic entries, with how each was checked | feeds the reference list |
+| `audit/` | the two-pass model judgments and their agreement | cited in VI-B |
 
-## What only people (or a networked machine) can do, in this order
+## How the results were produced
 
-1. Real corpus from Role A (`data/passages.jsonl`). Install `pip install -r requirements-ml.txt` on a machine with Hugging Face access.
-2. `make pools` -> blind sheets. DONE differently from the plan: an LLM judged all 589 pairs and a second LLM pass judged 91 (see `audit/`); no human judged. If people later grade the spare 91-row sheet with `make judge`, the human-vs-LLM kappa can replace the LLM-vs-LLM one. Nobody opens `data/judgments/pool_key.json` while judging.
-3. `make merge`, then `make tune` (dev split only, writes `bm25_params.json`).
-4. `make retrieval-dev`, `make ablation-dev` while building.
-5. After the feature freeze, once: `make retrieval-test`, then `python eval/hypotheses.py`. The test run is locked after its first execution.
-6. Copy numbers from `eval/out/*.json` into `10_retrieval_results.md`; replace each `TODO(run)`.
+Code: `src/trademesh/ranking/` (BM25, dense, fusion, rerank, PRF), `src/trademesh/evaluation/` (metrics, qrels, pooling, bootstrap,
+kappa, bpref) and the scripts in `eval/`. The run order is the Makefile order: `make pools`, `make merge`, `make tune` (dev split only),
+`make retrieval-dev` and `make ablation-dev`, then once after the feature freeze `make retrieval-test` followed by
+`python eval/hypotheses.py`. The test run is locked after its first execution. Dry runs on the test fixture go to `eval/out/dryrun/`
+and are refused unless `--allow-stub` is passed.
 
-Dry runs on the fixture go to `eval/out/dryrun/` and are refused unless `--allow-stub` is passed.
+## Facts a reader should know
 
-## Things to decide or check
-
-* Role B is owned by Tanish Shitanshu (see "Team and roles" in the root README).
-* `references.md` marks which citations were checked against a source and which still need a check.
-* Role A's systems (TF-IDF, champion lists, Boolean/phrase) join the comparison automatically when `trademesh.index.build_retrievers` exists; H1 needs a retriever named `tfidf`.
+* The relevance judgments are model-assisted: a language model graded all 589 pooled pairs and a second pass graded 91 of them
+  (weighted kappa 0.785 between the passes, `audit/`). No human graded a relevance pair.
+* Role B was owned by Tanish Shitanshu (see "Team and roles" in the root README).
+* Role A's systems (TF-IDF, champion lists, Boolean and phrase search) are part of the comparison under the names `tfidf`,
+  `tfidf-champ-50`, `tfidf-champ-200` and `boolean`.
