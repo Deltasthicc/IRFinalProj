@@ -86,3 +86,27 @@ def test_unsafe_folder_names_are_ignored(tmp_path):
     git(remote, "add", "-A")
     git(remote, "commit", "-m", "x")
     assert wr.check(local)["imported"] == [] and not (local / "eval/human/raters/bad name").exists()
+
+
+def test_import_from_a_folder_accepts_partial_citations_only_when_asked(tmp_path):
+    _, local = make_world(tmp_path)
+    src = tmp_path / "sent"
+    sheets(tmp_path / "x", "Sam", cites=[["Q1", "A", "P1", "1"]])               # one of two citations checked
+    for fn in ("references.csv", "ratings.csv", "citations.csv"):
+        (src).mkdir(exist_ok=True)
+        (src / fn).write_bytes((tmp_path / "x/eval/human/raters/Sam" / fn).read_bytes())
+    assert "1 of 2 citations checked" in " ".join(wr.import_dir(local, src, "Sam"))
+    assert not (local / "eval/human/raters/Sam").exists()
+    assert wr.import_dir(local, src, "Sam", allow_partial_citations=True) == []
+    assert (local / "eval/human/raters/Sam/citations.csv").exists()
+    assert wr.import_dir(local, src, "Sam", allow_partial_citations=True)       # already exists: refused
+
+
+def test_partial_citations_never_excuse_incomplete_ratings(tmp_path):
+    _, local = make_world(tmp_path)
+    sheets(tmp_path / "x", "Sam", ratings=[["Q1", "A", "2"]])
+    src = tmp_path / "sent"
+    src.mkdir()
+    for fn in ("references.csv", "ratings.csv", "citations.csv"):
+        (src / fn).write_bytes((tmp_path / "x/eval/human/raters/Sam" / fn).read_bytes())
+    assert "answers rated" in " ".join(wr.import_dir(local, src, "Sam", allow_partial_citations=True))

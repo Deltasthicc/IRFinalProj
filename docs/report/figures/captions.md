@@ -6,7 +6,7 @@
 
 **fig_ndcg_by_type.png.** Mean nDCG@10 of BM25, hybrid and hybrid + rerank for each of the three need types (entity, topical, terminology), computed from the 20 test questions. Source: the `by_type` entry of `eval/out/retrieval_test.json`.
 
-**fig_rag_ratings.png.** Mean answer rating (scale 0 to 2) for closed-book, BM25-RAG and best-RAG over the same 20 test questions, comparing the human ratings with the model-assisted ratings; the text box lists the human paired differences with 95% bootstrap intervals. Sources: `eval/out/rag_scores_human.json` (human ratings and paired differences) and `eval/out/rag_scores_test.json` (model-assisted ratings).
+**fig_rag_ratings.png.** Mean answer rating (scale 0 to 2) for closed-book, BM25-RAG and best-RAG over the same 20 test questions, comparing the human ratings (mean of the two raters, Shashwat Rajan and Ruchir Sharma) with the model-assisted ratings; the text box lists the human paired differences with 95% bootstrap intervals. Sources: `eval/out/rag_scores_human.json` (human ratings and paired differences) and `eval/out/rag_scores_test.json` (model-assisted ratings).
 
 **fig_entity_accuracy.png.** Share of misspelled company names resolved to the correct ticker, by typo kind, over 40 misspelled-name queries (39 correct overall); the number above each bar is correct/total for that kind. Source: the `by_kind` entry of `eval/out/entity_eval.json`.
 

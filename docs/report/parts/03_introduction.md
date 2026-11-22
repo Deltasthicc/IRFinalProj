@@ -22,7 +22,7 @@ TradeMesh answers questions over the most recent 10-K of 20 companies. A user ca
 2. A pooled test collection of 30 information needs with blind, LLM-assisted relevance judgments, consistency between two LLM passes measured by Cohen's kappa, and three explicit checks for pooling bias.
 3. Hypotheses and decision rules fixed before the test run and applied mechanically, so that failed hypotheses are reported as findings and not explained away.
 4. A comparison of our ordering of methods with published results (BEIR, DPR, RRF, BERT reranking, FinanceBench, ColPali), reported by direction of effect because the corpora differ.
-5. A verified-RAG pipeline with a deterministic number and citation checker and a rule for abstaining, evaluated by blind ratings from one human and, for comparison, two model-assisted passes; the report states where the two disagree and discloses a reference answer that was corrected after the first scoring.
+5. A verified-RAG pipeline with a deterministic number and citation checker and a rule for abstaining, evaluated by blind ratings from two humans and, for comparison, two model-assisted passes; the report states where the two disagree and discloses a reference answer that was corrected after the first scoring.
 6. A company mention graph with PageRank and HITS, and an honest finding that on this corpus it adds little beyond counting mentions.
 
 ### 3.6 Organisation of the report

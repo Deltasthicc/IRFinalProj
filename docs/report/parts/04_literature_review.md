@@ -35,4 +35,4 @@ None of the components is new, and we do not claim that they are. What this proj
 * an evaluation discipline new to most course projects: hypotheses and decision rules fixed before the test run, paired bootstrap intervals, pool-bias checks, and a blind human rating whose disagreement with the model-assisted rating is reported instead of hidden;
 * a documented defect and a documented correction (a reference answer that was wrong and was fixed after the first scoring), with both results reported.
 
-The limits on this claim are in section 9: the collections are small, the relevance judgments are model-assisted, and the human ratings come from a single rater.
+The limits on this claim are in section 9: the collections are small, the relevance judgments are model-assisted, and the human ratings come from two raters who are both on the team.

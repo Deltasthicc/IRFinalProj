@@ -267,3 +267,12 @@ def test_human_scores_loader_and_evaluation_panel(monkeypatch, tmp_path):
     text = _md(at)
     assert "Human ratings (blind)" in text and "Rated by Sam" in text and "1.90" in text
     assert "Read this first" not in text                                          # the model-only notice is replaced
+
+
+def test_headline_tile_names_the_number_of_human_raters(monkeypatch):
+    from trademesh.app import backend
+    cfgs = {"closed_book": {"mean_rating": 0.5}, "bm25_rag": {"mean_rating": 0.9}, "best_rag": {"mean_rating": 1.2}}
+    for raters, phrase in ((["A"], "rated blind by one human"), (["A", "B"], "rated blind by 2 humans (mean)")):
+        monkeypatch.setattr(backend, "load_human_scores", lambda r=raters: {"rated_by": r, "configs": cfgs})
+        tile = {t[0]: t for t in backend.headline_numbers()}["Answer quality, best-RAG (0 to 2)"]
+        assert phrase in tile[2] and tile[1] == "1.20"

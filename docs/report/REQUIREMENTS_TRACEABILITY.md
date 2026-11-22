@@ -44,7 +44,7 @@ Status: **Done** = built and in the report. **Done, changed** = done but not exa
 | Basic cited RAG on BM25 context | Done | 7.8, 8.12 |
 | Dense retrieval and RRF hybrid | Done | 7.4 |
 | Cross-encoder reranker on top-30 | Done | 7.4 |
-| Verifier, abstention, RAG study (closed-book vs RAG, citation precision, number grounding) | Done, changed: abstention uses the model's verdict because tau tuned to 0; ratings by one human plus two model passes, not two humans | 7.8, 8.12 |
+| Verifier, abstention, RAG study (closed-book vs RAG, citation precision, number grounding) | Done, changed: abstention uses the model's verdict because tau tuned to 0; ratings by two humans (Shashwat and Ruchir) plus two model passes; Ruchir checked only 48 of the 95 citations and nobody did the optional retrieval-judging step | 7.8, 8.12 |
 | Table-aware chunks | Done (1,052 table chunks) | 7.6, 8.1 |
 | Compare-companies mode | Done | 7.6, app |
 | Docker Compose packaging | Done, tested from a clean checkout | README, demo script |
@@ -55,7 +55,7 @@ Status: **Done** = built and in the report. **Done, changed** = done but not exa
 | Plan | What we did | Why |
 |---|---|---|
 | All three members judge pooled relevance pairs (about 300 each) | All 589 pooled pairs graded by a language model blind to the system, 91 pairs graded twice; kappa 0.785 between the two passes; no human graded a pair | Time; stated in the abstract, 8.1, 8.2 and 9.2 as the main limitation of the retrieval results |
-| Reference answers written during judging, ratings by two of us | One project member rated 60 answers blind against references they wrote for the 20 test questions; model-assisted ratings kept for comparison; one reference (T10) corrected after the first scoring and disclosed | One human rater was what was available; the correction is reported with both results |
+| Reference answers written during judging, ratings by two of us | Two project members (Shashwat Rajan and Ruchir Sharma) each rated the 60 answers blind against references they wrote for the 20 test questions; model-assisted ratings kept for comparison; one reference (T10, Shashwat's) corrected after the first scoring and disclosed | The plan said two of us; both did the ratings, but only one checked all citations. Results are reported for the mean of the two and for each rater, with the kappa between them (0.39) |
 | Abstain when best rerank score is below tau | tau tuned on dev came out 0, so abstention is the model's INSUFFICIENT EVIDENCE verdict | The score rule did not separate the classes (precision 0.385 on test); disclosed that we saw the test numbers before choosing the verdict rule |
 | BM25 defaults k1 = 1.2, b = 0.75, small grid on dev | Grid on dev gave k1 = 0.6, b = 0.9 (flat surface) | Reported with the whole grid |
 | Stretch: single RAGAS cross-check, learned fusion, boilerplate flags, multimodal answers | Not done | See E |
@@ -102,6 +102,6 @@ The plan targeted 6,000 to 10,000 passages from the latest 10-K of 20 companies.
 
 ## I. Checks run for this audit
 
-* Full test suite: 130 passed (offline).
+* Full test suite: 137 passed (offline).
 * Headline numbers in the report were re-read from `eval/out/*.json` and `data/graph/company_graph.json` (retrieval nDCG@10 and MAP for all ten systems, entity 39/40, graph correlations).
 * Report assembled by `docs/report/build_report.py`, which stops if an expected string is missing; the PDF was inspected page by page.

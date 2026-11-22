@@ -205,7 +205,7 @@ def fig_rag_ratings():
     fig, ax = plt.subplots(figsize=(W, 4.0))
     width = 0.36
     xs = list(range(len(cfgs)))
-    b1 = ax.bar([x - width / 2 for x in xs], hv, width, label="Human rating")
+    b1 = ax.bar([x - width / 2 for x in xs], hv, width, label="Human rating (mean of two raters)")
     style_bar(b1, C_DARK, "")
     b2 = ax.bar([x + width / 2 for x in xs], mv, width,
                 label="Model-assisted rating")
@@ -213,7 +213,7 @@ def fig_rag_ratings():
     for bars in (b1, b2):
         for b in bars:
             ax.text(b.get_x() + b.get_width() / 2, b.get_height() + 0.03,
-                    f"{b.get_height():.2f}", ha="center", va="bottom")
+                    f"{b.get_height():.3f}", ha="center", va="bottom")
     ax.set_xticks(xs)
     ax.set_xticklabels([names[c] for c in cfgs])
     ax.set_ylabel("Mean answer rating (scale 0-2)")
@@ -230,8 +230,8 @@ def fig_rag_ratings():
               "best_rag": "best-RAG"}
     for k, d in h["bootstrap"].items():
         a, b = [t.strip() for t in k.split(" - ")]
-        lines.append(f"{pretty[a]} - {pretty[b]}: {d['mean_diff']:+.2f} "
-                     f"[{d['ci95'][0]:+.2f}, {d['ci95'][1]:+.2f}]")
+        lines.append(f"{pretty[a]} - {pretty[b]}: {d['mean_diff']:+.3f} "
+                     f"[{d['ci95'][0]:+.3f}, {d['ci95'][1]:+.3f}]")
     ax.text(0.99, 0.99, "\n".join(lines), transform=ax.transAxes, ha="right",
             va="top", fontsize=9,
             bbox=dict(boxstyle="square", facecolor="white", edgecolor="black",

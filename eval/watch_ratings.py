@@ -56,8 +56,11 @@ def expected(repo: Path) -> dict:
     return {"qids": qids, "answers": answers, "cites": cites}
 
 
-def validate(files: dict[str, bytes], exp: dict) -> list[str]:
-    """Problems with a rater's three sheets (an empty list means complete and valid)."""
+def validate(files: dict[str, bytes], exp: dict, allow_partial_citations: bool = False) -> list[str]:
+    """Problems with a rater's three sheets (an empty list means complete and valid).
+
+    With allow_partial_citations the citation sheet may be incomplete (every filled mark must still be valid and refer to a real
+    citation); the ratings and references must always be complete, because they carry the headline result."""
     problems = []
     for need in ("references.csv", "ratings.csv", "citations.csv"):
         if need not in files:
@@ -82,7 +85,11 @@ def validate(files: dict[str, bytes], exp: dict) -> list[str]:
             if r["supports"].strip() not in ("0", "1"):
                 problems.append(f"citation mark {r['supports']!r} is not 0 or 1")
             cites[(r["question_id"], r["label"], r["citation"])] = r["supports"]
-    if set(cites) != exp["cites"]:
+    if allow_partial_citations:
+        stray = set(cites) - exp["cites"]
+        if stray:
+            problems.append(f"{len(stray)} citation marks do not match the blind package")
+    elif set(cites) != exp["cites"]:
         problems.append(f"{len(cites)} of {len(exp['cites'])} citations checked")
     return problems
 
@@ -111,6 +118,24 @@ def remote_raters(repo: Path, remote: str) -> dict[str, tuple[str, dict[str, byt
             if name not in best or filled > best[name][0]:
                 best[name] = (filled, ref, files)
     return {n: (ref, files) for n, (_, ref, files) in best.items()}
+
+
+def import_dir(repo: Path, src: Path, name: str, allow_partial_citations: bool = False) -> list[str]:
+    """Import one rater from an unpacked folder (for example a ZIP the rater sent) after the same validation as a remote
+    sheet. `src` is the folder that holds references.csv, ratings.csv and citations.csv. Returns the problems (empty = imported).
+    Only those three CSV files are read; nothing else in the folder is used."""
+    if not NAME_OK.match(name):
+        return [f"unsafe rater name {name!r}"]
+    if (repo / RATERS / name).exists():
+        return [f"{name} already exists here"]
+    files = {fn: (src / fn).read_bytes() for fn in ("references.csv", "ratings.csv", "citations.csv") if (src / fn).is_file()}
+    problems = validate(files, expected(repo), allow_partial_citations)
+    if not problems:
+        rdir = repo / RATERS / name
+        rdir.mkdir(parents=True)
+        for fn, data in files.items():
+            (rdir / fn).write_bytes(data)
+    return problems
 
 
 def check(repo: Path, remote: str = "origin", do_import: bool = True, fetch: bool = True) -> dict:
@@ -153,7 +178,20 @@ def main() -> int:
     ap.add_argument("--once", action="store_true", help="check once and exit")
     ap.add_argument("--interval", type=int, default=300, help="seconds between checks when looping")
     ap.add_argument("--no-import", action="store_true", help="only report, do not write files or score")
+    ap.add_argument("--from-dir", help="import a rater from an unpacked folder holding the three CSVs (needs --name) instead of a remote")
+    ap.add_argument("--name", help="rater name for --from-dir")
+    ap.add_argument("--allow-partial-citations", action="store_true",
+                    help="with --from-dir: accept an incomplete citation sheet (ratings and references must be complete)")
     args = ap.parse_args()
+    if args.from_dir:
+        if not args.name:
+            sys.exit("--from-dir needs --name")
+        problems = import_dir(ROOT, Path(args.from_dir), args.name, args.allow_partial_citations)
+        if problems:
+            sys.exit(f"{args.name} not imported: " + "; ".join(problems))
+        print(f"imported {args.name} from {args.from_dir}")
+        subprocess.run([sys.executable, str(ROOT / "eval" / "human_score.py")], check=True, cwd=ROOT)
+        return NEW_RATER_EXIT
     while True:
         res = check(ROOT, args.remote, do_import=not args.no_import)
         stamp = time.strftime("%H:%M:%S")

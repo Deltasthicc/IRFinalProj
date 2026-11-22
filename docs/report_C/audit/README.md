@@ -1,8 +1,8 @@
 # Audit trail for the RAG answer ratings and citation checks (test split)
 
 **Everything in this folder is LLM-assisted. No human rated these answers or checked these citations.**
-A blind human re-rating was later done by one rater (`eval/human/`, results in `eval/out/rag_scores_human.json` and
-`docs/report_C/human_rating_results.md`). The human ratings are the primary result and are stricter (kappa 0.23 to 0.27 against these files);
+A blind human re-rating was later done by two raters (`eval/human/`, results in `eval/out/rag_scores_human.json` and
+`docs/report_C/human_rating_results.md`). The human ratings are the primary result and are stricter (kappa 0.23 to 0.38 between each human and these files);
 these model-assisted files are kept for comparison and should not be cited as validated.
 Both passes were made by the same language model (Claude), so agreement between them is a consistency
 check, not independent validation.

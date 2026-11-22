@@ -31,8 +31,8 @@
 | H5 | Table chunks and numeric tokens matter for table needs | Neither supported nor refuted: only the all-needs effect was computed (about zero) |
 | H6 | Pseudo-relevance feedback helps terminology needs and not entity needs | Tied on both (+0.002 and -0.006) |
 | H7 | Champion lists cut latency at small quality cost | Consistent for r = 50 (median 0.237 to 0.080 ms, MAP 0.455 to 0.450), not significance-tested |
-| H8 | RAG beats closed-book on correctness and number grounding | Best-RAG **supported** on correctness (+0.50, CI +0.20 to +0.80); BM25-RAG not shown (+0.10); number grounding not comparable |
-| H9 | Best-RAG is at least as good as BM25-RAG; abstention raises citation precision | First half **supported** (+0.40, CI +0.20 to +0.60); second half not tested (tau tuned to 0) |
+| H8 | RAG beats closed-book on correctness and number grounding | Best-RAG **supported** on correctness (+0.625, CI +0.350 to +0.900); BM25-RAG only weakly (+0.325, CI +0.050 to +0.575, carried by one rater); number grounding not comparable |
+| H9 | Best-RAG is at least as good as BM25-RAG; abstention raises citation precision | First half **supported** (+0.300, CI +0.125 to +0.500); second half not tested (tau tuned to 0) |
 | H10 | PageRank ranks companies differently from in-degree | **Not supported** (Spearman 0.933) |
 | H11 | Page-image retrieval beats text retrieval on visually rich pages | **Not tested**: track gated and not built (section 7.9) |
 

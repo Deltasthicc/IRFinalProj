@@ -1,12 +1,13 @@
 {
   "split": "test",
   "rated_by": [
-    "shash"
+    "Ruchir",
+    "Shashwat"
   ],
   "configs": {
     "closed_book": {
       "n_rated": 20,
-      "mean_rating": 0.7,
+      "mean_rating": 0.575,
       "share_rated_2": 0.0,
       "citation_precision": null,
       "n_citations_judged": 0,
@@ -15,19 +16,19 @@
     },
     "bm25_rag": {
       "n_rated": 20,
-      "mean_rating": 0.8,
+      "mean_rating": 0.9,
       "share_rated_2": 0.0,
-      "citation_precision": 0.9428571428571428,
-      "n_citations_judged": 35,
+      "citation_precision": 1.0,
+      "n_citations_judged": 16,
       "number_grounding": 1.0,
       "verifier_pass_rate": 1.0
     },
     "best_rag": {
       "n_rated": 20,
       "mean_rating": 1.2,
-      "share_rated_2": 0.2,
-      "citation_precision": 0.9666666666666667,
-      "n_citations_judged": 60,
+      "share_rated_2": 0.1,
+      "citation_precision": 0.96875,
+      "n_citations_judged": 32,
       "number_grounding": 1.0,
       "verifier_pass_rate": 1.0
     }
@@ -35,60 +36,83 @@
   "n_questions": 20,
   "bootstrap": {
     "bm25_rag - closed_book": {
-      "mean_diff": 0.1,
+      "mean_diff": 0.325,
       "ci95": [
-        -0.15,
-        0.35
+        0.05,
+        0.575
       ],
-      "better": 4,
+      "better": 11,
       "worse": 2,
-      "tied": 14
+      "tied": 7
     },
     "best_rag - closed_book": {
-      "mean_diff": 0.5,
+      "mean_diff": 0.625,
       "ci95": [
-        0.2,
-        0.8
+        0.35,
+        0.9
       ],
-      "better": 8,
-      "worse": 0,
-      "tied": 12
+      "better": 14,
+      "worse": 1,
+      "tied": 5
     },
     "best_rag - bm25_rag": {
-      "mean_diff": 0.4,
+      "mean_diff": 0.3,
       "ci95": [
-        0.2,
-        0.6
+        0.125,
+        0.5
       ],
-      "better": 8,
-      "worse": 0,
-      "tied": 12
+      "better": 9,
+      "worse": 1,
+      "tied": 10
     }
   },
   "leave_one_out": {
     "bm25_rag - closed_book": {
-      "min": 0.05263157894736842,
-      "max": 0.15789473684210525
+      "min": 0.2631578947368421,
+      "max": 0.39473684210526316
     },
     "best_rag - closed_book": {
-      "min": 0.42105263157894735,
-      "max": 0.5263157894736842
+      "min": 0.5526315789473685,
+      "max": 0.6842105263157895
     },
     "best_rag - bm25_rag": {
-      "min": 0.3684210526315789,
-      "max": 0.42105263157894735
+      "min": 0.2631578947368421,
+      "max": 0.34210526315789475
     }
   },
   "rq3_human": {
-    "spearman": 0.0,
+    "spearman": -0.13799792945224007,
     "n": 40,
     "ci95_approx": [
-      -0.3288652263592654,
-      0.3288652263592654
+      -0.44659543987359895,
+      0.19994117115530471
     ]
   },
+  "per_rater": {
+    "Ruchir": {
+      "closed_book": 0.45,
+      "bm25_rag": 1.0,
+      "best_rag": 1.2
+    },
+    "Shashwat": {
+      "closed_book": 0.7,
+      "bm25_rag": 0.8,
+      "best_rag": 1.2
+    }
+  },
+  "kappa_between_humans": 0.39102564102564097,
+  "n_double_rated": 60,
   "vs_model": {
-    "shash vs model pass AI": {
+    "Ruchir vs model pass AI": {
+      "n": 60,
+      "identical": 0.5333333333333333,
+      "kappa": 0.32557205941388995,
+      "mean_human": 0.8833333333333333,
+      "mean_model": 1.4333333333333333,
+      "human_higher": 0,
+      "human_lower": 28
+    },
+    "Shashwat vs model pass AI": {
       "n": 60,
       "identical": 0.4666666666666667,
       "kappa": 0.225181598062954,
@@ -97,7 +121,16 @@
       "human_higher": 0,
       "human_lower": 32
     },
-    "shash vs model pass AI2": {
+    "Ruchir vs model pass AI2": {
+      "n": 60,
+      "identical": 0.5833333333333334,
+      "kappa": 0.3747394747811588,
+      "mean_human": 0.8833333333333333,
+      "mean_model": 1.3666666666666667,
+      "human_higher": 0,
+      "human_lower": 25
+    },
+    "Shashwat vs model pass AI2": {
       "n": 60,
       "identical": 0.5333333333333333,
       "kappa": 0.27272727272727265,
