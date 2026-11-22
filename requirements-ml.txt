@@ -1,5 +1,6 @@
 # Optional: dense retrieval (all-MiniLM-L6-v2) and the cross-encoder reranker (ms-marco-MiniLM-L-6-v2).
 # Without these, trademesh.ranking serves BM25 and BM25+PRF only and prints a notice.
-# Versions are lower bounds: pin the exact versions here after the first successful install on the
-# machine that produces the reported numbers, and record them in the report.
-sentence-transformers>=3.0
+# Pinned to the versions installed on the machine that produced the reported numbers (Python 3.14.6).
+sentence-transformers==6.3.0
+torch==2.15.0
+transformers==5.23.0

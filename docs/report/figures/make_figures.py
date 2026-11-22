@@ -18,17 +18,21 @@ import matplotlib.pyplot as plt  # noqa: E402
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, "..", "..", ".."))
 
-W = 6.5  # inches
+W = float(os.environ.get("FIG_W", "6.5"))  # inches; FIG_W=3.35 makes the column-width variants (suffix _s)
+SMALL = W < 5
+HS = 0.82 if SMALL else 1.0
+FS = 7 if SMALL else 9
+SUFFIX = "_s" if SMALL else ""
 DPI = 200
 
 plt.rcParams.update({
     "font.family": "DejaVu Sans",
-    "font.size": 9,
-    "axes.titlesize": 10,
-    "axes.labelsize": 9,
-    "xtick.labelsize": 9,
-    "ytick.labelsize": 9,
-    "legend.fontsize": 9,
+    "font.size": FS,
+    "axes.titlesize": FS + 1,
+    "axes.labelsize": FS,
+    "xtick.labelsize": FS,
+    "ytick.labelsize": FS,
+    "legend.fontsize": FS,
     "figure.facecolor": "white",
     "axes.facecolor": "white",
     "savefig.facecolor": "white",
@@ -50,6 +54,7 @@ def load(rel):
 
 
 def save(fig, name):
+    name = name.replace(".png", SUFFIX + ".png")
     path = os.path.join(HERE, name)
     fig.savefig(path, dpi=DPI, bbox_inches="tight", pad_inches=0.08,
                 metadata={"Software": None})
@@ -102,7 +107,7 @@ def fig_ndcg_systems():
     systems = sorted(overall, key=lambda s: (-overall[s][metric], s))
     vals = [overall[s][metric] for s in systems]
 
-    fig = plt.figure(figsize=(W, 3.6))
+    fig = plt.figure(figsize=(W, 3.6 * HS))
     ax = fig.add_axes([0.30, 0.15, 0.30, 0.76])
     y = list(range(len(systems)))
     bars = ax.barh(y, vals, height=0.7)
@@ -119,7 +124,7 @@ def fig_ndcg_systems():
     # The stored bootstrap entries are paired differences vs the baseline,
     # not per-system intervals, so they are printed as text, not error bars.
     ax.text(1.12, -0.9, f"Diff. vs {LABELS[base]}\n[95% CI]", ha="left",
-            va="bottom", fontsize=9, fontweight="bold", clip_on=False)
+            va="bottom", fontsize=FS, fontweight="bold", clip_on=False)
     for yi, s in zip(y, systems):
         if s in boot and metric in boot[s]:
             d = boot[s][metric]
@@ -128,7 +133,7 @@ def fig_ndcg_systems():
             txt = "(reference)"
         else:
             txt = ""
-        ax.text(1.12, yi, txt, va="center", ha="left", fontsize=9, clip_on=False)
+        ax.text(1.12, yi, txt, va="center", ha="left", fontsize=FS, clip_on=False)
     ax.grid(axis="x", color="#cccccc", linewidth=0.5)
     ax.set_axisbelow(True)
     fig.savefig(os.path.join(HERE, "fig_ndcg_systems.png"), dpi=DPI,
@@ -145,7 +150,7 @@ def fig_pr_curves():
                if s in pr]
     colours = {"tfidf": "#7f7f7f", "bm25": C_ORANGE, "dense": C_MID,
                "hybrid": "#2e8b57", "hybrid+rerank": "black"}
-    fig, ax = plt.subplots(figsize=(W, 3.8))
+    fig, ax = plt.subplots(figsize=(W, 3.8 * HS))
     for s in systems:
         yv = pr[s]
         xv = [i / (len(yv) - 1) for i in range(len(yv))]
@@ -168,7 +173,7 @@ def fig_ndcg_by_type():
     bt = r["by_type"]
     systems = [s for s in ["bm25", "hybrid", "hybrid+rerank"] if s in bt]
     types = list(bt[systems[0]].keys())
-    fig, ax = plt.subplots(figsize=(W, 3.6))
+    fig, ax = plt.subplots(figsize=(W, 3.6 * HS))
     n = len(systems)
     width = 0.8 / n
     for i, s in enumerate(systems):
@@ -177,7 +182,7 @@ def fig_ndcg_by_type():
         bars = ax.bar(xs, vals, width * 0.95, label=LABELS[s])
         style_bar(bars, STYLE[s][0], STYLE[s][1])
         for x, v in zip(xs, vals):
-            ax.text(x, v + 0.01, f"{v:.2f}", ha="center", va="bottom", fontsize=9)
+            ax.text(x, v + 0.01, f"{v:.2f}", ha="center", va="bottom", fontsize=FS)
     ax.set_xticks(range(len(types)))
     ax.set_xticklabels([t.capitalize() for t in types])
     ax.set_xlabel("Information-need type")
@@ -202,7 +207,7 @@ def fig_rag_ratings():
     mv = [m["configs"][c]["mean_rating"] for c in cfgs]
     nq = h["n_questions"]
 
-    fig, ax = plt.subplots(figsize=(W, 4.0))
+    fig, ax = plt.subplots(figsize=(W, 4.0 * HS))
     width = 0.36
     xs = list(range(len(cfgs)))
     b1 = ax.bar([x - width / 2 for x in xs], hv, width, label="Human rating (mean of two raters)")
@@ -233,7 +238,7 @@ def fig_rag_ratings():
         lines.append(f"{pretty[a]} - {pretty[b]}: {d['mean_diff']:+.3f} "
                      f"[{d['ci95'][0]:+.3f}, {d['ci95'][1]:+.3f}]")
     ax.text(0.99, 0.99, "\n".join(lines), transform=ax.transAxes, ha="right",
-            va="top", fontsize=9,
+            va="top", fontsize=FS,
             bbox=dict(boxstyle="square", facecolor="white", edgecolor="black",
                       linewidth=0.8))
     save(fig, "fig_rag_ratings.png")
@@ -245,7 +250,7 @@ def fig_entity_accuracy():
     bk = e["by_kind"]
     kinds = sorted(bk, key=lambda k: (-bk[k]["n"], k))
     acc = [100.0 * bk[k]["correct"] / bk[k]["n"] for k in kinds]
-    fig, ax = plt.subplots(figsize=(W, 3.6))
+    fig, ax = plt.subplots(figsize=(W, 3.6 * HS))
     bars = ax.bar(range(len(kinds)), acc)
     for i, b in enumerate(bars):
         full = bk[kinds[i]]["correct"] == bk[kinds[i]]["n"]
@@ -266,6 +271,8 @@ def fig_entity_accuracy():
                  f"({100 * e['accuracy']:.1f}%)")
     ax.grid(axis="y", color="#cccccc", linewidth=0.5)
     ax.set_axisbelow(True)
+    if SMALL:
+        plt.setp(ax.get_xticklabels(), rotation=30, ha="right")
     save(fig, "fig_entity_accuracy.png")
 
 
@@ -274,7 +281,7 @@ def fig_pagerank():
     g = load("data/graph/company_graph.json")
     nodes = sorted(g["nodes"], key=lambda n: (-n["pagerank"], n["ticker"]))[:12]
     cor = g["correlations"]
-    fig, ax = plt.subplots(figsize=(W, 4.0))
+    fig, ax = plt.subplots(figsize=(W, 4.0 * HS))
     xs = list(range(len(nodes)))
     bars = ax.bar(xs, [n["pagerank"] for n in nodes], 0.65)
     style_bar(bars, C_LIGHT, "//")
@@ -287,7 +294,7 @@ def fig_pagerank():
     ax.set_axisbelow(True)
     for x, n in zip(xs, nodes):
         ax.text(x, n["pagerank"] + 0.002, f"{n['pagerank']:.3f}", ha="center",
-                va="bottom", fontsize=9, rotation=90)
+                va="bottom", fontsize=FS, rotation=90)
     ax2 = ax.twinx()
     ax2.spines["right"].set_visible(True)
     ax2.plot(xs, [n["in_degree"] for n in nodes], linestyle="none", marker="D",
@@ -307,7 +314,7 @@ def fig_pagerank():
         f"{g['params']['n_edges']} edges)\n"
         f"Spearman rho: PageRank vs in-degree = {cor['pagerank_vs_indegree_spearman']:.2f}; "
         f"authority vs in-degree = {cor['authority_vs_indegree_spearman']:.2f}",
-        fontsize=9.5)
+        fontsize=FS + 0.5)
     save(fig, "fig_pagerank.png")
 
 
@@ -317,7 +324,7 @@ def fig_abstention():
     mv = load("eval/out/abstention_eval.json")
     metrics = ["precision", "recall", "f1"]
     labels = ["Precision", "Recall", "F1"]
-    fig, ax = plt.subplots(figsize=(W, 4.0))
+    fig, ax = plt.subplots(figsize=(W, 4.0 * HS))
     width = 0.36
     xs = list(range(3))
     v1 = [so["test"][k] for k in metrics]
@@ -344,7 +351,7 @@ def fig_abstention():
     ax.text(0.0, -0.17,
             f"Score-only: tp={t1['tp']} fp={t1['fp']} fn={t1['fn']} tn={t1['tn']}"
             f"      Model verdict: tp={t2['tp']} fp={t2['fp']} fn={t2['fn']} tn={t2['tn']}",
-            transform=ax.transAxes, ha="left", va="top", fontsize=9)
+            transform=ax.transAxes, ha="left", va="top", fontsize=FS)
     ax.grid(axis="y", color="#cccccc", linewidth=0.5)
     ax.set_axisbelow(True)
     save(fig, "fig_abstention.png")
@@ -361,7 +368,7 @@ def fig_speed_quality():
         return
     marks = {"tfidf": ("o", "white"), "tfidf-champ-200": ("s", "#9dc3e6"),
              "tfidf-champ-50": ("^", "black")}
-    fig, ax = plt.subplots(figsize=(W, 3.8))
+    fig, ax = plt.subplots(figsize=(W, 3.8 * HS))
     for s in systems:
         lat = c[s]["p50_ms"]
         up = c[s]["p95_ms"] - lat
@@ -379,7 +386,10 @@ def fig_speed_quality():
     ax.set_title(f"TF-IDF champion list: latency vs quality "
                  f"({c['n_passages']:,} passages)")
     ax.grid(color="#cccccc", linewidth=0.5)
-    ax.legend(loc="lower center", bbox_to_anchor=(0.5, 0.02), frameon=True)
+    if SMALL:
+        ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.2), frameon=False, fontsize=FS - 1)
+    else:
+        ax.legend(loc="lower center", bbox_to_anchor=(0.5, 0.02), frameon=True)
     save(fig, "fig_speed_quality.png")
 
 

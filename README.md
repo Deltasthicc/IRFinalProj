@@ -70,7 +70,7 @@ python -m pytest -q        # offline, no network, no key
 | `eval/` | `entity_eval.py`, `rag_run.py`, `rag_sheets.py`, `rag_score.py`, `abstention_eval.py` |
 | `eval/human_*.py`, `eval/human/` | the blind **human rating** package: tool, blank sheets, scorer and step-by-step guide (`eval/human/README.md`) |
 | `docs/report_C/` | report drafts for Role C's sections and the model figure |
-| `docs/report/` | **the final report** (`TradeMesh_Report_IEEE.pdf`, an IEEE-style two-column paper, built from the drafts and `parts/` by `python docs/report/build_report.py`; needs `requirements-dev.txt` and Chrome or Edge), its figures, and `REQUIREMENTS_TRACEABILITY.md` (every requested item: done, or why not) |
+| `docs/report/` | **the final report**: `TradeMesh_Report.pdf` (short, plain-language, IEEE-style, 8 pages; `python docs/report/build_concise.py`) and `TradeMesh_Report_Detailed.pdf` (every table and ablation; `python docs/report/build_report.py`). Both need `requirements-dev.txt` and Chrome or Edge. Also its figures (`figures/`, including `capture_app.py` for the app screenshots), `REQUIREMENTS_TRACEABILITY.md` (every requested item: done, or why not) and `make_submission_zip.py` |
 | `tests/` | pytest suite and the clearly marked fixture |
 
 ## Interfaces for the other roles

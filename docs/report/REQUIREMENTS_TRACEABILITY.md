@@ -1,6 +1,6 @@
 # Requirements traceability: every item asked for, and where it is (or why it is not)
 
-Sources: the instructor's email (report sections, reference format, ZIP contents), the approved plan `TradeMesh_v2_Proposal.pdf` (Core / Plan / Gate / Stretch / Skip tiers, hypotheses H1 to H11, rubric mapping) and our own chat decisions. "Report" means `docs/report/TradeMesh_Report_IEEE.pdf`, an IEEE-style two-column paper. The instructor's section order is kept; the numbering follows the IEEE convention (the Abstract and References are unnumbered, Introduction = I, Literature review = II, Objective = III, Proposed model = IV, Methodology = V, Experiments and results = VI, Conclusions and limitations = VII), with lettered subsections, so a reference such as 7.6 below (methodology, sixth subsection) is section V-F of the paper; the rule is section n = Roman numeral of n minus 2 (3 to 9 become I to VII) and subsection m = letter m. The tables below keep the decimal form of the instructor's list. Citations in the text are author-year and the reference list uses the instructor's required format, because her email prescribes it.
+Sources: the instructor's email (report sections, reference format, ZIP contents), the approved plan `TradeMesh_v2_Proposal.pdf` (Core / Plan / Gate / Stretch / Skip tiers, hypotheses H1 to H11, rubric mapping) and our own chat decisions. "Report" means `docs/report/TradeMesh_Report.pdf`, a short IEEE-style two-column paper (10 pages, 17 figures, 12 tables, 25 references) written in plain language. It follows the instructor's section order with IEEE numbering (the Abstract and References are unnumbered; Introduction = I, Related work = II, Objective = III, Proposed model = IV, Methodology = V, Experiments and results = VI, Conclusions and limitations = VII). The long version with every table, ablation and pool-bias check is `docs/report/TradeMesh_Report_Detailed.pdf` (23 pages, also in the ZIP under `extra/`); the decimal section numbers below (for example 7.6) refer to that detailed version, where section n is Roman numeral n minus 2 and subsection m is letter m (7.6 = V-F). Citations in the text are author-year and the reference list uses the instructor's required format, because her email prescribes it.
 
 Status: **Done** = built and in the report. **Done, changed** = done but not exactly as planned (the change is stated in the report). **Not done, justified** = deliberately not done, with the reason.
 
@@ -9,7 +9,7 @@ Status: **Done** = built and in the report. **Done, changed** = done but not exa
 | # | Required | Status | Where |
 |---|---|---|---|
 | 1 | Title | Done | Title block |
-| 2 | Abstract | Done (205 words; the plan said about 150, the email set no length) | Section 2 |
+| 2 | Abstract | Done (152 words in the short report; the plan said about 150) | Section 2 |
 | 3 | Introduction: background, importance, motivation, contributions | Done | 3.1 to 3.6 |
 | 4 | Literature review: at least 5 to 7 papers, plus what is new | Done: 25 references (24 distinct papers and one book chapter) in six themes, novelty stated modestly | Section 4, 4.7 |
 | 5 | Objective | Done: aim, 7 objectives, RQ1 to RQ5, H1 to H11 with outcomes | Section 5 |
@@ -94,7 +94,7 @@ Status: **Done** = built and in the report. **Done, changed** = done but not exa
 | Demo | Six-tab app: cited Q&A with trust panel, closed-book toggle, compare mode, Boolean/phrase/wildcard and side-by-side rankers, spelling-corrected names, an unanswerable question that abstains, filing graph, Evaluation and System tabs. `docker compose up` or plain Python. Cached offline mode. `docs/demo_script.md` has the 8-minute run of show and fixes. Pages view says the vision track was not built |
 | Viva | Every formula is in section 7; `docs/demo_script.md` section 3 has short answers; each member must still be able to explain the others' modules (the plan's mock-Viva rule) |
 | Novelty | Section 4.7: domain test collection, controlled comparison, deterministic verifier with abstention and a negative result on score thresholds, pre-declared hypotheses with bootstrap, graph analysis. Text-versus-vision study not delivered |
-| Report | 10 sections in the instructor's order, 9 figures, tables, 25 references, comparison with published work |
+| Report | 10 sections in the instructor's order, 17 figures (pipeline diagram, answer-checking flow, four app screenshots, plots), 12 tables, 25 references, comparison with published work |
 
 ## H. Why more filings or datasets were not added
 
@@ -105,3 +105,10 @@ The plan targeted 6,000 to 10,000 passages from the latest 10-K of 20 companies.
 * Full test suite: 137 passed (offline).
 * Headline numbers in the report were re-read from `eval/out/*.json` and `data/graph/company_graph.json` (retrieval nDCG@10 and MAP for all ten systems, entity 39/40, graph correlations).
 * Report assembled by `docs/report/build_report.py`, which stops if an expected string is missing; the PDF was inspected page by page.
+
+## J. Reproducibility and wording of claims (from the final review)
+
+* The paper names the answer model (Gemini, `gemini-3.5-flash-lite`, temperature 0), the encoder, the reranker, the package versions and the bootstrap seed (Table III). The exact version of the model that made the relevance labels was not recorded, and the paper says so. `requirements-ml.txt` pins sentence-transformers, torch and transformers to the versions used.
+* The dataset used is the processed corpus (`dataset/data/passages.jsonl`, 11,964 passages, with `filings.json` listing each filing's accession number and URL), the questions, judgments, ratings and results. The original SEC filing files are public and are not bundled; `python -m trademesh.ingest.corpus` fetches them again.
+* Claims are kept narrow in the abstract, section VI-F and the conclusions: 20 test questions, model-made relevance labels, two raters from the team (kappa 0.39), and an abstention result on easy questions that relies on the model's own verdict.
+* `make_submission_zip.py` checks its own output (report PDF, link, README, code, dataset, both raters) and refuses to finish if a draft or old-name file is inside.

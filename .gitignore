@@ -20,8 +20,7 @@ data/raw_html/
 # dense embeddings are recomputed on first use and cached here (18 MB for the corpus); not committed
 cache/emb_*.npy
 
-# the assembled report keeps its PDF and markdown; the HTML embeds every figure and is rebuilt on demand
-docs/report/TradeMesh_Report_IEEE.html
-# superseded single-column report (the PDF was open in a viewer when the IEEE version replaced it)
-docs/report/TradeMesh_Report.pdf
+# the reports keep their PDF and markdown; the HTML embeds every figure and is rebuilt on demand
 docs/report/TradeMesh_Report.html
+docs/report/TradeMesh_Report_Detailed.html
+docs/report/*_Draft.*

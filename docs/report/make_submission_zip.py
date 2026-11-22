@@ -25,9 +25,10 @@ CSD358 Information Retrieval, Monsoon 2026
 Shashwat Rajan (2510111019), Tanish Shitanshu (2510110008), Ruchir Sharma (2310110728)
 
 Contents
-  TradeMesh_Report_IEEE.pdf        the report (IEEE-style paper; the instructor's sections, in her order)
+  TradeMesh_Report.pdf             the report: a short IEEE-style paper with the instructor's sections, in her order
   GITHUB_LINK.txt                  the repository
   REQUIREMENTS_TRACEABILITY.md     every requested item: where it is, or why it is not
+  extra/TradeMesh_Report_Detailed.pdf   the long version with every table and ablation (optional reading)
   code/                            full source (python package src/trademesh, tests, eval scripts, app, Dockerfile, report build)
   dataset/data/                    processed passages (passages.jsonl, 11,964), companies, filings list,
                                    information needs (needs/needs.csv, unanswerable.csv, typos.csv),
@@ -42,8 +43,10 @@ Run (details in code/README.md)
   python -m streamlit run src/trademesh/app/streamlit_app.py
   or: docker compose up --build
 
-Raw filings are not shipped; python -m trademesh.ingest.corpus downloads them again from SEC EDGAR
-(needs SEC_USER_AGENT with a contact email).
+The dataset used by every experiment is the processed corpus in dataset/data/passages.jsonl (the latest 10-K of 20 companies split
+into 11,964 passages, with filings.json listing each filing's accession number and URL), together with the questions, relevance
+judgments, ratings and results listed above. The original SEC filing files are public and are not bundled;
+python -m trademesh.ingest.corpus downloads them again from SEC EDGAR (needs SEC_USER_AGENT with a contact email).
 No API key is included. Live answers need GEMINI_API_KEY in a local .env; cached demo answers work offline (LLM_OFFLINE=1).
 """
 
@@ -51,11 +54,19 @@ No API key is included. Live answers need GEMINI_API_KEY in a local .env; cached
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--out", default=str(ROOT.parent / f"{NAME}.zip"))
+    ap.add_argument("--report-pdf", help="package this PDF as TradeMesh_Report.pdf (for a trial build from a draft); the freshness check is skipped")
     args = ap.parse_args()
-    pdf = ROOT / "docs/report/TradeMesh_Report_IEEE.pdf"
-    sources = [*(ROOT / "docs/report/parts").glob("*.md"), *(ROOT / "docs/report_B").glob("*.md"), *(ROOT / "docs/report_C").glob("*.md")]
-    if not pdf.exists() or any(s.stat().st_mtime > pdf.stat().st_mtime + 1 for s in sources):
-        sys.exit("The report PDF is missing or older than its sources: run python docs/report/build_report.py first.")
+    pdf = Path(args.report_pdf) if args.report_pdf else ROOT / "docs/report/TradeMesh_Report.pdf"
+    detailed = ROOT / "docs/report/TradeMesh_Report_Detailed.pdf"
+    short_sources = [ROOT / "docs/report/concise/paper.md", ROOT / "docs/report/build_concise.py", *(ROOT / "eval/out").glob("*.json")]
+    long_sources = [*(ROOT / "docs/report/parts").glob("*.md"), *(ROOT / "docs/report_B").glob("*.md"), *(ROOT / "docs/report_C").glob("*.md")]
+    for f, srcs, cmd in ((pdf, short_sources, "build_concise.py"), (detailed, long_sources, "build_report.py")):
+        if f is pdf and args.report_pdf:
+            if not f.exists():
+                sys.exit(f"{f} does not exist")
+            continue
+        if not f.exists() or any(s.stat().st_mtime > f.stat().st_mtime + 1 for s in srcs):
+            sys.exit(f"{f.name} is missing or older than its sources: run python docs/report/{cmd} first.")
     dirty = subprocess.run(["git", "-C", str(ROOT), "status", "--porcelain", "--untracked-files=no"], capture_output=True, text=True).stdout.strip()
     if dirty:
         sys.exit("Uncommitted changes (the code folder is exactly HEAD). Commit first:\n" + dirty)
@@ -71,7 +82,8 @@ def main() -> None:
             if src.is_file():
                 z.write(src, f"{NAME}/{dest}")
 
-        add(pdf, "TradeMesh_Report_IEEE.pdf")
+        add(pdf, "TradeMesh_Report.pdf")
+        add(detailed, "extra/TradeMesh_Report_Detailed.pdf")
         add(ROOT / "docs/report/REQUIREMENTS_TRACEABILITY.md", "REQUIREMENTS_TRACEABILITY.md")
         z.writestr(f"{NAME}/GITHUB_LINK.txt", "Code, data and results: https://github.com/Deltasthicc/IRFinalProj\n")
         z.writestr(f"{NAME}/README.txt", README)
@@ -86,6 +98,14 @@ def main() -> None:
             if p.suffix in (".json", ".csv"):
                 add(p, f"dataset/results/{p.name}")
     names = zipfile.ZipFile(out).namelist()
+    need = ["TradeMesh_Report.pdf", "GITHUB_LINK.txt", "README.txt", "REQUIREMENTS_TRACEABILITY.md", "extra/TradeMesh_Report_Detailed.pdf",
+            "code/README.md", "code/requirements.txt", "dataset/data/passages.jsonl", "dataset/data/filings.json",
+            "dataset/human_ratings/raters/Shashwat/ratings.csv", "dataset/human_ratings/raters/Ruchir/ratings.csv", "dataset/results/rag_scores_human.json"]
+    missing = [n for n in need if f"{NAME}/{n}" not in names]
+    stale = [n for n in names if any(s in n for s in ("_Draft", "_IEEE"))]
+    if missing or stale:
+        out.unlink(missing_ok=True)
+        sys.exit(f"ZIP check failed. Missing: {missing}. Stale draft or old-name files: {stale}")
     bad = [n for n in names if any(s in n.lower() for s in (".env\0", "secret")) or n.endswith("/.env")]
     print(f"wrote {out} ({out.stat().st_size // 1024} KB, {len(names)} files); suspicious names: {bad or 'none'}")
 

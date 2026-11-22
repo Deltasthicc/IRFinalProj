@@ -1,6 +1,6 @@
 """Assemble the final report from its parts and render it to PDF.
 
-    python docs/report/build_report.py            # writes TradeMesh_Report_IEEE.md, .html and (if Chrome/Edge is found) .pdf
+    python docs/report/build_report.py            # writes TradeMesh_Report_Detailed.md, .html and (if Chrome/Edge is found) .pdf
 
 Sources: the new parts in docs/report/parts/, the role drafts in docs/report_B and docs/report_C (renumbered to the
 instructor's ten-section layout), the figures in docs/report/figures/ and docs/report_C/fig_model.svg.
@@ -22,7 +22,7 @@ HERE = Path(__file__).resolve().parent
 DOCS = HERE.parent
 PARTS, FIGS = HERE / "parts", HERE / "figures"
 B, C = DOCS / "report_B", DOCS / "report_C"
-OUT = HERE / "TradeMesh_Report_IEEE"
+OUT = HERE / "TradeMesh_Report_Detailed"
 
 
 def read(p: Path) -> str:
