@@ -12,7 +12,8 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright
 
 OUT = Path(__file__).resolve().parent
-URL = "http://localhost:8501"
+import os
+URL = os.environ.get("TM_URL", "http://localhost:8501")
 
 
 def shot(page, path: Path) -> None:

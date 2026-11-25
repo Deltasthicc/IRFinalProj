@@ -220,7 +220,7 @@ def readiness(state: AppState) -> list[tuple[str, bool, str]]:
         ("Reranker", state.reranker is not None, "cross-encoder installed" if state.reranker else "not installed (pip install -r requirements-ml.txt)"),
         ("LLM", not state.llm.is_stub, f"{state.llm.provider} / {state.llm.model}"),
         ("Company graph", graph_ok, "data/graph/company_graph.json" if graph_ok else "not produced yet"),
-        ("Page images", vision_ok, "data/vision/results.json" if vision_ok else "vision track is gated, not run"),
+        ("Page images", vision_ok, "small demo: 8 questions on 39 filing pages (data/vision/results.json)" if vision_ok else "vision demo not run (docs/vision_demo.md)"),
     ]
 
 

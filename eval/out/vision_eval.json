@@ -1,0 +1,188 @@
+{
+ "summary": {
+  "vision_maxsim": {
+   "hit@1": 8,
+   "hit@3": 8,
+   "mrr": 1.0
+  },
+  "text_bm25": {
+   "hit@1": 7,
+   "hit@3": 8,
+   "mrr": 0.938
+  }
+ },
+ "n_questions": 8,
+ "n_pages": 39,
+ "pool": {
+  "gold": 11,
+  "numbers": 16,
+  "prose": 12
+ },
+ "encoder": {
+  "model": "vidore/colSmol-256M",
+  "device": "cpu",
+  "load_seconds": 9.8,
+  "pages": 39,
+  "seconds_per_page_mean": 38.5,
+  "vectors_per_page_mean": 875.0,
+  "vector_dim": 128,
+  "torch": "2.13.0+cpu"
+ },
+ "per_question": [
+  {
+   "id": "V1",
+   "question": "Which page shows Apple's net sales by product category: iPhone, Mac, iPad, Wearables and Services?",
+   "gold": [
+    "AAPL_p29",
+    "AAPL_p42"
+   ],
+   "vision_rank_of_first_gold": 1,
+   "text_rank_of_first_gold": 1,
+   "vision_top3": [
+    "AAPL_p29",
+    "AAPL_p42",
+    "AAPL_p35"
+   ],
+   "text_top3": [
+    "AAPL_p29",
+    "AAPL_p42",
+    "AAPL_p18"
+   ]
+  },
+  {
+   "id": "V2",
+   "question": "Where is the table of Apple's five-year cumulative total shareholder return compared with the S&P 500 index?",
+   "gold": [
+    "AAPL_p26"
+   ],
+   "vision_rank_of_first_gold": 1,
+   "text_rank_of_first_gold": 1,
+   "vision_top3": [
+    "AAPL_p26",
+    "WMT_p55",
+    "AAPL_p42"
+   ],
+   "text_top3": [
+    "AAPL_p26",
+    "AAPL_p29",
+    "MSFT_p73"
+   ]
+  },
+  {
+   "id": "V3",
+   "question": "Microsoft revenue and operating income by segment: Productivity and Business Processes, Intelligent Cloud, More Personal Computing",
+   "gold": [
+    "MSFT_p38"
+   ],
+   "vision_rank_of_first_gold": 1,
+   "text_rank_of_first_gold": 1,
+   "vision_top3": [
+    "MSFT_p38",
+    "WMT_p77",
+    "TSLA_p53"
+   ],
+   "text_top3": [
+    "MSFT_p38",
+    "MSFT_p29",
+    "WMT_p77"
+   ]
+  },
+  {
+   "id": "V4",
+   "question": "Microsoft income statement with net income and earnings per share",
+   "gold": [
+    "MSFT_p50",
+    "MSFT_p62"
+   ],
+   "vision_rank_of_first_gold": 1,
+   "text_rank_of_first_gold": 1,
+   "vision_top3": [
+    "MSFT_p50",
+    "MSFT_p62",
+    "AAPL_p42"
+   ],
+   "text_top3": [
+    "MSFT_p62",
+    "AAPL_p35",
+    "AAPL_p42"
+   ]
+  },
+  {
+   "id": "V5",
+   "question": "Tesla statement of operations: automotive sales, regulatory credits and energy generation and storage revenues",
+   "gold": [
+    "TSLA_p53"
+   ],
+   "vision_rank_of_first_gold": 1,
+   "text_rank_of_first_gold": 1,
+   "vision_top3": [
+    "TSLA_p53",
+    "TSLA_p42",
+    "TSLA_p95"
+   ],
+   "text_top3": [
+    "TSLA_p53",
+    "TSLA_p42",
+    "TSLA_p95"
+   ]
+  },
+  {
+   "id": "V6",
+   "question": "Tesla balance sheet with total assets and total liabilities",
+   "gold": [
+    "TSLA_p52",
+    "TSLA_p95"
+   ],
+   "vision_rank_of_first_gold": 1,
+   "text_rank_of_first_gold": 1,
+   "vision_top3": [
+    "TSLA_p95",
+    "TSLA_p52",
+    "WMT_p54"
+   ],
+   "text_top3": [
+    "TSLA_p95",
+    "TSLA_p52",
+    "WMT_p54"
+   ]
+  },
+  {
+   "id": "V7",
+   "question": "Walmart net sales and operating income by segment: Walmart U.S., Walmart International and Sam's Club",
+   "gold": [
+    "WMT_p77"
+   ],
+   "vision_rank_of_first_gold": 1,
+   "text_rank_of_first_gold": 1,
+   "vision_top3": [
+    "WMT_p77",
+    "WMT_p79",
+    "WMT_p52"
+   ],
+   "text_top3": [
+    "WMT_p77",
+    "WMT_p79",
+    "WMT_p52"
+   ]
+  },
+  {
+   "id": "V8",
+   "question": "Walmart consolidated balance sheet with total assets",
+   "gold": [
+    "WMT_p54"
+   ],
+   "vision_rank_of_first_gold": 1,
+   "text_rank_of_first_gold": 2,
+   "vision_top3": [
+    "WMT_p54",
+    "TSLA_p52",
+    "WMT_p52"
+   ],
+   "text_top3": [
+    "TSLA_p95",
+    "WMT_p54",
+    "TSLA_p52"
+   ]
+  }
+ ]
+}
