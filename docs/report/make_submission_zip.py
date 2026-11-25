@@ -90,7 +90,7 @@ def main() -> None:
         for p in (ROOT / "data").rglob("*"):
             rel = p.relative_to(ROOT / "data")
             heavy = rel.parts[0] == "vision" and (len(rel.parts) > 1 and rel.parts[1] in ("html", "pdf", "wide") or rel.name.startswith("emb_"))
-            if p.is_file() and rel.parts[0] not in ("raw", "raw_html") and not heavy:
+            if p.is_file() and rel.parts[0] not in ("raw", "raw_html", "vision_full_work") and not heavy:
                 add(p, f"dataset/data/{rel.as_posix()}")
         for p in (ROOT / "eval/human/raters").rglob("*"):
             add(p, f"dataset/human_ratings/raters/{p.relative_to(ROOT / 'eval/human/raters').as_posix()}")

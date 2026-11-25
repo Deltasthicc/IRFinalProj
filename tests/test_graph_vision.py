@@ -109,3 +109,53 @@ def test_vision_scoring_ranks_the_matching_page_first_and_the_app_reads_the_extr
     assert res["summary"]["vision_maxsim"]["hit@1"] == 1 and res["summary"]["text_bm25"]["hit@1"] == 1
     from trademesh.app.backend import load_vision
     assert load_vision(v / "results.json")[0] is not None
+
+
+def test_full_scoring_questions_and_app_loader(tmp_path, monkeypatch):
+    """vision_full_prepare builds company questions from page texts; vision_full_score ranks pages; the app prefers the full results."""
+    import json
+    import sys
+    from pathlib import Path
+
+    import numpy as np
+    from PIL import Image
+
+    root = Path(__file__).resolve().parents[1]
+    sys.path.insert(0, str(root))
+    import eval.vision_full_prepare as fp
+    import eval.vision_full_score as fs
+
+    pages = {"A_p1": {"ticker": "A", "page": 1, "image": "pages/A_p1.png", "digits": 0.3, "text": "Consolidated Balance Sheets Total assets 10 Total liabilities 5"},
+             "A_p2": {"ticker": "A", "page": 2, "image": "pages/A_p2.png", "digits": 0.02, "text": "Balance Sheets are discussed in prose Total assets Total liabilities"},
+             "B_p1": {"ticker": "B", "page": 1, "image": "pages/B_p1.png", "digits": 0.3, "text": "Statements of Cash Flows operating activities investing financing 5"}}
+    qs, dropped = fp.build_questions(pages, {"A": "Alpha", "B": "Beta"})
+    by = {q["id"]: q for q in qs}
+    assert by["A-balance"]["gold"] == ["A_p1"] and by["A-balance"]["question"].startswith("Alpha ")      # the prose page is not gold
+    assert by["B-cash"]["gold"] == ["B_p1"] and any(d.startswith("A-income") for d in dropped)
+
+    work = tmp_path / "work"
+    (work / "emb").mkdir(parents=True)
+    (work / "pages").mkdir()
+    for pid in pages:
+        Image.new("RGB", (20, 30), "white").save(work / "pages" / f"{pid}.png")
+    (work / "pages.json").write_text(json.dumps(pages))
+    keep = [q for q in qs if q["id"] in ("A-balance", "B-cash")]
+    (work / "questions.json").write_text(json.dumps(keep))
+    vecs = {"A_p1": [[1.0, 0.0]], "A_p2": [[0.0, 1.0]], "B_p1": [[0.6, 0.6]]}
+    for pid, v in vecs.items():
+        np.save(work / "emb" / f"{pid}.npy", np.array(v, dtype=np.float16))
+    np.savez(work / "emb_queries.npz", **{"A-balance": np.array([[1.0, 0.0]]), "B-cash": np.array([[0.6, 0.6]])})
+    out = tmp_path / "out"
+    monkeypatch.setattr(sys, "argv", ["x", "--work", str(work), "--out", str(out)])
+    (tmp_path / "data").mkdir()
+    (tmp_path / "data" / "companies.json").write_text(json.dumps([{"ticker": "A", "name": "Alpha"}, {"ticker": "B", "name": "Beta"}]))
+    monkeypatch.setattr(fs, "ROOT", tmp_path)
+    fs.main()
+    res = json.loads((out / "results.json").read_text())
+    assert res["summary"]["overall"]["vision_maxsim"]["hit@1"] == 2 and res["scale"] == "full"
+    assert (out / "thumbs" / "A_p1.jpg").exists() and res["summary"]["groups"]["balance sheet"]["vision_maxsim"]["n"] == 1
+
+    from trademesh.app import backend
+    monkeypatch.setattr(backend, "VISION_FULL_PATH", out / "results.json")
+    monkeypatch.setattr(backend, "VISION_PATH", tmp_path / "missing.json")
+    assert backend.load_vision()[0]["scale"] == "full"
