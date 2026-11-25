@@ -36,7 +36,8 @@ EXAMPLES = [
 ]
 
 GRAPH_PATH = DATA / "graph" / "company_graph.json"
-VISION_PATH = DATA / "vision" / "results.json"
+VISION_PATH = DATA / "vision" / "results.json"                    # the small demonstration (39 pages)
+VISION_FULL_PATH = DATA / "vision_full" / "results.json"          # the full-corpus run from the Colab notebook, preferred when present
 
 
 @dataclass
@@ -166,7 +167,10 @@ def load_graph(path: Path = GRAPH_PATH) -> tuple[dict | None, str]:
     return _load_json(path, _validate_graph)
 
 
-def load_vision(path: Path = VISION_PATH) -> tuple[dict | None, str]:
+def load_vision(path: Path | None = None) -> tuple[dict | None, str]:
+    """The page-image results: the full-corpus run if data/vision_full/results.json exists, otherwise the small demonstration."""
+    if path is None:
+        path = VISION_FULL_PATH if VISION_FULL_PATH.exists() else VISION_PATH
     return _load_json(path, _validate_vision)
 
 
@@ -213,14 +217,17 @@ def load_entity_eval(path: Path = ENTITY_EVAL) -> dict | None:
 def readiness(state: AppState) -> list[tuple[str, bool, str]]:
     """What is wired up and what is still missing (name, ready, detail)."""
     graph_ok = load_graph()[0] is not None
-    vision_ok = load_vision()[0] is not None
+    _vis = load_vision()[0]
+    vision_ok = _vis is not None
+    vision_note = (f'{_vis.get("n_questions", len(_vis["queries"]))} questions on {_vis.get("n_pages", "?")} filing pages'
+                   + (" (full corpus)" if _vis.get("scale") == "full" else " (small demo)")) if _vis else ""
     return [
         ("Corpus", not state.is_fixture, f"{len(state.passages):,} passages" if not state.is_fixture else "using the test fixture"),
         ("Retrievers", not state.using_stub, ", ".join(state.retrievers) if not state.using_stub else "dev BM25 stub"),
         ("Reranker", state.reranker is not None, "cross-encoder installed" if state.reranker else "not installed (pip install -r requirements-ml.txt)"),
         ("LLM", not state.llm.is_stub, f"{state.llm.provider} / {state.llm.model}"),
         ("Company graph", graph_ok, "data/graph/company_graph.json" if graph_ok else "not produced yet"),
-        ("Page images", vision_ok, "small demo: 8 questions on 39 filing pages (data/vision/results.json)" if vision_ok else "vision demo not run (docs/vision_demo.md)"),
+        ("Page images", vision_ok, vision_note if vision_ok else "vision demo not run (docs/vision_demo.md)"),
     ]
 
 

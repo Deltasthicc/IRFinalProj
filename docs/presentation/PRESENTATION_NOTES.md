@@ -76,11 +76,11 @@ The proposal mapped each lecture to a part of the system. Use this table when th
 | Beyond the slides: rank fusion | Reciprocal rank fusion, CombSUM, CombMNZ | Yes |
 | Beyond the slides: Rocchio relevance feedback | Pseudo-relevance feedback (`bm25+prf`) | Yes |
 | Beyond the slides: retrieval-augmented generation | Cited answers from five passages, checked by a verifier | Yes (verifier, prompt, cache); model used |
-| Beyond the slides: late interaction (ColBERT / ColPali) | MaxSim page scoring for the Pages tab (small demo: page-image search against text search) | Yes (scoring); model used |
+| Beyond the slides: late interaction (ColBERT / ColPali) | MaxSim page scoring for the Pages tab (page-image search against text search over all 2,606 pages) | Yes (scoring); model used |
 
 ## 2. How it works, step by step
 
-@@FIG:docs/report_C/fig_model.svg|165|Figure 1. The pipeline. The top row is built once (offline). The two lower rows run for every question. The dashed box is the page-image track; the report says it was not built, and a small demonstration was added afterwards (section 3.16).@@
+@@FIG:docs/report_C/fig_model.svg|165|Figure 1. The pipeline. The top row is built once (offline). The two lower rows run for every question. The dashed box is the page-image track; the report says it was not built, and a full run was added afterwards (section 3.16).@@
 
 ### 2.1 Offline stage (done once)
 
@@ -205,35 +205,35 @@ computed by power iteration; HITS gives each company a hub and an authority scor
 
 ### 3.15 The page-image track and what the report says
 
-The optional vision track was gated in the proposal (it needs a vision-language model, normally on a GPU). The submitted report states that only the MaxSim scoring was built and the track was not run. The next subsection describes the small demonstration that was added afterwards.
+The optional vision track was gated in the proposal (it needs a vision-language model, normally on a GPU). The submitted report states that only the MaxSim scoring was built and the track was not run. The next subsection describes what was run afterwards.
 
-### 3.16 The page-image demo (the Pages tab), added after the report
+### 3.16 The page-image run (the Pages tab), added after the report
 
-The report says the page-image track was not built. After that we built a **small demonstration** so that you can show a working Pages tab. What it is, in plain words:
+The report says the page-image track was not built. After submission we built it, in two steps, so that the Pages tab shows a real result. Say clearly that this is **post-submission work and is not in the report**.
 
-* **The idea (ColBERT / ColPali, late interaction).** Instead of extracting text from a page, a vision-language model looks at the **picture of the page** and turns it into many small vectors (one per image patch, here about 875 per page). A question is turned into one vector per word. The **MaxSim** score of a page is: for each question vector, take its best-matching page vector, then add these maxima. The page with the highest total is returned. This is the late-interaction scoring we wrote ourselves in `src/trademesh/vision/maxsim.py`; only the vectors come from the pre-trained model.
-* **What we ran.** 39 pages from four filings (Apple, Microsoft, Tesla, Walmart), rendered to images; 8 hand-written questions, mostly about tables (net sales by product, revenue by segment, income statement, balance sheet, shareholder-return table). The model is `vidore/colSmol-256M` (256 million parameters), run on the **CPU** because the laptop's graphics card has only 4 GB and the Python environment has the CPU build of PyTorch; it took about 38 seconds per page.
-* **A fair comparison.** For the same questions and pages we also ran **BM25 over the text extracted from the pages**. A result counts as correct when its page contains the answer (a page matching the question's keyword rule).
-* **Result.** MaxSim over page images: the first result was a correct page for **8 of 8** questions and a correct page was in the top three for **8 of 8**. BM25 over extracted text: **7 of 8** and **8 of 8**.
+* **The idea (ColBERT / ColPali, late interaction).** Instead of extracting text from a page, a vision-language model looks at the **picture of the page** and turns it into many small vectors (one per image patch). A question is turned into one vector per word. The **MaxSim** score of a page is: for each question vector take its best-matching page vector, then add these maxima; the page with the highest total wins. The scoring is our own code (`src/trademesh/vision/maxsim.py`); only the vectors come from the pre-trained model.
+* **Step 1, a small demonstration on the laptop.** 39 pages from four filings, 8 hand-written table questions, a 256-million-parameter model (`colSmol-256M`) on the CPU. Page images put a correct page first for 8 of 8 questions and text search (BM25) for 7 of 8. This only shows that the idea works on a small pool.
+* **Step 2, the full run on Colab (the numbers the Pages tab now shows).** All **2,606 pages of all 20 filings** (the real corpus, rendered to images), **66 questions** and the larger model `colqwen2` (`vidore/colqwen2-v1.0-merged`, run on a Tesla T4 in float16; the encoding took about 33 minutes). For every question, **all 2,606 pages compete**. The questions: for each company the balance sheet, the income statement and the cash-flow statement (for example "Apple consolidated balance sheet with total assets and total liabilities"), plus the 8 hand-written ones. A result counts as correct when its page matches the question's keyword rule (a page of that company's statement). We compare with **BM25 over the text extracted from the same pages**.
 
-| Question | Question (shortened) | Rank of first correct page, vision | Rank, text BM25 |
-|---|---|---|---|
-| V1 | Which page shows Apple's net sales by product category: iPhone, Mac, iPad, Wea... | 1 | 1 |
-| V2 | Where is the table of Apple's five-year cumulative total shareholder return co... | 1 | 1 |
-| V3 | Microsoft revenue and operating income by segment: Productivity and Business P... | 1 | 1 |
-| V4 | Microsoft income statement with net income and earnings per share | 1 | 1 |
-| V5 | Tesla statement of operations: automotive sales, regulatory credits and energy... | 1 | 1 |
-| V6 | Tesla balance sheet with total assets and total liabilities | 1 | 1 |
-| V7 | Walmart net sales and operating income by segment: Walmart U.S., Walmart Inter... | 1 | 1 |
-| V8 | Walmart consolidated balance sheet with total assets | 1 | 2 |
+| Question group | Questions | Page images: first result correct | Text BM25: first result correct | Page images: in top 3 | Text BM25: in top 3 |
+|---|---|---|---|---|---|
+| balance sheet | 19 | 9 | 4 | 11 | 12 |
+| cash flow | 19 | 2 | 11 | 7 | 15 |
+| hand-written | 8 | 4 | 4 | 7 | 6 |
+| income statement | 20 | 1 | 11 | 5 | 15 |
+| **All** | **66** | **16** | **30** | **30** | **48** |
 
-* **How to read it honestly.** This is eight questions on 39 pages written by us, so it shows that the approach works on this kind of page; it does not show that vision is better or worse than text in general (that would need many more questions and the full corpus). The pages are real filing pages, but the filings' charts are separate image files that we did not download, so a chart shows as an empty frame; the numbers around it are real. The demo is **not in the submitted report**, which still says the track was not built; say that it was added afterwards as a proof of concept.
+Mean reciprocal rank (1 = always first): page images 0.392, text 0.616. A correct page was in the top 10 for 45 of 66 questions with page images and 58 of 66 with text.
 
-@@FIG:docs/report/figures/app_pages_top.png|120|Figure 12. The Pages tab: page-image search (MaxSim) against text search (BM25) on the same 39 pages, then the best four pages for each question.@@
+* **What the result says, honestly.** At full scale **text search beat page-image search overall** (30 against 16 first-result hits of 66). The picture is mixed: page images were clearly **better on balance-sheet questions** (9 against 4) and on the segment questions that depend on a table's layout (for example Microsoft's segments and Walmart's segments, where page images were first and text was fourth and second), tied on the hand-written group, and much **worse on income-statement and cash-flow questions** (1 against 11 and 2 against 11). That is the opposite of the 8-of-8 result on 39 pages, which shows that a small test can look much better than the same method at scale. Hypothesis H11 (page images beat text) is therefore **not supported** in this run.
+* **Likely reasons, not tested.** A whole A3 page is shown to the model at limited resolution (at most about 768 visual tokens), so small table text is hard to read; the filings of 20 companies contain many near-identical statement pages, and for income and cash-flow statements the page looks much like other companies' statements; the "correct page" rule is a keyword match on the page text, which favours the text baseline, and the text baseline also gets the company name added.
+* **Limits.** 66 questions written by us, a keyword-based definition of "correct", one model, one precision setting (float16), charts not downloaded (a chart shows as an empty frame). It is a demonstration at scale, not a benchmark.
 
-<div class="callout demo"><b>DEMO:</b> Pages tab. The four tiles at the top compare page-image search with text search. Below, each question shows the four best pages as pictures; a page marked "[correct page]" contains the answer.</div>
+@@FIG:docs/report/figures/app_pages_full.png|120|Figure 12. The Pages tab with the full run: page images (MaxSim) against text (BM25) over 2,606 pages, a table per question group, and a question picker with the best four pages.@@
 
-<div class="callout code"><b>CODE:</b> <code>eval/vision_prepare.py</code> (choose and render pages, write questions), <code>eval/vision_encode.py</code> (the pre-trained vision model), <code>eval/vision_score.py</code> (our MaxSim and the BM25 baseline), <code>src/trademesh/vision/maxsim.py</code>, results in <code>data/vision/results.json</code>, instructions in <code>docs/vision_demo.md</code>.</div>
+<div class="callout demo"><b>DEMO:</b> Pages tab. The four tiles compare page-image search with text search; the table gives the result per question group. Use the <b>Question</b> picker: choose <code>V3</code> (Microsoft segments) or <code>JPM-balance</code> to show page images finding the right page among 2,606, then <code>AAPL-balance</code> or <code>AAPL-income</code> to show a miss (the first pages shown are other companies' statements). A page marked "[correct page]" is a correct answer.</div>
+
+<div class="callout code"><b>CODE:</b> <code>eval/vision_full_prepare.py</code> (download, render every page, extract text, write questions), <code>eval/vision_full_encode.py</code> (the pre-trained vision model, GPU), <code>eval/vision_full_score.py</code> (our MaxSim and the BM25 baseline); the notebook <code>notebooks/TradeMesh_Vision_Colab.ipynb</code> runs all three on Colab and pushes the result; results in <code>data/vision_full/results.json</code> and <code>eval/out/vision_full_eval.json</code>. The earlier small demo: <code>eval/vision_prepare.py</code>, <code>vision_encode.py</code>, <code>vision_score.py</code>, <code>data/vision/</code>. Instructions: <code>docs/vision_demo.md</code>.</div>
 
 ## 4. How we evaluated, and how to explain the numbers
 
@@ -277,7 +277,7 @@ With only 20 test questions, a classic significance test is unreliable. For two 
 | H8 | Answers with retrieval beat answers without | **Supported** for the best retriever (+0.625); weak for BM25 (+0.325) |
 | H9 | Hybrid + reranker answers beat BM25 answers | **Supported** (+0.300) |
 | H10 | PageRank differs from counting mentions | No (Spearman 0.93) |
-| H11 | Page-image retrieval beats text | Not tested in the report; the later 8-question demo is only a proof of concept (section 3.16) |
+| H11 | Page-image retrieval beats text | Not tested in the report. In the later full run (section 3.16) text search was better overall, so H11 is **not supported** there |
 
 ### 4.6 The human rating study (and the one correction we disclose)
 
@@ -403,7 +403,7 @@ The page, top to bottom: a hero with two buttons ("Ask with a typo" and "Compare
 | **Ask** | The question box and four example buttons; toggles Closed-book and Compare; a pipeline strip of seven chips; the answer with P-tags; evidence cards; the trust panel |
 | **Search** | Query box, up to three retrievers side by side, company filter, top K; highlighted words, hits by 10-K item, "Why this score" |
 | **Graph** | Company mention graph: PageRank bars and a node graph |
-| **Pages** | Small page-image demo: tiles comparing page-image search (MaxSim) with text search (BM25), then the four best page pictures for each of 8 questions, with the correct page marked |
+| **Pages** | The page-image run over all 2,606 pages: tiles comparing page-image search (MaxSim) with text search (BM25), a table per question group, and a question picker that shows the four best page pictures with the correct page marked |
 | **Evaluation** | Three sub-tabs: Retrieval, RAG answers, Abstention, all read from the locked result files |
 | **System** | Readiness checklist, headline tiles, and the typo lab |
 
@@ -424,7 +424,7 @@ The sidebar has the controls for the answer pipeline: retriever, cross-encoder t
 | 4:30 | Search tab: `supplier concentration`; choose bm25, tfidf, hybrid. | "Our retrievers side by side. Why this score shows each word's contribution." Optionally pick **boolean** and try a phrase or `cyber*`. |
 | 5:15 | Evaluation tab. | "Hybrid with reranking 0.828 against 0.699 for BM25. Two of us rated 60 answers blind." State the limits. |
 | 6:15 | Graph tab. | "Who mentions whom. PageRank correlates 0.93 with plain counting, so it adds little." |
-| 6:45 | System tab, typo lab: `Micorsoft`, then `MSTF`. | "Readiness is honest about what is wired up." Then open the Pages tab (section 3.16): "This is a small proof of concept that we added after the report: a vision model reads page pictures and our MaxSim ranks them." |
+| 6:45 | System tab, typo lab: `Micorsoft`, then `MSTF`. | "Readiness is honest about what is wired up." Then open the Pages tab (section 3.16): "After the report we added page-image search: a vision model reads page pictures and our MaxSim ranks them, on all 2,606 pages. It beats text search on balance sheets and segment tables and loses on income and cash-flow statements, so text is better overall." |
 
 **Do not type live:** possessive company names ("Microsoft's", "Apple's"): the spelling module skips them when the possessive form already occurs in the filings, so the company filter is not applied (a known defect that we disclose; it affected three company-naming questions in the test). **If something breaks:** play the backup video and narrate; if an answer takes very long, the client is waiting out the provider's rate limit, so switch to offline mode.
 
@@ -479,7 +479,7 @@ Section numbers are those of the paper (Roman numerals). Code paths are relative
 | VI-G Company graph | 14 links, Spearman 0.93 | Graph tab | `graph/mentions.py` |
 | VI-H Comparison with papers | Agrees on fusion; BM25 not ahead of dense | (slide) | `docs/report_B/10_paper_comparison.md` |
 | VI-I to K Discussion, failures, cost | Tables are hardest; "'s" defect | System tab | `docs/report_C/10_rag_results.md`, `eval/out/cost_table.json` |
-| VII Conclusions and limitations | Small set, model labels, team raters; report says page images not built | Pages tab (small demo added afterwards) | `vision/maxsim.py`, `eval/vision_*.py`, `data/vision/results.json` |
+| VII Conclusions and limitations | Small set, model labels, team raters; report says page images not built | Pages tab (full run added afterwards) | `vision/maxsim.py`, `eval/vision_full_*.py`, `data/vision_full/results.json` |
 
 ## 8. Novelty and honest limits
 
@@ -496,7 +496,7 @@ We do not claim a new model. The contribution is the combination and the evaluat
 
 ### 8.2 What we did not do, and what the results do not prove
 
-* The **page-image track** (RQ5, H11): the report says it was not built. Afterwards we added a small demonstration (8 questions, 39 pages, a 256-million-parameter model on the CPU). It is a proof of concept, not a result for the report.
+* The **page-image track** (RQ5, H11): the report says it was not built. Afterwards we ran it on all 2,606 pages with 66 questions on a Colab GPU; text search was better overall (first result correct for 30 of 66 questions against 16), page images won on balance sheets. This is post-submission work, defined by a keyword rule that favours text, and is not in the report.
 * Relevance labels were made by a **language model**; no human checked them.
 * Both answer raters are **on our team**; one checked only 48 of the 95 citations; kappa is moderate (0.39).
 * The test set is **small** (20 questions), so many intervals are wide and many comparisons are "unclear".
@@ -541,7 +541,7 @@ We do not claim a new model. The contribution is the combination and the evaluat
 
 **What does the company graph tell us?** Little on this small graph: 14 links, PageRank almost the same as in-degree (Spearman 0.93), and HITS nearly degenerate. We report it as a negative result.
 
-**Why was the vision track not in the report?** It was optional and gated (it needs a vision model, normally on a GPU) and was not run in time. We wrote and tested the MaxSim scoring and said so in the report. After submission we added a small demonstration with a small ColPali-family model on the CPU: 8 hand-written table questions on 39 pages from four filings, where page-image search put a correct page first for 8 of 8 questions and text search (BM25) for 7 of 8. It shows that the approach works; with so few questions it does not show which method is better.
+**Why was the vision track not in the report, and what did you find later?** It was optional and gated (it needs a vision model on a GPU) and was not run in time; the report says so. After submission we ran it on Colab: all 2,606 pages of the 20 filings, 66 questions (balance sheet, income statement and cash-flow statement of every company plus 8 hand-written), a ColPali-family model (`colqwen2`) with our own MaxSim, against BM25 over the extracted text. Text was better overall (first result correct for 30 of 66 against 16 of 66), page images were better on balance sheets (9 against 4) and tied on the hand-written questions, and much worse on income and cash-flow statements. An earlier 39-page demo gave 8 of 8, which shows how a small test can mislead. The definition of a correct page is a keyword rule that favours text, so we call it a demonstration, not a benchmark.
 
 **What would you do next?** More raters and test questions, human checks of the relevance labels, a fix for the possessive-name problem, harder unanswerable questions, several filing years and, if a GPU is available, the page-image track.
 

@@ -1,0 +1,2634 @@
+{
+ "queries": [
+  {
+   "query": "Apple consolidated balance sheet with total assets and total liabilities",
+   "id": "AAPL-balance",
+   "group": "balance sheet",
+   "gold": [
+    "AAPL_p37"
+   ],
+   "results": [
+    {
+     "ticker": "BAC",
+     "page": 157,
+     "score": 10.986067771911621,
+     "image": "data/vision_full/thumbs/BAC_p157.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "BAC",
+     "page": 94,
+     "score": 10.948144912719727,
+     "image": "data/vision_full/thumbs/BAC_p94.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "JPM",
+     "page": 169,
+     "score": 10.878265380859375,
+     "image": "data/vision_full/thumbs/JPM_p169.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "XOM",
+     "page": 95,
+     "score": 10.76651668548584,
+     "image": "data/vision_full/thumbs/XOM_p95.jpg",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "query": "Apple consolidated income statement with net income and earnings per share",
+   "id": "AAPL-income",
+   "group": "income statement",
+   "gold": [
+    "AAPL_p35"
+   ],
+   "results": [
+    {
+     "ticker": "MSFT",
+     "page": 62,
+     "score": 11.141775131225586,
+     "image": "data/vision_full/thumbs/MSFT_p62.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "BAC",
+     "page": 93,
+     "score": 10.918096542358398,
+     "image": "data/vision_full/thumbs/BAC_p93.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "BAC",
+     "page": 29,
+     "score": 10.894328117370605,
+     "image": "data/vision_full/thumbs/BAC_p29.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "DIS",
+     "page": 73,
+     "score": 10.817081451416016,
+     "image": "data/vision_full/thumbs/DIS_p73.jpg",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "query": "Apple consolidated statement of cash flows with operating, investing and financing activities",
+   "id": "AAPL-cash",
+   "group": "cash flow",
+   "gold": [
+    "AAPL_p39"
+   ],
+   "results": [
+    {
+     "ticker": "JPM",
+     "page": 60,
+     "score": 13.710211753845215,
+     "image": "data/vision_full/thumbs/JPM_p60.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "INTC",
+     "page": 34,
+     "score": 13.701476097106934,
+     "image": "data/vision_full/thumbs/INTC_p34.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "PFE",
+     "page": 53,
+     "score": 13.688552856445312,
+     "image": "data/vision_full/thumbs/PFE_p53.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "XOM",
+     "page": 112,
+     "score": 13.234549522399902,
+     "image": "data/vision_full/thumbs/XOM_p112.jpg",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "query": "Amazon.com, consolidated balance sheet with total assets and total liabilities",
+   "id": "AMZN-balance",
+   "group": "balance sheet",
+   "gold": [
+    "AMZN_p39"
+   ],
+   "results": [
+    {
+     "ticker": "AMZN",
+     "page": 78,
+     "score": 11.819422721862793,
+     "image": "data/vision_full/thumbs/AMZN_p78.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "GS",
+     "page": 142,
+     "score": 11.285123825073242,
+     "image": "data/vision_full/thumbs/GS_p142.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "JPM",
+     "page": 169,
+     "score": 11.247234344482422,
+     "image": "data/vision_full/thumbs/JPM_p169.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "AMZN",
+     "page": 41,
+     "score": 11.040290832519531,
+     "image": "data/vision_full/thumbs/AMZN_p41.jpg",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "query": "Amazon.com, consolidated income statement with net income and earnings per share",
+   "id": "AMZN-income",
+   "group": "income statement",
+   "gold": [
+    "AMZN_p37"
+   ],
+   "results": [
+    {
+     "ticker": "AMZN",
+     "page": 41,
+     "score": 12.330806732177734,
+     "image": "data/vision_full/thumbs/AMZN_p41.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "WMT",
+     "page": 63,
+     "score": 12.22214126586914,
+     "image": "data/vision_full/thumbs/WMT_p63.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "AMZN",
+     "page": 3,
+     "score": 12.021404266357422,
+     "image": "data/vision_full/thumbs/AMZN_p3.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "AMZN",
+     "page": 34,
+     "score": 11.97028636932373,
+     "image": "data/vision_full/thumbs/AMZN_p34.jpg",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "query": "Amazon.com, consolidated statement of cash flows with operating, investing and financing activities",
+   "id": "AMZN-cash",
+   "group": "cash flow",
+   "gold": [
+    "AMZN_p36"
+   ],
+   "results": [
+    {
+     "ticker": "PFE",
+     "page": 53,
+     "score": 14.131326675415039,
+     "image": "data/vision_full/thumbs/PFE_p53.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "WMT",
+     "page": 56,
+     "score": 13.971085548400879,
+     "image": "data/vision_full/thumbs/WMT_p56.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "JPM",
+     "page": 60,
+     "score": 13.772404670715332,
+     "image": "data/vision_full/thumbs/JPM_p60.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "AMZN",
+     "page": 36,
+     "score": 13.587858200073242,
+     "image": "data/vision_full/thumbs/AMZN_p36.jpg",
+     "correct": true
+    }
+   ]
+  },
+  {
+   "query": "The Boeing Company consolidated income statement with net income and earnings per share",
+   "id": "BA-income",
+   "group": "income statement",
+   "gold": [
+    "BA_p56"
+   ],
+   "results": [
+    {
+     "ticker": "KO",
+     "page": 69,
+     "score": 11.794602394104004,
+     "image": "data/vision_full/thumbs/KO_p69.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "BAC",
+     "page": 29,
+     "score": 11.793425559997559,
+     "image": "data/vision_full/thumbs/BAC_p29.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "BAC",
+     "page": 93,
+     "score": 11.542229652404785,
+     "image": "data/vision_full/thumbs/BAC_p93.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "WMT",
+     "page": 63,
+     "score": 11.2687406539917,
+     "image": "data/vision_full/thumbs/WMT_p63.jpg",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "query": "The Boeing Company consolidated statement of cash flows with operating, investing and financing activities",
+   "id": "BA-cash",
+   "group": "cash flow",
+   "gold": [
+    "BA_p59"
+   ],
+   "results": [
+    {
+     "ticker": "PFE",
+     "page": 53,
+     "score": 14.458154678344727,
+     "image": "data/vision_full/thumbs/PFE_p53.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "BA",
+     "page": 59,
+     "score": 14.00594425201416,
+     "image": "data/vision_full/thumbs/BA_p59.jpg",
+     "correct": true
+    },
+    {
+     "ticker": "WMT",
+     "page": 56,
+     "score": 13.9571533203125,
+     "image": "data/vision_full/thumbs/WMT_p56.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "INTC",
+     "page": 34,
+     "score": 13.76287841796875,
+     "image": "data/vision_full/thumbs/INTC_p34.jpg",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "query": "Bank of America consolidated balance sheet with total assets and total liabilities",
+   "id": "BAC-balance",
+   "group": "balance sheet",
+   "gold": [
+    "BAC_p132",
+    "BAC_p157",
+    "BAC_p158",
+    "BAC_p171",
+    "BAC_p31",
+    "BAC_p94"
+   ],
+   "results": [
+    {
+     "ticker": "BAC",
+     "page": 94,
+     "score": 12.103123664855957,
+     "image": "data/vision_full/thumbs/BAC_p94.jpg",
+     "correct": true
+    },
+    {
+     "ticker": "BAC",
+     "page": 32,
+     "score": 11.870765686035156,
+     "image": "data/vision_full/thumbs/BAC_p32.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "BAC",
+     "page": 52,
+     "score": 11.643793106079102,
+     "image": "data/vision_full/thumbs/BAC_p52.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "BAC",
+     "page": 4,
+     "score": 11.521700859069824,
+     "image": "data/vision_full/thumbs/BAC_p4.jpg",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "query": "Bank of America consolidated income statement with net income and earnings per share",
+   "id": "BAC-income",
+   "group": "income statement",
+   "gold": [
+    "BAC_p34",
+    "BAC_p35",
+    "BAC_p93"
+   ],
+   "results": [
+    {
+     "ticker": "BAC",
+     "page": 168,
+     "score": 12.560652732849121,
+     "image": "data/vision_full/thumbs/BAC_p168.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "BAC",
+     "page": 4,
+     "score": 12.361445426940918,
+     "image": "data/vision_full/thumbs/BAC_p4.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "BAC",
+     "page": 29,
+     "score": 11.965982437133789,
+     "image": "data/vision_full/thumbs/BAC_p29.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "BAC",
+     "page": 89,
+     "score": 11.847756385803223,
+     "image": "data/vision_full/thumbs/BAC_p89.jpg",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "query": "Bank of America consolidated statement of cash flows with operating, investing and financing activities",
+   "id": "BAC-cash",
+   "group": "cash flow",
+   "gold": [
+    "BAC_p172",
+    "BAC_p96"
+   ],
+   "results": [
+    {
+     "ticker": "JPM",
+     "page": 60,
+     "score": 14.221992492675781,
+     "image": "data/vision_full/thumbs/JPM_p60.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "PFE",
+     "page": 53,
+     "score": 13.986398696899414,
+     "image": "data/vision_full/thumbs/PFE_p53.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "BAC",
+     "page": 96,
+     "score": 13.964248657226562,
+     "image": "data/vision_full/thumbs/BAC_p96.jpg",
+     "correct": true
+    },
+    {
+     "ticker": "XOM",
+     "page": 112,
+     "score": 13.893753051757812,
+     "image": "data/vision_full/thumbs/XOM_p112.jpg",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "query": "Chevron consolidated balance sheet with total assets and total liabilities",
+   "id": "CVX-balance",
+   "group": "balance sheet",
+   "gold": [
+    "CVX_p68"
+   ],
+   "results": [
+    {
+     "ticker": "INTC",
+     "page": 64,
+     "score": 11.30498218536377,
+     "image": "data/vision_full/thumbs/INTC_p64.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "CVX",
+     "page": 19,
+     "score": 10.978360176086426,
+     "image": "data/vision_full/thumbs/CVX_p19.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "CVX",
+     "page": 78,
+     "score": 10.974689483642578,
+     "image": "data/vision_full/thumbs/CVX_p78.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "BAC",
+     "page": 94,
+     "score": 10.95577335357666,
+     "image": "data/vision_full/thumbs/BAC_p94.jpg",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "query": "Chevron consolidated income statement with net income and earnings per share",
+   "id": "CVX-income",
+   "group": "income statement",
+   "gold": [
+    "CVX_p66"
+   ],
+   "results": [
+    {
+     "ticker": "BAC",
+     "page": 93,
+     "score": 11.422324180603027,
+     "image": "data/vision_full/thumbs/BAC_p93.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "CVX",
+     "page": 36,
+     "score": 11.40147876739502,
+     "image": "data/vision_full/thumbs/CVX_p36.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "CVX",
+     "page": 86,
+     "score": 11.387856483459473,
+     "image": "data/vision_full/thumbs/CVX_p86.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "CVX",
+     "page": 81,
+     "score": 11.049086570739746,
+     "image": "data/vision_full/thumbs/CVX_p81.jpg",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "query": "Chevron consolidated statement of cash flows with operating, investing and financing activities",
+   "id": "CVX-cash",
+   "group": "cash flow",
+   "gold": [
+    "CVX_p69",
+    "CVX_p77"
+   ],
+   "results": [
+    {
+     "ticker": "PFE",
+     "page": 53,
+     "score": 13.960010528564453,
+     "image": "data/vision_full/thumbs/PFE_p53.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "JPM",
+     "page": 60,
+     "score": 13.845250129699707,
+     "image": "data/vision_full/thumbs/JPM_p60.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "XOM",
+     "page": 112,
+     "score": 13.532039642333984,
+     "image": "data/vision_full/thumbs/XOM_p112.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "JNJ",
+     "page": 54,
+     "score": 13.053159713745117,
+     "image": "data/vision_full/thumbs/JNJ_p54.jpg",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "query": "The Walt Disney Company consolidated balance sheet with total assets and total liabilities",
+   "id": "DIS-balance",
+   "group": "balance sheet",
+   "gold": [
+    "DIS_p75"
+   ],
+   "results": [
+    {
+     "ticker": "DIS",
+     "page": 95,
+     "score": 12.193442344665527,
+     "image": "data/vision_full/thumbs/DIS_p95.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "INTC",
+     "page": 64,
+     "score": 11.932964324951172,
+     "image": "data/vision_full/thumbs/INTC_p64.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "KO",
+     "page": 65,
+     "score": 11.913299560546875,
+     "image": "data/vision_full/thumbs/KO_p65.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "GS",
+     "page": 142,
+     "score": 11.810262680053711,
+     "image": "data/vision_full/thumbs/GS_p142.jpg",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "query": "The Walt Disney Company consolidated income statement with net income and earnings per share",
+   "id": "DIS-income",
+   "group": "income statement",
+   "gold": [
+    "DIS_p73"
+   ],
+   "results": [
+    {
+     "ticker": "DIS",
+     "page": 73,
+     "score": 13.852571487426758,
+     "image": "data/vision_full/thumbs/DIS_p73.jpg",
+     "correct": true
+    },
+    {
+     "ticker": "DIS",
+     "page": 74,
+     "score": 12.830728530883789,
+     "image": "data/vision_full/thumbs/DIS_p74.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "DIS",
+     "page": 80,
+     "score": 12.306289672851562,
+     "image": "data/vision_full/thumbs/DIS_p80.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "WMT",
+     "page": 52,
+     "score": 12.071507453918457,
+     "image": "data/vision_full/thumbs/WMT_p52.jpg",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "query": "The Walt Disney Company consolidated statement of cash flows with operating, investing and financing activities",
+   "id": "DIS-cash",
+   "group": "cash flow",
+   "gold": [
+    "DIS_p76"
+   ],
+   "results": [
+    {
+     "ticker": "PFE",
+     "page": 53,
+     "score": 14.831510543823242,
+     "image": "data/vision_full/thumbs/PFE_p53.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "JPM",
+     "page": 60,
+     "score": 14.365467071533203,
+     "image": "data/vision_full/thumbs/JPM_p60.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "WMT",
+     "page": 56,
+     "score": 14.343696594238281,
+     "image": "data/vision_full/thumbs/WMT_p56.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "JNJ",
+     "page": 54,
+     "score": 14.15483283996582,
+     "image": "data/vision_full/thumbs/JNJ_p54.jpg",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "query": "The Goldman Sachs Group, consolidated balance sheet with total assets and total liabilities",
+   "id": "GS-balance",
+   "group": "balance sheet",
+   "gold": [
+    "GS_p142",
+    "GS_p240"
+   ],
+   "results": [
+    {
+     "ticker": "GS",
+     "page": 150,
+     "score": 13.943978309631348,
+     "image": "data/vision_full/thumbs/GS_p150.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "GS",
+     "page": 142,
+     "score": 13.759773254394531,
+     "image": "data/vision_full/thumbs/GS_p142.jpg",
+     "correct": true
+    },
+    {
+     "ticker": "GS",
+     "page": 91,
+     "score": 13.593185424804688,
+     "image": "data/vision_full/thumbs/GS_p91.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "GS",
+     "page": 66,
+     "score": 13.396698951721191,
+     "image": "data/vision_full/thumbs/GS_p66.jpg",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "query": "The Goldman Sachs Group, consolidated income statement with net income and earnings per share",
+   "id": "GS-income",
+   "group": "income statement",
+   "gold": [
+    "GS_p141"
+   ],
+   "results": [
+    {
+     "ticker": "GS",
+     "page": 66,
+     "score": 14.438532829284668,
+     "image": "data/vision_full/thumbs/GS_p66.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "GS",
+     "page": 252,
+     "score": 13.936664581298828,
+     "image": "data/vision_full/thumbs/GS_p252.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "GS",
+     "page": 224,
+     "score": 13.775172233581543,
+     "image": "data/vision_full/thumbs/GS_p224.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "GS",
+     "page": 139,
+     "score": 13.77224349975586,
+     "image": "data/vision_full/thumbs/GS_p139.jpg",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "query": "The Goldman Sachs Group, consolidated statement of cash flows with operating, investing and financing activities",
+   "id": "GS-cash",
+   "group": "cash flow",
+   "gold": [
+    "GS_p144",
+    "GS_p241"
+   ],
+   "results": [
+    {
+     "ticker": "GS",
+     "page": 66,
+     "score": 15.015981674194336,
+     "image": "data/vision_full/thumbs/GS_p66.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "GS",
+     "page": 73,
+     "score": 14.958147048950195,
+     "image": "data/vision_full/thumbs/GS_p73.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "GS",
+     "page": 7,
+     "score": 14.915019035339355,
+     "image": "data/vision_full/thumbs/GS_p7.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "GS",
+     "page": 144,
+     "score": 14.895342826843262,
+     "image": "data/vision_full/thumbs/GS_p144.jpg",
+     "correct": true
+    }
+   ]
+  },
+  {
+   "query": "Intel consolidated balance sheet with total assets and total liabilities",
+   "id": "INTC-balance",
+   "group": "balance sheet",
+   "gold": [
+    "INTC_p64"
+   ],
+   "results": [
+    {
+     "ticker": "JPM",
+     "page": 169,
+     "score": 11.417386054992676,
+     "image": "data/vision_full/thumbs/JPM_p169.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "BAC",
+     "page": 172,
+     "score": 11.369131088256836,
+     "image": "data/vision_full/thumbs/BAC_p172.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "BAC",
+     "page": 94,
+     "score": 11.23425006866455,
+     "image": "data/vision_full/thumbs/BAC_p94.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "BAC",
+     "page": 132,
+     "score": 10.965095520019531,
+     "image": "data/vision_full/thumbs/BAC_p132.jpg",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "query": "Intel consolidated income statement with net income and earnings per share",
+   "id": "INTC-income",
+   "group": "income statement",
+   "gold": [
+    "INTC_p62"
+   ],
+   "results": [
+    {
+     "ticker": "WMT",
+     "page": 63,
+     "score": 11.655774116516113,
+     "image": "data/vision_full/thumbs/WMT_p63.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "KO",
+     "page": 108,
+     "score": 11.361108779907227,
+     "image": "data/vision_full/thumbs/KO_p108.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "WMT",
+     "page": 53,
+     "score": 11.320140838623047,
+     "image": "data/vision_full/thumbs/WMT_p53.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "BAC",
+     "page": 93,
+     "score": 11.229588508605957,
+     "image": "data/vision_full/thumbs/BAC_p93.jpg",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "query": "Intel consolidated statement of cash flows with operating, investing and financing activities",
+   "id": "INTC-cash",
+   "group": "cash flow",
+   "gold": [
+    "INTC_p65"
+   ],
+   "results": [
+    {
+     "ticker": "JPM",
+     "page": 60,
+     "score": 13.90804672241211,
+     "image": "data/vision_full/thumbs/JPM_p60.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "PFE",
+     "page": 53,
+     "score": 13.645520210266113,
+     "image": "data/vision_full/thumbs/PFE_p53.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "WMT",
+     "page": 56,
+     "score": 13.626401901245117,
+     "image": "data/vision_full/thumbs/WMT_p56.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "BAC",
+     "page": 172,
+     "score": 13.453262329101562,
+     "image": "data/vision_full/thumbs/BAC_p172.jpg",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "query": "Johnson & Johnson consolidated balance sheet with total assets and total liabilities",
+   "id": "JNJ-balance",
+   "group": "balance sheet",
+   "gold": [
+    "JNJ_p50"
+   ],
+   "results": [
+    {
+     "ticker": "JNJ",
+     "page": 50,
+     "score": 12.430676460266113,
+     "image": "data/vision_full/thumbs/JNJ_p50.jpg",
+     "correct": true
+    },
+    {
+     "ticker": "JPM",
+     "page": 169,
+     "score": 11.38905143737793,
+     "image": "data/vision_full/thumbs/JPM_p169.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "JPM",
+     "page": 269,
+     "score": 11.349955558776855,
+     "image": "data/vision_full/thumbs/JPM_p269.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "JNJ",
+     "page": 129,
+     "score": 11.162348747253418,
+     "image": "data/vision_full/thumbs/JNJ_p129.jpg",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "query": "Johnson & Johnson consolidated income statement with net income and earnings per share",
+   "id": "JNJ-income",
+   "group": "income statement",
+   "gold": [
+    "JNJ_p51"
+   ],
+   "results": [
+    {
+     "ticker": "JNJ",
+     "page": 113,
+     "score": 12.645465850830078,
+     "image": "data/vision_full/thumbs/JNJ_p113.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "JNJ",
+     "page": 62,
+     "score": 12.084648132324219,
+     "image": "data/vision_full/thumbs/JNJ_p62.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "KO",
+     "page": 69,
+     "score": 11.962050437927246,
+     "image": "data/vision_full/thumbs/KO_p69.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "JNJ",
+     "page": 52,
+     "score": 11.840144157409668,
+     "image": "data/vision_full/thumbs/JNJ_p52.jpg",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "query": "Johnson & Johnson consolidated statement of cash flows with operating, investing and financing activities",
+   "id": "JNJ-cash",
+   "group": "cash flow",
+   "gold": [
+    "JNJ_p54",
+    "JNJ_p55"
+   ],
+   "results": [
+    {
+     "ticker": "JNJ",
+     "page": 54,
+     "score": 14.415875434875488,
+     "image": "data/vision_full/thumbs/JNJ_p54.jpg",
+     "correct": true
+    },
+    {
+     "ticker": "JPM",
+     "page": 60,
+     "score": 13.740486145019531,
+     "image": "data/vision_full/thumbs/JPM_p60.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "PFE",
+     "page": 53,
+     "score": 13.708647727966309,
+     "image": "data/vision_full/thumbs/PFE_p53.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "PFE",
+     "page": 68,
+     "score": 13.47596263885498,
+     "image": "data/vision_full/thumbs/PFE_p68.jpg",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "query": "JPMorgan Chase consolidated balance sheet with total assets and total liabilities",
+   "id": "JPM-balance",
+   "group": "balance sheet",
+   "gold": [
+    "JPM_p169",
+    "JPM_p312",
+    "JPM_p317"
+   ],
+   "results": [
+    {
+     "ticker": "JPM",
+     "page": 169,
+     "score": 13.195206642150879,
+     "image": "data/vision_full/thumbs/JPM_p169.jpg",
+     "correct": true
+    },
+    {
+     "ticker": "JPM",
+     "page": 317,
+     "score": 13.163780212402344,
+     "image": "data/vision_full/thumbs/JPM_p317.jpg",
+     "correct": true
+    },
+    {
+     "ticker": "JPM",
+     "page": 269,
+     "score": 12.859025001525879,
+     "image": "data/vision_full/thumbs/JPM_p269.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "JPM",
+     "page": 69,
+     "score": 12.851702690124512,
+     "image": "data/vision_full/thumbs/JPM_p69.jpg",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "query": "JPMorgan Chase consolidated income statement with net income and earnings per share",
+   "id": "JPM-income",
+   "group": "income statement",
+   "gold": [
+    "JPM_p167",
+    "JPM_p46"
+   ],
+   "results": [
+    {
+     "ticker": "JPM",
+     "page": 49,
+     "score": 13.456316947937012,
+     "image": "data/vision_full/thumbs/JPM_p49.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "JPM",
+     "page": 168,
+     "score": 13.412759780883789,
+     "image": "data/vision_full/thumbs/JPM_p168.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "JPM",
+     "page": 167,
+     "score": 13.08781909942627,
+     "image": "data/vision_full/thumbs/JPM_p167.jpg",
+     "correct": true
+    },
+    {
+     "ticker": "JPM",
+     "page": 288,
+     "score": 12.995243072509766,
+     "image": "data/vision_full/thumbs/JPM_p288.jpg",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "query": "JPMorgan Chase consolidated statement of cash flows with operating, investing and financing activities",
+   "id": "JPM-cash",
+   "group": "cash flow",
+   "gold": [
+    "JPM_p171",
+    "JPM_p313"
+   ],
+   "results": [
+    {
+     "ticker": "JPM",
+     "page": 60,
+     "score": 16.247163772583008,
+     "image": "data/vision_full/thumbs/JPM_p60.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "PFE",
+     "page": 53,
+     "score": 14.52153491973877,
+     "image": "data/vision_full/thumbs/PFE_p53.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "JPM",
+     "page": 174,
+     "score": 14.520106315612793,
+     "image": "data/vision_full/thumbs/JPM_p174.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "JPM",
+     "page": 171,
+     "score": 14.408356666564941,
+     "image": "data/vision_full/thumbs/JPM_p171.jpg",
+     "correct": true
+    }
+   ]
+  },
+  {
+   "query": "The Coca-Cola Company consolidated balance sheet with total assets and total liabilities",
+   "id": "KO-balance",
+   "group": "balance sheet",
+   "gold": [
+    "KO_p65"
+   ],
+   "results": [
+    {
+     "ticker": "KO",
+     "page": 65,
+     "score": 14.200545310974121,
+     "image": "data/vision_full/thumbs/KO_p65.jpg",
+     "correct": true
+    },
+    {
+     "ticker": "KO",
+     "page": 68,
+     "score": 13.478324890136719,
+     "image": "data/vision_full/thumbs/KO_p68.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "KO",
+     "page": 108,
+     "score": 13.310674667358398,
+     "image": "data/vision_full/thumbs/KO_p108.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "KO",
+     "page": 123,
+     "score": 13.284893035888672,
+     "image": "data/vision_full/thumbs/KO_p123.jpg",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "query": "The Coca-Cola Company consolidated income statement with net income and earnings per share",
+   "id": "KO-income",
+   "group": "income statement",
+   "gold": [
+    "KO_p63"
+   ],
+   "results": [
+    {
+     "ticker": "KO",
+     "page": 64,
+     "score": 14.393963813781738,
+     "image": "data/vision_full/thumbs/KO_p64.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "KO",
+     "page": 123,
+     "score": 14.102075576782227,
+     "image": "data/vision_full/thumbs/KO_p123.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "KO",
+     "page": 69,
+     "score": 13.956594467163086,
+     "image": "data/vision_full/thumbs/KO_p69.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "KO",
+     "page": 108,
+     "score": 13.932255744934082,
+     "image": "data/vision_full/thumbs/KO_p108.jpg",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "query": "The Coca-Cola Company consolidated statement of cash flows with operating, investing and financing activities",
+   "id": "KO-cash",
+   "group": "cash flow",
+   "gold": [
+    "KO_p66"
+   ],
+   "results": [
+    {
+     "ticker": "PFE",
+     "page": 53,
+     "score": 14.792007446289062,
+     "image": "data/vision_full/thumbs/PFE_p53.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "KO",
+     "page": 66,
+     "score": 14.421476364135742,
+     "image": "data/vision_full/thumbs/KO_p66.jpg",
+     "correct": true
+    },
+    {
+     "ticker": "PEP",
+     "page": 60,
+     "score": 14.389037132263184,
+     "image": "data/vision_full/thumbs/PEP_p60.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "XOM",
+     "page": 112,
+     "score": 14.385272979736328,
+     "image": "data/vision_full/thumbs/XOM_p112.jpg",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "query": "Microsoft consolidated balance sheet with total assets and total liabilities",
+   "id": "MSFT-balance",
+   "group": "balance sheet",
+   "gold": [
+    "MSFT_p52"
+   ],
+   "results": [
+    {
+     "ticker": "BAC",
+     "page": 94,
+     "score": 11.248665809631348,
+     "image": "data/vision_full/thumbs/BAC_p94.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "XOM",
+     "page": 75,
+     "score": 11.149971961975098,
+     "image": "data/vision_full/thumbs/XOM_p75.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "JPM",
+     "page": 169,
+     "score": 11.068056106567383,
+     "image": "data/vision_full/thumbs/JPM_p169.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "GS",
+     "page": 142,
+     "score": 10.86512565612793,
+     "image": "data/vision_full/thumbs/GS_p142.jpg",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "query": "Microsoft consolidated income statement with net income and earnings per share",
+   "id": "MSFT-income",
+   "group": "income statement",
+   "gold": [
+    "MSFT_p50"
+   ],
+   "results": [
+    {
+     "ticker": "BAC",
+     "page": 93,
+     "score": 11.45359992980957,
+     "image": "data/vision_full/thumbs/BAC_p93.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "XOM",
+     "page": 73,
+     "score": 11.296509742736816,
+     "image": "data/vision_full/thumbs/XOM_p73.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "WMT",
+     "page": 63,
+     "score": 11.086575508117676,
+     "image": "data/vision_full/thumbs/WMT_p63.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "KO",
+     "page": 108,
+     "score": 11.074958801269531,
+     "image": "data/vision_full/thumbs/KO_p108.jpg",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "query": "Microsoft consolidated statement of cash flows with operating, investing and financing activities",
+   "id": "MSFT-cash",
+   "group": "cash flow",
+   "gold": [
+    "MSFT_p53"
+   ],
+   "results": [
+    {
+     "ticker": "PFE",
+     "page": 53,
+     "score": 13.790955543518066,
+     "image": "data/vision_full/thumbs/PFE_p53.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "JPM",
+     "page": 60,
+     "score": 13.47006893157959,
+     "image": "data/vision_full/thumbs/JPM_p60.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "XOM",
+     "page": 112,
+     "score": 13.150861740112305,
+     "image": "data/vision_full/thumbs/XOM_p112.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "WMT",
+     "page": 56,
+     "score": 13.147695541381836,
+     "image": "data/vision_full/thumbs/WMT_p56.jpg",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "query": "Netflix, consolidated balance sheet with total assets and total liabilities",
+   "id": "NFLX-balance",
+   "group": "balance sheet",
+   "gold": [
+    "NFLX_p44"
+   ],
+   "results": [
+    {
+     "ticker": "BAC",
+     "page": 157,
+     "score": 11.904223442077637,
+     "image": "data/vision_full/thumbs/BAC_p157.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "JPM",
+     "page": 269,
+     "score": 11.856090545654297,
+     "image": "data/vision_full/thumbs/JPM_p269.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "BAC",
+     "page": 158,
+     "score": 11.615255355834961,
+     "image": "data/vision_full/thumbs/BAC_p158.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "BAC",
+     "page": 172,
+     "score": 11.446677207946777,
+     "image": "data/vision_full/thumbs/BAC_p172.jpg",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "query": "Netflix, consolidated income statement with net income and earnings per share",
+   "id": "NFLX-income",
+   "group": "income statement",
+   "gold": [
+    "NFLX_p41"
+   ],
+   "results": [
+    {
+     "ticker": "KO",
+     "page": 64,
+     "score": 11.98974609375,
+     "image": "data/vision_full/thumbs/KO_p64.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "WMT",
+     "page": 53,
+     "score": 11.980896949768066,
+     "image": "data/vision_full/thumbs/WMT_p53.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "WMT",
+     "page": 63,
+     "score": 11.810267448425293,
+     "image": "data/vision_full/thumbs/WMT_p63.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "KO",
+     "page": 69,
+     "score": 11.739760398864746,
+     "image": "data/vision_full/thumbs/KO_p69.jpg",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "query": "Netflix, consolidated statement of cash flows with operating, investing and financing activities",
+   "id": "NFLX-cash",
+   "group": "cash flow",
+   "gold": [
+    "NFLX_p43"
+   ],
+   "results": [
+    {
+     "ticker": "JPM",
+     "page": 60,
+     "score": 13.639514923095703,
+     "image": "data/vision_full/thumbs/JPM_p60.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "NFLX",
+     "page": 43,
+     "score": 13.601043701171875,
+     "image": "data/vision_full/thumbs/NFLX_p43.jpg",
+     "correct": true
+    },
+    {
+     "ticker": "PFE",
+     "page": 53,
+     "score": 13.52263355255127,
+     "image": "data/vision_full/thumbs/PFE_p53.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "WMT",
+     "page": 56,
+     "score": 13.403326034545898,
+     "image": "data/vision_full/thumbs/WMT_p56.jpg",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "query": "NVIDIA consolidated balance sheet with total assets and total liabilities",
+   "id": "NVDA-balance",
+   "group": "balance sheet",
+   "gold": [
+    "NVDA_p53"
+   ],
+   "results": [
+    {
+     "ticker": "NVDA",
+     "page": 53,
+     "score": 12.471489906311035,
+     "image": "data/vision_full/thumbs/NVDA_p53.jpg",
+     "correct": true
+    },
+    {
+     "ticker": "UNH",
+     "page": 82,
+     "score": 10.863632202148438,
+     "image": "data/vision_full/thumbs/UNH_p82.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "XOM",
+     "page": 75,
+     "score": 10.665117263793945,
+     "image": "data/vision_full/thumbs/XOM_p75.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "NVDA",
+     "page": 60,
+     "score": 10.62242603302002,
+     "image": "data/vision_full/thumbs/NVDA_p60.jpg",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "query": "NVIDIA consolidated income statement with net income and earnings per share",
+   "id": "NVDA-income",
+   "group": "income statement",
+   "gold": [
+    "NVDA_p51"
+   ],
+   "results": [
+    {
+     "ticker": "NVDA",
+     "page": 52,
+     "score": 11.430774688720703,
+     "image": "data/vision_full/thumbs/NVDA_p52.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "NVDA",
+     "page": 51,
+     "score": 11.426044464111328,
+     "image": "data/vision_full/thumbs/NVDA_p51.jpg",
+     "correct": true
+    },
+    {
+     "ticker": "KO",
+     "page": 69,
+     "score": 11.00285816192627,
+     "image": "data/vision_full/thumbs/KO_p69.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "KO",
+     "page": 64,
+     "score": 10.933472633361816,
+     "image": "data/vision_full/thumbs/KO_p64.jpg",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "query": "NVIDIA consolidated statement of cash flows with operating, investing and financing activities",
+   "id": "NVDA-cash",
+   "group": "cash flow",
+   "gold": [
+    "NVDA_p55"
+   ],
+   "results": [
+    {
+     "ticker": "XOM",
+     "page": 112,
+     "score": 13.445449829101562,
+     "image": "data/vision_full/thumbs/XOM_p112.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "INTC",
+     "page": 34,
+     "score": 13.280821800231934,
+     "image": "data/vision_full/thumbs/INTC_p34.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "PFE",
+     "page": 53,
+     "score": 13.259676933288574,
+     "image": "data/vision_full/thumbs/PFE_p53.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "NVDA",
+     "page": 55,
+     "score": 13.195940017700195,
+     "image": "data/vision_full/thumbs/NVDA_p55.jpg",
+     "correct": true
+    }
+   ]
+  },
+  {
+   "query": "PepsiCo, consolidated balance sheet with total assets and total liabilities",
+   "id": "PEP-balance",
+   "group": "balance sheet",
+   "gold": [
+    "PEP_p62"
+   ],
+   "results": [
+    {
+     "ticker": "PEP",
+     "page": 62,
+     "score": 14.94550895690918,
+     "image": "data/vision_full/thumbs/PEP_p62.jpg",
+     "correct": true
+    },
+    {
+     "ticker": "PEP",
+     "page": 117,
+     "score": 14.632198333740234,
+     "image": "data/vision_full/thumbs/PEP_p117.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "PEP",
+     "page": 109,
+     "score": 14.262222290039062,
+     "image": "data/vision_full/thumbs/PEP_p109.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "PEP",
+     "page": 116,
+     "score": 13.697633743286133,
+     "image": "data/vision_full/thumbs/PEP_p116.jpg",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "query": "PepsiCo, consolidated income statement with net income and earnings per share",
+   "id": "PEP-income",
+   "group": "income statement",
+   "gold": [
+    "PEP_p58"
+   ],
+   "results": [
+    {
+     "ticker": "PEP",
+     "page": 59,
+     "score": 15.22435474395752,
+     "image": "data/vision_full/thumbs/PEP_p59.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "PEP",
+     "page": 117,
+     "score": 14.487061500549316,
+     "image": "data/vision_full/thumbs/PEP_p117.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "PEP",
+     "page": 109,
+     "score": 14.448833465576172,
+     "image": "data/vision_full/thumbs/PEP_p109.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "PEP",
+     "page": 3,
+     "score": 14.4281644821167,
+     "image": "data/vision_full/thumbs/PEP_p3.jpg",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "query": "Pfizer consolidated balance sheet with total assets and total liabilities",
+   "id": "PFE-balance",
+   "group": "balance sheet",
+   "gold": [
+    "PFE_p60"
+   ],
+   "results": [
+    {
+     "ticker": "PFE",
+     "page": 64,
+     "score": 11.41158676147461,
+     "image": "data/vision_full/thumbs/PFE_p64.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "PEP",
+     "page": 62,
+     "score": 11.28390884399414,
+     "image": "data/vision_full/thumbs/PEP_p62.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "PFE",
+     "page": 70,
+     "score": 11.20202922821045,
+     "image": "data/vision_full/thumbs/PFE_p70.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "PFE",
+     "page": 61,
+     "score": 11.183459281921387,
+     "image": "data/vision_full/thumbs/PFE_p61.jpg",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "query": "Pfizer consolidated income statement with net income and earnings per share",
+   "id": "PFE-income",
+   "group": "income statement",
+   "gold": [
+    "PFE_p58"
+   ],
+   "results": [
+    {
+     "ticker": "PFE",
+     "page": 51,
+     "score": 12.516968727111816,
+     "image": "data/vision_full/thumbs/PFE_p51.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "PFE",
+     "page": 64,
+     "score": 11.837369918823242,
+     "image": "data/vision_full/thumbs/PFE_p64.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "PFE",
+     "page": 6,
+     "score": 11.797616004943848,
+     "image": "data/vision_full/thumbs/PFE_p6.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "PFE",
+     "page": 105,
+     "score": 11.766950607299805,
+     "image": "data/vision_full/thumbs/PFE_p105.jpg",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "query": "Pfizer consolidated statement of cash flows with operating, investing and financing activities",
+   "id": "PFE-cash",
+   "group": "cash flow",
+   "gold": [
+    "PFE_p62"
+   ],
+   "results": [
+    {
+     "ticker": "PFE",
+     "page": 53,
+     "score": 14.265835762023926,
+     "image": "data/vision_full/thumbs/PFE_p53.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "JPM",
+     "page": 60,
+     "score": 13.792495727539062,
+     "image": "data/vision_full/thumbs/JPM_p60.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "PFE",
+     "page": 68,
+     "score": 13.6225004196167,
+     "image": "data/vision_full/thumbs/PFE_p68.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "INTC",
+     "page": 34,
+     "score": 13.425344467163086,
+     "image": "data/vision_full/thumbs/INTC_p34.jpg",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "query": "Tesla, consolidated balance sheet with total assets and total liabilities",
+   "id": "TSLA-balance",
+   "group": "balance sheet",
+   "gold": [
+    "TSLA_p52"
+   ],
+   "results": [
+    {
+     "ticker": "TSLA",
+     "page": 95,
+     "score": 12.640665054321289,
+     "image": "data/vision_full/thumbs/TSLA_p95.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "TSLA",
+     "page": 52,
+     "score": 12.27260684967041,
+     "image": "data/vision_full/thumbs/TSLA_p52.jpg",
+     "correct": true
+    },
+    {
+     "ticker": "BAC",
+     "page": 94,
+     "score": 11.68835163116455,
+     "image": "data/vision_full/thumbs/BAC_p94.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "BAC",
+     "page": 158,
+     "score": 11.641061782836914,
+     "image": "data/vision_full/thumbs/BAC_p158.jpg",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "query": "Tesla, consolidated income statement with net income and earnings per share",
+   "id": "TSLA-income",
+   "group": "income statement",
+   "gold": [
+    "TSLA_p53"
+   ],
+   "results": [
+    {
+     "ticker": "TSLA",
+     "page": 54,
+     "score": 12.42746353149414,
+     "image": "data/vision_full/thumbs/TSLA_p54.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "KO",
+     "page": 69,
+     "score": 11.323433876037598,
+     "image": "data/vision_full/thumbs/KO_p69.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "KO",
+     "page": 64,
+     "score": 11.319267272949219,
+     "image": "data/vision_full/thumbs/KO_p64.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "TSLA",
+     "page": 57,
+     "score": 11.039629936218262,
+     "image": "data/vision_full/thumbs/TSLA_p57.jpg",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "query": "Tesla, consolidated statement of cash flows with operating, investing and financing activities",
+   "id": "TSLA-cash",
+   "group": "cash flow",
+   "gold": [
+    "TSLA_p56"
+   ],
+   "results": [
+    {
+     "ticker": "TSLA",
+     "page": 56,
+     "score": 13.864866256713867,
+     "image": "data/vision_full/thumbs/TSLA_p56.jpg",
+     "correct": true
+    },
+    {
+     "ticker": "JPM",
+     "page": 60,
+     "score": 13.68124008178711,
+     "image": "data/vision_full/thumbs/JPM_p60.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "XOM",
+     "page": 112,
+     "score": 13.590677261352539,
+     "image": "data/vision_full/thumbs/XOM_p112.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "NFLX",
+     "page": 43,
+     "score": 13.569369316101074,
+     "image": "data/vision_full/thumbs/NFLX_p43.jpg",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "query": "UnitedHealth Group Incorporated consolidated balance sheet with total assets and total liabilities",
+   "id": "UNH-balance",
+   "group": "balance sheet",
+   "gold": [
+    "UNH_p43",
+    "UNH_p82"
+   ],
+   "results": [
+    {
+     "ticker": "UNH",
+     "page": 82,
+     "score": 13.182821273803711,
+     "image": "data/vision_full/thumbs/UNH_p82.jpg",
+     "correct": true
+    },
+    {
+     "ticker": "UNH",
+     "page": 43,
+     "score": 13.03798770904541,
+     "image": "data/vision_full/thumbs/UNH_p43.jpg",
+     "correct": true
+    },
+    {
+     "ticker": "UNH",
+     "page": 48,
+     "score": 12.023991584777832,
+     "image": "data/vision_full/thumbs/UNH_p48.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "BAC",
+     "page": 94,
+     "score": 11.655385971069336,
+     "image": "data/vision_full/thumbs/BAC_p94.jpg",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "query": "UnitedHealth Group Incorporated consolidated income statement with net income and earnings per share",
+   "id": "UNH-income",
+   "group": "income statement",
+   "gold": [
+    "UNH_p44"
+   ],
+   "results": [
+    {
+     "ticker": "UNH",
+     "page": 48,
+     "score": 13.161199569702148,
+     "image": "data/vision_full/thumbs/UNH_p48.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "UNH",
+     "page": 44,
+     "score": 12.891836166381836,
+     "image": "data/vision_full/thumbs/UNH_p44.jpg",
+     "correct": true
+    },
+    {
+     "ticker": "UNH",
+     "page": 45,
+     "score": 12.686941146850586,
+     "image": "data/vision_full/thumbs/UNH_p45.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "UNH",
+     "page": 79,
+     "score": 12.506972312927246,
+     "image": "data/vision_full/thumbs/UNH_p79.jpg",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "query": "UnitedHealth Group Incorporated consolidated statement of cash flows with operating, investing and financing activities",
+   "id": "UNH-cash",
+   "group": "cash flow",
+   "gold": [
+    "UNH_p47",
+    "UNH_p84"
+   ],
+   "results": [
+    {
+     "ticker": "PFE",
+     "page": 53,
+     "score": 14.120659828186035,
+     "image": "data/vision_full/thumbs/PFE_p53.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "JPM",
+     "page": 60,
+     "score": 14.014052391052246,
+     "image": "data/vision_full/thumbs/JPM_p60.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "XOM",
+     "page": 112,
+     "score": 13.76589584350586,
+     "image": "data/vision_full/thumbs/XOM_p112.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "UNH",
+     "page": 47,
+     "score": 13.682361602783203,
+     "image": "data/vision_full/thumbs/UNH_p47.jpg",
+     "correct": true
+    }
+   ]
+  },
+  {
+   "query": "Walmart consolidated balance sheet with total assets and total liabilities",
+   "id": "WMT-balance",
+   "group": "balance sheet",
+   "gold": [
+    "WMT_p54"
+   ],
+   "results": [
+    {
+     "ticker": "WMT",
+     "page": 54,
+     "score": 12.357706069946289,
+     "image": "data/vision_full/thumbs/WMT_p54.jpg",
+     "correct": true
+    },
+    {
+     "ticker": "WMT",
+     "page": 59,
+     "score": 12.107860565185547,
+     "image": "data/vision_full/thumbs/WMT_p59.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "WMT",
+     "page": 31,
+     "score": 11.27315616607666,
+     "image": "data/vision_full/thumbs/WMT_p31.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "WMT",
+     "page": 79,
+     "score": 11.171762466430664,
+     "image": "data/vision_full/thumbs/WMT_p79.jpg",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "query": "Walmart consolidated income statement with net income and earnings per share",
+   "id": "WMT-income",
+   "group": "income statement",
+   "gold": [
+    "WMT_p52"
+   ],
+   "results": [
+    {
+     "ticker": "WMT",
+     "page": 53,
+     "score": 12.846681594848633,
+     "image": "data/vision_full/thumbs/WMT_p53.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "WMT",
+     "page": 52,
+     "score": 12.476344108581543,
+     "image": "data/vision_full/thumbs/WMT_p52.jpg",
+     "correct": true
+    },
+    {
+     "ticker": "WMT",
+     "page": 63,
+     "score": 12.008968353271484,
+     "image": "data/vision_full/thumbs/WMT_p63.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "WMT",
+     "page": 7,
+     "score": 11.949040412902832,
+     "image": "data/vision_full/thumbs/WMT_p7.jpg",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "query": "Walmart consolidated statement of cash flows with operating, investing and financing activities",
+   "id": "WMT-cash",
+   "group": "cash flow",
+   "gold": [
+    "WMT_p56"
+   ],
+   "results": [
+    {
+     "ticker": "JPM",
+     "page": 60,
+     "score": 13.84250259399414,
+     "image": "data/vision_full/thumbs/JPM_p60.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "PFE",
+     "page": 53,
+     "score": 13.328676223754883,
+     "image": "data/vision_full/thumbs/PFE_p53.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "WMT",
+     "page": 56,
+     "score": 12.97810173034668,
+     "image": "data/vision_full/thumbs/WMT_p56.jpg",
+     "correct": true
+    },
+    {
+     "ticker": "WMT",
+     "page": 4,
+     "score": 12.63681411743164,
+     "image": "data/vision_full/thumbs/WMT_p4.jpg",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "query": "Exxon Mobil consolidated balance sheet with total assets and total liabilities",
+   "id": "XOM-balance",
+   "group": "balance sheet",
+   "gold": [
+    "XOM_p75"
+   ],
+   "results": [
+    {
+     "ticker": "XOM",
+     "page": 75,
+     "score": 13.511096954345703,
+     "image": "data/vision_full/thumbs/XOM_p75.jpg",
+     "correct": true
+    },
+    {
+     "ticker": "XOM",
+     "page": 4,
+     "score": 12.309990882873535,
+     "image": "data/vision_full/thumbs/XOM_p4.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "XOM",
+     "page": 33,
+     "score": 12.292367935180664,
+     "image": "data/vision_full/thumbs/XOM_p33.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "XOM",
+     "page": 24,
+     "score": 12.177602767944336,
+     "image": "data/vision_full/thumbs/XOM_p24.jpg",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "query": "Exxon Mobil consolidated income statement with net income and earnings per share",
+   "id": "XOM-income",
+   "group": "income statement",
+   "gold": [
+    "XOM_p73"
+   ],
+   "results": [
+    {
+     "ticker": "XOM",
+     "page": 82,
+     "score": 13.944784164428711,
+     "image": "data/vision_full/thumbs/XOM_p82.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "XOM",
+     "page": 4,
+     "score": 13.54865837097168,
+     "image": "data/vision_full/thumbs/XOM_p4.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "XOM",
+     "page": 50,
+     "score": 13.417961120605469,
+     "image": "data/vision_full/thumbs/XOM_p50.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "XOM",
+     "page": 37,
+     "score": 13.319636344909668,
+     "image": "data/vision_full/thumbs/XOM_p37.jpg",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "query": "Exxon Mobil consolidated statement of cash flows with operating, investing and financing activities",
+   "id": "XOM-cash",
+   "group": "cash flow",
+   "gold": [
+    "XOM_p105",
+    "XOM_p76"
+   ],
+   "results": [
+    {
+     "ticker": "XOM",
+     "page": 33,
+     "score": 14.152162551879883,
+     "image": "data/vision_full/thumbs/XOM_p33.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "XOM",
+     "page": 112,
+     "score": 13.981253623962402,
+     "image": "data/vision_full/thumbs/XOM_p112.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "XOM",
+     "page": 37,
+     "score": 13.631596565246582,
+     "image": "data/vision_full/thumbs/XOM_p37.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "XOM",
+     "page": 4,
+     "score": 13.61882209777832,
+     "image": "data/vision_full/thumbs/XOM_p4.jpg",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "query": "Which page shows Apple's net sales by product category: iPhone, Mac, iPad, Wearables and Services?",
+   "id": "V1",
+   "group": "hand-written",
+   "gold": [
+    "AAPL_p29",
+    "AAPL_p42"
+   ],
+   "results": [
+    {
+     "ticker": "AAPL",
+     "page": 29,
+     "score": 22.601852416992188,
+     "image": "data/vision_full/thumbs/AAPL_p29.jpg",
+     "correct": true
+    },
+    {
+     "ticker": "AAPL",
+     "page": 42,
+     "score": 20.331836700439453,
+     "image": "data/vision_full/thumbs/AAPL_p42.jpg",
+     "correct": true
+    },
+    {
+     "ticker": "AAPL",
+     "page": 5,
+     "score": 18.104236602783203,
+     "image": "data/vision_full/thumbs/AAPL_p5.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "AAPL",
+     "page": 4,
+     "score": 18.04056167602539,
+     "image": "data/vision_full/thumbs/AAPL_p4.jpg",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "query": "Where is the table of Apple's five-year cumulative total shareholder return compared with the S&P 500 index?",
+   "id": "V2",
+   "group": "hand-written",
+   "gold": [
+    "AAPL_p26"
+   ],
+   "results": [
+    {
+     "ticker": "AAPL",
+     "page": 26,
+     "score": 22.32967758178711,
+     "image": "data/vision_full/thumbs/AAPL_p26.jpg",
+     "correct": true
+    },
+    {
+     "ticker": "JNJ",
+     "page": 119,
+     "score": 21.872215270996094,
+     "image": "data/vision_full/thumbs/JNJ_p119.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "NVDA",
+     "page": 35,
+     "score": 21.690378189086914,
+     "image": "data/vision_full/thumbs/NVDA_p35.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "KO",
+     "page": 37,
+     "score": 21.443073272705078,
+     "image": "data/vision_full/thumbs/KO_p37.jpg",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "query": "Microsoft revenue and operating income by segment: Productivity and Business Processes, Intelligent Cloud, More Personal Computing",
+   "id": "V3",
+   "group": "hand-written",
+   "gold": [
+    "MSFT_p38"
+   ],
+   "results": [
+    {
+     "ticker": "MSFT",
+     "page": 38,
+     "score": 21.100284576416016,
+     "image": "data/vision_full/thumbs/MSFT_p38.jpg",
+     "correct": true
+    },
+    {
+     "ticker": "MSFT",
+     "page": 35,
+     "score": 20.559677124023438,
+     "image": "data/vision_full/thumbs/MSFT_p35.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "MSFT",
+     "page": 83,
+     "score": 20.162506103515625,
+     "image": "data/vision_full/thumbs/MSFT_p83.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "MSFT",
+     "page": 84,
+     "score": 20.07080078125,
+     "image": "data/vision_full/thumbs/MSFT_p84.jpg",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "query": "Microsoft income statement with net income and earnings per share",
+   "id": "V4",
+   "group": "hand-written",
+   "gold": [
+    "MSFT_p50",
+    "MSFT_p62"
+   ],
+   "results": [
+    {
+     "ticker": "BAC",
+     "page": 29,
+     "score": 11.805523872375488,
+     "image": "data/vision_full/thumbs/BAC_p29.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "NFLX",
+     "page": 51,
+     "score": 11.643943786621094,
+     "image": "data/vision_full/thumbs/NFLX_p51.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "MSFT",
+     "page": 62,
+     "score": 11.630351066589355,
+     "image": "data/vision_full/thumbs/MSFT_p62.jpg",
+     "correct": true
+    },
+    {
+     "ticker": "MSFT",
+     "page": 50,
+     "score": 11.529577255249023,
+     "image": "data/vision_full/thumbs/MSFT_p50.jpg",
+     "correct": true
+    }
+   ]
+  },
+  {
+   "query": "Tesla statement of operations: automotive sales, regulatory credits and energy generation and storage revenues",
+   "id": "V5",
+   "group": "hand-written",
+   "gold": [
+    "TSLA_p53"
+   ],
+   "results": [
+    {
+     "ticker": "TSLA",
+     "page": 58,
+     "score": 15.300614356994629,
+     "image": "data/vision_full/thumbs/TSLA_p58.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "TSLA",
+     "page": 53,
+     "score": 15.097251892089844,
+     "image": "data/vision_full/thumbs/TSLA_p53.jpg",
+     "correct": true
+    },
+    {
+     "ticker": "TSLA",
+     "page": 40,
+     "score": 14.951911926269531,
+     "image": "data/vision_full/thumbs/TSLA_p40.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "TSLA",
+     "page": 62,
+     "score": 14.596489906311035,
+     "image": "data/vision_full/thumbs/TSLA_p62.jpg",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "query": "Tesla balance sheet with total assets and total liabilities",
+   "id": "V6",
+   "group": "hand-written",
+   "gold": [
+    "TSLA_p52",
+    "TSLA_p95"
+   ],
+   "results": [
+    {
+     "ticker": "BAC",
+     "page": 31,
+     "score": 10.967720985412598,
+     "image": "data/vision_full/thumbs/BAC_p31.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "JPM",
+     "page": 312,
+     "score": 10.792875289916992,
+     "image": "data/vision_full/thumbs/JPM_p312.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "BAC",
+     "page": 132,
+     "score": 10.718996047973633,
+     "image": "data/vision_full/thumbs/BAC_p132.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "JPM",
+     "page": 317,
+     "score": 10.663958549499512,
+     "image": "data/vision_full/thumbs/JPM_p317.jpg",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "query": "Walmart net sales and operating income by segment: Walmart U.S., Walmart International and Sam's Club",
+   "id": "V7",
+   "group": "hand-written",
+   "gold": [
+    "WMT_p77"
+   ],
+   "results": [
+    {
+     "ticker": "WMT",
+     "page": 77,
+     "score": 20.88719940185547,
+     "image": "data/vision_full/thumbs/WMT_p77.jpg",
+     "correct": true
+    },
+    {
+     "ticker": "WMT",
+     "page": 78,
+     "score": 20.401613235473633,
+     "image": "data/vision_full/thumbs/WMT_p78.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "WMT",
+     "page": 39,
+     "score": 20.060348510742188,
+     "image": "data/vision_full/thumbs/WMT_p39.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "WMT",
+     "page": 76,
+     "score": 19.968061447143555,
+     "image": "data/vision_full/thumbs/WMT_p76.jpg",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "query": "Walmart consolidated balance sheet with total assets",
+   "id": "V8",
+   "group": "hand-written",
+   "gold": [
+    "WMT_p54"
+   ],
+   "results": [
+    {
+     "ticker": "WMT",
+     "page": 59,
+     "score": 10.673026084899902,
+     "image": "data/vision_full/thumbs/WMT_p59.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "WMT",
+     "page": 54,
+     "score": 10.658651351928711,
+     "image": "data/vision_full/thumbs/WMT_p54.jpg",
+     "correct": true
+    },
+    {
+     "ticker": "WMT",
+     "page": 31,
+     "score": 10.193387985229492,
+     "image": "data/vision_full/thumbs/WMT_p31.jpg",
+     "correct": false
+    },
+    {
+     "ticker": "WMT",
+     "page": 79,
+     "score": 10.156011581420898,
+     "image": "data/vision_full/thumbs/WMT_p79.jpg",
+     "correct": false
+    }
+   ]
+  }
+ ],
+ "summary": {
+  "overall": {
+   "vision_maxsim": {
+    "hit@1": 16,
+    "hit@3": 30,
+    "hit@10": 45,
+    "mrr": 0.392,
+    "n": 66
+   },
+   "text_bm25": {
+    "hit@1": 30,
+    "hit@3": 48,
+    "hit@10": 58,
+    "mrr": 0.616,
+    "n": 66
+   }
+  },
+  "groups": {
+   "balance sheet": {
+    "vision_maxsim": {
+     "hit@1": 9,
+     "hit@3": 11,
+     "hit@10": 14,
+     "mrr": 0.553,
+     "n": 19
+    },
+    "text_bm25": {
+     "hit@1": 4,
+     "hit@3": 12,
+     "hit@10": 16,
+     "mrr": 0.44,
+     "n": 19
+    }
+   },
+   "cash flow": {
+    "vision_maxsim": {
+     "hit@1": 2,
+     "hit@3": 7,
+     "hit@10": 14,
+     "mrr": 0.311,
+     "n": 19
+    },
+    "text_bm25": {
+     "hit@1": 11,
+     "hit@3": 15,
+     "hit@10": 16,
+     "mrr": 0.698,
+     "n": 19
+    }
+   },
+   "hand-written": {
+    "vision_maxsim": {
+     "hit@1": 4,
+     "hit@3": 7,
+     "hit@10": 7,
+     "mrr": 0.676,
+     "n": 8
+    },
+    "text_bm25": {
+     "hit@1": 4,
+     "hit@3": 6,
+     "hit@10": 8,
+     "mrr": 0.688,
+     "n": 8
+    }
+   },
+   "income statement": {
+    "vision_maxsim": {
+     "hit@1": 1,
+     "hit@3": 5,
+     "hit@10": 10,
+     "mrr": 0.204,
+     "n": 20
+    },
+    "text_bm25": {
+     "hit@1": 11,
+     "hit@3": 15,
+     "hit@10": 18,
+     "mrr": 0.676,
+     "n": 20
+    }
+   }
+  }
+ },
+ "n_questions": 66,
+ "n_pages": 2606,
+ "n_companies": 20,
+ "encoder": {
+  "model": "vidore/colqwen2-v1.0-merged",
+  "family": "colqwen2",
+  "device": "cuda",
+  "dtype": "float16",
+  "pages": 2606,
+  "vector_dim": 128,
+  "torch": "2.13.0+cu130",
+  "gpu": "Tesla T4",
+  "encode_seconds": 2002
+ },
+ "scale": "full",
+ "note": "Full corpus: every page of the latest 10-K of each company competes for every question. Gold pages come from a keyword rule on the page text, which favours the text baseline; a demonstration of the idea, not a benchmark."
+}

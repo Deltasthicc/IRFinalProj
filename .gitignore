@@ -31,3 +31,5 @@ data/vision/html/
 data/vision/pdf/
 data/vision/wide/
 data/vision/emb_*.npz
+data/vision_full_work/
+docs/presentation/TradeMesh_Presentation_Notes.html

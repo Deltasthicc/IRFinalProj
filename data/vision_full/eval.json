@@ -1,0 +1,1509 @@
+{
+ "summary": {
+  "overall": {
+   "vision_maxsim": {
+    "hit@1": 16,
+    "hit@3": 30,
+    "hit@10": 45,
+    "mrr": 0.392,
+    "n": 66
+   },
+   "text_bm25": {
+    "hit@1": 30,
+    "hit@3": 48,
+    "hit@10": 58,
+    "mrr": 0.616,
+    "n": 66
+   }
+  },
+  "groups": {
+   "balance sheet": {
+    "vision_maxsim": {
+     "hit@1": 9,
+     "hit@3": 11,
+     "hit@10": 14,
+     "mrr": 0.553,
+     "n": 19
+    },
+    "text_bm25": {
+     "hit@1": 4,
+     "hit@3": 12,
+     "hit@10": 16,
+     "mrr": 0.44,
+     "n": 19
+    }
+   },
+   "cash flow": {
+    "vision_maxsim": {
+     "hit@1": 2,
+     "hit@3": 7,
+     "hit@10": 14,
+     "mrr": 0.311,
+     "n": 19
+    },
+    "text_bm25": {
+     "hit@1": 11,
+     "hit@3": 15,
+     "hit@10": 16,
+     "mrr": 0.698,
+     "n": 19
+    }
+   },
+   "hand-written": {
+    "vision_maxsim": {
+     "hit@1": 4,
+     "hit@3": 7,
+     "hit@10": 7,
+     "mrr": 0.676,
+     "n": 8
+    },
+    "text_bm25": {
+     "hit@1": 4,
+     "hit@3": 6,
+     "hit@10": 8,
+     "mrr": 0.688,
+     "n": 8
+    }
+   },
+   "income statement": {
+    "vision_maxsim": {
+     "hit@1": 1,
+     "hit@3": 5,
+     "hit@10": 10,
+     "mrr": 0.204,
+     "n": 20
+    },
+    "text_bm25": {
+     "hit@1": 11,
+     "hit@3": 15,
+     "hit@10": 18,
+     "mrr": 0.676,
+     "n": 20
+    }
+   }
+  }
+ },
+ "n_questions": 66,
+ "n_pages": 2606,
+ "encoder": {
+  "model": "vidore/colqwen2-v1.0-merged",
+  "family": "colqwen2",
+  "device": "cuda",
+  "dtype": "float16",
+  "pages": 2606,
+  "vector_dim": 128,
+  "torch": "2.13.0+cu130",
+  "gpu": "Tesla T4",
+  "encode_seconds": 2002
+ },
+ "per_question": [
+  {
+   "id": "AAPL-balance",
+   "group": "balance sheet",
+   "question": "Apple consolidated balance sheet with total assets and total liabilities",
+   "company": "AAPL",
+   "gold": [
+    "AAPL_p37"
+   ],
+   "vision_rank": 25,
+   "text_rank": 3,
+   "vision_top3": [
+    "BAC_p157",
+    "BAC_p94",
+    "JPM_p169"
+   ],
+   "text_top3": [
+    "GS_p90",
+    "GS_p105",
+    "AAPL_p37"
+   ]
+  },
+  {
+   "id": "AAPL-income",
+   "group": "income statement",
+   "question": "Apple consolidated income statement with net income and earnings per share",
+   "company": "AAPL",
+   "gold": [
+    "AAPL_p35"
+   ],
+   "vision_rank": 40,
+   "text_rank": 1,
+   "vision_top3": [
+    "MSFT_p62",
+    "BAC_p93",
+    "BAC_p29"
+   ],
+   "text_top3": [
+    "AAPL_p35",
+    "JPM_p49",
+    "AAPL_p38"
+   ]
+  },
+  {
+   "id": "AAPL-cash",
+   "group": "cash flow",
+   "question": "Apple consolidated statement of cash flows with operating, investing and financing activities",
+   "company": "AAPL",
+   "gold": [
+    "AAPL_p39"
+   ],
+   "vision_rank": 18,
+   "text_rank": 1,
+   "vision_top3": [
+    "JPM_p60",
+    "INTC_p34",
+    "PFE_p53"
+   ],
+   "text_top3": [
+    "AAPL_p39",
+    "INTC_p34",
+    "XOM_p76"
+   ]
+  },
+  {
+   "id": "AMZN-balance",
+   "group": "balance sheet",
+   "question": "Amazon.com, consolidated balance sheet with total assets and total liabilities",
+   "company": "AMZN",
+   "gold": [
+    "AMZN_p39"
+   ],
+   "vision_rank": 9,
+   "text_rank": 1,
+   "vision_top3": [
+    "AMZN_p78",
+    "GS_p142",
+    "JPM_p169"
+   ],
+   "text_top3": [
+    "AMZN_p39",
+    "AMZN_p78",
+    "AMZN_p76"
+   ]
+  },
+  {
+   "id": "AMZN-income",
+   "group": "income statement",
+   "question": "Amazon.com, consolidated income statement with net income and earnings per share",
+   "company": "AMZN",
+   "gold": [
+    "AMZN_p37"
+   ],
+   "vision_rank": 47,
+   "text_rank": 1,
+   "vision_top3": [
+    "AMZN_p41",
+    "WMT_p63",
+    "AMZN_p3"
+   ],
+   "text_top3": [
+    "AMZN_p37",
+    "AMZN_p39",
+    "AMZN_p76"
+   ]
+  },
+  {
+   "id": "AMZN-cash",
+   "group": "cash flow",
+   "question": "Amazon.com, consolidated statement of cash flows with operating, investing and financing activities",
+   "company": "AMZN",
+   "gold": [
+    "AMZN_p36"
+   ],
+   "vision_rank": 4,
+   "text_rank": 1,
+   "vision_top3": [
+    "PFE_p53",
+    "WMT_p56",
+    "JPM_p60"
+   ],
+   "text_top3": [
+    "AMZN_p36",
+    "INTC_p34",
+    "AMZN_p76"
+   ]
+  },
+  {
+   "id": "BA-income",
+   "group": "income statement",
+   "question": "The Boeing Company consolidated income statement with net income and earnings per share",
+   "company": "BA",
+   "gold": [
+    "BA_p56"
+   ],
+   "vision_rank": 34,
+   "text_rank": 1,
+   "vision_top3": [
+    "KO_p69",
+    "BAC_p29",
+    "BAC_p93"
+   ],
+   "text_top3": [
+    "BA_p56",
+    "BA_p76",
+    "WMT_p63"
+   ]
+  },
+  {
+   "id": "BA-cash",
+   "group": "cash flow",
+   "question": "The Boeing Company consolidated statement of cash flows with operating, investing and financing activities",
+   "company": "BA",
+   "gold": [
+    "BA_p59"
+   ],
+   "vision_rank": 2,
+   "text_rank": 1,
+   "vision_top3": [
+    "PFE_p53",
+    "BA_p59",
+    "WMT_p56"
+   ],
+   "text_top3": [
+    "BA_p59",
+    "INTC_p34",
+    "XOM_p76"
+   ]
+  },
+  {
+   "id": "BAC-balance",
+   "group": "balance sheet",
+   "question": "Bank of America consolidated balance sheet with total assets and total liabilities",
+   "company": "BAC",
+   "gold": [
+    "BAC_p132",
+    "BAC_p157",
+    "BAC_p158",
+    "BAC_p171",
+    "BAC_p31",
+    "BAC_p94"
+   ],
+   "vision_rank": 1,
+   "text_rank": 4,
+   "vision_top3": [
+    "BAC_p94",
+    "BAC_p32",
+    "BAC_p52"
+   ],
+   "text_top3": [
+    "BAC_p139",
+    "BAC_p138",
+    "BAC_p136"
+   ]
+  },
+  {
+   "id": "BAC-income",
+   "group": "income statement",
+   "question": "Bank of America consolidated income statement with net income and earnings per share",
+   "company": "BAC",
+   "gold": [
+    "BAC_p34",
+    "BAC_p35",
+    "BAC_p93"
+   ],
+   "vision_rank": 5,
+   "text_rank": 2,
+   "vision_top3": [
+    "BAC_p168",
+    "BAC_p4",
+    "BAC_p29"
+   ],
+   "text_top3": [
+    "BAC_p29",
+    "BAC_p93",
+    "BAC_p89"
+   ]
+  },
+  {
+   "id": "BAC-cash",
+   "group": "cash flow",
+   "question": "Bank of America consolidated statement of cash flows with operating, investing and financing activities",
+   "company": "BAC",
+   "gold": [
+    "BAC_p172",
+    "BAC_p96"
+   ],
+   "vision_rank": 3,
+   "text_rank": 1,
+   "vision_top3": [
+    "JPM_p60",
+    "PFE_p53",
+    "BAC_p96"
+   ],
+   "text_top3": [
+    "BAC_p96",
+    "BAC_p172",
+    "INTC_p34"
+   ]
+  },
+  {
+   "id": "CVX-balance",
+   "group": "balance sheet",
+   "question": "Chevron consolidated balance sheet with total assets and total liabilities",
+   "company": "CVX",
+   "gold": [
+    "CVX_p68"
+   ],
+   "vision_rank": 48,
+   "text_rank": 6,
+   "vision_top3": [
+    "INTC_p64",
+    "CVX_p19",
+    "CVX_p78"
+   ],
+   "text_top3": [
+    "CVX_p78",
+    "CVX_p81",
+    "CVX_p86"
+   ]
+  },
+  {
+   "id": "CVX-income",
+   "group": "income statement",
+   "question": "Chevron consolidated income statement with net income and earnings per share",
+   "company": "CVX",
+   "gold": [
+    "CVX_p66"
+   ],
+   "vision_rank": 28,
+   "text_rank": 4,
+   "vision_top3": [
+    "BAC_p93",
+    "CVX_p36",
+    "CVX_p86"
+   ],
+   "text_top3": [
+    "CVX_p70",
+    "CVX_p86",
+    "CVX_p81"
+   ]
+  },
+  {
+   "id": "CVX-cash",
+   "group": "cash flow",
+   "question": "Chevron consolidated statement of cash flows with operating, investing and financing activities",
+   "company": "CVX",
+   "gold": [
+    "CVX_p69",
+    "CVX_p77"
+   ],
+   "vision_rank": 30,
+   "text_rank": 7,
+   "vision_top3": [
+    "PFE_p53",
+    "JPM_p60",
+    "XOM_p112"
+   ],
+   "text_top3": [
+    "INTC_p34",
+    "XOM_p76",
+    "BAC_p96"
+   ]
+  },
+  {
+   "id": "DIS-balance",
+   "group": "balance sheet",
+   "question": "The Walt Disney Company consolidated balance sheet with total assets and total liabilities",
+   "company": "DIS",
+   "gold": [
+    "DIS_p75"
+   ],
+   "vision_rank": 30,
+   "text_rank": 26,
+   "vision_top3": [
+    "DIS_p95",
+    "INTC_p64",
+    "KO_p65"
+   ],
+   "text_top3": [
+    "DIS_p69",
+    "DIS_p62",
+    "DIS_p63"
+   ]
+  },
+  {
+   "id": "DIS-income",
+   "group": "income statement",
+   "question": "The Walt Disney Company consolidated income statement with net income and earnings per share",
+   "company": "DIS",
+   "gold": [
+    "DIS_p73"
+   ],
+   "vision_rank": 1,
+   "text_rank": 1,
+   "vision_top3": [
+    "DIS_p73",
+    "DIS_p74",
+    "DIS_p80"
+   ],
+   "text_top3": [
+    "DIS_p73",
+    "DIS_p57",
+    "DIS_p64"
+   ]
+  },
+  {
+   "id": "DIS-cash",
+   "group": "cash flow",
+   "question": "The Walt Disney Company consolidated statement of cash flows with operating, investing and financing activities",
+   "company": "DIS",
+   "gold": [
+    "DIS_p76"
+   ],
+   "vision_rank": 14,
+   "text_rank": 48,
+   "vision_top3": [
+    "PFE_p53",
+    "JPM_p60",
+    "WMT_p56"
+   ],
+   "text_top3": [
+    "DIS_p96",
+    "DIS_p69",
+    "DIS_p64"
+   ]
+  },
+  {
+   "id": "GS-balance",
+   "group": "balance sheet",
+   "question": "The Goldman Sachs Group, consolidated balance sheet with total assets and total liabilities",
+   "company": "GS",
+   "gold": [
+    "GS_p142",
+    "GS_p240"
+   ],
+   "vision_rank": 2,
+   "text_rank": 9,
+   "vision_top3": [
+    "GS_p150",
+    "GS_p142",
+    "GS_p91"
+   ],
+   "text_top3": [
+    "GS_p91",
+    "GS_p111",
+    "GS_p88"
+   ]
+  },
+  {
+   "id": "GS-income",
+   "group": "income statement",
+   "question": "The Goldman Sachs Group, consolidated income statement with net income and earnings per share",
+   "company": "GS",
+   "gold": [
+    "GS_p141"
+   ],
+   "vision_rank": 7,
+   "text_rank": 1,
+   "vision_top3": [
+    "GS_p66",
+    "GS_p252",
+    "GS_p224"
+   ],
+   "text_top3": [
+    "GS_p141",
+    "GS_p3",
+    "GS_p212"
+   ]
+  },
+  {
+   "id": "GS-cash",
+   "group": "cash flow",
+   "question": "The Goldman Sachs Group, consolidated statement of cash flows with operating, investing and financing activities",
+   "company": "GS",
+   "gold": [
+    "GS_p144",
+    "GS_p241"
+   ],
+   "vision_rank": 4,
+   "text_rank": 1,
+   "vision_top3": [
+    "GS_p66",
+    "GS_p73",
+    "GS_p7"
+   ],
+   "text_top3": [
+    "GS_p241",
+    "GS_p116",
+    "GS_p144"
+   ]
+  },
+  {
+   "id": "INTC-balance",
+   "group": "balance sheet",
+   "question": "Intel consolidated balance sheet with total assets and total liabilities",
+   "company": "INTC",
+   "gold": [
+    "INTC_p64"
+   ],
+   "vision_rank": 9,
+   "text_rank": 1,
+   "vision_top3": [
+    "JPM_p169",
+    "BAC_p172",
+    "BAC_p94"
+   ],
+   "text_top3": [
+    "INTC_p64",
+    "XOM_p95",
+    "GS_p91"
+   ]
+  },
+  {
+   "id": "INTC-income",
+   "group": "income statement",
+   "question": "Intel consolidated income statement with net income and earnings per share",
+   "company": "INTC",
+   "gold": [
+    "INTC_p62"
+   ],
+   "vision_rank": 84,
+   "text_rank": 1,
+   "vision_top3": [
+    "WMT_p63",
+    "KO_p108",
+    "WMT_p53"
+   ],
+   "text_top3": [
+    "INTC_p62",
+    "INTC_p79",
+    "INTC_p27"
+   ]
+  },
+  {
+   "id": "INTC-cash",
+   "group": "cash flow",
+   "question": "Intel consolidated statement of cash flows with operating, investing and financing activities",
+   "company": "INTC",
+   "gold": [
+    "INTC_p65"
+   ],
+   "vision_rank": 41,
+   "text_rank": 13,
+   "vision_top3": [
+    "JPM_p60",
+    "PFE_p53",
+    "WMT_p56"
+   ],
+   "text_top3": [
+    "INTC_p34",
+    "XOM_p76",
+    "BAC_p96"
+   ]
+  },
+  {
+   "id": "JNJ-balance",
+   "group": "balance sheet",
+   "question": "Johnson & Johnson consolidated balance sheet with total assets and total liabilities",
+   "company": "JNJ",
+   "gold": [
+    "JNJ_p50"
+   ],
+   "vision_rank": 1,
+   "text_rank": 2,
+   "vision_top3": [
+    "JNJ_p50",
+    "JPM_p169",
+    "JPM_p269"
+   ],
+   "text_top3": [
+    "JNJ_p113",
+    "JNJ_p50",
+    "JNJ_p102"
+   ]
+  },
+  {
+   "id": "JNJ-income",
+   "group": "income statement",
+   "question": "Johnson & Johnson consolidated income statement with net income and earnings per share",
+   "company": "JNJ",
+   "gold": [
+    "JNJ_p51"
+   ],
+   "vision_rank": 13,
+   "text_rank": 1,
+   "vision_top3": [
+    "JNJ_p113",
+    "JNJ_p62",
+    "KO_p69"
+   ],
+   "text_top3": [
+    "JNJ_p51",
+    "JNJ_p53",
+    "JNJ_p113"
+   ]
+  },
+  {
+   "id": "JNJ-cash",
+   "group": "cash flow",
+   "question": "Johnson & Johnson consolidated statement of cash flows with operating, investing and financing activities",
+   "company": "JNJ",
+   "gold": [
+    "JNJ_p54",
+    "JNJ_p55"
+   ],
+   "vision_rank": 1,
+   "text_rank": 1,
+   "vision_top3": [
+    "JNJ_p54",
+    "JPM_p60",
+    "PFE_p53"
+   ],
+   "text_top3": [
+    "JNJ_p54",
+    "INTC_p34",
+    "XOM_p76"
+   ]
+  },
+  {
+   "id": "JPM-balance",
+   "group": "balance sheet",
+   "question": "JPMorgan Chase consolidated balance sheet with total assets and total liabilities",
+   "company": "JPM",
+   "gold": [
+    "JPM_p169",
+    "JPM_p312",
+    "JPM_p317"
+   ],
+   "vision_rank": 1,
+   "text_rank": 3,
+   "vision_top3": [
+    "JPM_p169",
+    "JPM_p317",
+    "JPM_p269"
+   ],
+   "text_top3": [
+    "JPM_p296",
+    "JPM_p269",
+    "JPM_p169"
+   ]
+  },
+  {
+   "id": "JPM-income",
+   "group": "income statement",
+   "question": "JPMorgan Chase consolidated income statement with net income and earnings per share",
+   "company": "JPM",
+   "gold": [
+    "JPM_p167",
+    "JPM_p46"
+   ],
+   "vision_rank": 3,
+   "text_rank": 1,
+   "vision_top3": [
+    "JPM_p49",
+    "JPM_p168",
+    "JPM_p167"
+   ],
+   "text_top3": [
+    "JPM_p167",
+    "JPM_p46",
+    "JPM_p288"
+   ]
+  },
+  {
+   "id": "JPM-cash",
+   "group": "cash flow",
+   "question": "JPMorgan Chase consolidated statement of cash flows with operating, investing and financing activities",
+   "company": "JPM",
+   "gold": [
+    "JPM_p171",
+    "JPM_p313"
+   ],
+   "vision_rank": 4,
+   "text_rank": 2,
+   "vision_top3": [
+    "JPM_p60",
+    "PFE_p53",
+    "JPM_p174"
+   ],
+   "text_top3": [
+    "JPM_p60",
+    "JPM_p171",
+    "INTC_p34"
+   ]
+  },
+  {
+   "id": "KO-balance",
+   "group": "balance sheet",
+   "question": "The Coca-Cola Company consolidated balance sheet with total assets and total liabilities",
+   "company": "KO",
+   "gold": [
+    "KO_p65"
+   ],
+   "vision_rank": 1,
+   "text_rank": 2,
+   "vision_top3": [
+    "KO_p65",
+    "KO_p68",
+    "KO_p108"
+   ],
+   "text_top3": [
+    "KO_p108",
+    "KO_p65",
+    "KO_p67"
+   ]
+  },
+  {
+   "id": "KO-income",
+   "group": "income statement",
+   "question": "The Coca-Cola Company consolidated income statement with net income and earnings per share",
+   "company": "KO",
+   "gold": [
+    "KO_p63"
+   ],
+   "vision_rank": 5,
+   "text_rank": 2,
+   "vision_top3": [
+    "KO_p64",
+    "KO_p123",
+    "KO_p69"
+   ],
+   "text_top3": [
+    "KO_p67",
+    "KO_p63",
+    "KO_p87"
+   ]
+  },
+  {
+   "id": "KO-cash",
+   "group": "cash flow",
+   "question": "The Coca-Cola Company consolidated statement of cash flows with operating, investing and financing activities",
+   "company": "KO",
+   "gold": [
+    "KO_p66"
+   ],
+   "vision_rank": 2,
+   "text_rank": 1,
+   "vision_top3": [
+    "PFE_p53",
+    "KO_p66",
+    "PEP_p60"
+   ],
+   "text_top3": [
+    "KO_p66",
+    "KO_p55",
+    "KO_p56"
+   ]
+  },
+  {
+   "id": "MSFT-balance",
+   "group": "balance sheet",
+   "question": "Microsoft consolidated balance sheet with total assets and total liabilities",
+   "company": "MSFT",
+   "gold": [
+    "MSFT_p52"
+   ],
+   "vision_rank": 275,
+   "text_rank": 221,
+   "vision_top3": [
+    "BAC_p94",
+    "XOM_p75",
+    "JPM_p169"
+   ],
+   "text_top3": [
+    "MSFT_p55",
+    "XOM_p95",
+    "GS_p91"
+   ]
+  },
+  {
+   "id": "MSFT-income",
+   "group": "income statement",
+   "question": "Microsoft consolidated income statement with net income and earnings per share",
+   "company": "MSFT",
+   "gold": [
+    "MSFT_p50"
+   ],
+   "vision_rank": 59,
+   "text_rank": 82,
+   "vision_top3": [
+    "BAC_p93",
+    "XOM_p73",
+    "WMT_p63"
+   ],
+   "text_top3": [
+    "MSFT_p37",
+    "MSFT_p62",
+    "WMT_p63"
+   ]
+  },
+  {
+   "id": "MSFT-cash",
+   "group": "cash flow",
+   "question": "Microsoft consolidated statement of cash flows with operating, investing and financing activities",
+   "company": "MSFT",
+   "gold": [
+    "MSFT_p53"
+   ],
+   "vision_rank": 175,
+   "text_rank": 66,
+   "vision_top3": [
+    "PFE_p53",
+    "JPM_p60",
+    "XOM_p112"
+   ],
+   "text_top3": [
+    "INTC_p34",
+    "XOM_p76",
+    "BAC_p96"
+   ]
+  },
+  {
+   "id": "NFLX-balance",
+   "group": "balance sheet",
+   "question": "Netflix, consolidated balance sheet with total assets and total liabilities",
+   "company": "NFLX",
+   "gold": [
+    "NFLX_p44"
+   ],
+   "vision_rank": 74,
+   "text_rank": 1,
+   "vision_top3": [
+    "BAC_p157",
+    "JPM_p269",
+    "BAC_p158"
+   ],
+   "text_top3": [
+    "NFLX_p44",
+    "XOM_p95",
+    "GS_p91"
+   ]
+  },
+  {
+   "id": "NFLX-income",
+   "group": "income statement",
+   "question": "Netflix, consolidated income statement with net income and earnings per share",
+   "company": "NFLX",
+   "gold": [
+    "NFLX_p41"
+   ],
+   "vision_rank": 15,
+   "text_rank": 1,
+   "vision_top3": [
+    "KO_p64",
+    "WMT_p53",
+    "WMT_p63"
+   ],
+   "text_top3": [
+    "NFLX_p41",
+    "MSFT_p62",
+    "WMT_p63"
+   ]
+  },
+  {
+   "id": "NFLX-cash",
+   "group": "cash flow",
+   "question": "Netflix, consolidated statement of cash flows with operating, investing and financing activities",
+   "company": "NFLX",
+   "gold": [
+    "NFLX_p43"
+   ],
+   "vision_rank": 2,
+   "text_rank": 1,
+   "vision_top3": [
+    "JPM_p60",
+    "NFLX_p43",
+    "PFE_p53"
+   ],
+   "text_top3": [
+    "NFLX_p43",
+    "INTC_p34",
+    "XOM_p76"
+   ]
+  },
+  {
+   "id": "NVDA-balance",
+   "group": "balance sheet",
+   "question": "NVIDIA consolidated balance sheet with total assets and total liabilities",
+   "company": "NVDA",
+   "gold": [
+    "NVDA_p53"
+   ],
+   "vision_rank": 1,
+   "text_rank": 3,
+   "vision_top3": [
+    "NVDA_p53",
+    "UNH_p82",
+    "XOM_p75"
+   ],
+   "text_top3": [
+    "NVDA_p67",
+    "NVDA_p56",
+    "NVDA_p53"
+   ]
+  },
+  {
+   "id": "NVDA-income",
+   "group": "income statement",
+   "question": "NVIDIA consolidated income statement with net income and earnings per share",
+   "company": "NVDA",
+   "gold": [
+    "NVDA_p51"
+   ],
+   "vision_rank": 2,
+   "text_rank": 4,
+   "vision_top3": [
+    "NVDA_p52",
+    "NVDA_p51",
+    "KO_p69"
+   ],
+   "text_top3": [
+    "NVDA_p54",
+    "MSFT_p62",
+    "WMT_p63"
+   ]
+  },
+  {
+   "id": "NVDA-cash",
+   "group": "cash flow",
+   "question": "NVIDIA consolidated statement of cash flows with operating, investing and financing activities",
+   "company": "NVDA",
+   "gold": [
+    "NVDA_p55"
+   ],
+   "vision_rank": 4,
+   "text_rank": 2,
+   "vision_top3": [
+    "XOM_p112",
+    "INTC_p34",
+    "PFE_p53"
+   ],
+   "text_top3": [
+    "INTC_p34",
+    "NVDA_p55",
+    "XOM_p76"
+   ]
+  },
+  {
+   "id": "PEP-balance",
+   "group": "balance sheet",
+   "question": "PepsiCo, consolidated balance sheet with total assets and total liabilities",
+   "company": "PEP",
+   "gold": [
+    "PEP_p62"
+   ],
+   "vision_rank": 1,
+   "text_rank": 1,
+   "vision_top3": [
+    "PEP_p62",
+    "PEP_p117",
+    "PEP_p109"
+   ],
+   "text_top3": [
+    "PEP_p62",
+    "PEP_p105",
+    "PEP_p33"
+   ]
+  },
+  {
+   "id": "PEP-income",
+   "group": "income statement",
+   "question": "PepsiCo, consolidated income statement with net income and earnings per share",
+   "company": "PEP",
+   "gold": [
+    "PEP_p58"
+   ],
+   "vision_rank": 5,
+   "text_rank": 3,
+   "vision_top3": [
+    "PEP_p59",
+    "PEP_p117",
+    "PEP_p109"
+   ],
+   "text_top3": [
+    "PEP_p100",
+    "PEP_p63",
+    "PEP_p58"
+   ]
+  },
+  {
+   "id": "PFE-balance",
+   "group": "balance sheet",
+   "question": "Pfizer consolidated balance sheet with total assets and total liabilities",
+   "company": "PFE",
+   "gold": [
+    "PFE_p60"
+   ],
+   "vision_rank": 6,
+   "text_rank": 2,
+   "vision_top3": [
+    "PFE_p64",
+    "PEP_p62",
+    "PFE_p70"
+   ],
+   "text_top3": [
+    "PFE_p99",
+    "PFE_p60",
+    "XOM_p95"
+   ]
+  },
+  {
+   "id": "PFE-income",
+   "group": "income statement",
+   "question": "Pfizer consolidated income statement with net income and earnings per share",
+   "company": "PFE",
+   "gold": [
+    "PFE_p58"
+   ],
+   "vision_rank": 20,
+   "text_rank": 1,
+   "vision_top3": [
+    "PFE_p51",
+    "PFE_p64",
+    "PFE_p6"
+   ],
+   "text_top3": [
+    "PFE_p58",
+    "PFE_p61",
+    "PFE_p52"
+   ]
+  },
+  {
+   "id": "PFE-cash",
+   "group": "cash flow",
+   "question": "Pfizer consolidated statement of cash flows with operating, investing and financing activities",
+   "company": "PFE",
+   "gold": [
+    "PFE_p62"
+   ],
+   "vision_rank": 7,
+   "text_rank": 2,
+   "vision_top3": [
+    "PFE_p53",
+    "JPM_p60",
+    "PFE_p68"
+   ],
+   "text_top3": [
+    "INTC_p34",
+    "PFE_p62",
+    "PFE_p53"
+   ]
+  },
+  {
+   "id": "TSLA-balance",
+   "group": "balance sheet",
+   "question": "Tesla, consolidated balance sheet with total assets and total liabilities",
+   "company": "TSLA",
+   "gold": [
+    "TSLA_p52"
+   ],
+   "vision_rank": 2,
+   "text_rank": 2,
+   "vision_top3": [
+    "TSLA_p95",
+    "TSLA_p52",
+    "BAC_p94"
+   ],
+   "text_top3": [
+    "TSLA_p95",
+    "TSLA_p52",
+    "XOM_p95"
+   ]
+  },
+  {
+   "id": "TSLA-income",
+   "group": "income statement",
+   "question": "Tesla, consolidated income statement with net income and earnings per share",
+   "company": "TSLA",
+   "gold": [
+    "TSLA_p53"
+   ],
+   "vision_rank": 7,
+   "text_rank": 4,
+   "vision_top3": [
+    "TSLA_p54",
+    "KO_p69",
+    "KO_p64"
+   ],
+   "text_top3": [
+    "MSFT_p62",
+    "WMT_p63",
+    "BAC_p93"
+   ]
+  },
+  {
+   "id": "TSLA-cash",
+   "group": "cash flow",
+   "question": "Tesla, consolidated statement of cash flows with operating, investing and financing activities",
+   "company": "TSLA",
+   "gold": [
+    "TSLA_p56"
+   ],
+   "vision_rank": 1,
+   "text_rank": 1,
+   "vision_top3": [
+    "TSLA_p56",
+    "JPM_p60",
+    "XOM_p112"
+   ],
+   "text_top3": [
+    "TSLA_p56",
+    "INTC_p34",
+    "XOM_p76"
+   ]
+  },
+  {
+   "id": "UNH-balance",
+   "group": "balance sheet",
+   "question": "UnitedHealth Group Incorporated consolidated balance sheet with total assets and total liabilities",
+   "company": "UNH",
+   "gold": [
+    "UNH_p43",
+    "UNH_p82"
+   ],
+   "vision_rank": 1,
+   "text_rank": 2,
+   "vision_top3": [
+    "UNH_p82",
+    "UNH_p43",
+    "UNH_p48"
+   ],
+   "text_top3": [
+    "UNH_p79",
+    "UNH_p82",
+    "UNH_p48"
+   ]
+  },
+  {
+   "id": "UNH-income",
+   "group": "income statement",
+   "question": "UnitedHealth Group Incorporated consolidated income statement with net income and earnings per share",
+   "company": "UNH",
+   "gold": [
+    "UNH_p44"
+   ],
+   "vision_rank": 2,
+   "text_rank": 1,
+   "vision_top3": [
+    "UNH_p48",
+    "UNH_p44",
+    "UNH_p45"
+   ],
+   "text_top3": [
+    "UNH_p44",
+    "UNH_p30",
+    "UNH_p54"
+   ]
+  },
+  {
+   "id": "UNH-cash",
+   "group": "cash flow",
+   "question": "UnitedHealth Group Incorporated consolidated statement of cash flows with operating, investing and financing activities",
+   "company": "UNH",
+   "gold": [
+    "UNH_p47",
+    "UNH_p84"
+   ],
+   "vision_rank": 4,
+   "text_rank": 1,
+   "vision_top3": [
+    "PFE_p53",
+    "JPM_p60",
+    "XOM_p112"
+   ],
+   "text_top3": [
+    "UNH_p84",
+    "UNH_p47",
+    "INTC_p34"
+   ]
+  },
+  {
+   "id": "WMT-balance",
+   "group": "balance sheet",
+   "question": "Walmart consolidated balance sheet with total assets and total liabilities",
+   "company": "WMT",
+   "gold": [
+    "WMT_p54"
+   ],
+   "vision_rank": 1,
+   "text_rank": 4,
+   "vision_top3": [
+    "WMT_p54",
+    "WMT_p59",
+    "WMT_p31"
+   ],
+   "text_top3": [
+    "WMT_p57",
+    "WMT_p36",
+    "WMT_p29"
+   ]
+  },
+  {
+   "id": "WMT-income",
+   "group": "income statement",
+   "question": "Walmart consolidated income statement with net income and earnings per share",
+   "company": "WMT",
+   "gold": [
+    "WMT_p52"
+   ],
+   "vision_rank": 2,
+   "text_rank": 3,
+   "vision_top3": [
+    "WMT_p53",
+    "WMT_p52",
+    "WMT_p63"
+   ],
+   "text_top3": [
+    "WMT_p63",
+    "WMT_p4",
+    "WMT_p52"
+   ]
+  },
+  {
+   "id": "WMT-cash",
+   "group": "cash flow",
+   "question": "Walmart consolidated statement of cash flows with operating, investing and financing activities",
+   "company": "WMT",
+   "gold": [
+    "WMT_p56"
+   ],
+   "vision_rank": 3,
+   "text_rank": 1,
+   "vision_top3": [
+    "JPM_p60",
+    "PFE_p53",
+    "WMT_p56"
+   ],
+   "text_top3": [
+    "WMT_p56",
+    "WMT_p37",
+    "INTC_p34"
+   ]
+  },
+  {
+   "id": "XOM-balance",
+   "group": "balance sheet",
+   "question": "Exxon Mobil consolidated balance sheet with total assets and total liabilities",
+   "company": "XOM",
+   "gold": [
+    "XOM_p75"
+   ],
+   "vision_rank": 1,
+   "text_rank": 28,
+   "vision_top3": [
+    "XOM_p75",
+    "XOM_p4",
+    "XOM_p33"
+   ],
+   "text_top3": [
+    "XOM_p71",
+    "CVX_p87",
+    "XOM_p103"
+   ]
+  },
+  {
+   "id": "XOM-income",
+   "group": "income statement",
+   "question": "Exxon Mobil consolidated income statement with net income and earnings per share",
+   "company": "XOM",
+   "gold": [
+    "XOM_p73"
+   ],
+   "vision_rank": 58,
+   "text_rank": 11,
+   "vision_top3": [
+    "XOM_p82",
+    "XOM_p4",
+    "XOM_p50"
+   ],
+   "text_top3": [
+    "XOM_p19",
+    "CVX_p87",
+    "XOM_p3"
+   ]
+  },
+  {
+   "id": "XOM-cash",
+   "group": "cash flow",
+   "question": "Exxon Mobil consolidated statement of cash flows with operating, investing and financing activities",
+   "company": "XOM",
+   "gold": [
+    "XOM_p105",
+    "XOM_p76"
+   ],
+   "vision_rank": 6,
+   "text_rank": 2,
+   "vision_top3": [
+    "XOM_p33",
+    "XOM_p112",
+    "XOM_p37"
+   ],
+   "text_top3": [
+    "INTC_p34",
+    "XOM_p76",
+    "BAC_p96"
+   ]
+  },
+  {
+   "id": "V1",
+   "group": "hand-written",
+   "question": "Which page shows Apple's net sales by product category: iPhone, Mac, iPad, Wearables and Services?",
+   "company": "AAPL",
+   "gold": [
+    "AAPL_p29",
+    "AAPL_p42"
+   ],
+   "vision_rank": 1,
+   "text_rank": 1,
+   "vision_top3": [
+    "AAPL_p29",
+    "AAPL_p42",
+    "AAPL_p5"
+   ],
+   "text_top3": [
+    "AAPL_p29",
+    "AAPL_p4",
+    "AAPL_p42"
+   ]
+  },
+  {
+   "id": "V2",
+   "group": "hand-written",
+   "question": "Where is the table of Apple's five-year cumulative total shareholder return compared with the S&P 500 index?",
+   "company": "AAPL",
+   "gold": [
+    "AAPL_p26"
+   ],
+   "vision_rank": 1,
+   "text_rank": 1,
+   "vision_top3": [
+    "AAPL_p26",
+    "JNJ_p119",
+    "NVDA_p35"
+   ],
+   "text_top3": [
+    "AAPL_p26",
+    "JNJ_p119",
+    "NVDA_p35"
+   ]
+  },
+  {
+   "id": "V3",
+   "group": "hand-written",
+   "question": "Microsoft revenue and operating income by segment: Productivity and Business Processes, Intelligent Cloud, More Personal Computing",
+   "company": "MSFT",
+   "gold": [
+    "MSFT_p38"
+   ],
+   "vision_rank": 1,
+   "text_rank": 4,
+   "vision_top3": [
+    "MSFT_p38",
+    "MSFT_p35",
+    "MSFT_p83"
+   ],
+   "text_top3": [
+    "MSFT_p83",
+    "MSFT_p37",
+    "MSFT_p5"
+   ]
+  },
+  {
+   "id": "V4",
+   "group": "hand-written",
+   "question": "Microsoft income statement with net income and earnings per share",
+   "company": "MSFT",
+   "gold": [
+    "MSFT_p50",
+    "MSFT_p62"
+   ],
+   "vision_rank": 3,
+   "text_rank": 2,
+   "vision_top3": [
+    "BAC_p29",
+    "NFLX_p51",
+    "MSFT_p62"
+   ],
+   "text_top3": [
+    "MSFT_p37",
+    "MSFT_p62",
+    "JNJ_p87"
+   ]
+  },
+  {
+   "id": "V5",
+   "group": "hand-written",
+   "question": "Tesla statement of operations: automotive sales, regulatory credits and energy generation and storage revenues",
+   "company": "TSLA",
+   "gold": [
+    "TSLA_p53"
+   ],
+   "vision_rank": 2,
+   "text_rank": 1,
+   "vision_top3": [
+    "TSLA_p58",
+    "TSLA_p53",
+    "TSLA_p40"
+   ],
+   "text_top3": [
+    "TSLA_p53",
+    "TSLA_p62",
+    "TSLA_p96"
+   ]
+  },
+  {
+   "id": "V6",
+   "group": "hand-written",
+   "question": "Tesla balance sheet with total assets and total liabilities",
+   "company": "TSLA",
+   "gold": [
+    "TSLA_p52",
+    "TSLA_p95"
+   ],
+   "vision_rank": 13,
+   "text_rank": 1,
+   "vision_top3": [
+    "BAC_p31",
+    "JPM_p312",
+    "BAC_p132"
+   ],
+   "text_top3": [
+    "TSLA_p95",
+    "TSLA_p52",
+    "XOM_p95"
+   ]
+  },
+  {
+   "id": "V7",
+   "group": "hand-written",
+   "question": "Walmart net sales and operating income by segment: Walmart U.S., Walmart International and Sam's Club",
+   "company": "WMT",
+   "gold": [
+    "WMT_p77"
+   ],
+   "vision_rank": 1,
+   "text_rank": 2,
+   "vision_top3": [
+    "WMT_p77",
+    "WMT_p78",
+    "WMT_p39"
+   ],
+   "text_top3": [
+    "WMT_p8",
+    "WMT_p77",
+    "WMT_p6"
+   ]
+  },
+  {
+   "id": "V8",
+   "group": "hand-written",
+   "question": "Walmart consolidated balance sheet with total assets",
+   "company": "WMT",
+   "gold": [
+    "WMT_p54"
+   ],
+   "vision_rank": 2,
+   "text_rank": 4,
+   "vision_top3": [
+    "WMT_p59",
+    "WMT_p54",
+    "WMT_p31"
+   ],
+   "text_top3": [
+    "WMT_p29",
+    "WMT_p57",
+    "WMT_p36"
+   ]
+  }
+ ]
+}

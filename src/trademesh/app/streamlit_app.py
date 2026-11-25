@@ -254,21 +254,35 @@ def tab_graph() -> None:
 
 
 def tab_pages() -> None:
-    md(ui.heading("Page retrieval", "page", "small demonstration: page images, late interaction"))
     vision, why = load_vision()
+    full_run = bool(vision and vision.get("scale") == "full")
+    md(ui.heading("Page retrieval", "page", "full corpus: page images, late interaction" if full_run else "small demonstration: page images, late interaction"))
     if vision is None:
         md(ui.empty_state("No signal", f"Page-image retrieval is {why} (run the steps in docs/vision_demo.md)", "page", "manhattan-1931.jpg"))
         return
-    summ, enc = vision.get("summary"), vision.get("encoder") or {}
-    if summ:
-        n = vision.get("n_questions", len(vision["queries"]))
-        v, x = summ["vision_maxsim"], summ["text_bm25"]
+    summ, enc = vision.get("summary") or {}, vision.get("encoder") or {}
+    overall = summ.get("overall", summ)             # the full run nests its summary under "overall"
+    if overall:
+        v, x = overall["vision_maxsim"], overall["text_bm25"]
+        n = v.get("n", vision.get("n_questions", len(vision["queries"])))
         md(ui.tiles([("Page images (MaxSim)", f'{v["hit@1"]}/{n}', f'first result is a correct page; top 3: {v["hit@3"]}/{n}', False),
                      ("Text only (BM25)", f'{x["hit@1"]}/{n}', f'first result is a correct page; top 3: {x["hit@3"]}/{n}', False),
-                     ("Pages searched", str(vision.get("n_pages", "-")), "4 filings: AAPL, MSFT, TSLA, WMT", False),
-                     ("Encoder", str(enc.get("model", "-")).split("/")[-1], f'{enc.get("device", "-")}, {enc.get("vector_dim", "-")}-d vectors', False)]))
+                     ("Pages searched", str(vision.get("n_pages", "-")), f'{vision.get("n_companies", 4)} filings; every page competes for every question', False),
+                     ("Encoder run on", str(enc.get("gpu") or enc.get("device", "-")).replace("Tesla ", "").replace("NVIDIA GeForce ", ""), f'{str(enc.get("family") or str(enc.get("model", "-")).split("/")[-1])}, {enc.get("vector_dim", "-")}-d vectors', False)]))
         st.caption(vision.get("note", ""))
-    for q in vision["queries"]:
+    groups = summ.get("groups")
+    queries = vision["queries"]
+    if groups:
+        import pandas as pd
+        st.dataframe(pd.DataFrame([{"Question group": g, "Questions": s["vision_maxsim"]["n"],
+                                    "Page images, first result correct": s["vision_maxsim"]["hit@1"], "Text BM25, first result correct": s["text_bm25"]["hit@1"],
+                                    "Page images, in top 3": s["vision_maxsim"]["hit@3"], "Text BM25, in top 3": s["text_bm25"]["hit@3"]}
+                                   for g, s in groups.items()]), hide_index=True, use_container_width=True)
+    if len(queries) > 12:
+        label = {q.get("id", str(i)): f'{q.get("id", i)}: {q["query"]}' for i, q in enumerate(queries)}
+        pick = st.selectbox("Question", list(label), format_func=lambda k: label[k], key="pages_q")
+        queries = [q for i, q in enumerate(queries) if q.get("id", str(i)) == pick]
+    for q in queries:
         md(f'<span class="tm-tag">{ui.esc(q["query"])}</span>')
         cols = st.columns(max(1, min(4, len(q["results"]))))
         for col, r in zip(cols, q["results"]):

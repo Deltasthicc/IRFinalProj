@@ -1,0 +1,10 @@
+{
+ "model": "vidore/colSmol-256M",
+ "device": "cpu",
+ "load_seconds": 9.8,
+ "pages": 39,
+ "seconds_per_page_mean": 38.5,
+ "vectors_per_page_mean": 875.0,
+ "vector_dim": 128,
+ "torch": "2.13.0+cpu"
+}
