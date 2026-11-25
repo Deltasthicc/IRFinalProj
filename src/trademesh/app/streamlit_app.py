@@ -15,6 +15,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 import streamlit as st  # noqa: E402
 
 from trademesh.app import ui  # noqa: E402
+from trademesh.data import ROOT  # noqa: E402
 from trademesh.app.backend import (EXAMPLES, AppState, graph_dot, headline_numbers, load_entity_eval, load_graph,  # noqa: E402
                                    load_human_scores, load_rag_study, load_results, load_state, load_vision, readiness)
 from trademesh.rag.llm import CacheMiss, LiveCallCapReached  # noqa: E402
@@ -253,19 +254,31 @@ def tab_graph() -> None:
 
 
 def tab_pages() -> None:
-    md(ui.heading("Page retrieval", "page", "vision track, gated"))
+    md(ui.heading("Page retrieval", "page", "small demonstration: page images, late interaction"))
     vision, why = load_vision()
     if vision is None:
-        md(ui.empty_state("No signal", f"Page-image retrieval is {why} (the vision track is gated)", "page", "manhattan-1931.jpg"))
+        md(ui.empty_state("No signal", f"Page-image retrieval is {why} (run the steps in docs/vision_demo.md)", "page", "manhattan-1931.jpg"))
         return
+    summ, enc = vision.get("summary"), vision.get("encoder") or {}
+    if summ:
+        n = vision.get("n_questions", len(vision["queries"]))
+        v, x = summ["vision_maxsim"], summ["text_bm25"]
+        md(ui.tiles([("Page images (MaxSim)", f'{v["hit@1"]}/{n}', f'first result is a correct page; top 3: {v["hit@3"]}/{n}', False),
+                     ("Text only (BM25)", f'{x["hit@1"]}/{n}', f'first result is a correct page; top 3: {x["hit@3"]}/{n}', False),
+                     ("Pages searched", str(vision.get("n_pages", "-")), "4 filings: AAPL, MSFT, TSLA, WMT", False),
+                     ("Encoder", str(enc.get("model", "-")).split("/")[-1], f'{enc.get("device", "-")}, {enc.get("vector_dim", "-")}-d vectors', False)]))
+        st.caption(vision.get("note", ""))
     for q in vision["queries"]:
         md(f'<span class="tm-tag">{ui.esc(q["query"])}</span>')
         cols = st.columns(max(1, min(4, len(q["results"]))))
         for col, r in zip(cols, q["results"]):
             with col:
                 img = Path(r.get("image", ""))
+                if not img.is_absolute():
+                    img = ROOT / img
+                mark = {True: " [correct page]", False: ""}.get(r.get("correct"), "")
                 if img.exists():
-                    st.image(str(img), caption=f"{r['ticker']} p.{r['page']} / {r['score']:.2f}")
+                    st.image(str(img), caption=f"{r['ticker']} p.{r['page']} / score {r['score']:.2f}{mark}")
                 else:
                     md(ui.panel(f"{r['ticker']} p.{r['page']}", "Image missing"))
 

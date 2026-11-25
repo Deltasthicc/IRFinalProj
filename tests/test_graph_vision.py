@@ -78,3 +78,34 @@ def test_vision_results_file_matches_the_apps_validator(tmp_path):
     from trademesh.app.backend import load_vision
     write_results(tmp_path / "r.json", [{"query": "q", "results": [{"ticker": "AAPL", "page": 4, "score": 1.5, "image": "x.png"}]}])
     assert load_vision(tmp_path / "r.json")[0] is not None
+
+
+def test_vision_scoring_ranks_the_matching_page_first_and_the_app_reads_the_extra_fields(tmp_path, monkeypatch):
+    """eval/vision_score.py on tiny made-up embeddings and page texts: MaxSim finds the page whose vectors match the query."""
+    import json
+    import sys
+    from pathlib import Path
+
+    import numpy as np
+
+    root = Path(__file__).resolve().parents[1]
+    sys.path.insert(0, str(root))
+    import eval.vision_score as vs
+
+    v = tmp_path / "vision"
+    v.mkdir()
+    pages = {"A_p1": {"ticker": "A", "page": 1, "image": "a.png", "text": "revenue by segment cloud", "kind": "gold"},
+             "A_p2": {"ticker": "A", "page": 2, "image": "b.png", "text": "risk factors competition", "kind": "prose"}}
+    questions = [{"id": "Q1", "question": "revenue by segment", "company": "A", "gold": ["A_p1"]}]
+    (v / "pages.json").write_text(json.dumps(pages))
+    (v / "questions.json").write_text(json.dumps(questions))
+    np.savez(v / "emb_pages.npz", A_p1=np.array([[1.0, 0.0], [0.9, 0.1]]), A_p2=np.array([[0.0, 1.0]]))
+    np.savez(v / "emb_queries.npz", Q1=np.array([[1.0, 0.0]]))
+    monkeypatch.setattr(vs, "V", v)
+    monkeypatch.setattr(vs, "ROOT", tmp_path)
+    vs.main()
+    res = json.loads((v / "results.json").read_text())
+    assert res["queries"][0]["results"][0]["page"] == 1 and res["queries"][0]["results"][0]["correct"] is True
+    assert res["summary"]["vision_maxsim"]["hit@1"] == 1 and res["summary"]["text_bm25"]["hit@1"] == 1
+    from trademesh.app.backend import load_vision
+    assert load_vision(v / "results.json")[0] is not None

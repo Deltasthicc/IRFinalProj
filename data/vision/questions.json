@@ -1,0 +1,69 @@
+[
+ {
+  "id": "V1",
+  "question": "Which page shows Apple's net sales by product category: iPhone, Mac, iPad, Wearables and Services?",
+  "company": "AAPL",
+  "gold": [
+   "AAPL_p29",
+   "AAPL_p42"
+  ]
+ },
+ {
+  "id": "V2",
+  "question": "Where is the table of Apple's five-year cumulative total shareholder return compared with the S&P 500 index?",
+  "company": "AAPL",
+  "gold": [
+   "AAPL_p26"
+  ]
+ },
+ {
+  "id": "V3",
+  "question": "Microsoft revenue and operating income by segment: Productivity and Business Processes, Intelligent Cloud, More Personal Computing",
+  "company": "MSFT",
+  "gold": [
+   "MSFT_p38"
+  ]
+ },
+ {
+  "id": "V4",
+  "question": "Microsoft income statement with net income and earnings per share",
+  "company": "MSFT",
+  "gold": [
+   "MSFT_p50",
+   "MSFT_p62"
+  ]
+ },
+ {
+  "id": "V5",
+  "question": "Tesla statement of operations: automotive sales, regulatory credits and energy generation and storage revenues",
+  "company": "TSLA",
+  "gold": [
+   "TSLA_p53"
+  ]
+ },
+ {
+  "id": "V6",
+  "question": "Tesla balance sheet with total assets and total liabilities",
+  "company": "TSLA",
+  "gold": [
+   "TSLA_p52",
+   "TSLA_p95"
+  ]
+ },
+ {
+  "id": "V7",
+  "question": "Walmart net sales and operating income by segment: Walmart U.S., Walmart International and Sam's Club",
+  "company": "WMT",
+  "gold": [
+   "WMT_p77"
+  ]
+ },
+ {
+  "id": "V8",
+  "question": "Walmart consolidated balance sheet with total assets",
+  "company": "WMT",
+  "gold": [
+   "WMT_p54"
+  ]
+ }
+]

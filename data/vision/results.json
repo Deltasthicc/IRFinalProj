@@ -1,0 +1,325 @@
+{
+ "queries": [
+  {
+   "query": "Which page shows Apple's net sales by product category: iPhone, Mac, iPad, Wearables and Services?",
+   "gold": [
+    "AAPL_p29",
+    "AAPL_p42"
+   ],
+   "results": [
+    {
+     "ticker": "AAPL",
+     "page": 29,
+     "score": 22.724403381347656,
+     "image": "data/vision/pages/AAPL_p29.png",
+     "correct": true
+    },
+    {
+     "ticker": "AAPL",
+     "page": 42,
+     "score": 20.449214935302734,
+     "image": "data/vision/pages/AAPL_p42.png",
+     "correct": true
+    },
+    {
+     "ticker": "AAPL",
+     "page": 35,
+     "score": 18.700820922851562,
+     "image": "data/vision/pages/AAPL_p35.png",
+     "correct": false
+    },
+    {
+     "ticker": "AAPL",
+     "page": 56,
+     "score": 16.97647476196289,
+     "image": "data/vision/pages/AAPL_p56.png",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "query": "Where is the table of Apple's five-year cumulative total shareholder return compared with the S&P 500 index?",
+   "gold": [
+    "AAPL_p26"
+   ],
+   "results": [
+    {
+     "ticker": "AAPL",
+     "page": 26,
+     "score": 24.549259185791016,
+     "image": "data/vision/pages/AAPL_p26.png",
+     "correct": true
+    },
+    {
+     "ticker": "WMT",
+     "page": 55,
+     "score": 18.27235221862793,
+     "image": "data/vision/pages/WMT_p55.png",
+     "correct": false
+    },
+    {
+     "ticker": "AAPL",
+     "page": 42,
+     "score": 18.224321365356445,
+     "image": "data/vision/pages/AAPL_p42.png",
+     "correct": false
+    },
+    {
+     "ticker": "WMT",
+     "page": 77,
+     "score": 17.467144012451172,
+     "image": "data/vision/pages/WMT_p77.png",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "query": "Microsoft revenue and operating income by segment: Productivity and Business Processes, Intelligent Cloud, More Personal Computing",
+   "gold": [
+    "MSFT_p38"
+   ],
+   "results": [
+    {
+     "ticker": "MSFT",
+     "page": 38,
+     "score": 21.4799747467041,
+     "image": "data/vision/pages/MSFT_p38.png",
+     "correct": true
+    },
+    {
+     "ticker": "WMT",
+     "page": 77,
+     "score": 14.694872856140137,
+     "image": "data/vision/pages/WMT_p77.png",
+     "correct": false
+    },
+    {
+     "ticker": "TSLA",
+     "page": 53,
+     "score": 14.374029159545898,
+     "image": "data/vision/pages/TSLA_p53.png",
+     "correct": false
+    },
+    {
+     "ticker": "AAPL",
+     "page": 29,
+     "score": 14.324111938476562,
+     "image": "data/vision/pages/AAPL_p29.png",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "query": "Microsoft income statement with net income and earnings per share",
+   "gold": [
+    "MSFT_p50",
+    "MSFT_p62"
+   ],
+   "results": [
+    {
+     "ticker": "MSFT",
+     "page": 50,
+     "score": 14.23784351348877,
+     "image": "data/vision/pages/MSFT_p50.png",
+     "correct": true
+    },
+    {
+     "ticker": "MSFT",
+     "page": 62,
+     "score": 14.204299926757812,
+     "image": "data/vision/pages/MSFT_p62.png",
+     "correct": true
+    },
+    {
+     "ticker": "AAPL",
+     "page": 42,
+     "score": 13.653168678283691,
+     "image": "data/vision/pages/AAPL_p42.png",
+     "correct": false
+    },
+    {
+     "ticker": "AAPL",
+     "page": 35,
+     "score": 13.363129615783691,
+     "image": "data/vision/pages/AAPL_p35.png",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "query": "Tesla statement of operations: automotive sales, regulatory credits and energy generation and storage revenues",
+   "gold": [
+    "TSLA_p53"
+   ],
+   "results": [
+    {
+     "ticker": "TSLA",
+     "page": 53,
+     "score": 17.051063537597656,
+     "image": "data/vision/pages/TSLA_p53.png",
+     "correct": true
+    },
+    {
+     "ticker": "TSLA",
+     "page": 42,
+     "score": 15.258099555969238,
+     "image": "data/vision/pages/TSLA_p42.png",
+     "correct": false
+    },
+    {
+     "ticker": "TSLA",
+     "page": 95,
+     "score": 15.056720733642578,
+     "image": "data/vision/pages/TSLA_p95.png",
+     "correct": false
+    },
+    {
+     "ticker": "TSLA",
+     "page": 52,
+     "score": 13.64840030670166,
+     "image": "data/vision/pages/TSLA_p52.png",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "query": "Tesla balance sheet with total assets and total liabilities",
+   "gold": [
+    "TSLA_p52",
+    "TSLA_p95"
+   ],
+   "results": [
+    {
+     "ticker": "TSLA",
+     "page": 95,
+     "score": 12.810017585754395,
+     "image": "data/vision/pages/TSLA_p95.png",
+     "correct": true
+    },
+    {
+     "ticker": "TSLA",
+     "page": 52,
+     "score": 12.720952987670898,
+     "image": "data/vision/pages/TSLA_p52.png",
+     "correct": true
+    },
+    {
+     "ticker": "WMT",
+     "page": 54,
+     "score": 12.645844459533691,
+     "image": "data/vision/pages/WMT_p54.png",
+     "correct": false
+    },
+    {
+     "ticker": "TSLA",
+     "page": 55,
+     "score": 10.730669021606445,
+     "image": "data/vision/pages/TSLA_p55.png",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "query": "Walmart net sales and operating income by segment: Walmart U.S., Walmart International and Sam's Club",
+   "gold": [
+    "WMT_p77"
+   ],
+   "results": [
+    {
+     "ticker": "WMT",
+     "page": 77,
+     "score": 24.810321807861328,
+     "image": "data/vision/pages/WMT_p77.png",
+     "correct": true
+    },
+    {
+     "ticker": "WMT",
+     "page": 79,
+     "score": 21.063425064086914,
+     "image": "data/vision/pages/WMT_p79.png",
+     "correct": false
+    },
+    {
+     "ticker": "WMT",
+     "page": 52,
+     "score": 19.827911376953125,
+     "image": "data/vision/pages/WMT_p52.png",
+     "correct": false
+    },
+    {
+     "ticker": "WMT",
+     "page": 55,
+     "score": 18.61778450012207,
+     "image": "data/vision/pages/WMT_p55.png",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "query": "Walmart consolidated balance sheet with total assets",
+   "gold": [
+    "WMT_p54"
+   ],
+   "results": [
+    {
+     "ticker": "WMT",
+     "page": 54,
+     "score": 12.479164123535156,
+     "image": "data/vision/pages/WMT_p54.png",
+     "correct": true
+    },
+    {
+     "ticker": "TSLA",
+     "page": 52,
+     "score": 9.999576568603516,
+     "image": "data/vision/pages/TSLA_p52.png",
+     "correct": false
+    },
+    {
+     "ticker": "WMT",
+     "page": 52,
+     "score": 9.76467514038086,
+     "image": "data/vision/pages/WMT_p52.png",
+     "correct": false
+    },
+    {
+     "ticker": "TSLA",
+     "page": 95,
+     "score": 9.756657600402832,
+     "image": "data/vision/pages/TSLA_p95.png",
+     "correct": false
+    }
+   ]
+  }
+ ],
+ "summary": {
+  "vision_maxsim": {
+   "hit@1": 8,
+   "hit@3": 8,
+   "mrr": 1.0
+  },
+  "text_bm25": {
+   "hit@1": 7,
+   "hit@3": 8,
+   "mrr": 0.938
+  }
+ },
+ "n_questions": 8,
+ "n_pages": 39,
+ "pool": {
+  "gold": 11,
+  "numbers": 16,
+  "prose": 12
+ },
+ "encoder": {
+  "model": "vidore/colSmol-256M",
+  "device": "cpu",
+  "load_seconds": 9.8,
+  "pages": 39,
+  "seconds_per_page_mean": 38.5,
+  "vectors_per_page_mean": 875.0,
+  "vector_dim": 128,
+  "torch": "2.13.0+cpu"
+ },
+ "note": "8 hand-written questions, 39 pages, gold = a page matching the question's keyword rule; a demonstration, not a benchmark"
+}

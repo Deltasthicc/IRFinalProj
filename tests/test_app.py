@@ -72,7 +72,7 @@ def test_app_runs_every_tab_without_crashing(monkeypatch, tmp_path):
     assert {"Ask", "Search", "Graph", "Pages", "Evaluation", "System", "Retrieval", "RAG answers", "Abstention"} <= labels
     text = _md(at)
     assert "tm-hero" in text and "tm-marquee" in text and "tm-foot" in text            # hero, marquee, footer are drawn
-    assert "No signal" in text                                                         # the gated vision track says so, no crash
+    assert "Page retrieval" in text and ("Page images (MaxSim)" in text or "No signal" in text)   # the Pages tab shows the demo, or says there is none; no crash
     at.text_input(key="ask_q").set_value("What does Tesla say about supplier concentration?").run()
     assert not at.exception and "tm-cite" in _md(at)
     at.text_input(key="search_q").set_value("Telsa battery").run()
